@@ -1,0 +1,79 @@
+.CommentBox{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0rem 1rem 1rem 1rem;
+    margin-top: -30px;
+    height: 86vh;
+    position: relative;
+}
+
+.bottomcomment{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    z-index: 1;
+    padding-top: 1rem;
+    background-color: white;
+}
+
+.bottomcomment > hr{
+    width: 100%;
+    border: 1px solid rgb(240, 240, 240);
+    margin: 0;
+}
+
+.CommentBox > hr{
+    width: 100%;
+    border: 1px solid rgb(240, 240, 240);
+    margin: 0;
+}
+
+.CommentWindow{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-top: 1.5rem;
+}
+
+.CommentLeft{
+    display: flex;
+    gap: 1rem;
+}
+
+.CommentLeft > img{
+    /* border: 1px solid rgb(240, 240, 240); */
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+
+.CommentInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.CommentUserInfo{
+    font-size: 14px;
+}
+
+.CommentAction{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.MainComment {
+    margin-top: -0.8rem;
+    padding-top: -5rem;
+    height: 37rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+}
