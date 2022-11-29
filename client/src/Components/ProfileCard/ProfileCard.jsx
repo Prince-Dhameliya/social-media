@@ -5,13 +5,12 @@ import {Link} from 'react-router-dom'
 const ProfileCard = ({location}) => {
   const {user} = useSelector((state)=>state.authReducer.authData)
   const posts = useSelector((state)=>state.postReducer.posts)
-  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
 
   return (
     <div className="ProfileCard">
         <div className="ProfileImages">
-            <img src={user.coverPicture ? serverPublic + user.coverPicture : serverPublic + "defaultCover.jpg"} alt="" />
-            <img src={user.coverPicture ? serverPublic + user.profilePicture : serverPublic + "defaultProfile.png"} alt="" />
+            <img src={user.coverPicture ? user.coverPicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662226/Default/defaultCover_kadawa.jpg" } alt="" />
+            <img src={user.coverPicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } alt="" />
         </div>
 
         <div className="ProfileName">

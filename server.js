@@ -7,7 +7,6 @@ import AuthRoute from './Routes/AuthRoute.js'
 import UserRoute from './Routes/UserRoute.js'
 import PostRoute from './Routes/PostRoute.js'
 import UploadRoute from './Routes/UploadRoute.js'
-import path from 'path'
 
 // Routes
 const app = express();
@@ -31,14 +30,10 @@ mongoose.connect(process.env.MONGO_DB,
 
 if(process.env.NODE_ENV === "production"){
     app.use(express.static('client/build'))
-    app.get("*", (req, res)=>{
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
 }
-
 
 // usage of routes
 app.use('/auth', AuthRoute)
 app.use('/user', UserRoute)
 app.use('/posts', PostRoute)
-app.use('/upload', UploadRoute)
+// app.use('/upload', UploadRoute)

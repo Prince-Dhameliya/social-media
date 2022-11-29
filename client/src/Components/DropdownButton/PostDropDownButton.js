@@ -10,6 +10,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {UilEllipsisH} from "@iconscout/react-unicons"
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePost } from '../../actions/postAction';
+import './PostDropDown.css'
 
 const StyledMenu = styled((props) => (
   <Menu

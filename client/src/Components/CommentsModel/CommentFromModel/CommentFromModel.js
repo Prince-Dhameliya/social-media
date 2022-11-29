@@ -14,7 +14,7 @@ const CommentFromModel = ({comment,data}) => {
   return (
         <div className="CommentWindow">
             <div className="CommentLeft">
-                <img src={comment.profilePicture ? process.env.REACT_APP_PUBLIC_FOLDER + comment.profilePicture: ""} style={{cursor: "pointer"}} alt="" />
+                <img src={comment.profilePicture ? comment.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } style={{cursor: "pointer"}} alt="" />
 
                 <div className="CommentInfo">
                     <div className="CommentUserInfo">
@@ -23,15 +23,15 @@ const CommentFromModel = ({comment,data}) => {
                     </div>
 
                     <div className="CommentAction">
-                        <span style={{fontSize: "12px", color: "rgb(147, 147, 147)"}}>{time.ago(comment.createdAt)}</span>
-                        <span style={{fontSize: "13px", color: "rgb(158, 158, 158)"}}><b>{comment.likes} likes</b></span>
-                        <span style={{fontSize: "13px", color: "rgb(158, 158, 158)"}}><b>Reply</b></span>
-                        {(comment.userId) === (user._id) && (<span style={{fontSize: "13px", color: "rgb(158, 158, 158)",cursor: "pointer"}} onClick={handleDeleteComment} ><b>Delete</b></span>)}
+                        <span>{time.ago(comment.createdAt)}</span>
+                        <span><b>{comment.likes} likes</b></span>
+                        <span><b>Reply</b></span>
+                        {(comment.userId) === (user._id) && (<span style={{cursor: "pointer"}} onClick={handleDeleteComment} ><b>Delete</b></span>)}
                     </div>
                 </div>
             </div>
 
-            <div><img src={Send} style={{cursor: "pointer",width: "20px"}} alt="" /></div>
+            <div className='CommentRight'><img src={Send} style={{cursor: "pointer"}} alt="" /></div>
         </div>
   )
 }

@@ -21,12 +21,12 @@ const InfoCard = () => {
             if(profileUserId === user._id){
                 setProfileUser(user);
             }else{
-                const profileUser = await UserApi.getUser(profileUserId)
-                setProfileUser(profileUser);
+                const profileUsers = await UserApi.getUser(profileUserId)
+                setProfileUser(profileUsers);
             }
         }
         fetchProfileUser();
-    },[user]);
+    },[]);
 
     const handleLogOut = () => {
         dispatch(logOut())

@@ -11,7 +11,6 @@ const Posts = () => {
   
   const {user} = useSelector((state)=>state.authReducer.authData);
   let {posts, loading} = useSelector((state)=>state.postReducer);
-  // loading = true;
   const params = useParams();
 
   useEffect(()=>{

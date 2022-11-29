@@ -2,21 +2,20 @@ import React, { useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
-// import { UilLocationPoint } from "@iconscout/react-unicons";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import './PostShare.css'
-import { uploadImage, uploadPost } from '../../actions/uploadAction';
+import { uploadPost } from '../../actions/uploadAction';
 import { getTimelinePosts } from '../../actions/postAction';
+import axios from 'axios';
 
 const PostShare = () => {
-    const loading = useSelector((state)=>state.postReducer.uploading)
-    const [image, setImage] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [image, setImage] = useState("");
     const imageRef = useRef();
     const dispatch = useDispatch();
     const desc = useRef();
     const {user} = useSelector((state)=>state.authReducer.authData);
-    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
 
     const onImageChange = (event) => {
         if(event.target.files && event.target.files[0]){
@@ -30,7 +29,8 @@ const PostShare = () => {
         desc.current.value = "";
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+        setLoading(true);
         event.preventDefault();
 
         const newPost = {
@@ -39,37 +39,56 @@ const PostShare = () => {
             profilePicture: user.profilePicture,
             desc: desc.current.value
         }
-
+        let res;
         if(image){
-            const data = new FormData();
-            const filename = Date.now() + image.name;
-            data.append("name", filename)
-            data.append("file", image)
-            newPost.image = filename;
-            try {
-                dispatch(uploadImage(data))
-            } catch (error) {
-                console.log(error);
-            }
+            const formData = new FormData();
+            formData.append("file", image)
+            formData.append('upload_preset', 'socialmedia');
+            formData.append('cloud_name', "princedhameliya")
+            
+            await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/image/upload', formData)
+            .then(async response => {
+                res = await response.data;
+            })
+            // await fetch('https://api.cloudinary.com/v1_1/princedhameliya/image/upload', {
+            //     method: "POST",
+            //     body: formData,
+            // })
+            // .then(res => res.json())
+            // .then(res => setPostObject(res))
+            // .catch(err => console.log(err))
+
+            // try {
+            //     dispatch(uploadImage(data))
+            // } catch (error) {
+            //     console.log(error);
+            // }
         }
         else{
             return;
         }
-        dispatch(uploadPost(newPost))
-        dispatch(getTimelinePosts(user._id))
+
+        if(res){
+            newPost.image = res.url;
+            dispatch(uploadPost(newPost))
+            dispatch(getTimelinePosts(user._id))
+        }
+        // dispatch(uploadPost(newPost))
+        // dispatch(getTimelinePosts(user._id))
+        setLoading(false);
         resetPost();
     }
 
   return (
     <div className="PostShare">
-        <img src={user.coverPicture ? serverPublic + user.profilePicture : serverPublic + "defaultProfile.png"} alt="" />
+        <img src={user.coverPicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } alt="" />
         <div>
             <input ref={desc} required type="text" placeholder="What's Happening" />
             <div className="PostOptions">
-                <div className="Option" style={{color: "var(--photo)"}} onClick={()=>imageRef.current.click()}> <UilScenery /> Photo </div>
-                <div className="Option VideoButton" style={{color: "var(--video)"}} onClick={()=>imageRef.current.click()}> <UilPlayCircle /> Video </div>
-                {/* <div className="Option" style={{color: "var(--location)"}}> <UilLocationPoint /> Location </div> */}
-                <div className="Option ScheduleButton" style={{color: "var(--schedule)"}}> <UilSchedule /> Schedule </div>
+                <div className="Option" style={{color: "var(--photo)"}} onClick={()=>imageRef.current.click()}> <UilScenery className="optionsIcon" /> Photo </div>
+                <div className="Option VideoButton" style={{color: "var(--video)"}} onClick={()=>imageRef.current.click()}> <UilPlayCircle className="optionsIcon"/> Video </div>
+                {/* <div className="Option" style={{color: "var(--location)"}}> <UilLocationPoint className="optionsIcon" /> Location </div> */}
+                <div className="Option ScheduleButton" style={{color: "var(--schedule)"}}> <UilSchedule className="optionsIcon" /> Schedule </div>
                 <button className="button ps-button" onClick={handleSubmit} disabled={loading} >{loading ? "Uploading..." : "Share"}</button>
                 <div style={{display: "none"}}>
                     <input type="file" name="myImage" ref={imageRef} 

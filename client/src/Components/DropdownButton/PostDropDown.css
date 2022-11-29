@@ -1,0 +1,18 @@
+@media (max-width: 300px){
+    #demo-customized-button{
+        height: 15px;
+        width: 15px;
+    }
+
+    .css-1x0waax-MuiModal-root-MuiPopover-root-MuiMenu-root .MuiPaper-root{
+        min-width: 120px !important;
+        left: 163px !important;
+    }
+
+    .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root{
+        font-size: 0.7rem !important;
+        min-height: 1rem !important;
+        padding-left: 10px !important;
+        /* padding-right: 5px !important; */
+    }
+}

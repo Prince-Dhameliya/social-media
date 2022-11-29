@@ -7,7 +7,6 @@ const User = ({person}) => {
     const dispatch = useDispatch();
     const {user} = useSelector((state)=>state.authReducer.authData)
     const [isfollowing, setIsFollowing] = useState(person.followers.includes(user._id))
-    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
 
     const handleFollow = () => {
         isfollowing ? dispatch(unFollowUser(person._id, user)) : dispatch(followUser(person._id, user));
@@ -16,7 +15,7 @@ const User = ({person}) => {
   return (
     <div className="Follower">
         <div>
-            <img src={person.coverPicture ? serverPublic + person.profilePicture : serverPublic + "defaultProfile.png"} alt="" className="FollowerImage" />
+            <img src={person.coverPicture ? person.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt="" className="FollowerImage" />
             <div className="FollowerName">
                 <span>{person.firstname} {person.lastname}</span>
                 <span>{person.username}</span>

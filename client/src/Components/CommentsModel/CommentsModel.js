@@ -77,8 +77,8 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
     >
       <div className="CommentBox">
             <div className="PostDetails">
-                <div className='PostUserName' style={{gap: "1rem"}}>
-                    <img src={data.profilePicture ? process.env.REACT_APP_PUBLIC_FOLDER + data.profilePicture: ""} style={{cursor: "pointer"}} alt="" />
+                <div className='PostUserName commentUsername'>
+                    <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } style={{cursor: "pointer"}} alt="" />
                     <span style={{cursor: "pointer"}}> <b>{data.username}</b></span>
                 </div>
                 <PostCustomizedMenus data={data} />
@@ -89,7 +89,7 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
             <div className="MainComment">
                 <div className="CommentWindow">
                     <div className="CommentLeft">
-                        <img src={data.profilePicture ? process.env.REACT_APP_PUBLIC_FOLDER + data.profilePicture: ""} style={{cursor: "pointer"}} alt="" />
+                        <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } style={{cursor: "pointer"}} alt="" />
 
                         <div className="CommentInfo">
                             <div className="CommentUserInfo">
@@ -97,8 +97,8 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
                                 <span> {data.desc}</span>
                             </div>
 
-                            <div>
-                                <span style={{fontSize: "12px", color: "rgb(147, 147, 147)"}}>{time.ago(data.createdAt)}</span>
+                            <div className="CommentUserInfo">
+                                <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(data.createdAt)}</span>
                             </div>
                         </div>
                     </div>
@@ -115,26 +115,26 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
             <div className="bottomcomment">
                 <div className="PostReact">
                     <div>
-                        <img src={liked ? Like : DisLike} alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
-                        <img src={Comment} id="RedirectCommentInput" onClick={handleRedirect} style={{cursor: "pointer",width: "33px",marginTop:"-4px"}} alt="" />
-                        <img src={Send} style={{cursor: "pointer",width: "29px"}} alt="" />
+                        <img src={liked ? Like : DisLike} className="ReactLike" alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
+                        <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} style={{cursor: "pointer",width: "33px",marginTop:"-4px"}} alt="" />
+                        <img src={Send} className="ReactShare" style={{cursor: "pointer",width: "29px"}} alt="" />
                     </div>
 
-                    <img src={Bookmark} style={{cursor: "pointer",width: "26px"}} alt="" />
+                    <img src={Bookmark} className="ReactBookmark" style={{cursor: "pointer",width: "26px"}} alt="" />
                 </div>
 
-                <span style={{fontSize: "14px"}}><b>{likes} likes</b></span>
+                <span><b>{likes} likes</b></span>
 
-                <span style={{fontSize: "13px",color: "rgb(147, 147, 147)"}}>{time.ago(data.createdAt)}</span>
+                <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(data.createdAt)}</span>
 
                 <hr />
 
                 <div className="CommentSection">
                     <div className="CommentPlusEmoji">
-                        <img src={Send} style={{cursor: "pointer",width: "20px"}} alt="" />
-                        <input type="text" id={data._id} className="CommentInput" ref={desc} required placeholder='Add a comment...' />
+                        <img src={Send} className="CommentEmojiIcon" style={{cursor: "pointer",width: "20px"}} alt="" />
+                        <input type="text" id={data._id} className="CommentInput" ref={desc} placeholder='Add a comment...' />
                     </div>
-                    <button className='CommentSendButton' onClick={handleSubmit} disabled={loading} ><div style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}>{loading ? "Posting" : "Post"}</div></button>
+                    <div className='CommentSendButton' id={data.createdAt} onClick={handleSubmit} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>{loading ? "Posting" : "Post"}</span></div>
                 </div>
             </div>
       </div>

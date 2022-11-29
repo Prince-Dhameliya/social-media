@@ -27,6 +27,18 @@ export const getPost = async (req, res) => {
     }
 }
 
+// Get all Post
+export const getPosts = async (req, res) => {
+    try {
+        const posts = await PostModel.find({});
+        res.status(200).json(posts.sort((a,b)=>{
+            return b.createdAt - a.createdAt;
+        }));
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 // Update a Post
 export const updatePost = async (req, res) => {
     const postId = req.params.id;

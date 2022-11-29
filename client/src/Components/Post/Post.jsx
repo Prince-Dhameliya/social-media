@@ -77,25 +77,25 @@ const Post = ({data}) => {
     <div className="Post">
         <div className="PostDetails">
           <div className='PostUserName'>
-            <img src={data.profilePicture ? process.env.REACT_APP_PUBLIC_FOLDER + data.profilePicture: ""} style={{cursor: "pointer"}} alt="" />
+            <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} style={{cursor: "pointer"}} alt="" />
             <span style={{cursor: "pointer"}}> <b>{data.username}</b></span>
           </div>
           <PostCustomizedMenus data={data} />
         </div>
 
-        <img src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image: ""} alt="" />
+        <img src={data.image ? data.image: ""} alt="" />
 
         <div className="PostReact">
             <div>
-              <img src={liked ? Like : DisLike} alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
+              <img src={liked ? Like : DisLike} className="ReactLike" alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
               {<div>
-                <img src={Comment} id="RedirectCommentInput" onClick={handleRedirect} style={{cursor: "pointer",width: "33px",marginTop:"-4px"}} alt="" />
+                <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} style={{cursor: "pointer",width: "33px",marginTop:"-4px"}} alt="" />
                 <CommentsModel modalOpened={modalOpened} setModalOpened={setModalOpened} data = {data} />
               </div>}
-              <img src={Send} style={{cursor: "pointer",width: "29px"}} alt="" />
+              <img src={Send} className="ReactShare" style={{cursor: "pointer",width: "29px"}} alt="" />
             </div>
 
-            <img src={Bookmark} style={{cursor: "pointer",width: "26px"}} alt="" />
+            <img src={Bookmark} className="ReactBookmark" style={{cursor: "pointer",width: "26px"}} alt="" />
         </div>
 
         <span style={{fontSize: "14px"}}><b>{likes} likes</b></span>
@@ -105,7 +105,7 @@ const Post = ({data}) => {
             <span> {data.desc}</span>
         </div>
 
-        {data.comments.length>0 && (<span style={{fontSize: "14px", color: "rgb(147, 147, 147)",cursor: "pointer"}} onClick={handleRedirect}>{`View all ${data.comments.length} comments`}</span>)}
+        {data.comments.length>0 && (<span style={{fontSize: "14px", color: "rgb(147, 147, 147)",cursor: "pointer"}} onClick={handleRedirect}><span>{`View all ${data.comments.length} comments`}</span></span>)}
 
         {data.comments.map((comment,id)=>{
           if(comment.userId === data.userId && id<2){
@@ -118,16 +118,16 @@ const Post = ({data}) => {
           }
         })}
 
-        <span style={{fontSize: "13px",color: "rgb(147, 147, 147)"}}>{time.ago(data.createdAt)}</span>
+        <span style={{fontSize: "13px",color: "rgb(147, 147, 147)"}}><span>{time.ago(data.createdAt)}</span></span>
 
         <hr />
 
         <div className="CommentSection">
           <div className="CommentPlusEmoji">
-            <img src={Send} style={{cursor: "pointer",width: "20px"}} alt="" />
+            <img src={Send} className="CommentEmojiIcon" style={{cursor: "pointer",width: "20px"}} alt="" />
             <input type="text" id={data._id} className="CommentInput" ref={desc} placeholder='Add a comment...' onChange={handleInput} />
           </div>
-          <button className='CommentSendButton' onClick={handleSubmit} disabled={loading} ><div id={data.createdAt} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}>{loading ? "Posting" : "Post"}</div></button>
+          <div className='CommentSendButton' id={data.createdAt} onClick={handleSubmit} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>{loading ? "Posting" : "Post"}</span></div>
         </div>
     </div>
   )

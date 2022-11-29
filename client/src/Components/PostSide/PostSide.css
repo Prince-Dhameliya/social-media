@@ -8,6 +8,8 @@
     margin: 0rem auto;
 }
 
-@media (max-width:543px){
-
+@media (max-width:300px){
+    .PostSide{
+        width: 18rem;
+    }
 }

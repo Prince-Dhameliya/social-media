@@ -2,11 +2,12 @@ import { Modal, useMantineTheme } from "@mantine/core";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { uploadImage } from "../../actions/uploadAction";
+// import { uploadImage } from "../../actions/uploadAction";
 import { updateUser } from "../../actions/userAction";
 
 function ProfileModal({modalOpened, setModalOpened, data}) {
   const theme = useMantineTheme();
+  const [loading, setLoading] = useState(false);
   const {password, ...other} = data;
   const [formData, setFormData] = useState(other);
   const [profileImage, setProfileImage]= useState(null);
@@ -25,36 +26,61 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let UserData = formData;
-    if(profileImage){
-      const data = new FormData();
-      const fileName = Date.now() + profileImage.name;
-      data.append("name", fileName);
-      data.append("file", profileImage);
-      UserData.profilePicture = fileName;
-      try {
-        dispatch(uploadImage(data));
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+      let UserData = formData;
 
-    if(coverImage){
-      const data = new FormData();
-      const fileName = Date.now() + coverImage.name;
-      data.append("name", fileName);
-      data.append("file", coverImage);
-      UserData.coverPicture = fileName;
-      try {
-        dispatch(uploadImage(data));
-      } catch (error) {
-        console.log(error);
+      let res1;
+      if(profileImage){
+        const ProfileData = new FormData();
+        ProfileData.append("file", profileImage);
+        ProfileData.append('upload_preset', 'socialmedia');
+        ProfileData.append('cloud_name', "princedhameliya")
+
+        await fetch('https://api.cloudinary.com/v1_1/princedhameliya/image/upload',{
+            method: "POST",
+            body: ProfileData,
+        })
+        .then(res => res.json())
+        .then(async res => {
+            res1 = await res;
+        })
+        .catch(err => console.log(err))
+        // try {
+        //   dispatch(uploadImage(data));
+        // } catch (error) {
+        //   console.log(error);
+        // }
       }
-    }
-    dispatch(updateUser(param.id, UserData));
-    setModalOpened(false);
+      if(res1 && profileImage) UserData.profilePicture = res1.url;
+
+      let res2;
+      if(coverImage){
+        const ProfileData = new FormData();
+        ProfileData.append("file", coverImage);
+        ProfileData.append('upload_preset', 'socialmedia');
+        ProfileData.append('cloud_name', "princedhameliya")
+
+        await fetch('https://api.cloudinary.com/v1_1/princedhameliya/image/upload',{
+            method: "POST",
+            body: ProfileData,
+        })
+        .then(res => res.json())
+        .then(async res => {
+          res2 = await res;
+        })
+        .catch(err => console.log(err))
+        // try {
+          //   dispatch(uploadImage(data));
+          // } catch (error) {
+            //   console.log(error);
+            // }
+      }
+      if(res2 && coverImage) UserData.coverPicture = res2.url;
+      dispatch(updateUser(param.id, UserData));
+      setLoading(false);
+      setModalOpened(false);
   }
 
   return (
@@ -93,7 +119,7 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
           <input type="file" name="coverImage" onChange={onImageChange} />
         </div>
 
-        <button className="button InfoButton" onClick={handleSubmit}>Update</button>
+        <button className="button InfoButton" onClick={handleSubmit} disabled={loading}>{loading ? "Updating" : "Update"}</button>
       </form>
     </Modal>
   );

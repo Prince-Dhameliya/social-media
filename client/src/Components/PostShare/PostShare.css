@@ -75,17 +75,48 @@
     border-radius: 0.5rem;
 }
 
-@media (max-width: 451px){
-    .ScheduleButton{
-        display: none;
-    }
-}
+@media (max-width: 300px){
 
-@media (max-width: 365px){
-    .PostShare > div > input{
-        width: 200px;
+    .PostShare{
+        gap: 0.5rem;
+        padding: 0.6rem;
+        border-radius: 1rem;
+        margin-top: 0.5rem;
     }
-    .VideoButton{
-        display: none;
+
+    .PostShare > img{
+        width: 2rem;  /*3rem*/
+        height: 2rem; /*3rem*/
+    }
+
+    .PostShare > div{
+        gap: 0.5rem;
+    }
+
+    .PostShare > div > input{
+        border-radius: 7px; /*10px*/
+        padding: 8px; /*10px*/
+        font-size: 9px; /*17px*/
+        
+    }
+
+    .optionsIcon{
+        height: 18px;
+        width: 18px;
+    }
+
+    .Option{
+        padding: 2px; /*5px*/
+        padding-left: 5px; /*10px*/
+        padding-right: 5px; /*10px*/
+        border-radius: 7px; /*10px*/
+        font-size: 9px; /*12px*/
+    }
+
+    .ps-button{
+        padding: 2px; /*5px*/
+        padding-left: 10px; /*20px*/
+        padding-right: 10px; /*20px*/
+        font-size: 9px; /*12px*/
     }
 }
