@@ -86,3 +86,13 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 420px){
+    .Auth{
+        flex-direction: column;
+    }
+
+    .InfoInput{
+        width: 20px;
+    }
+}

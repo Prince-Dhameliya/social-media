@@ -75,7 +75,99 @@
     border-radius: 0.5rem;
 }
 
+@media (max-width: 420px){
+
+    .PostShare{
+        gap: 0.7rem; /*1rem*/
+        padding: 0.8rem; /*1rem*/
+        border-radius: 1rem; /*1rem*/
+        margin-top: 0.7rem; /*1rem*/
+    }
+
+    .PostShare > img{
+        width: 2.5rem;  /*3rem*/
+        height: 2.5rem; /*3rem*/
+    }
+
+    .PostShare > div{
+        gap: 0.7rem;
+    }
+
+    .PostShare > div > input{
+        border-radius: 7px; /*10px*/
+        padding: 8px; /*10px*/
+        font-size: 13px; /*17px*/
+        
+    }
+
+    .optionsIcon{
+        height: 23px;
+        width: 23px; 
+    }
+
+    .Option{
+        padding: 3px; /*5px*/
+        padding-left: 7px; /*10px*/
+        padding-right: 7px; /*10px*/
+        border-radius: 7px; /*10px*/
+        font-size: 11px; /*12px*/
+    }
+
+    .ps-button{
+        padding: 3px; /*5px*/
+        padding-left: 18px; /*20px*/
+        padding-right: 18px; /*20px*/
+        font-size: 11px; /*12px*/
+    }
+}
+
 @media (max-width: 400px){
+
+    .PostShare{
+        gap: 0.6rem;
+        padding: 0.7rem;
+        border-radius: 1rem;
+        margin-top: 0.6rem;
+    }
+
+    .PostShare > img{
+        width: 2.3rem;  /*3rem*/
+        height: 2.3rem; /*3rem*/
+    }
+
+    .PostShare > div{
+        gap: 0.6rem;
+    }
+
+    .PostShare > div > input{
+        border-radius: 7px; /*10px*/
+        padding: 8px; /*10px*/
+        font-size: 12px; /*17px*/
+        
+    }
+
+    .optionsIcon{
+        height: 21px;
+        width: 21px;
+    }
+
+    .Option{
+        padding: 3px; /*5px*/
+        padding-left: 6px; /*10px*/
+        padding-right: 6px; /*10px*/
+        border-radius: 7px; /*10px*/
+        font-size: 10px; /*12px*/
+    }
+
+    .ps-button{
+        padding: 3px; /*5px*/
+        padding-left: 16px; /*20px*/
+        padding-right: 16px; /*20px*/
+        font-size: 10px; /*12px*/
+    }
+}
+
+@media (max-width: 350px){
 
     .PostShare{
         gap: 0.5rem;

@@ -8,6 +8,66 @@
     margin: 0rem auto;
 }
 
+@media screen and (max-width:500px){
+    .PostSide{
+        width: 28.5rem;
+    }
+}
+
+@media screen and (max-width:490px){
+    .PostSide{
+        width: 28rem;
+    }
+}
+
+@media screen and (max-width:480px){
+    .PostSide{
+        width: 27.5rem;
+    }
+}
+
+@media screen and (max-width:470px){
+    .PostSide{
+        width: 27rem;
+    }
+}
+
+@media screen and (max-width:460px){
+    .PostSide{
+        width: 26.5rem;
+    }
+}
+
+@media screen and (max-width:450px){
+    .PostSide{
+        width: 26rem;
+    }
+}
+
+@media screen and (max-width:440px){
+    .PostSide{
+        width: 25.5rem;
+    }
+}
+
+@media screen and (max-width:430px){
+    .PostSide{
+        width: 25rem;
+    }
+}
+
+@media screen and (max-width:420px){
+    .PostSide{
+        width: 24.5rem;
+    }
+}
+
+@media screen and (max-width:410px){
+    .PostSide{
+        width: 24rem;
+    }
+}
+
 @media screen and (max-width:400px){
     .PostSide{
         width: 23.5rem;
