@@ -75,7 +75,7 @@
     border-radius: 0.5rem;
 }
 
-@media (max-width: 300px){
+@media (max-width: 400px){
 
     .PostShare{
         gap: 0.5rem;

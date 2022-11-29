@@ -8,7 +8,67 @@
     margin: 0rem auto;
 }
 
-@media (max-width:300px){
+@media screen and (max-width:400px){
+    .PostSide{
+        width: 23.5rem;
+    }
+}
+
+@media screen and (max-width:390px){
+    .PostSide{
+        width: 23rem;
+    }
+}
+
+@media screen and (max-width:380px){
+    .PostSide{
+        width: 22.5rem;
+    }
+}
+
+@media screen and (max-width:370px){
+    .PostSide{
+        width: 22rem;
+    }
+}
+
+@media screen and (max-width:360px){
+    .PostSide{
+        width: 21.5rem;
+    }
+}
+
+@media screen and (max-width:350px){
+    .PostSide{
+        width: 21rem;
+    }
+}
+
+@media screen and (max-width:340px){
+    .PostSide{
+        width: 20.5rem;
+    }
+}
+
+@media screen and (max-width:330px){
+    .PostSide{
+        width: 20rem;
+    }
+}
+
+@media screen and (max-width:320px){
+    .PostSide{
+        width: 19.5rem;
+    }
+}
+
+@media screen and (max-width:310px){
+    .PostSide{
+        width: 19rem;
+    }
+}
+
+@media screen and (max-width:300px){
     .PostSide{
         width: 18rem;
     }
