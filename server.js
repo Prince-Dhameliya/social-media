@@ -36,6 +36,10 @@ app.get('/', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 
+app.get('/home', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
 // usage of routes
 app.use('/auth', AuthRoute)
 app.use('/user', UserRoute)
