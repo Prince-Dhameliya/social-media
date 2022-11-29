@@ -7,6 +7,7 @@ import AuthRoute from './Routes/AuthRoute.js'
 import UserRoute from './Routes/UserRoute.js'
 import PostRoute from './Routes/PostRoute.js'
 import UploadRoute from './Routes/UploadRoute.js'
+import path from 'path';
 
 // Routes
 const app = express();
