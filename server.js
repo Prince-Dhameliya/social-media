@@ -8,15 +8,16 @@ import UserRoute from './Routes/UserRoute.js'
 import PostRoute from './Routes/PostRoute.js'
 import UploadRoute from './Routes/UploadRoute.js'
 import path from 'path';
+import './client/build/index.html'
 
 // Routes
 const app = express();
 dotenv.config()
 const PORT = process.env.PORT || 5000;
 
-// to server images for public
-app.use(express.static('public'))
-app.use('/images', express.static("images"))
+// // to server images for public
+// app.use(express.static('public'))
+// app.use('/images', express.static("images"))
 
 // Middelware
 app.use(bodyParser.json({limit: "50mb", extended: true}));
@@ -32,7 +33,7 @@ mongoose.connect(process.env.MONGO_DB,
 if(process.env.NODE_ENV === "production"){
     app.use(express.static('client/build'))
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+        res.sendFile(path.join(__dirname+'./client/build/index.html'));
     });
 }
 
