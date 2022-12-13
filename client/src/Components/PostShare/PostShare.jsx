@@ -45,18 +45,22 @@ const PostShare = () => {
             formData.append("file", image)
             formData.append('upload_preset', 'socialmedia');
             formData.append('cloud_name', "princedhameliya")
-            
-            await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/image/upload', formData)
-            .then(async response => {
-                res = await response.data;
-            })
-            // await fetch('https://api.cloudinary.com/v1_1/princedhameliya/image/upload', {
-            //     method: "POST",
-            //     body: formData,
-            // })
-            // .then(res => res.json())
-            // .then(res => setPostObject(res))
-            // .catch(err => console.log(err))
+
+            if(image.type==="video/mp4"){
+                await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/video/upload', formData)
+                .then(async response => {
+                    res = await response.data;
+                })
+            }
+            else if(image.type==="image/png" || image.type==="image/jpg" || image.type==="image/jpeg"){
+                await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/image/upload', formData)
+                .then(async response => {
+                    res = await response.data;
+                })
+            }
+            else{
+                return;
+            }
 
             // try {
             //     dispatch(uploadImage(data))
@@ -91,7 +95,7 @@ const PostShare = () => {
                 <div className="Option ScheduleButton" style={{color: "var(--schedule)"}}> <UilSchedule className="optionsIcon" /> Schedule </div>
                 <button className="button ps-button" onClick={handleSubmit} disabled={loading} >{loading ? "Uploading..." : "Share"}</button>
                 <div style={{display: "none"}}>
-                    <input type="file" name="myImage" ref={imageRef} 
+                    <input type="file" name="myImage" accept='video/' ref={imageRef} 
                     onChange={onImageChange} />
                 </div>
             </div>

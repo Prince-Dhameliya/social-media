@@ -45,3 +45,9 @@ app.use('/auth', AuthRoute)
 app.use('/user', UserRoute)
 app.use('/posts', PostRoute)
 // app.use('/upload', UploadRoute)
+
+
+
+// "client-install": "cd client && npm install",
+// "client-build": "cd client && npm run build",
+// "heroku-postbuild": "npm run client-install && npm run client-build"

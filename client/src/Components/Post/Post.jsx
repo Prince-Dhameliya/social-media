@@ -11,6 +11,7 @@ import { commentPost, dislikePost, likePost } from '../../actions/postAction'
 import PostCustomizedMenus from '../DropdownButton/PostDropDownButton'
 import time from 'time-ago';
 import CommentsModel from '../CommentsModel/CommentsModel'
+import {VolumeUp, VolumeOff, PlayArrow} from '@mui/icons-material'
 
 const Post = ({data}) => {
   
@@ -73,6 +74,24 @@ const Post = ({data}) => {
 
   const [modalOpened, setModalOpened] = useState(false);
 
+
+  //Show Video
+  const videoRef = useRef(null);
+  const [muted, setMuted] = useState(true);
+  const [pause, setPause] = useState(false);
+  
+  const videoClick = () => {
+    if(videoRef.current){
+      setPause((prev)=>!prev);
+      videoRef.current.paused ? videoRef.current.play() : videoRef.current.pause()
+    }
+  }
+
+  const videoMuteClick = () => {
+      setMuted((prev)=>!prev);
+      videoRef.current.muted ? videoRef.current.muted=false :  videoRef.current.muted=true;
+  }
+
   return (
     <div className="Post">
         <div className="PostDetails">
@@ -81,9 +100,20 @@ const Post = ({data}) => {
             <span style={{cursor: "pointer"}}> <b>{data.username}</b></span>
           </div>
           <PostCustomizedMenus data={data} />
+          
         </div>
 
-        <img src={data.image ? data.image: ""} alt="" />
+        <div className='PostContent'>
+            {data.image.includes("image") 
+              ? <img src={data.image ? data.image: ""} alt="" />
+              : <><video ref={videoRef} autoPlay muted loop onClick={videoClick}><source src={data.image ? data.image : ""} type="video/mp4"/></video>
+                  {pause ? <PlayArrow className='videoPlay' onClick={videoClick}/> : null}
+                  {muted ? <VolumeOff className='muted' onClick={videoMuteClick} /> : <VolumeUp className='muted' onClick={videoMuteClick}/>}
+                </>
+            }
+        </div>
+
+      
 
         <div className="PostReact">
             <div>
