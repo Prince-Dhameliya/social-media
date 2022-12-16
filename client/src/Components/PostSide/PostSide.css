@@ -11,125 +11,398 @@
 @media screen and (max-width:500px){
     .PostSide{
         width: 28.5rem;
+        margin-left: 0.5rem;
+    }
+    .NavigationBar{
+        width: 28.5rem;
+    }
+    .ProfileCenter{
+        width: 28.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 28.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:490px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 28rem;
+    }
+    .NavigationBar{
+        width: 28rem;
+    }
+    .ProfileCenter{
+        width: 28rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 28rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:480px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 27.5rem;
+    }
+    .NavigationBar{
+        width: 27.5rem;
+    }
+    .ProfileCenter{
+        width: 27.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 27.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:470px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 27rem;
+    }
+    .NavigationBar{
+        width: 27rem;
+    }
+    .ProfileCenter{
+        width: 27rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 27rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:460px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 26.5rem;
+    }
+    .NavigationBar{
+        width: 26.5rem;
+    }
+    .ProfileCenter{
+        width: 26.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 26.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:450px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 26rem;
+    }
+    .NavigationBar{
+        width: 26rem;
+    }
+    .ProfileCenter{
+        width: 26rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 26rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:440px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 25.5rem;
+    }
+    .NavigationBar{
+        width: 25.5rem;
+    }
+    .ProfileCenter{
+        width: 25.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 25.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:430px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 25rem;
+    }
+    .NavigationBar{
+        width: 25rem;
+    }
+    .ProfileCenter{
+        width: 25rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 25rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:420px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 24.5rem;
+    }
+    .NavigationBar{
+        width: 24.5rem;
+    }
+    .ProfileCenter{
+        width: 24.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 24.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:410px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 24rem;
+    }
+    .NavigationBar{
+        width: 24rem;
+    }
+    .ProfileCenter{
+        width: 24rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 24rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:400px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 23.5rem;
+    }
+    .NavigationBar{
+        width: 23.5rem;
+    }
+    .ProfileCenter{
+        width: 23.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 23.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:390px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 23rem;
+    }
+    .NavigationBar{
+        width: 23rem;
+    }
+    .ProfileCenter{
+        width: 23rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 23rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:380px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 22.5rem;
+    }
+    .NavigationBar{
+        width: 22.5rem;
+    }
+    .ProfileCenter{
+        width: 22.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 22.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:370px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 22rem;
+    }
+    .NavigationBar{
+        width: 22rem;
+    }
+    .ProfileCenter{
+        width: 22rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 22rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:360px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 21.5rem;
+    }
+    .NavigationBar{
+        width: 21.5rem;
+    }
+    .ProfileCenter{
+        width: 21.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 21.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:350px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 21rem;
+    }
+    .NavigationBar{
+        width: 21rem;
+    }
+    .ProfileCenter{
+        width: 21rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 21rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:340px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 20.5rem;
+    }
+    .NavigationBar{
+        width: 20.5rem;
+    }
+    .ProfileCenter{
+        width: 20.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 20.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:330px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 20rem;
+    }
+    .NavigationBar{
+        width: 20rem;
+    }
+    .ProfileCenter{
+        width: 20rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 20rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:320px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 19.5rem;
+    }
+    .NavigationBar{
+        width: 19.5rem;
+    }
+    .ProfileCenter{
+        width: 19.5rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 19.5rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:310px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 19rem;
+    }
+    .NavigationBar{
+        width: 19rem;
+    }
+    .ProfileCenter{
+        width: 19rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 19rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
 
 @media screen and (max-width:300px){
     .PostSide{
+        margin-left: 0.5rem;
         width: 18rem;
+    }
+    .NavigationBar{
+        width: 18rem;
+    }
+    .ProfileCenter{
+        width: 18rem;
+        margin: 0rem auto;
+    }
+    .ProfileCard{
+        width: 18rem;
+        margin: 0rem auto;
+        margin-left: 0.5rem;
     }
 }
