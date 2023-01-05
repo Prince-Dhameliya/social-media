@@ -42,9 +42,9 @@ const PostShare = () => {
         let res;
         if(image){
             const formData = new FormData();
-            formData.append("file", image)
+            formData.append("file", image);
             formData.append('upload_preset', 'socialmedia');
-            formData.append('cloud_name', "princedhameliya")
+            formData.append('cloud_name', "princedhameliya");
 
             if(image.type==="video/mp4"){
                 await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/video/upload', formData)
@@ -52,7 +52,7 @@ const PostShare = () => {
                     res = await response.data;
                 })
             }
-            else if(image.type==="image/png" || image.type==="image/jpg" || image.type==="image/jpeg"){
+            else if(image.type==="image/png" || image.type==="image/jpg" || image.type==="image/jpeg" || image.type==="image/webp"){
                 await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/image/upload', formData)
                 .then(async response => {
                     res = await response.data;

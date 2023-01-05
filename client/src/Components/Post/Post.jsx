@@ -4,27 +4,35 @@ import Comment from '../../img/comment.svg'
 import Send from '../../img/send.svg'
 import Like from '../../img/like.svg'
 import DisLike from '../../img/dislike.svg'
-import Bookmark from '../../img/bookmark.svg'
+import UnBookmark from '../../img/UnBookmark.svg'
+import Bookmark from '../../img/Bookmark.svg'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { commentPost, dislikePost, likePost } from '../../actions/postAction'
+import { bookmarkPost, commentPost, dislikePost, likePost, unbookmarkPost } from '../../actions/postAction'
 import PostCustomizedMenus from '../DropdownButton/PostDropDownButton'
 import time from 'time-ago';
 import CommentsModel from '../CommentsModel/CommentsModel'
 import {VolumeUp, VolumeOff, PlayArrow} from '@mui/icons-material'
+import { Link } from 'react-router-dom'
 
 const Post = ({data}) => {
   
-  const dispatch = useDispatch();
   const {user}  = useSelector((state)=>state.authReducer.authData)
+  const dispatch = useDispatch();
 
   const [liked, setLiked] = useState(data.likes.includes(user._id))
+  const [bookmarked, setBookmarked] = useState(data.saved.includes(user._id))
   const [likes, setLikes] = useState(data.likes.length)
 
   const handleLike = async () => {
     setLiked((prev)=>!prev)
     liked ? setLikes((prev)=>prev-1) : setLikes((prev)=>prev+1)
     liked ? dispatch(dislikePost(data._id, user._id)) : dispatch(likePost(data._id, user._id))
+  }
+  const handleBookmark = async () => {
+    setBookmarked((prev)=>!prev)
+    bookmarked ? dispatch(unbookmarkPost(data._id, user._id)) : dispatch(bookmarkPost(data._id, user._id))
   }
 
   // For Comment
@@ -92,12 +100,13 @@ const Post = ({data}) => {
       videoRef.current.muted ? videoRef.current.muted=false :  videoRef.current.muted=true;
   }
 
+
   return (
     <div className="Post">
         <div className="PostDetails">
           <div className='PostUserName'>
             <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} style={{cursor: "pointer"}} alt="" />
-            <span style={{cursor: "pointer"}}> <b>{data.username}</b></span>
+            <span style={{cursor: "pointer"}}><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
           </div>
           <PostCustomizedMenus data={data} />
           
@@ -125,7 +134,7 @@ const Post = ({data}) => {
               <img src={Send} className="ReactShare" style={{cursor: "pointer",width: "29px"}} alt="" />
             </div>
 
-            <img src={Bookmark} className="ReactBookmark" style={{cursor: "pointer",width: "26px"}} alt="" />
+            <img src={bookmarked ? Bookmark : UnBookmark} className="ReactBookmark" onClick={handleBookmark} style={{cursor: "pointer",width: "26px"}} alt="" />
         </div>
 
         <span style={{fontSize: "14px"}}><b>{likes} likes</b></span>
@@ -146,6 +155,7 @@ const Post = ({data}) => {
               </div>
             )
           }
+          return null;
         })}
 
         <span style={{fontSize: "13px",color: "rgb(147, 147, 147)"}}><span>{time.ago(data.createdAt)}</span></span>

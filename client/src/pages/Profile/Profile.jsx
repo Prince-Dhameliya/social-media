@@ -1,19 +1,16 @@
-import PostSide from '../../Components/PostSide/PostSide'
+import Posts from '../../Components/Posts/Posts'
 import ProfileCard from '../../Components/ProfileCard/ProfileCard'
-import ProfileLeft from '../../Components/ProfileLeft/ProfileLeft'
-import RightSide from '../../Components/RightSide/RightSide'
+import NavigationMain from '../../Components/NavigationMain/NavigationMain'
 import './Profile.css'
 
-const Profile = () => {
-  
+const Profile = ({location}) => {
   return (
     <div className="Profile">
-        <ProfileLeft />
+        <NavigationMain />
         <div className="ProfileCenter">
-            <ProfileCard location ="profilePage" />
-            <PostSide />
+            <ProfileCard/>
+            <Posts location={location}/>
         </div>
-        <RightSide />
     </div>
   )
 }

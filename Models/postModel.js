@@ -13,6 +13,7 @@ const PostSchema = mongoose.Schema(
         profilePicture: String,
         desc: String,
         likes: [],
+        saved: [],
         image: String,
         comments: []
     },

@@ -11,6 +11,17 @@ export const getTimelinePosts = (id) => async (dispatch) => {
     }
 }
 
+export const getTimelineSavedPosts = (id) => async (dispatch) => {
+    dispatch({type: "SAVED_RETREIVING_START"})
+    try {
+        const {data} = await PostApi.getTimelineSavedPosts(id);
+        dispatch({type: "SAVED_RETREIVING_SUCCESS", data: data})
+    } catch (error) {
+        dispatch({type: "SAVED_RETREIVING_FAIL"})
+        console.log(error);
+    }
+}
+
 export const commentPost = (id, data) => async (dispatch) => {
     dispatch({type: "COMMENTING_START"})
     try {
@@ -46,6 +57,24 @@ export const dislikePost = (postId, userId) => async (dispatch) => {
     try {
         await PostApi.dislikePost(postId, userId);
         dispatch({type: "DISLIKE_POST", data: userId, Id:postId})    
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const bookmarkPost = (postId, userId) => async (dispatch) => {
+    try {
+        await PostApi.bookmarkPost(postId, userId);
+        dispatch({type: "BOOKMARK_POST", data: userId, Id:postId})    
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const unbookmarkPost = (postId, userId) => async (dispatch) => {
+    try {
+        await PostApi.unbookmarkPost(postId, userId);
+        dispatch({type: "UNBOOKMARK_POST", data: userId, Id:postId})    
     } catch (error) {
         console.log(error);
     }

@@ -1,9 +1,8 @@
 .ProfileCard{
-    border-radius: 1.5rem;
+    border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
     position: relative;
-    gap: 1rem;
     overflow-x: clip;
     background: var(--cardColor);
 }
@@ -14,6 +13,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .ProfileImages > img:nth-of-type(1){
@@ -32,12 +32,31 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3rem;
-    gap: 10px;
+    margin: 3rem 0rem 1rem 0rem;
 }
 
 .ProfileName > span:nth-of-type(1){
     font-weight: bold;
+}
+
+
+/* tempstuff */
+.tempStuff{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.tempStuff > div {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.logout-button{
+    width: 7rem;
+    height: 2rem;
 }
 
 /* Follow Status */
@@ -46,12 +65,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
 }
 
 .FollowStatus > hr{
-    width: 85%;
-    border: 1px solid var(--hrColor)
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: rgb(218, 218, 218);
+    margin: 0px;
 }
 
 .FollowStatus > div{
@@ -68,6 +89,7 @@
     gap: 0.4rem;
     align-items: center;
     justify-content: center;
+    margin: 1rem 0rem;
 }
 
 .Follow > span:nth-of-type(1){
@@ -80,14 +102,35 @@
 }
 
 .vl{
-    height: 150%;
-    border-left: 2px solid var(--hrColor);
+    height: 100%;
+    border-left: 1px solid rgb(218, 218, 218);
 }
 
-.ProfileCard > span{
-    font-weight: bold;
-    color: orange;
-    align-self: center;
-    margin-bottom: 1rem;
-    cursor: pointer;
+.ProfilePosts{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-top: 1px solid rgb(218, 218, 218);
 }
+
+.ProfilePostsButton{
+    padding: 17px 0px;
+    display: flex;
+    margin: 0px 30px;
+}
+
+.ProfilePostsButton.active{
+    border-top: 1px solid;
+}
+
+.ProfilePostsButton_Icon{
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+}
+
+.ProfilePostsButton_Title{
+    font-size: 12px;
+    font-weight: 600;
+}
+

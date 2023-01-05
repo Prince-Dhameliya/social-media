@@ -1,0 +1,98 @@
+/* css for navigation*/
+.NavigationBar{
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    background: white;
+    width: 30rem;
+    position:fixed;
+    bottom: 0;
+    padding: 0.5rem 0rem;
+    border-top: 1px solid rgb(183, 183, 183);
+    display: none;
+}
+
+.homeNavigation{
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.searchNavigation{
+    width: 2rem;
+    height: 2rem;
+}
+
+.addPostNavigation{
+    width: 2rem;
+    height: 2rem;
+}
+
+.likeNavigation{
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.profileNavigation{
+    width: 2rem;
+    height: 2rem;
+}
+
+@media screen and (max-width:700px){
+    .NavigationBar{
+        display:flex;
+    }
+}
+
+@media screen and (max-width: 420px){
+    .homeNavigation{
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+
+    .searchNavigation{
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+    
+    .addPostNavigation{
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    .likeNavigation{
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+    
+    .profileNavigation{
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 350px){
+    .homeNavigation{
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    .searchNavigation{
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+    
+    .addPostNavigation{
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+
+    .likeNavigation{
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+    
+    .profileNavigation{
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+}

@@ -103,6 +103,26 @@ export const likePost = async (req, res) => {
     }
 }
 
+export const bookmarkPost = async (req, res) => {
+    const postId = req.params.id;
+    const {userId} = req.body;
+
+    try {
+        const post = await PostModel.findById(postId);
+        if(!post.saved.includes(userId)){
+            await post.updateOne({$push : {saved : userId}})
+            res.status(200).json(post)
+        }
+        else{
+            await post.updateOne({$pull : {saved : userId}})
+            res.status(200).json(post)
+        }
+        
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 
 // Comment post
 export const commentPost = async (req, res) => {
@@ -174,6 +194,20 @@ export const getTimelinePosts = async (req, res) => {
             return b.createdAt - a.createdAt;
         }));
         
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+// Get Saved Posts
+export const getTimelineSavedPosts = async (req, res) => {
+    const userId = req.params.id;  
+    
+    try {
+        const posts = await PostModel.find({saved: userId});
+        res.status(200).json(posts.sort((a,b)=>{
+            return b.createdAt - a.createdAt;
+        }));
     } catch (error) {
         res.status(500).json(error)
     }

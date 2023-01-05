@@ -1,5 +1,5 @@
 const postReducer = (
-    state = {posts: [], loading: false, error: false, uploading: false},
+    state = {posts: [],savedPosts: [], loading: false, error: false, uploading: false},
     action
 ) => {
     switch(action.type){
@@ -37,6 +37,13 @@ const postReducer = (
         case "RETREIVING_FAIL":
             return {...state, loading: false, error: true}
 
+        case "SAVED_RETREIVING_START":
+            return {...state, loading:true, error: false}
+        case "SAVED_RETREIVING_SUCCESS":
+            return {...state, savedPosts: action.data, loading:false, error: false}
+        case "SAVED_RETREIVING_FAIL":
+            return {...state, loading: false, error: true}
+
         case "LIKE_POST":
             const likePosts = state.posts.map(obj=>
                 obj._id === action.Id ? {...obj, likes: [...obj.likes, action.data]} : obj
@@ -47,6 +54,17 @@ const postReducer = (
                 obj._id === action.Id ? {...obj, likes: [...obj.likes.filter(temp=>temp!==action.data)]} : obj
             );
             return {...state, posts : dislikePosts, loading: false, error: false}
+
+        case "BOOKMARK_POST":
+            const bookmarkPosts = state.posts.map(obj=>
+                obj._id === action.Id ? {...obj, saved: [...obj.saved, action.data]} : obj
+            );
+            return {...state, posts : bookmarkPosts, loading: false, error: false}
+        case "UNBOOKMARK_POST":
+            const unbookmarkPosts = state.posts.map(obj=>
+                obj._id === action.Id ? {...obj, saved: [...obj.saved.filter(temp=>temp!==action.data)]} : obj
+            );
+            return {...state, posts : unbookmarkPosts, loading: false, error: false}
 
         case "DELETING_START":
             return {...state, loading:true, error: false}

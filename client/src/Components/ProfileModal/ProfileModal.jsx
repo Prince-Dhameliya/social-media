@@ -100,6 +100,7 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
         </div>
 
         <div>
+          <input type="text" className="InfoInput" name="bio" placeholder="Bio" onChange={handleChange} value={formData.bio} />
           <input type="text" className="InfoInput" name="worksAt" placeholder="Work at" onChange={handleChange} value={formData.worksAt} />
         </div>
 

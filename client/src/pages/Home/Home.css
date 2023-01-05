@@ -1,16 +1,24 @@
 .Home{
     position: relative;
     display: grid;
-    grid-template-columns: 18rem auto 20rem;
+    grid-template-columns: 21rem auto;
     gap: 1rem;
 }
 
-@media (max-width:1200px){
+@media screen and (max-width:1600px){
     .Home{
-        grid-template-columns: auto;
+        grid-template-columns: 16rem auto;
     }
 }
 
-@media (min-height:300px){
-    
+@media screen and (max-width:1400px){
+    .Home{
+        grid-template-columns: 4.8rem auto;
+    }
+}
+
+@media screen and (max-width:700px){
+    .Home{
+        grid-template-columns: auto;
+    }
 }

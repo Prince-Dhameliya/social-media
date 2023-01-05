@@ -1,0 +1,240 @@
+.HomeSide{
+    display: flex;
+    margin: 0rem auto;
+    overflow: auto;
+    gap: 2rem;
+}
+
+.PostSide{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 30rem;
+    height: 100vh;
+}
+
+.FollowerSide{
+    width: 21rem;
+}
+
+@media screen and (max-width:1000px){
+    .FollowerSide{
+        display: none;
+    }
+}
+
+@media screen and (max-width:530px){
+    .PostSide{
+        width: 30rem;
+    }
+    .NavigationBar{
+        width: 30rem;
+    }
+}
+
+@media screen and (max-width:520px){
+    .PostSide{
+        width: 29.5rem;
+    }
+    .NavigationBar{
+        width: 29.5rem;
+    }
+}
+
+@media screen and (max-width:510px){
+    .PostSide{
+        width: 29rem;
+    }
+    .NavigationBar{
+        width: 29rem;
+    }
+}
+
+@media screen and (max-width:500px){
+    .PostSide{
+        width: 28.5rem;
+    }
+    .NavigationBar{
+        width: 28.5rem;
+    }
+}
+
+@media screen and (max-width:490px){
+    .PostSide{
+        width: 28rem;
+    }
+    .NavigationBar{
+        width: 28rem;
+    }
+}
+
+@media screen and (max-width:480px){
+    .PostSide{
+        width: 27.5rem;
+    }
+    .NavigationBar{
+        width: 27.5rem;
+    }
+}
+
+@media screen and (max-width:470px){
+    .PostSide{
+        width: 27rem;
+    }
+    .NavigationBar{
+        width: 27rem;
+    }
+}
+
+@media screen and (max-width:460px){
+    .PostSide{
+        width: 26.5rem;
+    }
+    .NavigationBar{
+        width: 26.5rem;
+    }
+}
+
+@media screen and (max-width:450px){
+    .PostSide{
+        width: 26rem;
+    }
+    .NavigationBar{
+        width: 26rem;
+    }
+}
+
+@media screen and (max-width:440px){
+    .PostSide{
+        width: 25.5rem;
+    }
+    .NavigationBar{
+        width: 25.5rem;
+    }
+}
+
+@media screen and (max-width:430px){
+    .PostSide{
+        width: 25rem;
+    }
+    .NavigationBar{
+        width: 25rem;
+    }
+}
+
+@media screen and (max-width:420px){
+    .PostSide{
+        width: 24.5rem;
+    }
+    .NavigationBar{
+        width: 24.5rem;
+    }
+}
+
+@media screen and (max-width:410px){
+    .PostSide{
+        width: 24rem;
+    }
+    .NavigationBar{
+        width: 24rem;
+    }
+}
+
+@media screen and (max-width:400px){
+    .PostSide{
+        width: 23.5rem;
+    }
+    .NavigationBar{
+        width: 23.5rem;
+    }
+}
+
+@media screen and (max-width:390px){
+    .PostSide{
+        width: 23rem;
+    }
+    .NavigationBar{
+        width: 23rem;
+    }
+}
+
+@media screen and (max-width:380px){
+    .PostSide{
+        width: 22.5rem;
+    }
+    .NavigationBar{
+        width: 22.5rem;
+    }
+}
+
+@media screen and (max-width:370px){
+    .PostSide{
+        width: 22rem;
+    }
+    .NavigationBar{
+        width: 22rem;
+    }
+}
+
+@media screen and (max-width:360px){
+    .PostSide{
+        width: 21.5rem;
+    }
+    .NavigationBar{
+        width: 21.5rem;
+    }
+}
+
+@media screen and (max-width:350px){
+    .PostSide{
+        width: 21rem;
+    }
+    .NavigationBar{
+        width: 21rem;
+    }
+}
+
+@media screen and (max-width:340px){
+    .PostSide{
+        width: 20.5rem;
+    }
+    .NavigationBar{
+        width: 20.5rem;
+    }
+}
+
+@media screen and (max-width:330px){
+    .PostSide{
+        width: 20rem;
+    }
+    .NavigationBar{
+        width: 20rem;
+    }
+}
+
+@media screen and (max-width:320px){
+    .PostSide{
+        width: 19.5rem;
+    }
+    .NavigationBar{
+        width: 19.5rem;
+    }
+}
+
+@media screen and (max-width:310px){
+    .PostSide{
+        width: 19rem;
+    }
+    .NavigationBar{
+        width: 19rem;
+    }
+}
+
+@media screen and (max-width:300px){
+    .PostSide{
+        width: 18rem;
+    }
+    .NavigationBar{
+        width: 18rem;
+    }
+}

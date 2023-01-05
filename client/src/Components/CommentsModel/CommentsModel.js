@@ -4,7 +4,7 @@ import Comment from '../../img/comment.svg'
 import Send from '../../img/send.svg'
 import Like from '../../img/like.svg'
 import DisLike from '../../img/dislike.svg'
-import Bookmark from '../../img/bookmark.svg'
+import Bookmark from '../../img/UnBookmark.svg'
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { commentPost, dislikePost, likePost } from "../../actions/postAction";

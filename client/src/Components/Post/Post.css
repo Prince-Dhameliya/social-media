@@ -3,7 +3,7 @@
     flex-direction: column;
     padding: 1rem;
     background-color: var(--cardColor);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     gap: 0.7rem;
 }
 
@@ -58,6 +58,7 @@
 .PostReact{
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 .PostReact > div{
@@ -118,46 +119,11 @@
     background: transparent;
 } */
 
-/* css for navigation*/
-.NavigationBar{
-    display: flex;
-    justify-content:space-around;
-    align-items: center;
-    background: white;
-    width: 30rem;
-    position:fixed;
-    bottom: 0;
-    padding: 0.5rem 0rem;
-    border-top: 1px solid rgb(183, 183, 183);
-    display: none;
-}
-
-.homeNavigation{
-    width: 1.6rem;
-    height: 1.6rem;
-}
-
-.addPostNavigation{
-    width: 2.2rem;
-    height: 2.2rem;
-}
-
-.profileNavigation{
-    width: 2rem;
-    height: 2rem;
-}
-
-@media screen and (max-width:1200px){
-    .NavigationBar{
-        display:flex;
-    }
-}
-
 @media (max-width: 420px){
     .Post{
         padding: 0.7rem; /*1rem*/
-        border-radius: 1rem; /*1rem*/
         gap: 0.5rem; /*0.7rem*/
+        border-radius: 0.2rem;
     }
 
     .PostUserName{
@@ -238,28 +204,13 @@
     .CommentSendButton > span{
         font-size: 12px;
     }
-
-    .homeNavigation{
-        width: 1.4rem;
-        height: 1.4rem;
-    }
-    
-    .addPostNavigation{
-        width: 2rem;
-        height: 2rem;
-    }
-    
-    .profileNavigation{
-        width: 1.8rem;
-        height: 1.8rem;
-    }
 }
 
 @media (max-width: 350px){
     .Post{
         padding: 0.5rem; /*1rem*/
-        border-radius: 1rem; /*1rem*/
         gap: 0.3rem; /*0.7rem*/
+        border-radius: 0.2rem;
     }
 
     .PostUserName{
@@ -339,20 +290,5 @@
 
     .CommentSendButton > span{
         font-size: 10px;
-    }
-
-    .homeNavigation{
-        width: 1.2rem;
-        height: 1.2rem;
-    }
-    
-    .addPostNavigation{
-        width: 1.8rem;
-        height: 1.8rem;
-    }
-    
-    .profileNavigation{
-        width: 1.6rem;
-        height: 1.6rem;
     }
 }
