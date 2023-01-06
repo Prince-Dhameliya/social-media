@@ -42,7 +42,7 @@ const NavigationMain = () => {
             <span className="navigation_title">Home</span>
           </div>
           </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to=""><div className="navigation_row">
+          <Link style={{textDecoration: "none", color: "inherit"}} to="../explore"><div className="navigation_row">
             <img src={WSearch} alt="" className='navigation_icon' />
             <span className="navigation_title">Search</span>
           </div>
@@ -58,7 +58,7 @@ const NavigationMain = () => {
           </div>
           </Link>
           <Link style={{textDecoration: "none", color: "inherit"}} to={`../${user._id}`}><div className="navigation_row">
-            <img src={user.profilePicture} alt="" className='navigation_icon' />
+            <img src={user.profilePicture} alt="" className='navigation_icon navigation_profileIcon' />
             <span className="navigation_title">Profile</span>
           </div>
           </Link>
@@ -70,17 +70,17 @@ const NavigationMain = () => {
         <span className="navigation_title">More</span>
       </div>
 
-      <div className="sub-menu-wrap" id="submenu">
+      <div className="sub-menu-wrap sub-menu-pc" id="submenu">
           <div className="sub-menu">
               <div className="sub-menu-link">
                   <p>Settings</p>
                   <span><img alt="" src={Settings}/></span>
               </div>
               <hr/>
-              <div className="sub-menu-link">
+              <Link style={{textDecoration: "none", color: "inherit"}} to={`/${user._id}/saved`}><div className="sub-menu-link">
                   <p>Saved</p>
                   <span><img alt="" src={Saved}/></span>
-              </div>
+              </div></Link>
               <hr/>
               <div className="sub-menu-link">
                   <p>Switch appearance</p>

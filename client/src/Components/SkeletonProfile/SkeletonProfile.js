@@ -4,7 +4,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Skeleton from '@mui/material/Skeleton';
 
-function SkeletonPost() {
+function SkeletonProfile() {
 
   return (
     <Card sx={{ maxWidth: 800, m: 0, borderRadius: 3 }}>
@@ -59,4 +59,4 @@ function SkeletonPost() {
   );
 }
 
-export default SkeletonPost
+export default SkeletonProfile

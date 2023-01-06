@@ -29,6 +29,8 @@ function App() {
               <Route path="/home" element={user ? <Home /> : <Navigate to = "../auth" />} />
               <Route path="/auth" element={user ? <Navigate to = "../home" /> : <Auth />} />
               <Route path="/:id" element={user ? <Profile location="posts" /> : <Navigate to = "../auth" />} />
+              <Route path="/explore" element={user ? <Profile location="allposts" /> : <Navigate to = "../auth" />} />
+              <Route path="/activity" element={user ? <Profile location="activity" /> : <Navigate to = "../auth" />} />
               <Route path="/:id/saved" element={user ? <Profile location="saved" /> : <Navigate to = "../auth" />} />
             </Routes>
         </div>}

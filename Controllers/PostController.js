@@ -28,7 +28,7 @@ export const getPost = async (req, res) => {
 }
 
 // Get all Post
-export const getPosts = async (req, res) => {
+export const getAllPosts = async (req, res) => {
     try {
         const posts = await PostModel.find({});
         res.status(200).json(posts.sort((a,b)=>{

@@ -13,8 +13,8 @@
 }
 
 .homeNavigation{
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 .searchNavigation{
@@ -35,6 +35,7 @@
 .profileNavigation{
     width: 2rem;
     height: 2rem;
+    border-radius: 50%;
 }
 
 @media screen and (max-width:700px){
@@ -45,8 +46,8 @@
 
 @media screen and (max-width: 420px){
     .homeNavigation{
-        width: 1.4rem;
-        height: 1.4rem;
+        width: 1.8rem;
+        height: 1.8rem;
     }
 
     .searchNavigation{
@@ -72,8 +73,8 @@
 
 @media screen and (max-width: 350px){
     .homeNavigation{
-        width: 1.2rem;
-        height: 1.2rem;
+        width: 1.6rem;
+        height: 1.6rem;
     }
 
     .searchNavigation{

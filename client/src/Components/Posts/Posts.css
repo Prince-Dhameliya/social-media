@@ -4,7 +4,7 @@
     gap: 1rem;
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width:700px) {
     .Posts{
         margin-bottom: 4rem;
     }

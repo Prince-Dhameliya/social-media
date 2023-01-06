@@ -22,6 +22,7 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
   const onImageChange = (event) => {
     if(event.target.files && event.target.files[0]){
       let img = event.target.files[0];
+      console.log(event.target.name);
       event.target.name === "profileImage" ? setProfileImage(img) : setCoverImage(img);
     }
   };
@@ -32,7 +33,7 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
       let UserData = formData;
 
       let res1;
-      if(profileImage){
+      if(profileImage!==null){
         const ProfileData = new FormData();
         ProfileData.append("file", profileImage);
         ProfileData.append('upload_preset', 'socialmedia');
@@ -53,10 +54,10 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
         //   console.log(error);
         // }
       }
-      if(res1 && profileImage) UserData.profilePicture = res1.url;
+      if(res1 && (profileImage!==null)) UserData.profilePicture = res1.url;
 
       let res2;
-      if(coverImage){
+      if(coverImage!==null){
         const ProfileData = new FormData();
         ProfileData.append("file", coverImage);
         ProfileData.append('upload_preset', 'socialmedia');
@@ -77,7 +78,7 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
             //   console.log(error);
             // }
       }
-      if(res2 && coverImage) UserData.coverPicture = res2.url;
+      if(res2 && (coverImage!==null)) UserData.coverPicture = res2.url;
       dispatch(updateUser(param.id, UserData));
       setLoading(false);
       setModalOpened(false);

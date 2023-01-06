@@ -20,13 +20,18 @@ const NavigationBar = () => {
     
 
   return (
-    <div className='NavigationBar'>
-            <Link to="../home"><img src={WHome} alt="" className='homeNavigation' /></Link>
-            <Link to=""><img src={WSearch} alt="" className='searchNavigation' /></Link>
-            <Link to=""><img src={WAddObj} alt="" className='addPostNavigation' /></Link>
-            <Link to=""><img src={WLike} alt="" className='likeNavigation' /></Link>
-            <Link to={`../${user._id}`}><img src={user.profilePicture} className="profileNavigation" alt="" /></Link>
-    </div>
+    <>
+      
+
+
+      <div className='NavigationBar'>
+              <Link to="../home"><img src={WHome} alt="" className='homeNavigation' /></Link>
+              <Link to="../explore"><img src={WSearch} alt="" className='searchNavigation' /></Link>
+              <Link to=""><img src={WAddObj} alt="" className='addPostNavigation' /></Link>
+              <Link to="../activity"><img src={WLike} alt="" className='likeNavigation' /></Link>
+              <Link to={`../${user._id}`}><img src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} className="profileNavigation" alt="" /></Link>
+      </div>
+    </>
   )
 }
 

@@ -32,11 +32,28 @@ mongoose.connect(process.env.MONGO_DB,
 // const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, './client/build')));
+
 app.get('/', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 
 app.get('/home', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
+app.get('/auth', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
+app.get('/explore', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
+app.get('/activity', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
+app.get('/:id/saved', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 

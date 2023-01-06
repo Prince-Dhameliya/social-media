@@ -1,5 +1,6 @@
 .HomeSide{
     display: flex;
+    flex-direction: row;
     margin: 0rem auto;
     overflow: auto;
     gap: 2rem;
@@ -10,7 +11,6 @@
     flex-direction: column;
     gap: 1rem;
     width: 30rem;
-    height: 100vh;
 }
 
 .FollowerSide{
@@ -23,11 +23,23 @@
     }
 }
 
+@media screen and (max-width:700px) {
+    .HomeSide{
+        margin-bottom: 3rem;
+    }
+    .PostSide{
+        margin-top: 2.5rem;
+    }
+}
+
 @media screen and (max-width:530px){
     .PostSide{
         width: 30rem;
     }
     .NavigationBar{
+        width: 30rem;
+    }
+    .HeaderBar{
         width: 30rem;
     }
 }
@@ -39,6 +51,9 @@
     .NavigationBar{
         width: 29.5rem;
     }
+    .HeaderBar{
+        width: 29.5rem;
+    }
 }
 
 @media screen and (max-width:510px){
@@ -46,6 +61,9 @@
         width: 29rem;
     }
     .NavigationBar{
+        width: 29rem;
+    }
+    .HeaderBar{
         width: 29rem;
     }
 }
@@ -57,6 +75,9 @@
     .NavigationBar{
         width: 28.5rem;
     }
+    .HeaderBar{
+        width: 28.5rem;
+    }
 }
 
 @media screen and (max-width:490px){
@@ -64,6 +85,9 @@
         width: 28rem;
     }
     .NavigationBar{
+        width: 28rem;
+    }
+    .HeaderBar{
         width: 28rem;
     }
 }
@@ -75,6 +99,9 @@
     .NavigationBar{
         width: 27.5rem;
     }
+    .HeaderBar{
+        width: 27.5rem;
+    }
 }
 
 @media screen and (max-width:470px){
@@ -82,6 +109,9 @@
         width: 27rem;
     }
     .NavigationBar{
+        width: 27rem;
+    }
+    .HeaderBar{
         width: 27rem;
     }
 }
@@ -93,6 +123,9 @@
     .NavigationBar{
         width: 26.5rem;
     }
+    .HeaderBar{
+        width: 26.5rem;
+    }
 }
 
 @media screen and (max-width:450px){
@@ -100,6 +133,9 @@
         width: 26rem;
     }
     .NavigationBar{
+        width: 26rem;
+    }
+    .HeaderBar{
         width: 26rem;
     }
 }
@@ -111,6 +147,9 @@
     .NavigationBar{
         width: 25.5rem;
     }
+    .HeaderBar{
+        width: 25.5rem;
+    }
 }
 
 @media screen and (max-width:430px){
@@ -118,6 +157,9 @@
         width: 25rem;
     }
     .NavigationBar{
+        width: 25rem;
+    }
+    .HeaderBar{
         width: 25rem;
     }
 }
@@ -129,6 +171,9 @@
     .NavigationBar{
         width: 24.5rem;
     }
+    .HeaderBar{
+        width: 24.5rem;
+    }
 }
 
 @media screen and (max-width:410px){
@@ -136,6 +181,9 @@
         width: 24rem;
     }
     .NavigationBar{
+        width: 24rem;
+    }
+    .HeaderBar{
         width: 24rem;
     }
 }
@@ -147,6 +195,9 @@
     .NavigationBar{
         width: 23.5rem;
     }
+    .HeaderBar{
+        width: 23.5rem;
+    }
 }
 
 @media screen and (max-width:390px){
@@ -154,6 +205,9 @@
         width: 23rem;
     }
     .NavigationBar{
+        width: 23rem;
+    }
+    .HeaderBar{
         width: 23rem;
     }
 }
@@ -165,6 +219,9 @@
     .NavigationBar{
         width: 22.5rem;
     }
+    .HeaderBar{
+        width: 22.5rem;
+    }
 }
 
 @media screen and (max-width:370px){
@@ -172,6 +229,9 @@
         width: 22rem;
     }
     .NavigationBar{
+        width: 22rem;
+    }
+    .HeaderBar{
         width: 22rem;
     }
 }
@@ -183,6 +243,9 @@
     .NavigationBar{
         width: 21.5rem;
     }
+    .HeaderBar{
+        width: 21.5rem;
+    }
 }
 
 @media screen and (max-width:350px){
@@ -190,6 +253,9 @@
         width: 21rem;
     }
     .NavigationBar{
+        width: 21rem;
+    }
+    .HeaderBar{
         width: 21rem;
     }
 }
@@ -201,6 +267,9 @@
     .NavigationBar{
         width: 20.5rem;
     }
+    .HeaderBar{
+        width: 20.5rem;
+    }
 }
 
 @media screen and (max-width:330px){
@@ -208,6 +277,9 @@
         width: 20rem;
     }
     .NavigationBar{
+        width: 20rem;
+    }
+    .HeaderBar{
         width: 20rem;
     }
 }
@@ -219,6 +291,9 @@
     .NavigationBar{
         width: 19.5rem;
     }
+    .HeaderBar{
+        width: 19.5rem;
+    }
 }
 
 @media screen and (max-width:310px){
@@ -228,6 +303,9 @@
     .NavigationBar{
         width: 19rem;
     }
+    .HeaderBar{
+        width: 19rem;
+    }
 }
 
 @media screen and (max-width:300px){
@@ -235,6 +313,9 @@
         width: 18rem;
     }
     .NavigationBar{
+        width: 18rem;
+    }
+    .HeaderBar{
         width: 18rem;
     }
 }

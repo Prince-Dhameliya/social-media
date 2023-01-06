@@ -50,19 +50,27 @@
     font-size: 15px;
 }
 
+.navigation_profileIcon{
+    border-radius: 50%;
+}
+
 .moreItems{
     display: flex;
     align-items: center;
     margin: 40px 0px 40px 0px;
     cursor: pointer;
+    position: relative;
 }
 
 /* dropdown menu css */
 
-.sub-menu-wrap{
+.sub-menu-pc{
     position: absolute;
-    left: 1%;
-    bottom: 9%;
+    left: 20px;
+    bottom: 80px;
+}
+
+.sub-menu-wrap{
     width: 250px;
     max-height: 0px;
     overflow: hidden;

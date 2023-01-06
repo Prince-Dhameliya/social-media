@@ -1,26 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.6d576443.css",
-    "main.js": "/static/js/main.b7b9ae33.js",
+    "main.css": "/static/css/main.1ed0d494.css",
+    "main.js": "/static/js/main.c9259432.js",
+    "static/media/Emoji.svg": "/static/media/Emoji.2c18e49bc52b3776733320cdf5e89745.svg",
     "static/media/Settings.svg": "/static/media/Settings.318d8e4008cbbf6440ad8a931bd4c014.svg",
     "static/media/dislike.svg": "/static/media/dislike.4e0846b50d43c51cfeb407e113542275.svg",
+    "static/media/Message1.svg": "/static/media/Message1.ba7aa5bb1eb5e49b9877c3fc3a5674ca.svg",
     "static/media/Mode.svg": "/static/media/Mode.d208230c15fe55adc3f7402d3e78b002.svg",
     "static/media/like.svg": "/static/media/like.d12e2dadfb4c4d7698ec45e5a02a0adc.svg",
     "static/media/comment.svg": "/static/media/comment.18bb9b0bb4f255f3dc3acd21441c2b5a.svg",
     "index.html": "/index.html",
-    "static/media/Whitehome.svg": "/static/media/Whitehome.34ffa0064a631a67754ea7709405d303.svg",
+    "static/media/SearchGrey.svg": "/static/media/SearchGrey.717d3fe7498c2ce84af18c4ff28f760e.svg",
     "static/media/Posts.svg": "/static/media/Posts.b9e90aacca0b0c8cd1b90af52ed50ee3.svg",
     "static/media/WhiteAddObject.svg": "/static/media/WhiteAddObject.4e343a12aa1c87f8f415a886c47aea17.svg",
     "static/media/More.svg": "/static/media/More.59c800d95ed52195b0e091e02f592876.svg",
+    "static/media/CloseGrey.svg": "/static/media/CloseGrey.b160f7c3e581d67dc7e99969091debe3.svg",
+    "static/media/Vertical3Dot.svg": "/static/media/Vertical3Dot.702468d2afe549dd49c28269f322d0cc.svg",
+    "static/media/Whitehome.svg": "/static/media/Whitehome.172dd62834686206807d0391d0ecbbf3.svg",
     "static/media/send.svg": "/static/media/send.14eb5b61b8eed59aecf94a31d94306e1.svg",
     "static/media/UnBookmark.svg": "/static/media/UnBookmark.67ac179c063193f82ad8f122ed33580d.svg",
     "static/media/WhiteSearch.svg": "/static/media/WhiteSearch.5c21bd8395563d4c788978d2897911d8.svg",
     "static/media/Bookmark.svg": "/static/media/Bookmark.19fe01c64d0cbf8233614dc88439d147.svg",
-    "main.6d576443.css.map": "/static/css/main.6d576443.css.map",
-    "main.b7b9ae33.js.map": "/static/js/main.b7b9ae33.js.map"
+    "main.1ed0d494.css.map": "/static/css/main.1ed0d494.css.map",
+    "main.c9259432.js.map": "/static/js/main.c9259432.js.map"
   },
   "entrypoints": [
-    "static/css/main.6d576443.css",
-    "static/js/main.b7b9ae33.js"
+    "static/css/main.1ed0d494.css",
+    "static/js/main.c9259432.js"
   ]
 }

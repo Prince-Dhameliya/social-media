@@ -9,8 +9,7 @@ import NavigationBar from '../NavigationBar/NavigationBar.js'
 import FollowersCard from '../FollowersCard/FollowersCard'
 
 
-const Posts = ({location}) => {
-
+const Posts = ({location, allPosts}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   let {savedPosts, posts, loading} = useSelector((state)=>state.postReducer);
   const params = useParams();
@@ -41,8 +40,11 @@ const Posts = ({location}) => {
 
     if(!posts) return "no Posts";
 
+    if(location === "allposts"){
+      posts = allPosts;
+    }
     if(location === "posts"){
-      if(params.id) posts = posts.filter((post)=>post.userId === params.id)
+      if(params.id) posts = allPosts.filter((post)=>post.userId === params.id)
     }
     else if(location === "saved"){
       posts = savedPosts;
@@ -51,14 +53,13 @@ const Posts = ({location}) => {
   return (
     <>
       <div className="Posts">
-          {loading 
-          ? <Media/>
+        {loading ? <Media/>
           : (
             <>
             {posts[0]!==undefined && (<Post key={0} data={posts[0]} />)}
             {posts[1]!==undefined && (<Post key={1} data={posts[1]} />)}
             
-            {location!=="posts" && location!=="saved" && screenSize.dynamicWidth < 700 && (<FollowersCard/>)}
+            {location === undefined && screenSize.dynamicWidth < 700 && (<FollowersCard/>)}
 
             {posts.map((post,id)=>{
               if(id>1){
@@ -66,11 +67,10 @@ const Posts = ({location}) => {
               }
               return null;
             })}
-            </>
-          )}
+            </>)
+        }
+        <NavigationBar/>
       </div>
-
-      <NavigationBar/>
     </>
   )
 }
