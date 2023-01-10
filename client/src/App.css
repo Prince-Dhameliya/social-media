@@ -55,3 +55,16 @@
 ::-webkit-scrollbar{
   display: none;
 }
+
+.tap-Highlight {
+  -webkit-tap-highlight-color:transparent;
+  -moz-tap-highlight-color:transparent;
+  -o-tap-highlight-color:transparent;
+  /* tap-highlight-color:transparent; */
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}

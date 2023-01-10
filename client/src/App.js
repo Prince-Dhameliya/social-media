@@ -21,7 +21,7 @@ function App() {
     <>
         {isLoad && <AppleBootupScreen/>}
 
-        {!isLoad && <div className="App">
+        {!isLoad && <div className="App tap-Highlight prevent-select">
             <div className="blur" style={{top: '-12%', right: '0'}}></div>
             <div className="blur" style={{top: '36%', left: '-8rem'}}></div>
             <Routes>
