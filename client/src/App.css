@@ -18,6 +18,7 @@
   overflow: hidden;
   color: var(--black);
   background: #f3f3f3;
+  height: 100vh;
 }
 
 .blur{
@@ -57,13 +58,21 @@
 }
 
 .tap-Highlight {
+  -webkit-touch-callout: none!important;
   -webkit-tap-highlight-color:transparent;
-  -moz-tap-highlight-color:transparent;
-  -o-tap-highlight-color:transparent;
-  /* tap-highlight-color:transparent; */
+}
+
+.tap-Highlight:focus{
+  outline: none!important;
 }
 
 .prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+img{
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
