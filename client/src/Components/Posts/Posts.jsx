@@ -56,14 +56,14 @@ const Posts = ({location, allPosts}) => {
         {loading ? <Media/>
           : (
             <>
-            {posts[0]!==undefined && (<Post key={0} data={posts[0]} />)}
-            {posts[1]!==undefined && (<Post key={1} data={posts[1]} />)}
+            {posts[0]!==undefined && (<Post key={0} index={0+1} data={posts[0]} />)}
+            {posts[1]!==undefined && (<Post key={1} index={1+1} data={posts[1]} />)}
             
             {location === undefined && screenSize.dynamicWidth < 700 && (<FollowersCard/>)}
 
             {posts.map((post,id)=>{
               if(id>1){
-                return <Post key={id} data={post} />
+                return <Post key={id} index={id+1} data={post} />
               }
               return null;
             })}

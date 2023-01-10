@@ -135,13 +135,15 @@ export const commentPost = async (req, res) => {
         username: username,
         profilePicture: profilePicture,
         comment: comment,
+        likes:[],
         createdAt: new Date()
     }
 
     try {
         const post = await PostModel.findById(postId)
         await post.updateOne({$push: {comments : newData}})
-        res.status(200).json(post)
+        const updatePost = await PostModel.findById(postId)
+        res.status(200).json(updatePost)
     } catch (error) {
         res.status(500).json(error)
     }

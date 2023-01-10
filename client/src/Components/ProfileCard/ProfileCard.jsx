@@ -49,7 +49,7 @@ const ProfileCard = ({allPosts,currentUser,profileUserId}) => {
 
                     </div>
                     <div className="Follow">
-                        <span>{allPosts.filter((post)=>post.userId === currentUser._id).length}</span>
+                        <span>{allPosts.filter((post)=>post.userId === profileUserId).length}</span>
                         <span>Posts</span>
                     </div>
                 </div>

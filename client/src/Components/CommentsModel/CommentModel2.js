@@ -1,22 +1,31 @@
-import { Modal, useMantineTheme } from "@mantine/core";
+import * as React from 'react';
+import Dialog from '@mui/material/Dialog';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import './CommentModel2.css'
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { commentPost, dislikePost, likePost } from "../../actions/postAction";
 import PostCustomizedMenus from '../DropdownButton/PostDropDownButton'
 import Comment from '../../img/comment.svg'
 import Send from '../../img/send.svg'
 import Like from '../../img/like.svg'
 import DisLike from '../../img/dislike.svg'
 import Bookmark from '../../img/UnBookmark.svg'
-import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { commentPost, dislikePost, likePost } from "../../actions/postAction";
+import Close from '../../img/Close.svg'
 import time from 'time-ago';
-import './CommentsModel.css'
 import CommentFromModel from "./CommentFromModel/CommentFromModel";
-// import CommentCustomizedMenus from "../DropdownButton/CommentDropDownButton";
 
-function ProfileModal({modalOpened, setModalOpened, data}) {
-  const theme = useMantineTheme();
+export default function CommentModel2({open, setOpen, data}) {
+//   const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  //for comment section
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   const dispatch = useDispatch();
   const {user}  = useSelector((state)=>state.authReducer.authData)
   const loading = useSelector((state)=>state.postReducer.uploading)
@@ -56,38 +65,29 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
     }
 
   return (
-    <Modal
-      overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[10]}
-      overlayOpacity={0.55}
-      overlayBlur={0}
-      size="30%"
-      opened={modalOpened}
-      onClose={()=>setModalOpened(false)}
-      padding={0}
-      styles={{
-        close :{
-            float: "right",
-            right:"-2rem",
-            '&:hover': {
-                background: "transparent"
-            }
-        }
-      }}
-      
-    >
-      <div className="CommentBox">
+    <div>
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <div className="CommentBox">
             <div className="PostDetails">
                 <div className='PostUserName commentUsername'>
                     <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } style={{cursor: "pointer"}} alt="" />
                     <span style={{cursor: "pointer"}}> <b>{data.username}</b></span>
                 </div>
-                <PostCustomizedMenus data={data} />
+                <div className='PostMoreIcon'>
+                    <PostCustomizedMenus data={data} />
+                    <img src={Close} className='ReactLike' alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleClose} />
+                </div>
             </div>
 
             <hr />
 
             <div className="MainComment">
-                <div className="CommentWindow">
+                {data.desc ? (<div className="CommentWindow">
                     <div className="CommentLeft">
                         <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } style={{cursor: "pointer"}} alt="" />
 
@@ -102,7 +102,8 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
                             </div>
                         </div>
                     </div>
-                </div>    
+                </div>) 
+                : null}   
 
                 {data.comments.map((comment,id)=>{
                     return <CommentFromModel key={id} comment={comment} data={data} />
@@ -113,6 +114,8 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
             
 
             <div className="bottomcomment">
+                <hr />
+
                 <div className="PostReact">
                     <div>
                         <img src={liked ? Like : DisLike} className="ReactLike" alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
@@ -137,9 +140,8 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
                     <div className='CommentSendButton' id={data.createdAt} onClick={handleSubmit} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>{loading ? "Posting" : "Post"}</span></div>
                 </div>
             </div>
-      </div>
-    </Modal>
+        </div>
+      </Dialog>
+    </div>
   );
 }
-
-export default ProfileModal

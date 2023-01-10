@@ -1,0 +1,236 @@
+.CommentBox{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1rem;
+    height: 100vh;
+    width: 35rem;
+    position: relative;
+}
+
+.MainComment {
+    margin-top: -0.8rem;
+    padding-top: -5rem;
+    height: 43rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+}
+
+.CommentWindow{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1.5rem 0rem;
+}
+
+.CommentLeft{
+    display: flex;
+    gap: 1rem;
+}
+
+.CommentLeft > img{
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+
+.CommentRight > img{
+    width: 20px;
+}
+
+.CommentInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.CommentUserInfo{
+    font-size: 14px;
+}
+
+.bottomcomment{
+    position: absolute;
+    right: 1rem;
+    left: 1rem;
+    bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    z-index: 1;
+    background-color: white;
+}
+
+.bottomcomment > span{
+    font-size: 13px;
+}
+
+.bottomcomment > hr{
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: rgb(218, 218, 218);
+    margin: 0px;
+}
+
+.CommentBox > hr{
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: rgb(218, 218, 218);
+    margin: 0px;
+}
+
+.CommentAction{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.CommentAction > span{
+    font-size: 13px;
+    color: rgb(158, 158, 158);
+}
+
+.commentUsername{
+    gap: 1rem;
+}
+
+.PostMoreIcon{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 900px) {
+    .CommentBox{
+        width:auto;
+    }
+}
+
+@media (max-width: 420px) {
+    .CommentBox{
+        gap: 0.5rem; /*0.7rem*/
+    }
+
+
+    .bottomcomment{
+        bottom: 1rem; /*1rem*/
+        right: 1rem; /*1rem*/
+        left: 1rem; /*1rem*/
+        gap: 0.5rem; /*0.7rem*/
+    }
+
+    .bottomcomment > span{
+        font-size: 12px;
+    }
+
+    .CommentWindow{
+        gap: 2rem; /*3rem*/
+        margin: 1.2rem 0rem; /*1.5rem*/
+    }
+    
+    .CommentLeft{
+        gap: 0.7rem; /*1rem*/
+    }
+    
+    .CommentLeft > img{
+        width: 1.7rem; /*2rem*/
+        height: 1.7rem; /*2rem*/
+    }
+
+    .CommentRight > img{
+        width: 20px;
+    }
+    
+    .CommentInfo{
+        gap: 0.6rem; /*0.7rem*/
+    }
+    
+    .CommentUserInfo{
+        font-size: 12px; /*14px*/
+    }
+    
+    .CommentAction{
+        gap: 0.4rem; /*0.5rem*/
+    }
+    
+    .CommentAction > span{
+        font-size: 12px;
+    }
+    
+    .MainComment {
+        margin-top: -0.3rem;
+        padding-top: -5rem;
+        height: 40.2rem;
+    }
+
+    .commentUsername{
+        gap: 0.7rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .CommentBox{
+        gap: 0.3rem; /*0.7rem*/
+        padding: 0.5rem; /*0rem 1rem 1rem 1rem*/
+    }
+
+
+    .bottomcomment{
+        bottom: 0.5rem; /*1rem*/
+        right: 0.5rem; /*1rem*/
+        left: 0.5rem; /*1rem*/
+        gap: 0.4rem; /*0.7rem*/
+    }
+
+    .bottomcomment > span{
+        font-size: 11px;
+    }
+
+    .CommentWindow{
+        gap: 1.5rem; /*3rem*/
+        margin: 0.8rem 0rem; /*1.5rem*/
+    }
+    
+    .CommentLeft{
+        gap: 0.5rem; /*1rem*/
+    }
+    
+    .CommentLeft > img{
+        width: 1.3rem; /*2rem*/
+        height: 1.3rem; /*2rem*/
+    }
+
+    .CommentRight > img{
+        width: 17px;
+    }
+    
+    .CommentInfo{
+        gap: 0.4rem; /*0.7rem*/
+    }
+    
+    .CommentUserInfo{
+        font-size: 11px; /*14px*/
+    }
+    
+    .CommentAction{
+        gap: 0.3rem; /*0.5rem*/
+    }
+    
+    .CommentAction > span{
+        font-size: 11px;
+    }
+    
+    .MainComment {
+        margin-top: -0.3rem;
+        padding-top: -5rem;
+        height: 40rem;
+    }
+
+    .commentUsername{
+        gap: 0.5rem;
+    }
+}

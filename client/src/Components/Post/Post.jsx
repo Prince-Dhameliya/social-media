@@ -13,12 +13,12 @@ import { useState } from 'react'
 import { bookmarkPost, commentPost, dislikePost, likePost, unbookmarkPost } from '../../actions/postAction'
 import PostCustomizedMenus from '../DropdownButton/PostDropDownButton'
 import time from 'time-ago';
-import CommentsModel from '../CommentsModel/CommentsModel'
 import {VolumeUp, VolumeOff, PlayArrow} from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import Skeleton from '@mui/material/Skeleton';
+import CommentModel2 from '../CommentsModel/CommentModel2'
 
-const Post = ({data}) => {
+const Post = ({data,index}) => {
   const {user}  = useSelector((state)=>state.authReducer.authData)
   const dispatch = useDispatch();
   
@@ -31,6 +31,15 @@ const Post = ({data}) => {
     liked ? setLikes((prev)=>prev-1) : setLikes((prev)=>prev+1)
     liked ? dispatch(dislikePost(data._id, user._id)) : dispatch(likePost(data._id, user._id))
   }
+
+  const handleDoubleClickLike = async () => {
+    setLiked(true);
+    if(!liked){
+      setLikes((prev)=>prev+1)
+      dispatch(likePost(data._id, user._id))
+    }
+  }
+
   const handleBookmark = async () => {
     setBookmarked((prev)=>!prev)
     bookmarked ? dispatch(unbookmarkPost(data._id, user._id)) : dispatch(bookmarkPost(data._id, user._id))
@@ -42,6 +51,16 @@ const Post = ({data}) => {
 
   const resetComment = () => {
     desc.current.value = "";
+  }
+
+  const searchKeyPressed = (e) => {
+    e = e || window.event;
+    if (e.keyCode === 13)
+    {
+        document.getElementById(index).click();
+        return false;
+    }
+    return true;
   }
 
   const handleSubmit = (event) => {
@@ -56,7 +75,7 @@ const Post = ({data}) => {
           likes:[]
       }
       dispatch(commentPost(data._id, newComment))
-      const myButton = document.getElementById(data.createdAt);
+      const myButton = document.getElementById(index);
       myButton.style.color = "rgb(176, 226, 243)"
       resetComment();
     }
@@ -64,7 +83,7 @@ const Post = ({data}) => {
 
   //redirect focus on inputfield
   function handleInput(){
-    const myButton = document.getElementById(data.createdAt);
+    const myButton = document.getElementById(index);
       if(desc.current.value){
         myButton.style.color = "rgb(4, 182, 231)"
       }
@@ -72,16 +91,16 @@ const Post = ({data}) => {
         myButton.style.color = "rgb(176, 226, 243)"
       }
   }
+  const [open, setOpen] = useState(false);
 
   function handleRedirect(){
     if(data.comments.length){
-      setModalOpened(true);
+      setOpen(true);
     }else{
       document.getElementById(data._id).select();
     }
   }
 
-  const [modalOpened, setModalOpened] = useState(false);
 
 
   //Show Video
@@ -121,7 +140,7 @@ const Post = ({data}) => {
         <div className='PostContent'>
           {data?.image ?
             (data.image.includes("image") 
-              ? <img src={data.image ? data.image: ""} alt="" />
+              ? <img src={data.image ? data.image: ""} onDoubleClick={handleDoubleClickLike} alt="" />
               : <><video ref={videoRef} autoPlay muted loop onClick={videoClick}><source src={data.image ? data.image : ""} type="video/mp4"/></video>
                   {pause ? <PlayArrow className='videoPlay' onClick={videoClick}/> : null}
                   {muted ? <VolumeOff className='muted' onClick={videoMuteClick} /> : <VolumeUp className='muted' onClick={videoMuteClick}/>}
@@ -136,7 +155,7 @@ const Post = ({data}) => {
               <img src={liked ? Like : DisLike} className="ReactLike" alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
               <div>
                 <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} style={{cursor: "pointer",width: "33px",marginTop:"-4px"}} alt="" />
-                {data ? <CommentsModel modalOpened={modalOpened} setModalOpened={setModalOpened} data = {data} /> : null}
+                {data ? <CommentModel2 open={open} setOpen={setOpen} data = {data} /> : null}
               </div>
               <img src={Send} className="ReactShare" style={{cursor: "pointer",width: "29px"}} alt="" />
             </div>
@@ -174,10 +193,10 @@ const Post = ({data}) => {
         <div className="CommentSection">
           <div className="CommentPlusEmoji">
             <img src={Emoji} className="CommentEmojiIcon" style={{cursor: "pointer",width: "20px"}} alt="" />
-            {data?._id ? <input type="text" id={data._id} className="CommentInput" ref={desc} placeholder='Add a comment...' onChange={handleInput} />
+            {data?._id ? <input type="text" id={data._id} className="CommentInput" ref={desc} placeholder='Add a comment...' onKeyDown={searchKeyPressed} onChange={handleInput} />
             : <input type="text" className="CommentInput" ref={desc} placeholder='Add a comment...' onChange={handleInput} />}
           </div>
-          {data?.createdAt ? <div className='CommentSendButton' id={data.createdAt} onClick={handleSubmit} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>{loading ? "Posting" : "Post"}</span></div>
+          {index ? <div className='CommentSendButton' id={index} onClick={handleSubmit} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>{loading ? "Posting" : "Post"}</span></div>
           : <div className='CommentSendButton' style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>Post</span></div>}
         </div>
     </div>

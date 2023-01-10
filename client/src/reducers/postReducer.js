@@ -14,7 +14,7 @@ const postReducer = (
             return {...state, uploading: true, error: false}
         case "COMMENTING_SUCCESS":
             const commentPosts = state.posts.map(obj=>
-                obj._id === action.id ? {...obj, comments: [action.data , ...obj.comments]} : obj
+                obj._id === action.id ? {...obj, comments: action.data} : obj
             );
             return {...state, posts : commentPosts, uploading: false, error: false}
         case "COMMENTING_FAIL":

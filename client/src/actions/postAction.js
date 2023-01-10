@@ -22,11 +22,11 @@ export const getTimelineSavedPosts = (id) => async (dispatch) => {
     }
 }
 
-export const commentPost = (id, data) => async (dispatch) => {
+export const commentPost = (id, curdata) => async (dispatch) => {
     dispatch({type: "COMMENTING_START"})
     try {
-        await PostApi.commentPost(id, data);
-        dispatch({type: "COMMENTING_SUCCESS", id: id, data: data})
+        const {data} = await PostApi.commentPost(id, curdata);
+        dispatch({type: "COMMENTING_SUCCESS", id: id, data: data.comments})
     } catch (error) {
         dispatch({type: "COMMENTING_FAIL"})
         console.log(error);
