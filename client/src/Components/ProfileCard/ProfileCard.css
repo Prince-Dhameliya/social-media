@@ -5,6 +5,7 @@
     position: relative;
     overflow-x: clip;
     background: var(--cardColor);
+    border: 1px solid var(--lineColor);
 }
 
 .ProfileImages{
@@ -26,6 +27,7 @@
     position: absolute;
     bottom: -3rem;
     box-shadow: var(--profileShadow);
+    border: 1px solid var(--lineColor);
 }
 
 .ProfileName{

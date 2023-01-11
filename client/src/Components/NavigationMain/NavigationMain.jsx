@@ -58,7 +58,7 @@ const NavigationMain = () => {
           </div>
           </Link>
           <Link style={{textDecoration: "none", color: "inherit"}} to={`../${user._id}`}><div className="navigation_row">
-            <img src={user.profilePicture} alt="" className='navigation_icon navigation_profileIcon' />
+            <img src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt="" className='navigation_icon navigation_profileIcon' />
             <span className="navigation_title">Profile</span>
           </div>
           </Link>

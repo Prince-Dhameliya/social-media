@@ -52,6 +52,7 @@
 
 .navigation_profileIcon{
     border-radius: 50%;
+    border: 1px solid var(--lineColor);
 }
 
 .moreItems{
