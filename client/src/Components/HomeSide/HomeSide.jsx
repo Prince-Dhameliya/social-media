@@ -1,6 +1,5 @@
 import React from 'react'
 import FollowersCard from '../FollowersCard/FollowersCard'
-import HeaderBar from '../HeaderBar/HeaderBar'
 import Posts from '../Posts/Posts'
 import PostShare from '../PostShare/PostShare'
 import './HomeSide.css'
@@ -10,7 +9,6 @@ const HomeSide = () => {
     <>
       <div className="HomeSide">
           <div className="PostSide">
-              <HeaderBar/>
               <PostShare />
               <Posts />
           </div>

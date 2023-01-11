@@ -30,20 +30,16 @@
 
 @media screen and (max-width:700px){
     .Profile{
-        grid-template-columns: auto;
+        /* grid-template-columns: auto; */
+        display: flex;
     }
     .ProfileCenter{
-        margin: 3rem auto 0rem auto;
+        margin: 3.5rem auto 3rem auto;
+        padding: 0.5rem 0rem;
     }
 }
 
 @media screen and (max-width:530px){
-    .NavigationBar{
-        width: 30rem;
-    }
-    .HeaderBar{
-        width: 30rem;
-    }
     .ProfileCenter{
         width: 30rem;
     }
@@ -53,12 +49,6 @@
 }
 
 @media screen and (max-width:520px){
-    .NavigationBar{
-        width: 29.5rem;
-    }
-    .HeaderBar{
-        width: 29.5rem;
-    }
     .ProfileCenter{
         width: 29.5rem;
     }
@@ -68,12 +58,6 @@
 }
 
 @media screen and (max-width:510px){
-    .NavigationBar{
-        width: 29rem;
-    }
-    .HeaderBar{
-        width: 29rem;
-    }
     .ProfileCenter{
         width: 29rem;
     }
@@ -83,12 +67,6 @@
 }
 
 @media screen and (max-width:500px){
-    .NavigationBar{
-        width: 28.5rem;
-    }
-    .HeaderBar{
-        width: 28.5rem;
-    }
     .ProfileCenter{
         width: 28.5rem;
     }
@@ -98,12 +76,6 @@
 }
 
 @media screen and (max-width:490px){
-    .NavigationBar{
-        width: 28rem;
-    }
-    .HeaderBar{
-        width: 28rem;
-    }
     .ProfileCenter{
         width: 28rem;
     }
@@ -113,12 +85,6 @@
 }
 
 @media screen and (max-width:480px){
-    .NavigationBar{
-        width: 27.5rem;
-    }
-    .HeaderBar{
-        width: 27.5rem;
-    }
     .ProfileCenter{
         width: 27.5rem;
     }
@@ -128,12 +94,6 @@
 }
 
 @media screen and (max-width:470px){
-    .NavigationBar{
-        width: 27rem;
-    }
-    .HeaderBar{
-        width: 27rem;
-    }
     .ProfileCenter{
         width: 27rem;
     }
@@ -143,12 +103,6 @@
 }
 
 @media screen and (max-width:460px){
-    .NavigationBar{
-        width: 26.5rem;
-    }
-    .HeaderBar{
-        width: 26.5rem;
-    }
     .ProfileCenter{
         width: 26.5rem;
     }
@@ -158,12 +112,6 @@
 }
 
 @media screen and (max-width:450px){
-    .NavigationBar{
-        width: 26rem;
-    }
-    .HeaderBar{
-        width: 26rem;
-    }
     .ProfileCenter{
         width: 26rem;
     }
@@ -173,12 +121,6 @@
 }
 
 @media screen and (max-width:440px){
-    .NavigationBar{
-        width: 25.5rem;
-    }
-    .HeaderBar{
-        width: 25.5rem;
-    }
     .ProfileCenter{
         width: 25.5rem;
     }
@@ -188,12 +130,6 @@
 }
 
 @media screen and (max-width:430px){
-    .NavigationBar{
-        width: 25rem;
-    }
-    .HeaderBar{
-        width: 25rem;
-    }
     .ProfileCenter{
         width: 25rem;
     }
@@ -203,12 +139,6 @@
 }
 
 @media screen and (max-width:420px){
-    .NavigationBar{
-        width: 24.5rem;
-    }
-    .HeaderBar{
-        width: 24.5rem;
-    }
     .ProfileCenter{
         width: 24.5rem;
     }
@@ -218,12 +148,6 @@
 }
 
 @media screen and (max-width:410px){
-    .NavigationBar{
-        width: 24rem;
-    }
-    .HeaderBar{
-        width: 24rem;
-    }
     .ProfileCenter{
         width: 24rem;
     }
@@ -233,12 +157,6 @@
 }
 
 @media screen and (max-width:400px){
-    .NavigationBar{
-        width: 23.5rem;
-    }
-    .HeaderBar{
-        width: 23.5rem;
-    }
     .ProfileCenter{
         width: 23.5rem;
     }
@@ -248,12 +166,6 @@
 }
 
 @media screen and (max-width:390px){
-    .NavigationBar{
-        width: 23rem;
-    }
-    .HeaderBar{
-        width: 23rem;
-    }
     .ProfileCenter{
         width: 23rem;
     }
@@ -263,12 +175,6 @@
 }
 
 @media screen and (max-width:380px){
-    .NavigationBar{
-        width: 22.5rem;
-    }
-    .HeaderBar{
-        width: 22.5rem;
-    }
     .ProfileCenter{
         width: 22.5rem;
     }
@@ -278,12 +184,6 @@
 }
 
 @media screen and (max-width:370px){
-    .NavigationBar{
-        width: 22rem;
-    }
-    .HeaderBar{
-        width: 22rem;
-    }
     .ProfileCenter{
         width: 22rem;
     }
@@ -293,12 +193,6 @@
 }
 
 @media screen and (max-width:360px){
-    .NavigationBar{
-        width: 21.5rem;
-    }
-    .HeaderBar{
-        width: 21.5rem;
-    }
     .ProfileCenter{
         width: 21.5rem;
     }
@@ -308,12 +202,6 @@
 }
 
 @media screen and (max-width:350px){
-    .NavigationBar{
-        width: 21rem;
-    }
-    .HeaderBar{
-        width: 21rem;
-    }
     .ProfileCenter{
         width: 21rem;
     }
@@ -323,12 +211,6 @@
 }
 
 @media screen and (max-width:340px){
-    .NavigationBar{
-        width: 20.5rem;
-    }
-    .HeaderBar{
-        width: 20.5rem;
-    }
     .ProfileCenter{
         width: 20.5rem;
     }
@@ -338,12 +220,6 @@
 }
 
 @media screen and (max-width:330px){
-    .NavigationBar{
-        width: 20rem;
-    }
-    .HeaderBar{
-        width: 20rem;
-    }
     .ProfileCenter{
         width: 20rem;
     }
@@ -353,12 +229,6 @@
 }
 
 @media screen and (max-width:320px){
-    .NavigationBar{
-        width: 19.5rem;
-    }
-    .HeaderBar{
-        width: 19.5rem;
-    }
     .ProfileCenter{
         width: 19.5rem;
     }
@@ -368,12 +238,6 @@
 }
 
 @media screen and (max-width:310px){
-    .NavigationBar{
-        width: 19rem;
-    }
-    .HeaderBar{
-        width: 19rem;
-    }
     .ProfileCenter{
         width: 19rem;
     }
@@ -383,12 +247,6 @@
 }
 
 @media screen and (max-width:300px){
-    .NavigationBar{
-        width: 18rem;
-    }
-    .HeaderBar{
-        width: 18rem;
-    }
     .ProfileCenter{
         width: 18rem;
     }

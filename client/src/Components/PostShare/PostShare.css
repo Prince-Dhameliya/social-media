@@ -4,7 +4,6 @@
     background-color: var(--cardColor);
     padding: 1rem;
     border-radius: 0.5rem;
-    margin-top: 1rem;
 }
 
 .PostShare > img{
@@ -76,11 +75,9 @@
 }
 
 @media screen and (max-width: 420px){
-
     .PostShare{
         gap: 0.7rem; /*1rem*/
         padding: 0.8rem; /*1rem*/
-        margin-top: 0.7rem; /*1rem*/
         border-radius: 0.2rem;
     }
 
@@ -126,7 +123,6 @@
     .PostShare{
         gap: 0.6rem;
         padding: 0.7rem;
-        margin-top: 0.6rem;
         border-radius: 0.2rem;
     }
 
@@ -172,7 +168,6 @@
     .PostShare{
         gap: 0.5rem;
         padding: 0.6rem;
-        margin-top: 0.5rem;
         border-radius: 0.2rem;
     }
 
@@ -189,7 +184,6 @@
         border-radius: 7px; /*10px*/
         padding: 8px; /*10px*/
         font-size: 9px; /*17px*/
-        
     }
 
     .optionsIcon{

@@ -37,7 +37,7 @@ const NavigationMain = () => {
             <span className="logo_Title">Social Point</span>
         </div>
         <div className="navigationItems">
-          <Link style={{textDecoration: "none", color: "inherit"}} to="../home"><div className="navigation_row">
+          <Link style={{textDecoration: "none", color: "inherit"}} to="../"><div className="navigation_row">
             <img src={WHome} alt="" className='navigation_icon' />
             <span className="navigation_title">Home</span>
           </div>

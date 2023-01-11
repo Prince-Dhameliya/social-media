@@ -21,11 +21,8 @@ const NavigationBar = () => {
 
   return (
     <>
-      
-
-
       <div className='NavigationBar'>
-              <Link to="../home"><img src={WHome} alt="" className='homeNavigation' /></Link>
+              <Link to="../"><img src={WHome} alt="" className='homeNavigation' /></Link>
               <Link to="../explore"><img src={WSearch} alt="" className='searchNavigation' /></Link>
               <Link to=""><img src={WAddObj} alt="" className='addPostNavigation' /></Link>
               <Link to="../activity"><img src={WLike} alt="" className='likeNavigation' /></Link>

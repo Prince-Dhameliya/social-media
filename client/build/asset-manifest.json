@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.4a90ba95.css",
-    "main.js": "/static/js/main.c3b10260.js",
+    "main.css": "/static/css/main.3be97e3c.css",
+    "main.js": "/static/js/main.458b75fe.js",
     "static/media/Emoji.svg": "/static/media/Emoji.2c18e49bc52b3776733320cdf5e89745.svg",
     "static/media/Settings.svg": "/static/media/Settings.318d8e4008cbbf6440ad8a931bd4c014.svg",
     "static/media/dislike.svg": "/static/media/dislike.4e0846b50d43c51cfeb407e113542275.svg",
@@ -22,11 +22,11 @@
     "static/media/UnBookmark.svg": "/static/media/UnBookmark.67ac179c063193f82ad8f122ed33580d.svg",
     "static/media/WhiteSearch.svg": "/static/media/WhiteSearch.5c21bd8395563d4c788978d2897911d8.svg",
     "static/media/Bookmark.svg": "/static/media/Bookmark.19fe01c64d0cbf8233614dc88439d147.svg",
-    "main.4a90ba95.css.map": "/static/css/main.4a90ba95.css.map",
-    "main.c3b10260.js.map": "/static/js/main.c3b10260.js.map"
+    "main.3be97e3c.css.map": "/static/css/main.3be97e3c.css.map",
+    "main.458b75fe.js.map": "/static/js/main.458b75fe.js.map"
   },
   "entrypoints": [
-    "static/css/main.4a90ba95.css",
-    "static/js/main.c3b10260.js"
+    "static/css/main.3be97e3c.css",
+    "static/js/main.458b75fe.js"
   ]
 }

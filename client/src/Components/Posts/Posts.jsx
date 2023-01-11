@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getTimelinePosts, getTimelineSavedPosts } from '../../actions/postAction'
 import Media from '../SkeletonPost/SkeletonPost'
-import NavigationBar from '../NavigationBar/NavigationBar.js'
 import FollowersCard from '../FollowersCard/FollowersCard'
 
 
@@ -43,7 +42,7 @@ const Posts = ({location, allPosts}) => {
     if(location === "allposts"){
       posts = allPosts;
     }
-    if(location === "posts"){
+    if(location === "profile"){
       if(params.id) posts = allPosts.filter((post)=>post.userId === params.id)
     }
     else if(location === "saved"){
@@ -69,7 +68,6 @@ const Posts = ({location, allPosts}) => {
             })}
             </>)
         }
-        <NavigationBar/>
       </div>
     </>
   )

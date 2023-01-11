@@ -3,39 +3,36 @@
     display: flex;
     justify-content:space-around;
     align-items: center;
-    background: white;
-    width: 30rem;
+    background-color: var(--cardColor);
+    width: 100%;
     position:fixed;
     bottom: 0;
     padding: 0.5rem 0rem;
     border-top: 1px solid rgb(183, 183, 183);
     display: none;
+    height: 2rem;
 }
 
 .homeNavigation{
-    width: 2rem;
-    height: 2rem;
+    width: 28px;
 }
 
 .searchNavigation{
-    width: 2rem;
-    height: 2rem;
+    width: 28px;
 }
 
 .addPostNavigation{
-    width: 2rem;
-    height: 2rem;
+    width: 28px;
 }
 
 .likeNavigation{
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 26px;
 }
 
 .profileNavigation{
-    width: 2rem;
-    height: 2rem;
     border-radius: 50%;
+    height: 28px;
+    width: 28px;
 }
 
 @media screen and (max-width:700px){
@@ -46,54 +43,46 @@
 
 @media screen and (max-width: 420px){
     .homeNavigation{
-        width: 1.8rem;
-        height: 1.8rem;
+        width: 28px;
     }
-
+    
     .searchNavigation{
-        width: 1.8rem;
-        height: 1.8rem;
+        width: 28px;
     }
     
     .addPostNavigation{
-        width: 1.8rem;
-        height: 1.8rem;
+        width: 28px;
     }
-
+    
     .likeNavigation{
-        width: 1.6rem;
-        height: 1.6rem;
+        width: 26px;
     }
     
     .profileNavigation{
-        width: 1.8rem;
-        height: 1.8rem;
+        height: 28px;
+        width: 28px;
     }
 }
 
 @media screen and (max-width: 350px){
     .homeNavigation{
-        width: 1.6rem;
-        height: 1.6rem;
+        width: 26px;
     }
 
     .searchNavigation{
-        width: 1.6rem;
-        height: 1.6rem;
+        width: 26px;
     }
     
     .addPostNavigation{
-        width: 1.6rem;
-        height: 1.6rem;
+        width: 26px;
     }
 
     .likeNavigation{
-        width: 1.4rem;
-        height: 1.4rem;
+        width: 24px;
     }
     
     .profileNavigation{
-        width: 1.6rem;
-        height: 1.6rem;
+        height: 26px;
+        width: 26px;
     }
 }

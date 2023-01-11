@@ -3,41 +3,46 @@
     display: flex;
     justify-content:space-between;
     align-items: center;
-    background: white;
-    width: 30rem;
+    background: var(--cardColor);
+    width: 100%;
     position:fixed;
     top: 0;
     padding: 0.7rem 0rem;
     border-bottom: 1px solid rgb(183, 183, 183);
-    z-index: 1;
-    height: 1.5rem;
+    /* z-index: 1; */
+    height: 2rem;
     display: none;
 }
 
+.HeaderBarSearch{
+    align-items: center;
+    justify-content: center;
+}
+
 .HeaderTitle{
+    margin-top: -5px;
     padding-left: 1rem;
     font-weight: 600;
-    font-size: 23px;
+    font-size: 22px;
+    font-family: cursive;
+    /* font-family: Georgia, 'Times New Roman', Times, serif; */
 }
 
 .HeaderChatIcon{
     padding-right: 1rem;
-    width: 2rem;
-    height: 2rem;
+    width: 26px;
     cursor: pointer;
 }
 
 .HeaderDotIcon{
     padding-right: 1rem;
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 24px;
     cursor: pointer;
 }
 
 .HeaderMoreIcon{
     padding-right: 1rem;
-    width: 2rem;
-    height: 2rem;
+    width: 28px;
     position: relative;
     cursor: pointer;
 }
@@ -91,11 +96,6 @@
     width: 20px;
 }
 
-.HeaderBarSearch{
-    align-items: center;
-    justify-content: center;
-}
-
 
 /* search field */
 #search {
@@ -145,22 +145,24 @@
 
 @media screen and (max-width: 420px){
     .HeaderTitle{
-        font-size: 21px;
-    }
-
-    .HeaderChatIcon{
-        width: 1.8rem;
-        height: 1.8rem;
+        font-size: 20px;
     }
 }
 
 @media screen and (max-width: 350px){
     .HeaderTitle{
-        font-size: 19px;
+        font-size: 18px;
     }
 
     .HeaderChatIcon{
-        width: 1.6rem;
-        height: 1.6rem;
+        width: 24px;
+    }
+
+    .HeaderDotIcon{
+        width: 21px;
+    }
+
+    .HeaderMoreIcon{
+        width: 26px;
     }
 }

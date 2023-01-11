@@ -12,6 +12,8 @@ import { useSelector } from 'react-redux'
 import HeaderBarNotificitions from '../../Components/HeaderBar/HeaderBarNotificitions'
 import HeaderBarProfile from '../../Components/HeaderBar/HeaderBarProfile'
 import HeaderBarSearch from '../../Components/HeaderBar/HeaderBarSearch'
+import HomeSide from '../../Components/HomeSide/HomeSide'
+import HeaderBar from '../../Components/HeaderBar/HeaderBar'
 
 const Profile = ({location}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
@@ -30,10 +32,10 @@ const Profile = ({location}) => {
         const {data} = await getUser(params.id);
         setCurrentUser(data);
     }
-    if(location !== undefined && location !== "activity"){
+    if(location !== undefined && location !== "activity" && location !== "home"){
       fetchAllPosts()
     }
-    if(location !== "allposts" && location !== "activity"){
+    if(location !== "allposts" && location !== "activity" && location !== "home"){
       fetchProfileUserData()
     }
   },[location,params.id])
@@ -41,16 +43,26 @@ const Profile = ({location}) => {
   return (
     <div className="Profile">
         <NavigationMain />
-        <div className="ProfileCenter">
-            {location !== "allposts" && location !== "saved" && <HeaderBarNotificitions/>}
-            {location !== "activity" && location !== "saved" && <HeaderBarSearch/>}
-            {location !== "allposts" && location !== "activity" && <HeaderBarProfile user={user} currentUser={currentUser}/>}
-            {location !== "allposts" && location !== "activity" && <ProfileCard allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
 
+        {location === "home" && <HeaderBar/>}
+        {location === "activity" && <HeaderBarNotificitions/>}
+        {location === "allposts" && <HeaderBarSearch/>}
+        {(location === "saved" || location === "profile") && <HeaderBarProfile user={user} currentUser={currentUser}/>}
+
+
+        {location === "home" && 
+        <HomeSide/>}
+
+        {location !== "home" && 
+        <div className="ProfileCenter">
+
+            {location !== "allposts" && location !== "activity" && <ProfileCard allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
             {location !== "activity" && <Posts location={location} allPosts={allPosts}/>}
             {location === "activity" && <FollowersCard/>}
-            {location === "activity" && <NavigationBar/>}
-        </div>
+
+        </div>}
+        
+        <NavigationBar/>
     </div>
   )
 }

@@ -72,12 +72,12 @@ const Auth = () => {
                 )}
 
                 <div>
-                    <input type="text" name="username" value={data.username} placeholder="Username" className="InfoInput" onChange={handleChange} />
+                    <input type="text" name="username" autoComplete='username' value={data.username} placeholder="Username" className="InfoInput" onChange={handleChange} />
                 </div>
 
                 <div>
-                    <input type="password" name="password" value={data.password} placeholder="Password" className="InfoInput" onChange={handleChange} />
-                    { isSignUp && <input type="password" value={data.confirmpassword} name="confirmpassword" placeholder="Confirm Password" className="InfoInput" onChange={handleChange} /> }
+                    <input type="password" name="password" autoComplete='new-password' value={data.password} placeholder="Password" className="InfoInput" onChange={handleChange} />
+                    { isSignUp && <input type="password" autoComplete='current-password' value={data.confirmpassword} name="confirmpassword" placeholder="Confirm Password" className="InfoInput" onChange={handleChange} /> }
                 </div>
 
                 <span style={{display: confirmPassword ? "none" : "block", color: "red", fontSize: "12px", alignSelf: "flex-end", marginRight: "5px"}}>
