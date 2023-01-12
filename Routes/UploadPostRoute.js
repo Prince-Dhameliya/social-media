@@ -4,7 +4,6 @@ import cloudinary from '../utils/Cloudinary.js'
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    console.log(req);
     const {image} = req.body;
 
     try {

@@ -2,7 +2,6 @@ import Posts from '../../Components/Posts/Posts'
 import ProfileCard from '../../Components/ProfileCard/ProfileCard'
 import NavigationMain from '../../Components/NavigationMain/NavigationMain'
 import './Profile.css'
-import FollowersCard from '../../Components/FollowersCard/FollowersCard'
 import NavigationBar from '../../Components/NavigationBar/NavigationBar'
 import { useEffect, useState } from 'react'
 import { getAllPosts } from '../../api/PostRequest'
@@ -14,6 +13,7 @@ import HeaderBarProfile from '../../Components/HeaderBar/HeaderBarProfile'
 import HeaderBarSearch from '../../Components/HeaderBar/HeaderBarSearch'
 import HomeSide from '../../Components/HomeSide/HomeSide'
 import HeaderBar from '../../Components/HeaderBar/HeaderBar'
+import FollowersCardVertical from '../../Components/FollowerCardVertical/FollowerCardVertical'
 
 function togglemenu(){
   let submenu = document.getElementById("submenu");
@@ -70,7 +70,7 @@ const Profile = ({location}) => {
 
             {location !== "allposts" && location !== "activity" && <ProfileCard location={location} allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
             {location !== "activity" && <Posts location={location} allPosts={allPosts}/>}
-            {location === "activity" && <FollowersCard/>}
+            {location === "activity" && <FollowersCardVertical/>}
 
         </div>}
         

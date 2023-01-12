@@ -20,7 +20,7 @@ const Auth = () => {
     password: "",
     confirmpassword: "",
     profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png",
-    coverPicture: "http://res.cloudinary.com/princedhameliya/image/upload/v1669663981/SocialMedia/oeqbfkgzegpktmccs3ei.jpg",
+    coverPicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662226/Default/defaultCover_kadawa.jpg",
   });
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const Auth = () => {
         password: "",
         confirmpassword: "",
         profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png",
-        coverPicture: "http://res.cloudinary.com/princedhameliya/image/upload/v1669663981/SocialMedia/oeqbfkgzegpktmccs3ei.jpg",
+        coverPicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662226/Default/defaultCover_kadawa.jpg",
     });
   }
   

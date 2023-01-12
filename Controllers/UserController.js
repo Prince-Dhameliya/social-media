@@ -85,7 +85,6 @@ export const deleteUser = async (req, res) => {
     if(id === currentUserId || currentUserAdminStatus){
         // currentUserId = "63b8d2dcc2f7bead52d5aafb";
         try {
-            console.log(currentUserId);
             await UserModel.updateMany({}, {$pull : {following : currentUserId}})
             await UserModel.updateMany({}, {$pull : {followers : currentUserId}})
             await UserModel.updateOne({_id : currentUserId}, {following : []})
