@@ -44,15 +44,28 @@
     height: 25px;
     width: 25px;
     margin: 0px 15px 0px 25px;
+    pointer-events: none;
 }
 
 .navigation_title{
     font-size: 15px;
+    pointer-events: none;
 }
 
 .navigation_profileIcon{
     border-radius: 50%;
-    border: 1px solid var(--lineColor);
+    border: 1px solid var(--borderColor);
+    margin: 0px 15px 0px 24px;
+}
+
+.navigation_profileIcon.active{
+    border: 2px solid black;
+    margin: -1px 14px 0px 23px;
+}
+
+.navigation_profileTitle.active{
+    margin-top: -1px;
+    pointer-events: none;
 }
 
 .moreItems{

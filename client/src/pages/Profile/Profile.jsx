@@ -15,6 +15,18 @@ import HeaderBarSearch from '../../Components/HeaderBar/HeaderBarSearch'
 import HomeSide from '../../Components/HomeSide/HomeSide'
 import HeaderBar from '../../Components/HeaderBar/HeaderBar'
 
+function togglemenu(){
+  let submenu = document.getElementById("submenu");
+  if(submenu?.classList?.contains("open-menu")){
+    submenu?.classList?.remove("open-menu");
+  }
+
+  let submenu1 = document.getElementById("submenu1");
+  if(submenu1?.classList?.contains("open-menu")){
+    submenu1?.classList?.remove("open-menu");
+  }
+}
+
 const Profile = ({location}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   const [allPosts, setAllPosts] = useState([]);
@@ -42,7 +54,7 @@ const Profile = ({location}) => {
 
   return (
     <div className="Profile">
-        <NavigationMain />
+        <NavigationMain location={location} user={user} currentUser={currentUser} />
 
         {location === "home" && <HeaderBar/>}
         {location === "activity" && <HeaderBarNotificitions/>}
@@ -54,15 +66,15 @@ const Profile = ({location}) => {
         <HomeSide/>}
 
         {location !== "home" && 
-        <div className="ProfileCenter">
+        <div className="ProfileCenter" onClick={togglemenu}>
 
-            {location !== "allposts" && location !== "activity" && <ProfileCard allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
+            {location !== "allposts" && location !== "activity" && <ProfileCard location={location} allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
             {location !== "activity" && <Posts location={location} allPosts={allPosts}/>}
             {location === "activity" && <FollowersCard/>}
 
         </div>}
         
-        <NavigationBar/>
+        <NavigationBar location={location}/>
     </div>
   )
 }

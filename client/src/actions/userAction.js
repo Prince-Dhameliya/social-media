@@ -31,3 +31,14 @@ export const unFollowUser = (id, data) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const deleteUser = (id, data) => async (dispatch) => {
+    dispatch({type: "DELETING_START"})
+    try {
+        await UserApi.deleteUser(id, data);
+        dispatch({type: "DELETING_SUCCESS", data: id})
+    } catch (error) {
+        dispatch({type: "DELETING_FAIL"})
+        console.log(error);
+    }
+}

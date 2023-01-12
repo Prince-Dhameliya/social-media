@@ -66,10 +66,17 @@ const postReducer = (
             );
             return {...state, posts : unbookmarkPosts, loading: false, error: false}
 
+        case "POST_DELETING_START":
+            return {...state, loading:true, error: false}
+        case "POST_DELETING_SUCCESS":
+            return {...state, posts: state.posts.filter(obj=>obj._id!==action.data), loading: false, error: false}
+        case "POST_DELETING_FAIL":
+            return {...state, loading: false, error: true}
+
         case "DELETING_START":
             return {...state, loading:true, error: false}
         case "DELETING_SUCCESS":
-            return {...state, posts: state.posts.filter(obj=>obj._id!==action.data), loading: false, error: false}
+            return {...state, loading: false, error: false}
         case "DELETING_FAIL":
             return {...state, loading: false, error: true}
 

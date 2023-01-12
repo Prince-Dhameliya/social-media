@@ -13,7 +13,8 @@
     gap: 1rem;
     width: 30rem;
     margin: 0rem auto 0rem auto;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 @media screen and (max-width:1600px){

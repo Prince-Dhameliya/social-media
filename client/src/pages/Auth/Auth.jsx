@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Logo from '../../img/logo.png'
 import './Auth.css'
@@ -8,9 +8,10 @@ import { logIn, signUp } from '../../actions/AuthAction';
 const Auth = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state)=>state.authReducer.loading);
-//   console.log(loading);
 
   const [isSignUp, setIsSignUp] = useState(true);
+  const [error, setError] = useState("");
+  const [ready, setReady] = useState(false);
 
   const [data, setData] = useState({
     firstname: "",
@@ -18,33 +19,53 @@ const Auth = () => {
     username: "",
     password: "",
     confirmpassword: "",
+    profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png",
+    coverPicture: "http://res.cloudinary.com/princedhameliya/image/upload/v1669663981/SocialMedia/oeqbfkgzegpktmccs3ei.jpg",
   });
 
-  const [confirmPassword, setConfirmPassword] = useState(true);
+  useEffect(() => {
+    if(isSignUp && data.firstname!=="" && data.lastname!=="" && data.username!=="" && data.password!=="" && data.confirmpassword!==""){
+      setReady(true);
+    }
+    else if(!isSignUp && data.username!=="" && data.password!==""){
+      setReady(true);
+    }
+    else{
+      setReady(false);
+    }
+  },[data,isSignUp])
 
   const handleChange = (e) => {
     setData({...data, [e.target.name]: e.target.value})
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if(isSignUp){
-        data.password === data.confirmpassword ? dispatch(signUp(data)) : setConfirmPassword(false);
+        if(data.password === data.confirmpassword){
+          const res = await dispatch(signUp(data))
+          setError(res?.response?.data?.message);
+        } else{
+          setError("Confirm Password Is Not Same");
+        }
     }
-    else{
-        dispatch(logIn(data))
+    else{ 
+        const res = await dispatch(logIn(data))
+        setError(res?.response?.data?.message);
     }
   }
 
   const resetForm = () => {
-    setConfirmPassword(true);
+    setError("");
     setData({
         firstname: "",
         lastname: "",
         username: "",
         password: "",
         confirmpassword: "",
+        profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png",
+        coverPicture: "http://res.cloudinary.com/princedhameliya/image/upload/v1669663981/SocialMedia/oeqbfkgzegpktmccs3ei.jpg",
     });
   }
   
@@ -80,13 +101,13 @@ const Auth = () => {
                     { isSignUp && <input type="password" autoComplete='current-password' value={data.confirmpassword} name="confirmpassword" placeholder="Confirm Password" className="InfoInput" onChange={handleChange} /> }
                 </div>
 
-                <span style={{display: confirmPassword ? "none" : "block", color: "red", fontSize: "12px", alignSelf: "flex-end", marginRight: "5px"}}>
-                    * Confirm Password Is Not Same
+                <span style={{display: (error==="") ? "none" : "block", color: "red", fontSize: "12px", alignSelf: "flex-end", marginRight: "5px"}}>
+                    * {error}
                 </span>
 
                 <div className="SwitchAuth">
                     <span style={{fontSize: "12px", cursor: "pointer"}} onClick={()=>{setIsSignUp((prev)=>!prev); resetForm()}}  >{isSignUp ? "Already have an account. Login!" : "Don't have an account? SignUp!"}</span>
-                    <button className="button InfoButton" type="submit" disabled={loading}>{loading ? "Loading..." : (isSignUp ? "Sign Up" : "Log In")}</button>
+                    <button className="button InfoButton" type="submit" disabled={(!ready || loading)}>{loading ? "Loading..." : (isSignUp ? "Sign Up" : "Log In")}</button>
                 </div>
             </form>
         </div>

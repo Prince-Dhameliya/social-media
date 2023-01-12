@@ -81,12 +81,12 @@ export const unbookmarkPost = (postId, userId) => async (dispatch) => {
 }
 
 export const deletePost = (id,userId) => async (dispatch) => {
-    dispatch({type: "DELETING_START"})
+    dispatch({type: "POST_DELETING_START"})
     try {
         await PostApi.deletePost(id, userId);
-        dispatch({type: "DELETING_SUCCESS", data: id})
+        dispatch({type: "POST_DELETING_SUCCESS", data: id})
     } catch (error) {
-        dispatch({type: "DELETING_FAIL"})
+        dispatch({type: "POST_DELETING_FAIL"})
         console.log(error);
     }
 }

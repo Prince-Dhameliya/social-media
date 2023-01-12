@@ -85,13 +85,12 @@ const PostShare = () => {
 
   return (
     <div className="PostShare">
-        <img src={user.coverPicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } alt="" />
+        <img src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } alt="" />
         <div>
             <input ref={desc} required type="text" placeholder="What's Happening" />
             <div className="PostOptions">
                 <div className="Option" style={{color: "var(--photo)"}} onClick={()=>imageRef.current.click()}> <UilScenery className="optionsIcon" /> Photo </div>
                 <div className="Option VideoButton" style={{color: "var(--video)"}} onClick={()=>imageRef.current.click()}> <UilPlayCircle className="optionsIcon"/> Video </div>
-                {/* <div className="Option" style={{color: "var(--location)"}}> <UilLocationPoint className="optionsIcon" /> Location </div> */}
                 <div className="Option ScheduleButton" style={{color: "var(--schedule)"}}> <UilSchedule className="optionsIcon" /> Schedule </div>
                 <button className="button ps-button" onClick={handleSubmit} disabled={loading} >{loading ? "Uploading..." : "Share"}</button>
                 <div style={{display: "none"}}>

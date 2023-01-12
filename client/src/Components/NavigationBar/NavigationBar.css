@@ -11,6 +11,7 @@
     border-top: 1px solid rgb(183, 183, 183);
     display: none;
     height: 2rem;
+    z-index: 1;
 }
 
 .homeNavigation{
@@ -18,7 +19,7 @@
 }
 
 .searchNavigation{
-    width: 28px;
+    width: 29px;
 }
 
 .addPostNavigation{
@@ -26,14 +27,18 @@
 }
 
 .likeNavigation{
-    width: 26px;
+    width: 25px;
 }
 
 .profileNavigation{
     border-radius: 50%;
     height: 28px;
     width: 28px;
-    border: 1px solid var(--lineColor);
+    border: 1px solid var(--borderColor);
+}
+
+.profileNavigation.active{
+    border: 2px solid black;
 }
 
 @media screen and (max-width:700px){
@@ -48,7 +53,7 @@
     }
     
     .searchNavigation{
-        width: 28px;
+        width: 29px;
     }
     
     .addPostNavigation{
@@ -56,7 +61,7 @@
     }
     
     .likeNavigation{
-        width: 26px;
+        width: 25px;
     }
     
     .profileNavigation{
@@ -71,7 +76,7 @@
     }
 
     .searchNavigation{
-        width: 26px;
+        width: 27px;
     }
     
     .addPostNavigation{
@@ -79,7 +84,7 @@
     }
 
     .likeNavigation{
-        width: 24px;
+        width: 23px;
     }
     
     .profileNavigation{

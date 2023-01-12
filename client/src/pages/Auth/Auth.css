@@ -77,6 +77,10 @@
     align-self: flex-end;
 }
 
+.InfoButton:disabled{
+    background: linear-gradient(98.63deg, #fbce8f 0%, #ffae97 100%);
+}
+
 .AuthForm{
     background-color: var(--cardColor);
     border-radius: 1rem;

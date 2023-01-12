@@ -1,12 +1,24 @@
-import { Modal, useMantineTheme } from "@mantine/core";
+import * as React from 'react';
+import Dialog from '@mui/material/Dialog';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-// import { uploadImage } from "../../actions/uploadAction";
-import { updateUser } from "../../actions/userAction";
+import Close from '../../img/Close.svg'
+import { useParams } from 'react-router-dom';
+import { updateUser } from '../../actions/userAction';
+import './ProfileModel.css'
 
-function ProfileModal({modalOpened, setModalOpened, data}) {
-  const theme = useMantineTheme();
+export default function ProfileModel({open, setOpen, data}) {
+//   const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   const [loading, setLoading] = useState(false);
   const {password, ...other} = data;
   const [formData, setFormData] = useState(other);
@@ -22,7 +34,6 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
   const onImageChange = (event) => {
     if(event.target.files && event.target.files[0]){
       let img = event.target.files[0];
-      console.log(event.target.name);
       event.target.name === "profileImage" ? setProfileImage(img) : setCoverImage(img);
     }
   };
@@ -79,52 +90,53 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
             // }
       }
       if(res2 && (coverImage!==null)) UserData.coverPicture = res2.url;
-      dispatch(updateUser(param.id, UserData));
+      const newData = {
+        UserData: UserData,
+        profilePicture: data.profilePicture,
+      }
+      dispatch(updateUser(param.id, newData));
+      setProfileImage(null);
+      setCoverImage(null);
       setLoading(false);
-      setModalOpened(false);
+      setOpen(false);
   }
 
   return (
-    <Modal
-      overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[10]}
-      overlayOpacity={0.55}
-      overlayBlur={0}
-      size="55%"
-      opened={modalOpened}
-      onClose={()=>setModalOpened(false)}
-    >
-      <form className="InfoForm">
-        <h3>Your Info</h3>
-        <div>
-          <input type="text" className="InfoInput" name="firstname" placeholder="First Name" onChange={handleChange} value={formData.firstname} />
-          <input type="text" className="InfoInput" name="lastname" placeholder="Last Name" onChange={handleChange} value={formData.lastname} />
-        </div>
+    <div>
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
 
-        <div>
-          <input type="text" className="InfoInput" name="bio" placeholder="Bio" onChange={handleChange} value={formData.bio} />
-          <input type="text" className="InfoInput" name="worksAt" placeholder="Work at" onChange={handleChange} value={formData.worksAt} />
-        </div>
+        <form className="InfoForm ProfileModel">
+          <div className='ProfileModel_Header'>
+            <h3>Your Info</h3>
+            <img src={Close} className='ReactLike' alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleClose} />
+          </div>
+          <div>
+            <input type="text" className="InfoInput" name="firstname" placeholder="First Name" onChange={handleChange} value={formData.firstname} />
+            <input type="text" className="InfoInput" name="lastname" placeholder="Last Name" onChange={handleChange} value={formData.lastname} />
+          </div>
 
-        <div>
-          <input type="text" className="InfoInput" name="livesin" placeholder="Lives In" onChange={handleChange} value={formData.livesin} />
-          <input type="text" className="InfoInput" name="country" placeholder="Country" onChange={handleChange} value={formData.country} />
-        </div>
+          <div>
+            <input type="text" className="InfoInput" name="bio" placeholder="Bio" onChange={handleChange} value={formData.bio} />
+          </div>
 
-        <div>
-          <input type="text" className="InfoInput" name="relationship" placeholder="Relationship Status" onChange={handleChange}  value={formData.relationship} />
-        </div>
+          <div>
+            Profile Image
+            <input type="file" name="profileImage" onChange={onImageChange} />
+          </div>
 
-        <div>
-          Profile Image
-          <input type="file" name="profileImage" onChange={onImageChange} />
-          Cover Image
-          <input type="file" name="coverImage" onChange={onImageChange} />
-        </div>
+          <div>
+            Cover Image
+            <input type="file" name="coverImage" onChange={onImageChange} />
+          </div>
 
-        <button className="button InfoButton" onClick={handleSubmit} disabled={loading}>{loading ? "Updating" : "Update"}</button>
-      </form>
-    </Modal>
+          <button className="button InfoButton" onClick={handleSubmit} disabled={loading}>{loading ? "Updating" : "Update"}</button>
+        </form>
+      </Dialog>
+    </div>
   );
 }
-
-export default ProfileModal

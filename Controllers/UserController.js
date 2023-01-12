@@ -1,6 +1,7 @@
 import UserModel from "../Models/userModel.js";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
+import PostModel from "../Models/postModel.js";
 
 // Get all users
 export const getAllUsers = async (req, res) => {
@@ -38,17 +39,21 @@ export const getUser = async (req, res) => {
 // Update a user
 export const updateUser = async (req, res) => {
     const id = req.params.id;
-    const {_id, currentUserAdminStatus, password} = req.body;
+    const {_id, currentUserAdminStatus, password} = req.body.UserData;
 
     if(id === _id){
         try {
 
             if(password){
                 const salt = await bcrypt.genSalt(10);
-                req.body.password = await bcrypt.hash(password, salt);
+                req.body.UserData.password = await bcrypt.hash(password, salt);
             }
 
-            const user = await UserModel.findByIdAndUpdate(id, req.body, {new: true,});
+            const user = await UserModel.findByIdAndUpdate(id, req.body.UserData, {new: true,});
+
+            if(req.body.UserData.profilePicture !== req.body.profilePicture){
+                await PostModel.updateMany({userId: id}, {profilePicture: req.body.UserData.profilePicture})
+            }
 
             const token = jwt.sign({
                 username: user.username,
@@ -68,11 +73,28 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     const id = req.params.id;
 
-    const {currentUserId, currentUserAdminStatus} = req.body;
+    //delete for other saved posts✔
+    //other followers✔
+    //other following✔
+    //other like✔
+    //other comment✔
+    //self all posts✔
+
+    var {currentUserId, currentUserAdminStatus} = req.body;
 
     if(id === currentUserId || currentUserAdminStatus){
+        // currentUserId = "63b8d2dcc2f7bead52d5aafb";
         try {
-            await UserModel.findOneAndDelete(id);
+            console.log(currentUserId);
+            await UserModel.updateMany({}, {$pull : {following : currentUserId}})
+            await UserModel.updateMany({}, {$pull : {followers : currentUserId}})
+            await UserModel.updateOne({_id : currentUserId}, {following : []})
+            await UserModel.updateOne({_id : currentUserId}, {followers : []})
+            await PostModel.updateMany({}, {$pull : {comments: {userId: currentUserId}}})
+            await PostModel.updateMany({}, {$pull : {likes : currentUserId}})
+            await PostModel.updateMany({}, {$pull : {saved : currentUserId}})
+            await PostModel.deleteMany({userId : currentUserId})
+            await UserModel.deleteOne({_id : currentUserId})
             res.status(200).json("User deleted successfully")
         } catch (error) {
             res.status(500).json(error)
