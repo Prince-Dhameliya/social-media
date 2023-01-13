@@ -75,12 +75,12 @@ const ProfileCard = ({location,allPosts,currentUser,profileUserId}) => {
             </div>
 
             <div className="ProfilePosts">
-                <Link style={{textDecoration: "none", color: "inherit"}} to={`/${profileUserId}`}><div id="profile" className={active === "profile" ? "active ProfilePostsButton" : "ProfilePostsButton"} onClick={handleClick}>
+                <Link style={{textDecoration: "none", color: "inherit"}} to={`../${profileUserId}`}><div id="profile" className={active === "profile" ? "active ProfilePostsButton" : "ProfilePostsButton"} onClick={handleClick}>
                     <img className="ProfilePostsButton_Icon" src={PostIcon} alt="" />
                     <span className="ProfilePostsButton_Title">POSTS</span>
                 </div></Link>
 
-                {user._id === profileUserId && <Link style={{textDecoration: "none", color: "inherit"}} to={`/${user._id}/saved`}><div id="saved" className={active === "saved" ? "active ProfilePostsButton" : "ProfilePostsButton"} onClick={handleClick}>
+                {user._id === profileUserId && <Link style={{textDecoration: "none", color: "inherit"}} to={`../${profileUserId}/saved`}><div id="saved" className={active === "saved" ? "active ProfilePostsButton" : "ProfilePostsButton"} onClick={handleClick}>
                     <img className="ProfilePostsButton_Icon" src={Saved} alt="" />
                     <span className="ProfilePostsButton_Title">SAVED</span>
                 </div></Link>

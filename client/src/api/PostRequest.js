@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({baseURL: ""})
+const API = axios.create({baseURL: "/"})
 
 export const getTimelinePosts = (id) => API.get(`posts/${id}/timeline`)
 export const getTimelineSavedPosts = (id) => API.get(`posts/${id}/saved`)
