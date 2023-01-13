@@ -16,9 +16,7 @@ const Posts = ({location, allPosts,persons}) => {
 
   useEffect(()=>{
       dispatch(getTimelinePosts(user._id))
-      if(location === "saved"){
-        dispatch(getTimelineSavedPosts(user._id))
-      }
+      dispatch(getTimelineSavedPosts(user._id))
   },[user._id,dispatch,location])
 
   const [screenSize, getDimension] = useState({
