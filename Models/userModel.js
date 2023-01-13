@@ -26,7 +26,8 @@ const UserSchema = mongoose.Schema(
         coverPicture: String,
         bio: String,
         followers: [],
-        following: [] 
+        following: [],
+        notifications: [], 
     },
     {timestamps: true}
 )

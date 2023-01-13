@@ -4,7 +4,6 @@ export const getTimelinePosts = (id) => async (dispatch) => {
     dispatch({type: "RETREIVING_START"})
     try {
         const {data} = await PostApi.getTimelinePosts(id);
-        console.log(data);
         dispatch({type: "RETREIVING_SUCCESS", data: data})
     } catch (error) {
         dispatch({type: "RETREIVING_FAIL"})
@@ -34,10 +33,10 @@ export const commentPost = (id, curdata) => async (dispatch) => {
     }
 }
 
-export const deleteComment = (postId, commentId) => async (dispatch) => {
+export const deleteComment = (userId, postId, commentId) => async (dispatch) => {
     dispatch({type: "COMMENTDELETING_START"})
     try {
-        await PostApi.deleteComment(postId, commentId);
+        await PostApi.deleteComment(userId, postId, commentId);
         dispatch({type: "COMMENTDELETING_SUCCESS", commentId: commentId, postId:postId})
     } catch (error) {
         dispatch({type: "COMMENTDELETING_FAIL"})

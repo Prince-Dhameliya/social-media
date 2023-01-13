@@ -9,7 +9,7 @@ const CommentFromModel = ({comment,data}) => {
     const dispatch = useDispatch();
 
     const handleDeleteComment = async () => {
-        dispatch(deleteComment(data._id, comment.commentId));
+        dispatch(deleteComment(user._id, data._id, comment.commentId));
       }
   return (
         <div className="CommentWindow">

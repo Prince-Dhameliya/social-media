@@ -36,6 +36,20 @@ export const getUser = async (req, res) => {
     }
 }
 
+//Get Notifications
+export const getNotifications = async (req, res) => {
+    const userId = req.params.id;
+    try {
+        let User = await UserModel.findById(userId);
+        let notifications = User.notifications;
+        User.notifications = [];
+        User.save();
+        res.status(200).json(notifications);
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 // Update a user
 export const updateUser = async (req, res) => {
     const id = req.params.id;

@@ -86,15 +86,27 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
     const postId = req.params.id;
     const {userId} = req.body;
-
     try {
         const post = await PostModel.findById(postId);
         if(!post.likes.includes(userId)){
             await post.updateOne({$push : {likes : userId}})
+            if(userId !== post.userId){
+                const User = await UserModel.findById(userId);
+                const data = {
+                    username : User.username,
+                    userImage : User.profilePicture,
+                    postId : post._id,
+                    postImage : post.image,
+                }
+                await UserModel.updateOne({_id : post.userId},{$push : {notifications : data}});
+            }
             res.status(200).json(post)
         }
         else{
             await post.updateOne({$pull : {likes : userId}})
+            if(userId !== post.userId){
+                await UserModel.updateOne({_id : post.userId},{$pull : {notifications : {postId : post._id}}});
+            }
             res.status(200).json(post)
         }
         
@@ -140,22 +152,34 @@ export const commentPost = async (req, res) => {
     }
 
     try {
+        await PostModel.updateOne({_id : postId}, {$push: {comments : newData}})
         const post = await PostModel.findById(postId)
-        await post.updateOne({$push: {comments : newData}})
-        const updatePost = await PostModel.findById(postId)
-        res.status(200).json(updatePost)
+        if(userId !== post.userId){
+            const data = {
+                username : username,
+                userImage : profilePicture,
+                postId : post._id,
+                postImage : post.image,
+                comment : comment,
+            }
+            await UserModel.updateOne({_id : post.userId},{$push : {notifications : data}});
+        }
+        res.status(200).json(post)
     } catch (error) {
         res.status(500).json(error)
     }
 }
 
 export const deleteComment = async(req, res) => {
-    const {postId} = req.body;
+    const {postId, userId} = req.body;
     let commentId = req.params.id;
     try {
+        await PostModel.updateOne({_id : postId}, {$pull : {comments : {commentId: ObjectId(commentId)}}});
         const post = await PostModel.findById(postId);
-        await post.updateOne({$pull : {comments : {commentId: ObjectId(commentId)}}})
-        res.status(200).json(post)
+        if(userId !== post.userId){
+            await UserModel.updateOne({_id : post.userId}, {$pull : {notifications : {postId : post._id}}});
+        }
+        res.status(200).json("comment deleted successfully")
     } catch (error) {
         res.status(500).json(error)
     }

@@ -10,6 +10,13 @@ action
             return { ...state, authData: action.data, loading: false, error: false };
         case "AUTH_FAIL":
             return { ...state, loading: false, error: true };
+
+        case "NOTIFICATIONS_RETREIVING_START":
+            return {...state, loading: true, error: false};
+        case "NOTIFICATIONS_RETREIVING_SUCCESS":
+            return {...state, loading: false, error: false}
+        case "NOTIFICATIONS_RETREIVING_FAIL":
+            return {...state, loading: false, error: true}
         
         case "UPDATING_START":
             return {...state, updateLoading: true, error: false};

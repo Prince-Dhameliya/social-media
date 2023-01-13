@@ -11,4 +11,4 @@ export const bookmarkPost = (id, userId) => API.put(`posts/${id}/bookmark`, {use
 export const unbookmarkPost = (id, userId) => API.put(`posts/${id}/bookmark`, {userId: userId})
 export const deletePost = (id, userId) => API.delete(`posts/${id}/delete`)
 export const commentPost = (id, data) => API.put(`posts/${id}/comment`, data)
-export const deleteComment = (postId, commentId) => API.put(`posts/${commentId}/commentdelete`, {postId: postId})
+export const deleteComment = (userId, postId, commentId) => API.put(`posts/${commentId}/commentdelete`, {postId: postId,userId: userId})

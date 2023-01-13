@@ -6,7 +6,7 @@ import './CommentModel2.css'
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { commentPost, dislikePost, likePost } from "../../actions/postAction";
-import PostCustomizedMenus from '../DropdownButton/PostOptionModel'
+import Horizontal from '../../img/Horizontal3Dot.svg'
 import Comment from '../../img/comment.svg'
 import Send from '../../img/send.svg'
 import Like from '../../img/like.svg'
@@ -15,6 +15,8 @@ import Bookmark from '../../img/UnBookmark.svg'
 import Close from '../../img/Close.svg'
 import time from 'time-ago';
 import CommentFromModel from "./CommentFromModel/CommentFromModel";
+import PostOptionModel from '../DropdownButton/PostOptionModel';
+import { Skeleton } from '@mui/material';
 
 export default function CommentModel2({open, setOpen, data}) {
 //   const [open, setOpen] = React.useState(false);
@@ -33,6 +35,7 @@ export default function CommentModel2({open, setOpen, data}) {
 
   const [liked, setLiked] = useState(data.likes.includes(user._id))
   const [likes, setLikes] = useState(data.likes.length)
+  const [openMore, setOpenMore] = useState(false);
 
   const handleLike = async () => {
     setLiked((prev)=>!prev)
@@ -79,7 +82,9 @@ export default function CommentModel2({open, setOpen, data}) {
                     <span style={{cursor: "pointer"}}> <b>{data.username}</b></span>
                 </div>
                 <div className='PostMoreIcon'>
-                    <PostCustomizedMenus data={data} />
+                    {data ? <img src={Horizontal} className="ReactLike" alt="" style={{cursor: "pointer",width: "24px"}} onClick={() => setOpenMore(true)} />
+                    : <Skeleton animation="wave" height={20} width={30}/>}
+                    <PostOptionModel open={openMore} setOpen={setOpenMore} data={data} />
                     <img src={Close} className='ReactLike' alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleClose} />
                 </div>
             </div>

@@ -14,6 +14,7 @@ import HeaderBarSearch from '../../Components/HeaderBar/HeaderBarSearch'
 import HomeSide from '../../Components/HomeSide/HomeSide'
 import HeaderBar from '../../Components/HeaderBar/HeaderBar'
 import FollowersCardVertical from '../../Components/FollowerCardVertical/FollowerCardVertical'
+import Notifications from '../../Components/Notifications/Notifications'
 
 function togglemenu(){
   let submenu = document.getElementById("submenu");
@@ -81,6 +82,7 @@ const Profile = ({location}) => {
 
             {location !== "home" && location !== "allposts" && location !== "activity" && <ProfileCard location={location} allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
             {location !== "activity" && <Posts location={location} allPosts={allPosts} persons={persons}/>}
+            {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} user={user}/>}
             {location === "activity" && <FollowersCardVertical persons={persons}/>}
 
         </div>}
