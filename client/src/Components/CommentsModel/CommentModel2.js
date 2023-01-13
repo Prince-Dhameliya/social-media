@@ -6,7 +6,7 @@ import './CommentModel2.css'
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { commentPost, dislikePost, likePost } from "../../actions/postAction";
-import PostCustomizedMenus from '../DropdownButton/PostDropDownButton'
+import PostCustomizedMenus from '../DropdownButton/PostOptionModel'
 import Comment from '../../img/comment.svg'
 import Send from '../../img/send.svg'
 import Like from '../../img/like.svg'

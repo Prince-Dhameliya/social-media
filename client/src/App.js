@@ -21,8 +21,8 @@ function App() {
         {isLoad && <AppleBootupScreen/>}
 
         {!isLoad && <div className="App tap-Highlight">
-            <div className="blur" style={{top: '-12%', right: '0'}}></div>
-            <div className="blur" style={{top: '36%', left: '-8rem'}}></div>
+            {/* <div className="blur" style={{top: '-12%', right: '0'}}></div>
+            <div className="blur" style={{top: '36%', left: '-8rem'}}></div> */}
             <Routes>
               <Route path="/" element={user ? <Profile location="home" /> : <Navigate to = "../auth" />} />
               <Route path="/auth" element={user ? <Navigate to = "../" /> : <Auth />} />

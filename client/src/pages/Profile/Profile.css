@@ -44,16 +44,10 @@
     .ProfileCenter{
         width: 30rem;
     }
-    .ProfileCard{
-        width: 30rem;
-    }
 }
 
 @media screen and (max-width:520px){
     .ProfileCenter{
-        width: 29.5rem;
-    }
-    .ProfileCard{
         width: 29.5rem;
     }
 }
@@ -62,16 +56,10 @@
     .ProfileCenter{
         width: 29rem;
     }
-    .ProfileCard{
-        width: 29rem;
-    }
 }
 
 @media screen and (max-width:500px){
     .ProfileCenter{
-        width: 28.5rem;
-    }
-    .ProfileCard{
         width: 28.5rem;
     }
 }
@@ -80,16 +68,10 @@
     .ProfileCenter{
         width: 28rem;
     }
-    .ProfileCard{
-        width: 28rem;
-    }
 }
 
 @media screen and (max-width:480px){
     .ProfileCenter{
-        width: 27.5rem;
-    }
-    .ProfileCard{
         width: 27.5rem;
     }
 }
@@ -98,16 +80,10 @@
     .ProfileCenter{
         width: 27rem;
     }
-    .ProfileCard{
-        width: 27rem;
-    }
 }
 
 @media screen and (max-width:460px){
     .ProfileCenter{
-        width: 26.5rem;
-    }
-    .ProfileCard{
         width: 26.5rem;
     }
 }
@@ -116,16 +92,10 @@
     .ProfileCenter{
         width: 26rem;
     }
-    .ProfileCard{
-        width: 26rem;
-    }
 }
 
 @media screen and (max-width:440px){
     .ProfileCenter{
-        width: 25.5rem;
-    }
-    .ProfileCard{
         width: 25.5rem;
     }
 }
@@ -134,16 +104,10 @@
     .ProfileCenter{
         width: 25rem;
     }
-    .ProfileCard{
-        width: 25rem;
-    }
 }
 
 @media screen and (max-width:420px){
     .ProfileCenter{
-        width: 24.5rem;
-    }
-    .ProfileCard{
         width: 24.5rem;
     }
 }
@@ -152,16 +116,10 @@
     .ProfileCenter{
         width: 24rem;
     }
-    .ProfileCard{
-        width: 24rem;
-    }
 }
 
 @media screen and (max-width:400px){
     .ProfileCenter{
-        width: 23.5rem;
-    }
-    .ProfileCard{
         width: 23.5rem;
     }
 }
@@ -170,16 +128,10 @@
     .ProfileCenter{
         width: 23rem;
     }
-    .ProfileCard{
-        width: 23rem;
-    }
 }
 
 @media screen and (max-width:380px){
     .ProfileCenter{
-        width: 22.5rem;
-    }
-    .ProfileCard{
         width: 22.5rem;
     }
 }
@@ -188,16 +140,10 @@
     .ProfileCenter{
         width: 22rem;
     }
-    .ProfileCard{
-        width: 22rem;
-    }
 }
 
 @media screen and (max-width:360px){
     .ProfileCenter{
-        width: 21.5rem;
-    }
-    .ProfileCard{
         width: 21.5rem;
     }
 }
@@ -206,16 +152,10 @@
     .ProfileCenter{
         width: 21rem;
     }
-    .ProfileCard{
-        width: 21rem;
-    }
 }
 
 @media screen and (max-width:340px){
     .ProfileCenter{
-        width: 20.5rem;
-    }
-    .ProfileCard{
         width: 20.5rem;
     }
 }
@@ -224,16 +164,10 @@
     .ProfileCenter{
         width: 20rem;
     }
-    .ProfileCard{
-        width: 20rem;
-    }
 }
 
 @media screen and (max-width:320px){
     .ProfileCenter{
-        width: 19.5rem;
-    }
-    .ProfileCard{
         width: 19.5rem;
     }
 }
@@ -242,16 +176,10 @@
     .ProfileCenter{
         width: 19rem;
     }
-    .ProfileCard{
-        width: 19rem;
-    }
 }
 
 @media screen and (max-width:300px){
     .ProfileCenter{
-        width: 18rem;
-    }
-    .ProfileCard{
         width: 18rem;
     }
 }

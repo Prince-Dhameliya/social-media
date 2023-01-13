@@ -5,7 +5,7 @@ import './Profile.css'
 import NavigationBar from '../../Components/NavigationBar/NavigationBar'
 import { useEffect, useState } from 'react'
 import { getAllPosts } from '../../api/PostRequest'
-import { getUser } from '../../api/UserRequest'
+import { getAllUser, getUser } from '../../api/UserRequest'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import HeaderBarNotificitions from '../../Components/HeaderBar/HeaderBarNotificitions'
@@ -30,6 +30,7 @@ function togglemenu(){
 const Profile = ({location}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   const [allPosts, setAllPosts] = useState([]);
+  const [persons, setPersons] = useState([]);
   const [currentUser, setCurrentUser] = useState(user);
   const params = useParams();
   const profileUserId = params.id;
@@ -44,7 +45,17 @@ const Profile = ({location}) => {
         const {data} = await getUser(params.id);
         setCurrentUser(data);
     }
-    if(location !== undefined && location !== "activity" && location !== "home"){
+
+    const fetchPersons = async () => {
+        const {data} = await getAllUser();
+        setPersons(data)
+    }
+
+    if(location !== "saved" && location !== "allposts" && location !== "profile"){
+      fetchPersons()
+    }
+
+    if(location !== "activity" && location !== "home"){
       fetchAllPosts()
     }
     if(location !== "allposts" && location !== "activity" && location !== "home"){
@@ -63,14 +74,14 @@ const Profile = ({location}) => {
 
 
         {location === "home" && 
-        <HomeSide/>}
+        <HomeSide persons={persons}/>}
 
         {location !== "home" && 
         <div className="ProfileCenter" onClick={togglemenu}>
 
-            {location !== "allposts" && location !== "activity" && <ProfileCard location={location} allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
-            {location !== "activity" && <Posts location={location} allPosts={allPosts}/>}
-            {location === "activity" && <FollowersCardVertical/>}
+            {location !== "home" && location !== "allposts" && location !== "activity" && <ProfileCard location={location} allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
+            {location !== "activity" && <Posts location={location} allPosts={allPosts} persons={persons}/>}
+            {location === "activity" && <FollowersCardVertical persons={persons}/>}
 
         </div>}
         

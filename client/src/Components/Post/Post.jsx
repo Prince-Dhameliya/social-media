@@ -7,16 +7,17 @@ import DisLike from '../../img/dislike.svg'
 import UnBookmark from '../../img/UnBookmark.svg'
 import Bookmark from '../../img/Bookmark.svg'
 import Emoji from '../../img/Emoji.svg'
+import Horizontal from '../../img/Horizontal3Dot.svg'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { bookmarkPost, commentPost, dislikePost, likePost, unbookmarkPost } from '../../actions/postAction'
-import PostCustomizedMenus from '../DropdownButton/PostDropDownButton'
 import time from 'time-ago';
 import {VolumeUp, VolumeOff, PlayArrow} from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import Skeleton from '@mui/material/Skeleton';
 import CommentModel2 from '../CommentsModel/CommentModel2'
+import PostOptionModel from '../DropdownButton/PostOptionModel'
 
 const Post = ({data,index}) => {
   const {user}  = useSelector((state)=>state.authReducer.authData)
@@ -27,17 +28,17 @@ const Post = ({data,index}) => {
   const [likes, setLikes] = useState(data.likes.length)
 
   const handleLike = async () => {
-    setLiked((prev)=>!prev)
     liked ? setLikes((prev)=>prev-1) : setLikes((prev)=>prev+1)
+    setLiked((prev)=>!prev)
     liked ? dispatch(dislikePost(data._id, user._id)) : dispatch(likePost(data._id, user._id))
   }
 
   const handleDoubleClickLike = async () => {
-    setLiked(true);
     if(!liked){
       setLikes((prev)=>prev+1)
       dispatch(likePost(data._id, user._id))
     }
+    setLiked(true);
   }
 
   const handleBookmark = async () => {
@@ -92,6 +93,7 @@ const Post = ({data,index}) => {
       }
   }
   const [open, setOpen] = useState(false);
+  const [openMore, setOpenMore] = useState(false);
 
   function handleRedirect(){
     if(data.comments.length){
@@ -132,9 +134,10 @@ const Post = ({data,index}) => {
             : <Skeleton animation="wave" height={20} width={120}/>
             }
           </div>
-          
-          {data ? <PostCustomizedMenus data={data} />
+
+          {data ? <img src={Horizontal} className="ReactLike" alt="" style={{cursor: "pointer",width: "24px"}} onClick={() => setOpenMore(true)} />
           : <Skeleton animation="wave" height={20} width={30}/>}
+          <PostOptionModel open={openMore} setOpen={setOpenMore} data={data} />
         </div>
 
         <div className='PostContent'>

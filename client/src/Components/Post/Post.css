@@ -26,13 +26,13 @@
 .PostContent > img{
     width: 100%;
     object-fit: cover;
-    border-radius: 0.5rem;
+    border-radius: 0.2rem;
 }
 
 .PostContent > video{
     width: 100%;
     object-fit: cover;
-    border-radius: 0.5rem;
+    border-radius: 0.2rem;
     /* aspect-ratio: 16/9; */
 }
 

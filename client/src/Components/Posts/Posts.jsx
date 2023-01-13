@@ -8,7 +8,7 @@ import Media from '../SkeletonPost/SkeletonPost'
 import FollowersCard from '../FollowersCard/FollowersCard'
 
 
-const Posts = ({location, allPosts}) => {
+const Posts = ({location, allPosts,persons}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   let {savedPosts, posts, loading} = useSelector((state)=>state.postReducer);
   const params = useParams();
@@ -16,7 +16,9 @@ const Posts = ({location, allPosts}) => {
 
   useEffect(()=>{
       dispatch(getTimelinePosts(user._id))
-      dispatch(getTimelineSavedPosts(user._id))
+      if(location === "saved"){
+        dispatch(getTimelineSavedPosts(user._id))
+      }
   },[user._id,dispatch,location])
 
   const [screenSize, getDimension] = useState({
@@ -55,14 +57,14 @@ const Posts = ({location, allPosts}) => {
         {loading ? <Media/>
           : (
             <>
-            {posts[0]!==undefined && (<Post key={0} index={0+1} data={posts[0]} />)}
+            {posts[0]!==undefined && (<Post key={0} index={0+1} data={posts[0]} location={location} />)}
             {posts[1]!==undefined && (<Post key={1} index={1+1} data={posts[1]} />)}
             
-            {location === undefined && screenSize.dynamicWidth < 700 && (<FollowersCard/>)}
+            {location === undefined && screenSize.dynamicWidth < 700 && (<FollowersCard persons={persons}/>)}
 
             {posts.map((post,id)=>{
               if(id>1){
-                return <Post key={id} index={id+1} data={post} />
+                return <Post key={id} index={id+1} data={post} location={location} />
               }
               return null;
             })}

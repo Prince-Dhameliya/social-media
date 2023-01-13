@@ -7,7 +7,7 @@ import Skeleton from '@mui/material/Skeleton';
 function SkeletonPost() {
 
   return (
-    <Card sx={{ maxWidth: 800, m: 0, borderRadius: 3 }}>
+    <Card sx={{ border: "1px solid rgb(218, 218, 218)",maxWidth: 800, m: 0, borderRadius: 1 }}>
         <CardHeader
             avatar={
                 <Skeleton animation="wave" variant="circular" width={40} height={40} />

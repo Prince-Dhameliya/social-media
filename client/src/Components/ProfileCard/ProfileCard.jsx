@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './ProfileCard.css'
 import {Link} from 'react-router-dom'
 import { useState } from 'react'
@@ -6,12 +6,20 @@ import { useState } from 'react'
 import PostIcon from '../../img/Posts.svg'
 import Saved from '../../img/UnBookmark.svg'
 import ProfileModel from '../ProfileModal/ProfileModel'
+import { followUser, unFollowUser } from '../../actions/userAction'
 
 const ProfileCard = ({location,allPosts,currentUser,profileUserId}) => {
+  const dispatch = useDispatch();
   const {user} = useSelector((state)=>state.authReducer.authData)
+  const [isfollowing, setIsFollowing] = useState(user.following.includes(profileUserId))
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(location);
+
+  const handleFollow = () => {
+    setIsFollowing((prev)=>!prev)
+    isfollowing ? dispatch(unFollowUser(currentUser._id, user)) : dispatch(followUser(currentUser._id, user));
+  }
 
 
   const handleClick = (event) => {
@@ -36,6 +44,12 @@ const ProfileCard = ({location,allPosts,currentUser,profileUserId}) => {
                 </div>
             </div>}
 
+            {user._id !== profileUserId && <div className="tempStuff">
+                <button className={isfollowing ? "button fc-buttonVertical UnfollowButton" : "button fc-buttonVertical"} onClick={handleFollow}>
+                    {isfollowing ? "Unfollow" : "Follow"}
+                </button>
+            </div>}
+
             <div className="FollowStatus">
                 <hr />
                 <div>
@@ -54,7 +68,7 @@ const ProfileCard = ({location,allPosts,currentUser,profileUserId}) => {
 
                     </div>
                     <div className="Follow">
-                        <span>{allPosts.filter((post)=>post.userId === profileUserId).length}</span>
+                        <span>{allPosts.filter((post)=>post.userId === currentUser._id).length}</span>
                         <span>Posts</span>
                     </div>
                 </div>

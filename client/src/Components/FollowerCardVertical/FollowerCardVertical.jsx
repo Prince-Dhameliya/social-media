@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {useSelector} from 'react-redux'
 import './FollowerCardVertical.css'
 import User from './User1'
-import { getAllUser } from '../../api/UserRequest';
 
-const FollowersCardVertical = () => {
-    const [persons, setPersons] = useState([]);
+const FollowersCardVertical = ({persons}) => {
     const {user} = useSelector((state)=>state.authReducer.authData)
-
-    useEffect(() => {
-        const fetchPersons = async () => {
-            const {data} = await getAllUser();
-            setPersons(data)
-        }
-        fetchPersons()
-    },[])
 
   return (
     <div className="FollowersCardVertical">
