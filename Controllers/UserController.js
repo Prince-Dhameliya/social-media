@@ -50,6 +50,18 @@ export const getNotifications = async (req, res) => {
     }
 }
 
+//Get TimelineNotifications
+export const getTimelineNotifications = async (req, res) => {
+    const userId = req.params.id;
+    try {
+        let User = await UserModel.findById(userId);
+        let notifications = User.notifications;
+        res.status(200).json(notifications);
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 // Update a user
 export const updateUser = async (req, res) => {
     const id = req.params.id;
@@ -122,7 +134,7 @@ export const deleteUser = async (req, res) => {
 export const followUser = async (req, res) => {
     const id = req.params.id;
 
-    const {_id} = req.body;
+    const {_id,username,profilePicture} = req.body;
 
     if(_id === id){
         res.status(403).json("Action forbidden")
@@ -135,6 +147,12 @@ export const followUser = async (req, res) => {
             if(!followUser.followers.includes(_id)){
                 await followUser.updateOne({$push : {followers: _id}})
                 await followingUser.updateOne({$push : {following: id}})
+                const data = {
+                    type : "follow",
+                    username : username,
+                    userImage : profilePicture,
+                }
+                await followUser.updateOne({$push : {notifications : data}})
                 res.status(200).json("User followed!")
             }
             else{
@@ -150,7 +168,7 @@ export const followUser = async (req, res) => {
 export const unfollowUser = async (req, res) => {
     const id = req.params.id;
 
-    const {_id} = req.body;
+    const {_id, username} = req.body;
 
     if(_id === id){
         res.status(403).json("Action forbidden")
@@ -163,6 +181,7 @@ export const unfollowUser = async (req, res) => {
             if(followUser.followers.includes(_id)){
                 await followUser.updateOne({$pull : {followers: _id}})
                 await followingUser.updateOne({$pull : {following: id}})
+                await followUser.updateOne({$pull : {notifications : {username : username}}})
                 res.status(200).json("User unfollowed!")
             }
             else{

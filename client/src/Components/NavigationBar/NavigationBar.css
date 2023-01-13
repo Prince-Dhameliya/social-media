@@ -28,6 +28,7 @@
 
 .likeNavigation{
     width: 25px;
+    position: relative;
 }
 
 .profileNavigation{
@@ -41,6 +42,51 @@
     border: 2px solid black;
     height: 26px;
     width: 26px;
+}
+
+.NotificationAnimation{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    left: 70%;
+    right: 30%;
+    bottom: 3rem;
+}
+
+.NotificationTop{
+    display: flex;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    gap: 1rem;
+    background: rgba(235,71,85,255);
+    align-items: center;
+    justify-content: center;
+}
+
+.NotificationTop > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.AnimationIcon{
+    width: 22px;
+}
+
+.AnimationCount{
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.NotificationBottom{
+    width: 25px;
+    transform: rotate(180deg);
+    margin-top: -12px;
 }
 
 @media screen and (max-width:700px){

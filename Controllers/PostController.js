@@ -93,6 +93,7 @@ export const likePost = async (req, res) => {
             if(userId !== post.userId){
                 const User = await UserModel.findById(userId);
                 const data = {
+                    type: "liked",
                     username : User.username,
                     userImage : User.profilePicture,
                     postId : post._id,
@@ -156,6 +157,7 @@ export const commentPost = async (req, res) => {
         const post = await PostModel.findById(postId)
         if(userId !== post.userId){
             const data = {
+                type: "comment",
                 username : username,
                 userImage : profilePicture,
                 postId : post._id,

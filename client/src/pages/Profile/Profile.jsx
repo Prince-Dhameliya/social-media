@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { getAllPosts } from '../../api/PostRequest'
 import { getAllUser, getUser } from '../../api/UserRequest'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import HeaderBarNotificitions from '../../Components/HeaderBar/HeaderBarNotificitions'
 import HeaderBarProfile from '../../Components/HeaderBar/HeaderBarProfile'
 import HeaderBarSearch from '../../Components/HeaderBar/HeaderBarSearch'
@@ -15,6 +15,7 @@ import HomeSide from '../../Components/HomeSide/HomeSide'
 import HeaderBar from '../../Components/HeaderBar/HeaderBar'
 import FollowersCardVertical from '../../Components/FollowerCardVertical/FollowerCardVertical'
 import Notifications from '../../Components/Notifications/Notifications'
+import { getTimelineNotifications } from '../../actions/userAction'
 
 function togglemenu(){
   let submenu = document.getElementById("submenu");
@@ -34,6 +35,7 @@ const Profile = ({location}) => {
   const [persons, setPersons] = useState([]);
   const [currentUser, setCurrentUser] = useState(user);
   const params = useParams();
+  const dispatch = useDispatch();
   const profileUserId = params.id;
 
   useEffect(()=>{
@@ -52,6 +54,10 @@ const Profile = ({location}) => {
         setPersons(data)
     }
 
+    const fetchNotifications = async () => {
+      dispatch(getTimelineNotifications(user._id))
+    }
+
     if(location !== "saved" && location !== "allposts" && location !== "profile"){
       fetchPersons()
     }
@@ -62,7 +68,8 @@ const Profile = ({location}) => {
     if(location !== "allposts" && location !== "activity" && location !== "home"){
       fetchProfileUserData()
     }
-  },[location,params.id])
+    fetchNotifications()
+  },[location,params.id,dispatch,user._id])
 
   return (
     <div className="Profile">
@@ -82,7 +89,7 @@ const Profile = ({location}) => {
 
             {location !== "home" && location !== "allposts" && location !== "activity" && <ProfileCard location={location} allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
             {location !== "activity" && <Posts location={location} allPosts={allPosts} persons={persons}/>}
-            {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} user={user}/>}
+            {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId} user={user}/>}
             {location === "activity" && <FollowersCardVertical persons={persons}/>}
 
         </div>}
