@@ -21,7 +21,7 @@ action
         case "NOTIFICATIONS_RETREIVING_START":
             return {...state, loading: true, error: false};
         case "NOTIFICATIONS_RETREIVING_SUCCESS":
-            return {...state, authData: {...state.authData, user: {...state.authData.user, notifications: action.data}}, loading: false, error: false}
+            return {...state, authData: {...state.authData, user: {...state.authData.user, notifications: action.notifications, notification: action.notification}}, loading: false, error: false}
         case "NOTIFICATIONS_RETREIVING_FAIL":
             return {...state, loading: false, error: true}
         

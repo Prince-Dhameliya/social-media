@@ -100,7 +100,7 @@ export const likePost = async (req, res) => {
                     postImage : post.image,
                     createdAt: new Date()
                 }
-                await UserModel.updateOne({_id : post.userId},{$push : {notification : data}}, {new: true,});
+                await UserModel.updateOne({_id : post.userId},{$push : {notification : data}});
                 await UserModel.updateOne({_id : post.userId},{$push : {notifications : data}});
             }
             res.status(200).json(post)
@@ -108,8 +108,8 @@ export const likePost = async (req, res) => {
         else{
             await post.updateOne({$pull : {likes : userId}})
             if(userId !== post.userId){
-                await UserModel.updateOne({_id : post.userId},{$pull : {notification : {postId : post._id}}});
-                await UserModel.updateOne({_id : post.userId},{$pull : {notifications : {postId : post._id}}});
+                await UserModel.updateOne({_id : post.userId},{$pull : {notification : {postId : post._id, type : "liked"}}});
+                await UserModel.updateOne({_id : post.userId},{$pull : {notifications : {postId : post._id, type : "liked"}}});
             }
             res.status(200).json(post)
         }
@@ -161,6 +161,7 @@ export const commentPost = async (req, res) => {
         if(userId !== post.userId){
             const data = {
                 type: "comment",
+                commentId: commentId,
                 username : username,
                 userImage : profilePicture,
                 postId : post._id,
@@ -168,7 +169,7 @@ export const commentPost = async (req, res) => {
                 comment : comment,
                 createdAt: new Date()
             }
-            await UserModel.updateOne({_id : post.userId},{$push : {notification : data}}, {new: true,});
+            await UserModel.updateOne({_id : post.userId},{$push : {notification : data}});
             await UserModel.updateOne({_id : post.userId},{$push : {notifications : data}});
         }
         res.status(200).json(post)
@@ -184,8 +185,8 @@ export const deleteComment = async(req, res) => {
         await PostModel.updateOne({_id : postId}, {$pull : {comments : {commentId: ObjectId(commentId)}}});
         const post = await PostModel.findById(postId);
         if(userId !== post.userId){
-            await UserModel.updateOne({_id : post.userId}, {$pull : {notification : {postId : post._id}}});
-            await UserModel.updateOne({_id : post.userId}, {$pull : {notifications : {postId : post._id}}});
+            await UserModel.updateOne({_id : post.userId}, {$pull : {notification : {commentId: commentId, type : "comment"}}});
+            await UserModel.updateOne({_id : post.userId}, {$pull : {notifications : {commentId: commentId,  type : "comment"}}});
         }
         res.status(200).json("comment deleted successfully")
     } catch (error) {

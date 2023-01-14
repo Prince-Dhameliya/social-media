@@ -55,8 +55,15 @@ export const getTimelineNotifications = async (req, res) => {
     const userId = req.params.id;
     try {
         let User = await UserModel.findById(userId);
+        let notification = User.notification;
         let notifications = User.notifications;
-        res.status(200).json(notifications);
+        const data = {
+            notification : notification,
+            notifications : notifications.sort((a,b)=>{
+                return b.createdAt - a.createdAt;
+            }),
+        }
+        res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error)
     }
@@ -153,7 +160,7 @@ export const followUser = async (req, res) => {
                     userImage : profilePicture,
                     createdAt: new Date()
                 }
-                await followUser.updateOne({$push : {notification : data}}, {new: true,})
+                await followUser.updateOne({$push : {notification : data}})
                 await followUser.updateOne({$push : {notifications : data}})
                 res.status(200).json("User followed!")
             }
@@ -183,8 +190,8 @@ export const unfollowUser = async (req, res) => {
             if(followUser.followers.includes(_id)){
                 await followUser.updateOne({$pull : {followers: _id}})
                 await followingUser.updateOne({$pull : {following: id}})
-                await followUser.updateOne({$pull : {notification : {username : username}}})
-                await followUser.updateOne({$pull : {notifications : {username : username}}})
+                await followUser.updateOne({$pull : {notification : {username : username, type : "follow"}}})
+                await followUser.updateOne({$pull : {notifications : {username : username, type : "follow"}}})
                 res.status(200).json("User unfollowed!")
             }
             else{

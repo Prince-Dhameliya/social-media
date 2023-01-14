@@ -35,8 +35,8 @@ export const unFollowUser = (id, data) => async (dispatch) => {
 export const getNotifications = (id) => async (dispatch) => {
     dispatch({type: "NOTIFICATION_RETREIVING_START"})
     try {
-        await UserApi.getNotifications(id);
-        dispatch({type: "NOTIFICATION_RETREIVING_SUCCESS", id : id})
+        const {data} = await UserApi.getNotifications(id);
+        dispatch({type: "NOTIFICATION_RETREIVING_SUCCESS", data : data})
     } catch (error) {
         dispatch({type: "NOTIFICATION_RETREIVING_FAIL"})
         console.log(error);
@@ -47,7 +47,8 @@ export const getTimelineNotifications = (id) => async (dispatch) => {
     dispatch({type: "NOTIFICATIONS_RETREIVING_START"})
     try {
         const {data} = await UserApi.getTimelineNotifications(id);
-        dispatch({type: "NOTIFICATIONS_RETREIVING_SUCCESS", data: data})
+        console.log(data);
+        dispatch({type: "NOTIFICATIONS_RETREIVING_SUCCESS", notifications : data.notifications , notification : data.notification})
     } catch (error) {
         dispatch({type: "NOTIFICATIONS_RETREIVING_FAIL"})
         console.log(error);
