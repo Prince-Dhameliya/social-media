@@ -19,15 +19,15 @@ export default function PostOptionModel({open,setOpen,data}) {
 
         <div style={{width: "20rem"}} className="sub-menu">
             {data.userId === user._id &&
-            <div className="sub-menu-link" onClick={handleClose && handleDelete}>
+            <><div className="sub-menu-link" onClick={handleClose && handleDelete}>
                 <p style={{color: "red",fontWeight: "600",alignItems: 'center'}}>Delete</p>
-            </div>}
-            <hr/>
+            </div>
+            <hr/></>}
             {data.userId === user._id &&
-            <div className="sub-menu-link" onClick={handleClose}>
+            <><div className="sub-menu-link" onClick={handleClose}>
                 <p>Edit</p>
-            </div>}
-            <hr/>
+            </div>
+            <hr/></>}
             <div className="sub-menu-link" onClick={handleClose}>
                 <p>Share to...</p>
             </div>

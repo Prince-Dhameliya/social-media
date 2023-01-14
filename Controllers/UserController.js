@@ -41,10 +41,10 @@ export const getNotifications = async (req, res) => {
     const userId = req.params.id;
     try {
         let User = await UserModel.findById(userId);
-        let notifications = User.notifications;
-        User.notifications = [];
+        let notification = User.notification;
+        User.notification = [];
         User.save();
-        res.status(200).json(notifications);
+        res.status(200).json(notification);
     } catch (error) {
         res.status(500).json(error)
     }
@@ -151,7 +151,9 @@ export const followUser = async (req, res) => {
                     type : "follow",
                     username : username,
                     userImage : profilePicture,
+                    createdAt: new Date()
                 }
+                await followUser.updateOne({$push : {notification : data}}, {new: true,})
                 await followUser.updateOne({$push : {notifications : data}})
                 res.status(200).json("User followed!")
             }
@@ -181,6 +183,7 @@ export const unfollowUser = async (req, res) => {
             if(followUser.followers.includes(_id)){
                 await followUser.updateOne({$pull : {followers: _id}})
                 await followingUser.updateOne({$pull : {following: id}})
+                await followUser.updateOne({$pull : {notification : {username : username}}})
                 await followUser.updateOne({$pull : {notifications : {username : username}}})
                 res.status(200).json("User unfollowed!")
             }

@@ -39,18 +39,16 @@
 
 .NotificationInfo{
     display: flex;
-    flex-direction: row;
-    gap: 5px;
     align-items: center;
 }
 
-.NotificationInfo > span:nth-of-type(1){
+.NotificationInfo > span > span:nth-of-type(1){
     font-weight: bold;
 }
 
-/* .NotificationInfo > span{
-    font-size: 13px;
-} */
+.NotificationRight{
+    margin-left: 10px;
+}
 
 .NotificationRight > img{
     width: 3.2rem;

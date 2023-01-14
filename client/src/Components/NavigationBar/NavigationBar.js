@@ -22,11 +22,11 @@ const NavigationBar = ({location}) => {
 
   const {user} = useSelector((state)=>state.authReducer.authData);
   const [animation, setAnimation] = useState(true);
-  let notifications = user.notifications;
+  let notification = user.notification;
   let comments=0;
   let like=0;
   let follow=0;
-  notifications.map((notification,id)=>{
+  notification.map((notification,id)=>{
       if(notification?.type === "comment"){
         comments=comments+1;
       }
@@ -40,13 +40,13 @@ const NavigationBar = ({location}) => {
   })
 
   useEffect(()=>{
-      if(notifications?.length > 0){
+      if(notification?.length > 0){
         setAnimation(true);
         setInterval(()=>{
           setAnimation(false);
         },2000)
       }
-  },[notifications.length])
+  },[notification.length])
 
 
   const [active, setActive] = useState(location);

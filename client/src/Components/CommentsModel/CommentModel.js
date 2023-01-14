@@ -2,7 +2,7 @@ import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import './CommentModel2.css'
+import './CommentModel.css'
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { commentPost, dislikePost, likePost } from "../../actions/postAction";
@@ -17,6 +17,7 @@ import time from 'time-ago';
 import CommentFromModel from "./CommentFromModel/CommentFromModel";
 import PostOptionModel from '../DropdownButton/PostOptionModel';
 import { Skeleton } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function CommentModel2({open, setOpen, data}) {
 //   const [open, setOpen] = React.useState(false);
@@ -79,7 +80,7 @@ export default function CommentModel2({open, setOpen, data}) {
             <div className="PostDetails">
                 <div className='PostUserName commentUsername'>
                     <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } style={{cursor: "pointer"}} alt="" />
-                    <span style={{cursor: "pointer"}}> <b>{data.username}</b></span>
+                    <span style={{cursor: "pointer"}}><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
                 </div>
                 <div className='PostMoreIcon'>
                     {data ? <img src={Horizontal} className="ReactLike" alt="" style={{cursor: "pointer",width: "24px"}} onClick={() => setOpenMore(true)} />
@@ -98,7 +99,7 @@ export default function CommentModel2({open, setOpen, data}) {
 
                         <div className="CommentInfo">
                             <div className="CommentUserInfo">
-                                <span><b>{data.username}</b></span>
+                                <span><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
                                 <span> {data.desc}</span>
                             </div>
 

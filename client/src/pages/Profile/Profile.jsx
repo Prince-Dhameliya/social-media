@@ -31,6 +31,7 @@ function togglemenu(){
 
 const Profile = ({location}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
+  let {posts} = useSelector((state)=>state.postReducer);
   const [allPosts, setAllPosts] = useState([]);
   const [persons, setPersons] = useState([]);
   const [currentUser, setCurrentUser] = useState(user);
@@ -63,7 +64,7 @@ const Profile = ({location}) => {
     }
 
     if(location !== "activity" && location !== "home"){
-      fetchAllPosts()
+      // fetchAllPosts()
     }
     if(location !== "allposts" && location !== "activity" && location !== "home"){
       fetchProfileUserData()
@@ -82,13 +83,13 @@ const Profile = ({location}) => {
 
 
         {location === "home" && 
-        <HomeSide persons={persons}/>}
+        <HomeSide posts={posts} location={location} persons={persons}/>}
 
         {location !== "home" && 
         <div className="ProfileCenter" onClick={togglemenu}>
 
-            {location !== "home" && location !== "allposts" && location !== "activity" && <ProfileCard location={location} allPosts={allPosts} currentUser={currentUser} profileUserId={profileUserId} />}
-            {location !== "activity" && <Posts location={location} allPosts={allPosts} persons={persons}/>}
+            {location !== "home" && location !== "allposts" && location !== "activity" && <ProfileCard location={location} posts={posts} currentUser={currentUser} profileUserId={profileUserId} />}
+            {location !== "activity" && <Posts location={location} posts={posts} persons={persons}/>}
             {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId} user={user}/>}
             {location === "activity" && <FollowersCardVertical persons={persons}/>}
 

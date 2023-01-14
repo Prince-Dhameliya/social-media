@@ -98,7 +98,9 @@ export const likePost = async (req, res) => {
                     userImage : User.profilePicture,
                     postId : post._id,
                     postImage : post.image,
+                    createdAt: new Date()
                 }
+                await UserModel.updateOne({_id : post.userId},{$push : {notification : data}}, {new: true,});
                 await UserModel.updateOne({_id : post.userId},{$push : {notifications : data}});
             }
             res.status(200).json(post)
@@ -106,6 +108,7 @@ export const likePost = async (req, res) => {
         else{
             await post.updateOne({$pull : {likes : userId}})
             if(userId !== post.userId){
+                await UserModel.updateOne({_id : post.userId},{$pull : {notification : {postId : post._id}}});
                 await UserModel.updateOne({_id : post.userId},{$pull : {notifications : {postId : post._id}}});
             }
             res.status(200).json(post)
@@ -163,7 +166,9 @@ export const commentPost = async (req, res) => {
                 postId : post._id,
                 postImage : post.image,
                 comment : comment,
+                createdAt: new Date()
             }
+            await UserModel.updateOne({_id : post.userId},{$push : {notification : data}}, {new: true,});
             await UserModel.updateOne({_id : post.userId},{$push : {notifications : data}});
         }
         res.status(200).json(post)
@@ -179,6 +184,7 @@ export const deleteComment = async(req, res) => {
         await PostModel.updateOne({_id : postId}, {$pull : {comments : {commentId: ObjectId(commentId)}}});
         const post = await PostModel.findById(postId);
         if(userId !== post.userId){
+            await UserModel.updateOne({_id : post.userId}, {$pull : {notification : {postId : post._id}}});
             await UserModel.updateOne({_id : post.userId}, {$pull : {notifications : {postId : post._id}}});
         }
         res.status(200).json("comment deleted successfully")
@@ -188,37 +194,52 @@ export const deleteComment = async(req, res) => {
 }
 
 // Get Timeline Posts
+// export const getTimelinePosts = async (req, res) => {
+//     const userId = req.params.id;  
+    
+//     try {
+//         const currentUserPosts = await PostModel.find({userId : userId});
+//         const followingPosts = await UserModel.aggregate([
+//             {
+//                 $match: {
+//                     _id : new mongoose.Types.ObjectId(userId)
+//                 }
+//             },
+//             {
+//                 $lookup: {
+//                     from : "posts",
+//                     localField : "following",
+//                     foreignField : "userId",
+//                     as : "followingPosts"
+//                 }
+//             },
+//             {
+//                 $project: {
+//                     followingPosts : 1,
+//                     _id : 0
+//                 }
+//             }
+//         ])
+        
+//         res
+//         .status(200)
+//         .json(currentUserPosts.concat(...followingPosts[0].followingPosts)
+//         .sort((a,b)=>{
+//             return b.createdAt - a.createdAt;
+//         }));
+        
+//     } catch (error) {
+//         res.status(500).json(error)
+//     }
+// }
+
 export const getTimelinePosts = async (req, res) => {
     const userId = req.params.id;  
     
     try {
-        const currentUserPosts = await PostModel.find({userId : userId});
-        const followingPosts = await UserModel.aggregate([
-            {
-                $match: {
-                    _id : new mongoose.Types.ObjectId(userId)
-                }
-            },
-            {
-                $lookup: {
-                    from : "posts",
-                    localField : "following",
-                    foreignField : "userId",
-                    as : "followingPosts"
-                }
-            },
-            {
-                $project: {
-                    followingPosts : 1,
-                    _id : 0
-                }
-            }
-        ])
+        const posts = await PostModel.find({});
         
-        res
-        .status(200)
-        .json(currentUserPosts.concat(...followingPosts[0].followingPosts)
-        .sort((a,b)=>{
+        res.status(200).json(posts.sort((a,b)=>{
             return b.createdAt - a.createdAt;
         }));
         

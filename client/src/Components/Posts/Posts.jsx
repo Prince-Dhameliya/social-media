@@ -8,9 +8,9 @@ import Media from '../SkeletonPost/SkeletonPost'
 import FollowersCard from '../FollowersCard/FollowersCard'
 
 
-const Posts = ({location, allPosts,persons}) => {
+const Posts = ({location,posts,persons}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
-  let {savedPosts, posts, loading} = useSelector((state)=>state.postReducer);
+  let {savedPosts, loading} = useSelector((state)=>state.postReducer);
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -39,11 +39,15 @@ const Posts = ({location, allPosts,persons}) => {
 
     if(!posts) return "no Posts";
 
-    if(location === "allposts"){
-      posts = allPosts;
+    if(location === "home"){
+      posts = posts.filter((post) => {
+        const postUser = post.userId;
+        if(user.following.includes(postUser) || postUser === user._id) return true;
+        else return false;
+      });
     }
     if(location === "profile"){
-      if(params.id) posts = allPosts.filter((post)=>post.userId === params.id)
+      if(params.id) posts = posts.filter((post)=>post.userId === params.id)
     }
     else if(location === "saved"){
       posts = savedPosts;
@@ -58,7 +62,7 @@ const Posts = ({location, allPosts,persons}) => {
             {posts[0]!==undefined && (<Post key={0} index={0+1} data={posts[0]} location={location} />)}
             {posts[1]!==undefined && (<Post key={1} index={1+1} data={posts[1]} />)}
             
-            {location === undefined && screenSize.dynamicWidth < 700 && (<FollowersCard persons={persons}/>)}
+            {location === "home" && screenSize.dynamicWidth < 700 && (<FollowersCard persons={persons}/>)}
 
             {posts.map((post,id)=>{
               if(id>1){

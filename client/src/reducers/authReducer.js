@@ -11,6 +11,13 @@ action
         case "AUTH_FAIL":
             return { ...state, loading: false, error: true };
 
+        case "NOTIFICATION_RETREIVING_START":
+            return {...state, loading: true, error: false};
+        case "NOTIFICATION_RETREIVING_SUCCESS":
+            return {...state, authData: {...state.authData, user: {...state.authData.user, notification: []}}, loading: false, error: false}
+        case "NOTIFICATION_RETREIVING_FAIL":
+            return {...state, loading: false, error: true}
+
         case "NOTIFICATIONS_RETREIVING_START":
             return {...state, loading: true, error: false};
         case "NOTIFICATIONS_RETREIVING_SUCCESS":

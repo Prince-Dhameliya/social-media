@@ -3,6 +3,7 @@ import Send from '../../../img/send.svg'
 import time from 'time-ago';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../actions/postAction';
+import { Link } from 'react-router-dom';
 
 const CommentFromModel = ({comment,data}) => {
     const {user}  = useSelector((state)=>state.authReducer.authData)
@@ -18,7 +19,7 @@ const CommentFromModel = ({comment,data}) => {
 
                 <div className="CommentInfo">
                     <div className="CommentUserInfo">
-                        <span><b>{comment.username}</b></span>
+                        <span><Link style={{textDecoration: "none", color: "inherit"}} to={`/${comment.userId}`}><b>{comment.username}</b></Link></span>
                         <span> {comment.comment}</span>
                     </div>
 

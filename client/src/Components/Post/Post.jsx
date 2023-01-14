@@ -16,7 +16,7 @@ import time from 'time-ago';
 import {VolumeUp, VolumeOff, PlayArrow} from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import Skeleton from '@mui/material/Skeleton';
-import CommentModel2 from '../CommentsModel/CommentModel2'
+import CommentModel from '../CommentsModel/CommentModel'
 import PostOptionModel from '../DropdownButton/PostOptionModel'
 
 const Post = ({data,index}) => {
@@ -158,7 +158,7 @@ const Post = ({data,index}) => {
               <img src={liked ? Like : DisLike} className="ReactLike" alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
               <div>
                 <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} style={{cursor: "pointer",width: "33px",marginTop:"-4px"}} alt="" />
-                {data ? <CommentModel2 open={open} setOpen={setOpen} data = {data} /> : null}
+                {data ? <CommentModel open={open} setOpen={setOpen} data = {data} /> : null}
               </div>
               <img src={Send} className="ReactShare" style={{cursor: "pointer",width: "29px"}} alt="" />
             </div>
@@ -170,7 +170,7 @@ const Post = ({data,index}) => {
         : <Skeleton animation="wave" height={20} width={80}/>}
 
         { data?.username ? <div className="Details">
-            <span><b>{data.username}</b></span>
+            <span><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
             <span> {data.desc}</span>
         </div> 
         : <Skeleton animation="wave" height={20} width={130}/>}
@@ -181,7 +181,7 @@ const Post = ({data,index}) => {
           if(comment.userId === data.userId && id<2){
             return (
               <div key={id} className="Details">
-                  <span><b>{comment.username}</b></span>
+                  <span><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{comment.username}</b></Link></span>
                   <span> {comment.comment}</span>
               </div>
             )

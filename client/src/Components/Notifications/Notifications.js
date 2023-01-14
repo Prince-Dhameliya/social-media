@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { followUser, unFollowUser } from '../../actions/userAction';
-import { getNotifications } from '../../api/UserRequest';
+import { followUser, getNotifications, unFollowUser } from '../../actions/userAction';
 import './Notifications.css'
+import time from 'time-ago';
 
 
 const Notification = ({notification,currentUser,profileUserId,user}) => {
@@ -19,18 +19,15 @@ const Notification = ({notification,currentUser,profileUserId,user}) => {
             <img src={notification.userImage} alt=""/>
 
             {(notification?.type === "comment") && <div className="NotificationInfo">
-                <span>{notification.username}</span>
-                <span>commented: {notification.comment}</span>
+                <span><span>{notification.username}</span> commented: {notification.comment} <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(notification.createdAt,true)}</span></span>
             </div>}
             
             {(notification?.type === "liked") && <div className="NotificationInfo">
-                <span>{notification.username}</span>
-                <span> liked your post.</span>
+                <span><span>{notification.username}</span> liked your post. <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(notification.createdAt,true)}</span></span>
             </div>}
 
             {(notification?.type === "follow") && <div className="NotificationInfo">
-                <span>{notification.username}</span>
-                <span>started following you.</span>
+                <span><span>{notification.username}</span> started following you. <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(notification.createdAt,true)}</span></span>
             </div>}
         </div>
 
@@ -49,7 +46,7 @@ const Notifications = ({location,currentUser,profileUserId,user}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchNotifications = async () => {
-      await getNotifications(user._id);
+      dispatch(getNotifications(user._id));
     }
     if(location === "activity"){
       fetchNotifications()

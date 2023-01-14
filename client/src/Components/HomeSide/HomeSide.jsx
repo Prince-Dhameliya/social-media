@@ -4,13 +4,13 @@ import Posts from '../Posts/Posts'
 import PostShare from '../PostShare/PostShare'
 import './HomeSide.css'
 
-const HomeSide = ({persons}) => {
+const HomeSide = ({posts,persons,location}) => {
   return (
     <>
       <div className="HomeSide">
           <div className="PostSide">
               <PostShare />
-              <Posts persons={persons} />
+              <Posts posts={posts} persons={persons} location={location} />
           </div>
           <div className="FollowerSide">
               <FollowersCard persons={persons}/>

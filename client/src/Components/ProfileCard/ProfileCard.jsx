@@ -8,7 +8,7 @@ import Saved from '../../img/UnBookmark.svg'
 import ProfileModel from '../ProfileModal/ProfileModel'
 import { followUser, unFollowUser } from '../../actions/userAction'
 
-const ProfileCard = ({location,allPosts,currentUser,profileUserId}) => {
+const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
   const dispatch = useDispatch();
   const {user} = useSelector((state)=>state.authReducer.authData)
   const [isfollowing, setIsFollowing] = useState(user.following.includes(profileUserId))
@@ -68,7 +68,7 @@ const ProfileCard = ({location,allPosts,currentUser,profileUserId}) => {
 
                     </div>
                     <div className="Follow">
-                        <span>{allPosts.filter((post)=>post.userId === currentUser._id).length}</span>
+                        <span>{posts.filter((post)=>post.userId === currentUser._id).length}</span>
                         <span>Posts</span>
                     </div>
                 </div>
