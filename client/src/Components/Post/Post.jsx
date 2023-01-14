@@ -4,8 +4,8 @@ import Comment from '../../img/comment.svg'
 import Send from '../../img/send.svg'
 import Like from '../../img/like.svg'
 import DisLike from '../../img/dislike.svg'
-import UnBookmark from '../../img/UnBookmark.svg'
 import Bookmark from '../../img/Bookmark.svg'
+import UnBookmark from '../../img/UnBookmark.svg'
 import Emoji from '../../img/Emoji.svg'
 import Horizontal from '../../img/Horizontal3Dot.svg'
 
@@ -158,7 +158,7 @@ const Post = ({data,index}) => {
               <img src={liked ? Like : DisLike} className="ReactLike" alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
               <div>
                 <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} style={{cursor: "pointer",width: "33px",marginTop:"-4px"}} alt="" />
-                {data ? <CommentModel open={open} setOpen={setOpen} data = {data} /> : null}
+                {data ? <CommentModel open={open} setOpen={setOpen} index={index} data = {data} /> : null}
               </div>
               <img src={Send} className="ReactShare" style={{cursor: "pointer",width: "29px"}} alt="" />
             </div>

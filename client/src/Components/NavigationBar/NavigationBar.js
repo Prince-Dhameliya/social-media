@@ -52,19 +52,19 @@ const NavigationBar = ({location}) => {
   const [active, setActive] = useState(location);
 
   const handleClick = (event) => {
-    if(event.target.id === "1"){
+    if(event.target.id === "100001"){
       setActive("home");
     }
-    else if(event.target.id === "2"){
+    else if(event.target.id === "100002"){
       setActive("allposts");
     }
-    else if(event.target.id === "3"){
+    else if(event.target.id === "100003"){
       setActive("createpost");
     }
-    else if(event.target.id === "4"){
+    else if(event.target.id === "100004"){
       setActive("activity");
     }
-    else if(event.target.id === "5"){
+    else if(event.target.id === "100005"){
       setActive("profile");
     }
   }
@@ -72,10 +72,11 @@ const NavigationBar = ({location}) => {
   return (
     <>
       <div className='NavigationBar'>
-              <Link to="../"><img id="1" src={active === "home" ? Home : WHome} alt="" className='homeNavigation' onClick={handleClick} /></Link>
-              <Link to="../explore"><img id="2" src={active === "allposts" ? Search : WSearch} alt="" className='searchNavigation' onClick={handleClick} /></Link>
-              <Link to=""><img id="3" src={active === "createpost" ? AddObj : WAddObj} alt="" className='addPostNavigation' onClick={handleClick} /></Link>
-              <Link to="../activity"><img id="4" src={active === "activity" ? Like : WLike} alt="" className='likeNavigation' onClick={handleClick} /></Link>
+              <Link to="../"><img id="100001" src={active === "home" ? Home : WHome} alt="" className='homeNavigation' onClick={handleClick} /></Link>
+              <Link to="../explore"><img id="100002" src={active === "allposts" ? Search : WSearch} alt="" className='searchNavigation' onClick={handleClick} /></Link>
+              <Link to=""><img id="100003" src={active === "createpost" ? AddObj : WAddObj} alt="" className='addPostNavigation' onClick={handleClick} /></Link>
+              <Link to="../activity"><img id="100004" src={active === "activity" ? Like : WLike} alt="" className='likeNavigation' onClick={handleClick} /></Link>
+              <Link to={`../${user._id}`}><img id="100005" src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} className={active === "profile" ? "active profileNavigation" : "profileNavigation"} alt="" onClick={handleClick} /></Link>
               {animation && ((like !== 0) || (comments !== 0) || (follow !== 0)) && <div className="NotificationAnimation" id="NotificationAnimation">
                   <div className="NotificationTop">
                       {(like!== 0) && <div>
@@ -93,7 +94,6 @@ const NavigationBar = ({location}) => {
                   </div>
                   <img src={Triangle} className="NotificationBottom" alt="" />
               </div>}
-              <Link to={`../${user._id}`}><img id="5" src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} className={active === "profile" ? "active profileNavigation" : "profileNavigation"} alt="" onClick={handleClick} /></Link>
       </div>
     </>
   )

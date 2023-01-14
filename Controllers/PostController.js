@@ -66,6 +66,10 @@ export const deletePost = async (req, res) => {
     
     try {
         const post = await PostModel.findById(postId);
+        await UserModel.updateMany({_id : post.userId},{$pull : {notification : {postId : post._id, type : "liked"}}});
+        await UserModel.updateMany({_id : post.userId},{$pull : {notifications : {postId : post._id, type : "liked"}}});
+        await UserModel.updateMany({_id : post.userId},{$pull : {notification : {postId : post._id, type : "comment"}}});
+        await UserModel.updateMany({_id : post.userId},{$pull : {notifications : {postId : post._id, type : "comment"}}});
 
         await post.deleteOne();
         res.status(200).json("Post Delete Successfully")
@@ -94,6 +98,7 @@ export const likePost = async (req, res) => {
                 const User = await UserModel.findById(userId);
                 const data = {
                     type: "liked",
+                    userId : userId,
                     username : User.username,
                     userImage : User.profilePicture,
                     postId : post._id,
@@ -161,11 +166,12 @@ export const commentPost = async (req, res) => {
         if(userId !== post.userId){
             const data = {
                 type: "comment",
-                commentId: commentId,
+                userId : userId,
                 username : username,
                 userImage : profilePicture,
                 postId : post._id,
                 postImage : post.image,
+                commentId: commentId,
                 comment : comment,
                 createdAt: new Date()
             }
@@ -185,8 +191,8 @@ export const deleteComment = async(req, res) => {
         await PostModel.updateOne({_id : postId}, {$pull : {comments : {commentId: ObjectId(commentId)}}});
         const post = await PostModel.findById(postId);
         if(userId !== post.userId){
-            await UserModel.updateOne({_id : post.userId}, {$pull : {notification : {commentId: commentId, type : "comment"}}});
-            await UserModel.updateOne({_id : post.userId}, {$pull : {notifications : {commentId: commentId,  type : "comment"}}});
+            await UserModel.updateOne({_id : post.userId},{$pull : {notification : {commentId: ObjectId(commentId), type : "comment"}}});
+            await UserModel.updateOne({_id : post.userId},{$pull : {notifications : {commentId: ObjectId(commentId),  type : "comment"}}});
         }
         res.status(200).json("comment deleted successfully")
     } catch (error) {

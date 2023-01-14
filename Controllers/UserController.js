@@ -43,6 +43,7 @@ export const getNotifications = async (req, res) => {
         let User = await UserModel.findById(userId);
         let notification = User.notification;
         User.notification = [];
+        // await UserModel.updateMany({},{notification : [],notifications : []})
         User.save();
         res.status(200).json(notification);
     } catch (error) {
@@ -127,6 +128,12 @@ export const deleteUser = async (req, res) => {
             await PostModel.updateMany({}, {$pull : {saved : currentUserId}})
             await PostModel.deleteMany({userId : currentUserId})
             await UserModel.deleteOne({_id : currentUserId})
+            await UserModel.updateMany({}, {$pull : {notification : {userId : currentUserId, type : "follow"}}})
+            await UserModel.updateMany({}, {$pull : {notifications : {userId : currentUserId, type : "follow"}}})
+            await UserModel.updateMany({}, {$pull : {notification : {userId : currentUserId, type : "liked"}}})
+            await UserModel.updateMany({}, {$pull : {notifications : {userId : currentUserId, type : "liked"}}})
+            await UserModel.updateMany({}, {$pull : {notification : {userId : currentUserId, type : "comment"}}})
+            await UserModel.updateMany({}, {$pull : {notifications : {userId : currentUserId, type : "comment"}}})
             res.status(200).json("User deleted successfully")
         } catch (error) {
             res.status(500).json(error)
@@ -156,6 +163,7 @@ export const followUser = async (req, res) => {
                 await followingUser.updateOne({$push : {following: id}})
                 const data = {
                     type : "follow",
+                    userId : _id,
                     username : username,
                     userImage : profilePicture,
                     createdAt: new Date()
@@ -190,8 +198,8 @@ export const unfollowUser = async (req, res) => {
             if(followUser.followers.includes(_id)){
                 await followUser.updateOne({$pull : {followers: _id}})
                 await followingUser.updateOne({$pull : {following: id}})
-                await followUser.updateOne({$pull : {notification : {username : username, type : "follow"}}})
-                await followUser.updateOne({$pull : {notifications : {username : username, type : "follow"}}})
+                await followUser.updateOne({$pull : {notification : {userId : _id, type : "follow"}}})
+                await followUser.updateOne({$pull : {notifications : {userId : _id, type : "follow"}}})
                 res.status(200).json("User unfollowed!")
             }
             else{

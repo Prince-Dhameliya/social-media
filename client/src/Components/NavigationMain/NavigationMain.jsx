@@ -36,19 +36,19 @@ const NavigationMain = ({location,user,currentUser}) => {
   const [active, setActive] = useState(location);
 
   const handleClick = (event) => {
-    if(event.target.id === "6"){
+    if(event.target.id === "100006"){
       setActive("home");
     }
-    else if(event.target.id === "7"){
+    else if(event.target.id === "100007"){
       setActive("allposts");
     }
-    else if(event.target.id === "8"){
+    else if(event.target.id === "100008"){
       setActive("createpost");
     }
-    else if(event.target.id === "9"){
+    else if(event.target.id === "100009"){
       setActive("activity");
     }
-    else if(event.target.id === "10"){
+    else if(event.target.id === "100010"){
       setActive("profile");
     }
   }
@@ -61,27 +61,27 @@ const NavigationMain = ({location,user,currentUser}) => {
             <span className="logo_Title">Social Point</span>
         </div>
         <div className="navigationItems">
-          <Link style={{textDecoration: "none", color: "inherit"}} to="../"><div id="6" className="navigation_row" onClick={handleClick}>
+          <Link style={{textDecoration: "none", color: "inherit"}} to="../"><div id="100006" className="navigation_row" onClick={handleClick}>
             <img src={active === "home" ? Home : WHome} alt="" className='navigation_icon' />
             <span className="navigation_title">Home</span>
           </div>
           </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to="../explore"><div id="7" className="navigation_row" onClick={handleClick}>
+          <Link style={{textDecoration: "none", color: "inherit"}} to="../explore"><div id="100007" className="navigation_row" onClick={handleClick}>
             <img src={active === "allposts" ? Search : WSearch} alt="" className='navigation_icon' />
             <span className="navigation_title">Search</span>
           </div>
           </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="8" className="navigation_row" onClick={handleClick}>
+          <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100008" className="navigation_row" onClick={handleClick}>
             <img src={active === "createpost" ? AddObj : WAddObj} alt="" className='navigation_icon' />
             <span className="navigation_title">Create</span>
           </div>
           </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="9" className="navigation_row" onClick={handleClick}>
+          <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100009" className="navigation_row" onClick={handleClick}>
             <img src={active === "activity" ? Like : WLike} style={{width:"23px",margin:"0px 15px 0px 26px"}} alt="" className='navigation_icon' />
             <span className="navigation_title">Notifications</span>
           </div>
           </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to={`../${user._id}`}><div id="10" className="navigation_row" onClick={handleClick}>
+          <Link style={{textDecoration: "none", color: "inherit"}} to={`../${user._id}`}><div id="100010" className="navigation_row" onClick={handleClick}>
             <img src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt="" className={active === "profile" ? "active navigation_icon navigation_profileIcon" : "navigation_icon navigation_profileIcon"} />
             <span className={active === "profile" ? "active navigation_title navigation_profileTitle" : "navigation_title navigation_profileTitle"}>Profile</span>
           </div>

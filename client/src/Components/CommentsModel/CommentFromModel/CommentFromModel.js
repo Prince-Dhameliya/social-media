@@ -11,7 +11,7 @@ const CommentFromModel = ({comment,data}) => {
 
     const handleDeleteComment = async () => {
         dispatch(deleteComment(user._id, data._id, comment.commentId));
-      }
+    }
   return (
         <div className="CommentWindow">
             <div className="CommentLeft">
@@ -24,7 +24,7 @@ const CommentFromModel = ({comment,data}) => {
                     </div>
 
                     <div className="CommentAction">
-                        <span>{time.ago(comment.createdAt)}</span>
+                        <span>{time.ago(comment.createdAt,true)}</span>
                         <span><b>{comment.likes} likes</b></span>
                         <span><b>Reply</b></span>
                         {(comment.userId) === (user._id) && (<span style={{cursor: "pointer"}} onClick={handleDeleteComment} ><b>Delete</b></span>)}

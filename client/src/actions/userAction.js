@@ -47,7 +47,6 @@ export const getTimelineNotifications = (id) => async (dispatch) => {
     dispatch({type: "NOTIFICATIONS_RETREIVING_START"})
     try {
         const {data} = await UserApi.getTimelineNotifications(id);
-        console.log(data);
         dispatch({type: "NOTIFICATIONS_RETREIVING_SUCCESS", notifications : data.notifications , notification : data.notification})
     } catch (error) {
         dispatch({type: "NOTIFICATIONS_RETREIVING_FAIL"})
