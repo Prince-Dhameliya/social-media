@@ -3,7 +3,7 @@ import './HeaderBar.css'
 
 const HeaderBarNotificitions = () => {
   return (
-    <div className="HeaderBar">
+    <div className="HeaderBarNotificitions">
         <span className="HeaderTitle">Notifications</span>
     </div>
   )

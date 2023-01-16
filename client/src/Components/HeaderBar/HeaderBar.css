@@ -1,6 +1,5 @@
 /* css for header navigation */
 .HeaderBar{
-    display: flex;
     justify-content:space-between;
     align-items: center;
     background: var(--cardColor);
@@ -14,10 +13,34 @@
     display: none;
 }
 
-.HeaderBarSearch{
+.HeaderBarNotificitions{
+    justify-content:space-between;
     align-items: center;
-    justify-content: center;
+    background: var(--cardColor);
+    width: 100%;
+    position:fixed;
+    top: 0;
+    padding: 0.7rem 0rem;
+    border-bottom: 1px solid rgb(183, 183, 183);
+    z-index: 1;
+    height: 2rem;
+    display: none;
 }
+
+.HeaderBarProfile{
+    justify-content:space-between;
+    align-items: center;
+    background: var(--cardColor);
+    width: 100%;
+    position:fixed;
+    top: 0;
+    padding: 0.7rem 0rem;
+    border-bottom: 1px solid rgb(183, 183, 183);
+    z-index: 1;
+    height: 2rem;
+    display: none;
+}
+
 
 .HeaderTitle{
     margin-top: -5px;
@@ -97,48 +120,90 @@
 
 
 /* search field */
+.HeaderBarSearch{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    background: var(--cardColor);
+    width: 23.5rem;
+    position:fixed;
+    top: 4rem;
+    padding: 0.7rem 0rem;
+    border-bottom: 1px solid rgb(183, 183, 183);
+    z-index: 1;
+    height: 2rem;
+}
+
 #search {
     color: #999;
     background-color: #fafafa;
     border: 1px solid #000;
     height: 1.7rem;
-    width: 87%;
+    width: 93%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 8px;
-    border-radius: 3px;
-  }
+    margin: 0rem 1rem;
+    border-radius: 5px;
+}
+
   
-  #search > input {
+#search > input {
     border: none;
     background: none;
     padding: 4px;
     outline: none;
     width: 45px;
-  }
-  
-  #search > *:last-child {
-    display: none;
-  }
-  
-  #search > input:focus {
-    flex-grow: 1;
-  }
-  
-  #search > input:focus + img {
-    display: block;
-  }
+}
 
-  .SearchButtonIcon{
+#search > input:focus {
+    flex-grow: 1;
+}
+
+#SearchTextCancel{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.SearchButtonIcon{
     width: 15px;
     height: 15px;
-  }
+    cursor: pointer;
+}
+
+#SearchCancel{
+    display: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 1rem;
+}
 
 
 @media screen and (max-width:700px){
     .HeaderBar{
         display:flex;
+    }
+    .HeaderBarNotificitions{
+        display: flex;
+    }
+    .HeaderBarProfile{
+        display: flex;
+    }
+    .HeaderBarSearch{
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        background: var(--cardColor);
+        width: 100%;
+        position:fixed;
+        top: 0;
+        padding: 0.7rem 0rem;
+        border-bottom: 1px solid rgb(183, 183, 183);
+        z-index: 1;
+        height: 2rem;
     }
 }
 

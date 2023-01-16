@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect} from 'react'
 import Post from '../Post/Post'
 import './Posts.css'
 import {useDispatch, useSelector} from 'react-redux'
@@ -8,7 +8,7 @@ import Media from '../SkeletonPost/SkeletonPost'
 import FollowersCard from '../FollowersCard/FollowersCard'
 
 
-const Posts = ({location,posts,persons}) => {
+const Posts = ({location,posts,persons,screenSize}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   let {savedPosts, loading} = useSelector((state)=>state.postReducer);
   const params = useParams();
@@ -18,24 +18,6 @@ const Posts = ({location,posts,persons}) => {
       dispatch(getTimelinePosts(user._id))
       dispatch(getTimelineSavedPosts(user._id))
   },[user._id,dispatch,location])
-
-  const [screenSize, getDimension] = useState({
-    dynamicWidth: window.innerWidth,
-    dynamicHeight: window.innerHeight
-  });
-  const setDimension = () => {
-    getDimension({
-      dynamicWidth: window.innerWidth,
-      dynamicHeight: window.innerHeight
-    })
-  }
-  
-  useEffect(() => {
-    window.addEventListener('resize', setDimension);
-    return(() => {
-        window.removeEventListener('resize', setDimension);
-    })
-  }, [screenSize])
 
     if(!posts) return "no Posts";
 

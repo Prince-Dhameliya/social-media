@@ -5,7 +5,12 @@
     background-color: white;
     border-right: 1px solid rgb(218, 218, 218);
     justify-content: space-between;
+    transition: 0.5s ease;
 }
+
+/* .NavigationMain.active{
+    display: none;
+} */
 
 .logoAndStuff{
     display: flex;
@@ -24,6 +29,10 @@
     display: none;
 }
 
+.mini_logo_icon{
+    display: flex;
+}
+
 .logo_Title{
     font-size: 21px;
     font-weight: 900;
@@ -32,6 +41,8 @@
 .navigationItems{
     display: flex;
     flex-direction: column;
+
+    margin: 0px 0px 0px 25px;
     gap: 2rem;
 }
 
@@ -40,27 +51,35 @@
     align-items: center;
 }
 
+.mininavigation_row{
+    display: flex;
+    align-items: center;
+}
+
 .navigation_icon{
     height: 25px;
     width: 25px;
-    margin: 0px 15px 0px 25px;
     pointer-events: none;
 }
 
 .navigation_title{
+    margin-left: 15px;
     font-size: 15px;
     pointer-events: none;
 }
 
 .navigation_profileIcon{
+    height: 25px;
+    width: 25px;
+    pointer-events: none;
     border-radius: 50%;
     border: 1px solid var(--borderColor);
-    margin: 0px 15px 0px 24px;
 }
 
 .navigation_profileIcon.active{
+    height: 23px;
+    width: 23px;
     border: 2px solid black;
-    margin: -1px 14px 0px 23px;
 }
 
 .navigation_profileTitle.active{
@@ -71,9 +90,57 @@
 .moreItems{
     display: flex;
     align-items: center;
-    margin: 40px 0px 40px 0px;
+    margin: 40px 0px 40px 25px;
     cursor: pointer;
     position: relative;
+}
+
+.MiniNavigation{
+    display: none;
+    flex-direction: row;
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    /* overflow: auto; */
+    background-color: white;
+    /* justify-content: space-between; */
+    width: 4.8rem;
+    z-index: 1;
+    transition: 0.5s ease;
+}
+
+.MiniNavigation.active{
+    display: flex;
+}
+
+.MiniNavigationLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 10px;
+    border-right: 1px solid rgb(218, 218, 218);
+}
+
+.MiniNavigationRight{
+    z-index: 1;
+    width: 24.5rem;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 0px 15px 15px 0px;
+    border-right: 1px solid rgb(218, 218, 218);
+    box-shadow: 17px 4px 17px 2px rgba(0, 0, 0, 0.25);
+}
+
+.MiniNavigationRight > h2 {
+    margin-left: 1.5rem;
+}
+
+.MiniNavigationRightStuff{
+    display: flex;
+    width: 23.5rem;
+    flex-direction: column;
+    padding :0rem 0.5rem 0rem 0.5rem;
 }
 
 /* dropdown menu css */
@@ -82,6 +149,7 @@
     position: absolute;
     left: 20px;
     bottom: 80px;
+    z-index: 2;
 }
 
 .sub-menu-wrap{

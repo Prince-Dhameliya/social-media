@@ -26,7 +26,7 @@ const HeaderBarProfile = ({user,currentUser}) => {
   }
 
   return (
-    <div className="HeaderBar">
+    <div className="HeaderBarProfile">
         <span className="HeaderTitle">{currentUser.username}</span>
         {user._id !== currentUser._id && (<img src={Dot} className='HeaderDotIcon' alt="" />)}
 

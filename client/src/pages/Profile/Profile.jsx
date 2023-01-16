@@ -16,6 +16,7 @@ import HeaderBar from '../../Components/HeaderBar/HeaderBar'
 import FollowersCardVertical from '../../Components/FollowerCardVertical/FollowerCardVertical'
 import Notifications from '../../Components/Notifications/Notifications'
 import { getTimelineNotifications } from '../../actions/userAction'
+import SearchedUser from '../../Components/SearchedUser/SearchedUser'
 
 function togglemenu(){
   let submenu = document.getElementById("submenu");
@@ -27,6 +28,10 @@ function togglemenu(){
   if(submenu1?.classList?.contains("open-menu")){
     submenu1?.classList?.remove("open-menu");
   }
+  const MiniNavigation = document.querySelector(".MiniNavigation");
+  if(MiniNavigation?.classList?.contains("active")){
+    MiniNavigation?.classList?.remove("active");
+  }
 }
 
 const Profile = ({location}) => {
@@ -35,9 +40,29 @@ const Profile = ({location}) => {
   const [allPosts, setAllPosts] = useState([]);
   const [persons, setPersons] = useState([]);
   const [currentUser, setCurrentUser] = useState(user);
+  const [searchedName, setSearchedName] = useState("");
   const params = useParams();
   const dispatch = useDispatch();
   const profileUserId = params.id;
+
+  const [screenSize, getDimension] = useState({
+    dynamicWidth: window.innerWidth,
+    dynamicHeight: window.innerHeight
+  });
+  const setDimension = () => {
+    getDimension({
+      dynamicWidth: window.innerWidth,
+      dynamicHeight: window.innerHeight
+    })
+  }
+  
+  useEffect(() => {
+    window.addEventListener('resize', setDimension);
+    return(() => {
+        window.removeEventListener('resize', setDimension);
+    })
+  }, [screenSize])
+  // console.log(screenSize.dynamicWidth);
 
   useEffect(()=>{
     const fetchAllPosts = async () => {
@@ -63,10 +88,10 @@ const Profile = ({location}) => {
       fetchPersons()
     }
 
-    if(location !== "activity" && location !== "home"){
+    if(location !== "search" && location !== "activity" && location !== "home"){
       // fetchAllPosts()
     }
-    if(location !== "allposts" && location !== "activity" && location !== "home"){
+    if(location !== "search" && location !== "allposts" && location !== "activity" && location !== "home"){
       fetchProfileUserData()
     }
     fetchNotifications()
@@ -74,22 +99,23 @@ const Profile = ({location}) => {
 
   return (
     <div className="Profile">
-        <NavigationMain location={location} user={user} currentUser={currentUser} />
+        <NavigationMain location={location} user={user} profileUserId={profileUserId} currentUser={currentUser} persons={persons} searchedName={searchedName} setSearchedName={setSearchedName} screenSize={screenSize}  />
 
         {location === "home" && <HeaderBar/>}
         {location === "activity" && <HeaderBarNotificitions/>}
-        {location === "allposts" && <HeaderBarSearch/>}
+        {(location === "search" || location === "allposts") && screenSize.dynamicWidth <= 700 && <HeaderBarSearch setSearchedName={setSearchedName} screenSize={screenSize} />}
         {(location === "saved" || location === "profile") && <HeaderBarProfile user={user} currentUser={currentUser}/>}
 
 
         {location === "home" && 
-        <HomeSide posts={posts} location={location} persons={persons}/>}
+        <HomeSide posts={posts} location={location} persons={persons} screenSize={screenSize}/>}
 
         {location !== "home" && 
         <div className="ProfileCenter" onClick={togglemenu}>
 
-            {location !== "home" && location !== "allposts" && location !== "activity" && <ProfileCard location={location} posts={posts} currentUser={currentUser} profileUserId={profileUserId} />}
-            {location !== "activity" && <Posts location={location} posts={posts} persons={persons}/>}
+            {location !== "home" && location !== "search" && location !== "allposts" && location !== "activity" && <ProfileCard location={location} posts={posts} currentUser={currentUser} profileUserId={profileUserId} />}
+            {location !== "activity" && location !== "search" && <Posts location={location} posts={posts} persons={persons}/>}
+            {location === "search" && <SearchedUser persons={persons} searchedName={searchedName} />}
             {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId} user={user}/>}
             {location === "activity" && <FollowersCardVertical persons={persons}/>}
 

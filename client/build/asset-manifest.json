@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.75fae0da.css",
-    "main.js": "/static/js/main.bec30f9c.js",
+    "main.css": "/static/css/main.b9cdf74f.css",
+    "main.js": "/static/js/main.5c9f5f2a.js",
     "static/media/Emoji.svg": "/static/media/Emoji.2c18e49bc52b3776733320cdf5e89745.svg",
     "static/media/Settings.svg": "/static/media/Settings.318d8e4008cbbf6440ad8a931bd4c014.svg",
     "static/media/dislike.svg": "/static/media/dislike.4e0846b50d43c51cfeb407e113542275.svg",
@@ -11,7 +11,9 @@
     "static/media/comment.svg": "/static/media/comment.18bb9b0bb4f255f3dc3acd21441c2b5a.svg",
     "static/media/Delete.svg": "/static/media/Delete.8e2a720d0542c413c31d440addad9683.svg",
     "index.html": "/index.html",
+    "static/media/WhiteExplore.svg": "/static/media/WhiteExplore.7cf8c9d3c53748b300eea333ba5f366c.svg",
     "static/media/SearchGrey.svg": "/static/media/SearchGrey.717d3fe7498c2ce84af18c4ff28f760e.svg",
+    "static/media/Explore.svg": "/static/media/Explore.6ed4e16ac1ecb66041b4892feb125187.svg",
     "static/media/likeBlack.svg": "/static/media/likeBlack.fb7a6ea03455c19ec3149be337901092.svg",
     "static/media/Posts.svg": "/static/media/Posts.b9e90aacca0b0c8cd1b90af52ed50ee3.svg",
     "static/media/UserIcon.svg": "/static/media/UserIcon.fb3d7f4fff51d187a05ecf1424c3bc98.svg",
@@ -32,11 +34,11 @@
     "static/media/UnBookmark.svg": "/static/media/UnBookmark.67ac179c063193f82ad8f122ed33580d.svg",
     "static/media/Bookmark.svg": "/static/media/Bookmark.19fe01c64d0cbf8233614dc88439d147.svg",
     "static/media/AddObject.svg": "/static/media/AddObject.64afa19b1854c82688e6a650409335ab.svg",
-    "main.75fae0da.css.map": "/static/css/main.75fae0da.css.map",
-    "main.bec30f9c.js.map": "/static/js/main.bec30f9c.js.map"
+    "main.b9cdf74f.css.map": "/static/css/main.b9cdf74f.css.map",
+    "main.5c9f5f2a.js.map": "/static/js/main.5c9f5f2a.js.map"
   },
   "entrypoints": [
-    "static/css/main.75fae0da.css",
-    "static/js/main.bec30f9c.js"
+    "static/css/main.b9cdf74f.css",
+    "static/js/main.5c9f5f2a.js"
   ]
 }
