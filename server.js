@@ -34,8 +34,6 @@ const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, './client/build')));
 
 
-
-
 app.get('/', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
@@ -57,10 +55,6 @@ app.get('/activity', function (req, res){
 })
 
 app.get('/:id/saved', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
-
-app.get('*', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 

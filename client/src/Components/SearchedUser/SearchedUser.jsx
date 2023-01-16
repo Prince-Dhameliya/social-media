@@ -11,7 +11,11 @@ const SearchedUser = ({persons,searchedName}) => {
         if(searchedName.length === 0){
             setSearchedUsers([]);
         }else{
-            setSearchedUsers(persons.filter(person=> person.username.includes(searchedName)));
+            setSearchedUsers(persons.filter(person=>{
+                let fullName = person?.firstname+" "+person?.lastname;
+                fullName = fullName.toLowerCase();
+                return (person.username.includes(searchedName) || fullName.includes(searchedName))
+            }));
         }
     },[searchedName.length])
 

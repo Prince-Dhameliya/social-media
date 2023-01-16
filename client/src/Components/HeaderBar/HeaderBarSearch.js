@@ -14,7 +14,7 @@ const HeaderBarSearch = ({setSearchedName,screenSize}) => {
   }
   
   const handleChange = (e) => {
-    let text = e.target.value;
+    let text = e.target.value.toLowerCase();
     setSearchedName(text);
     if(text.length > 0){
       document.getElementById("SearchTextCancel").style.display = "flex";
