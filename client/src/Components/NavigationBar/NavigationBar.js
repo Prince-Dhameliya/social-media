@@ -40,7 +40,7 @@ const NavigationBar = ({location}) => {
   })
 
   useEffect(()=>{
-      if(notification?.length > 0 && location !== "activity"){
+      if(location !== "activity" && notification?.length > 0){
         setAnimation(true);
         setInterval(()=>{
           setAnimation(false);

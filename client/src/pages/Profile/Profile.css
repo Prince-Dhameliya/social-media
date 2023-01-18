@@ -35,7 +35,7 @@
         flex-direction: column;
     }
     .ProfileCenter{
-        margin: 3.5rem auto 3rem auto;
+        margin: 0rem auto 3rem auto;
         padding: 0.5rem 0rem;
     }
 }
