@@ -40,9 +40,9 @@ app.get('/', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 
-app.get('/:id', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
+// app.get('/:id', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
 
 app.get('/auth', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
