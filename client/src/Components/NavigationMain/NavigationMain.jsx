@@ -13,6 +13,8 @@ import Like from '../../img/likeBlack.svg'
 import WLike from '../../img/dislike.svg'
 import Explore from '../../img/Explore.svg'
 import WExplore from '../../img/WhiteExplore.svg'
+import WMessage from '../../img/Message1.svg'
+import Message from '../../img/Message.svg'
 
 import More from '../../img/More.svg'
 import Settings from '../../img/Settings.svg'
@@ -61,6 +63,12 @@ const NavigationMain = ({location,user,currentUser,profileUserId,persons,searche
         MiniNavigation.classList.remove("active");
       }
     }
+    else if(event.target.id === "100012"){
+      setActive("messages");
+      if(MiniNavigation.classList.contains("active")){
+        MiniNavigation.classList.remove("active");
+      }
+    }
     else if(event.target.id === "100009"){
       setActive("createpost");
       if(MiniNavigation.classList.contains("active")){
@@ -103,6 +111,11 @@ const NavigationMain = ({location,user,currentUser,profileUserId,persons,searche
           <Link style={{textDecoration: "none", color: "inherit"}} to="../explore"><div id="100008" className="navigation_row" onClick={handleClick}>
             <img src={active === "allposts" ? Explore : WExplore} alt="" className='navigation_icon' />
             <span className="navigation_title">Explore</span>
+          </div>
+          </Link>
+          <Link style={{textDecoration: "none", color: "inherit"}} to="../messages"><div id="100012" className="navigation_row" onClick={handleClick}>
+            <img src={active === "messages" ? Message : WMessage} alt="" className='navigation_icon' />
+            <span className="navigation_title">Messages</span>
           </div>
           </Link>
           <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100009" className="navigation_row" onClick={handleClick}>
@@ -175,6 +188,10 @@ const NavigationMain = ({location,user,currentUser,profileUserId,persons,searche
                 </Link>
                 <Link style={{textDecoration: "none", color: "inherit"}} to="../explore"><div id="100008" className="navigation_row" onClick={handleClick}>
                   <img src={active === "allposts" ? Explore : WExplore} alt="" className='navigation_icon' />
+                </div>
+                </Link>
+                <Link style={{textDecoration: "none", color: "inherit"}} to="../messages"><div id="100012" className="navigation_row" onClick={handleClick}>
+                  <img src={active === "messages" ? Message : WMessage} alt="" className='navigation_icon' />
                 </div>
                 </Link>
                 <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100009" className="navigation_row" onClick={handleClick}>

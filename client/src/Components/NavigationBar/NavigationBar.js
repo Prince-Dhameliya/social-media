@@ -48,7 +48,6 @@ const NavigationBar = ({location}) => {
       }
   },[notification.length])
 
-
   const [active, setActive] = useState(location);
 
   const handleClick = (event) => {

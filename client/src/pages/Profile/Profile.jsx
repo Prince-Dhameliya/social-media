@@ -17,6 +17,7 @@ import FollowersCardVertical from '../../Components/FollowerCardVertical/Followe
 import Notifications from '../../Components/Notifications/Notifications'
 import { getTimelineNotifications } from '../../actions/userAction'
 import SearchedUser from '../../Components/SearchedUser/SearchedUser'
+import Conversations from '../../Components/Conversations/Conversations'
 
 function togglemenu(){
   let submenu = document.getElementById("submenu");
@@ -55,6 +56,10 @@ const Profile = ({location}) => {
       dynamicHeight: window.innerHeight
     })
   }
+  window.addEventListener("scroll", (event) => {
+    let scroll = this.scrollY;
+    console.log(scroll)
+});
   
   useEffect(() => {
     window.addEventListener('resize', setDimension);
@@ -84,14 +89,14 @@ const Profile = ({location}) => {
       dispatch(getTimelineNotifications(user._id))
     }
 
-    if(location !== "saved" && location !== "allposts" && location !== "profile"){
+    if(location === "activity" || location === "search" || location === "home"){
       fetchPersons()
     }
 
     if(location !== "search" && location !== "activity" && location !== "home"){
       // fetchAllPosts()
     }
-    if(location !== "search" && location !== "allposts" && location !== "activity" && location !== "home"){
+    if(location === "saved" || location === "profile"){
       fetchProfileUserData()
     }
     fetchNotifications()
@@ -109,19 +114,19 @@ const Profile = ({location}) => {
 
         {location === "home" && 
         <HomeSide posts={posts} location={location} persons={persons} screenSize={screenSize}/>}
+        {location === "messages" && <Conversations screenSize={screenSize}/>}
 
-        {location !== "home" && 
+        {location !== "home" && location !== "messages" &&
         <div className="ProfileCenter" onClick={togglemenu}>
-
-            {location !== "home" && location !== "search" && location !== "allposts" && location !== "activity" && <ProfileCard location={location} posts={posts} currentUser={currentUser} profileUserId={profileUserId} />}
-            {location !== "activity" && location !== "search" && <Posts location={location} posts={posts} persons={persons}/>}
+            {(location === "saved" || location === "profile") && <ProfileCard location={location} posts={posts} currentUser={currentUser} profileUserId={profileUserId} />}
+            {(location === "saved" || location === "profile" || location === "allposts" || location === "home") && <Posts location={location} posts={posts} persons={persons}/>}
             {location === "search" && <SearchedUser persons={persons} searchedName={searchedName} />}
             {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId} user={user}/>}
             {location === "activity" && <FollowersCardVertical persons={persons}/>}
 
         </div>}
         
-        <NavigationBar location={location}/>
+        {location !== "chatbox" && location !== "messages" && <NavigationBar location={location}/>}
     </div>
   )
 }

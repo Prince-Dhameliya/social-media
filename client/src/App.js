@@ -25,6 +25,8 @@ function App() {
             <div className="blur" style={{top: '36%', left: '-8rem'}}></div> */}
             <Routes>
               <Route path="/" element={user ? <Profile location="home" /> : <Navigate to = "../auth" />} />
+              <Route path="/messages" element={user ? <Profile location="messages" /> : <Navigate to = "../auth" />} />
+              <Route path="/messages/:id" element={user ? <Profile location="messages" /> : <Navigate to = "../auth" />} />
               <Route path="/auth" element={user ? <Navigate to = "../" /> : <Auth />} />
               <Route path="/:id" element={user ? <Profile location="profile" /> : <Navigate to = "../auth" />} />
               <Route path="/explore" element={user ? <Profile location="allposts" /> : <Navigate to = "../auth" />} />

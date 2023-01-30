@@ -50,7 +50,7 @@ const HeaderBarSearch = ({setSearchedName,screenSize}) => {
         <div className="HeaderBarSearch">
           <div id="search" onClick={handleSearch}>
             <img src={Search} className="SearchButtonIcon" alt="" />
-            <input type="text" placeholder="Search" id="SearchInput" onChange={handleChange}/>
+            <input type="text" placeholder="Search" id="SearchInput" onChange={handleChange} autoComplete="off"/>
             <div id="SearchTextCancel" onClick={handleTextCancle} >
               <img src={Close} className="SearchButtonIcon" alt="" />
             </div>
@@ -65,7 +65,7 @@ const HeaderBarSearch = ({setSearchedName,screenSize}) => {
         <div className="HeaderBarSearch">
           <div id="search" onClick={handleSearch}>
             <img src={Search} className="SearchButtonIcon" alt="" />
-            <input type="text" placeholder="Search" id="SearchInput" onChange={handleChange}/>
+            <input type="text" placeholder="Search" id="SearchInput" onChange={handleChange} autoComplete="off"/>
             <div id="SearchTextCancel" onClick={handleTextCancle} >
               <img src={Close} className="SearchButtonIcon" alt="" />
             </div>

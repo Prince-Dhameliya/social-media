@@ -7,6 +7,8 @@ import AuthRoute from './Routes/AuthRoute.js'
 import UserRoute from './Routes/UserRoute.js'
 import PostRoute from './Routes/PostRoute.js'
 import UploadRoute from './Routes/UploadRoute.js'
+import ConversationRoute from './Routes/ConversationRoute.js'
+import MessageRoute from './Routes/MessageRoute.js'
 import path from 'path';
 
 // Routes
@@ -38,6 +40,10 @@ app.get('/', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 
+app.get('/:id', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
 app.get('/auth', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
@@ -54,6 +60,14 @@ app.get('/activity', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 
+app.get('/messages', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
+app.get('/messages/:id', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
 app.get('/:id/saved', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
@@ -62,6 +76,8 @@ app.get('/:id/saved', function (req, res){
 app.use('/auth', AuthRoute)
 app.use('/user', UserRoute)
 app.use('/posts', PostRoute)
+app.use('/conversations', ConversationRoute)
+app.use('/messages', MessageRoute)
 // app.use('/upload', UploadRoute)
 
 

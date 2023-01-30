@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './ProfileCard.css'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react'
 
 import PostIcon from '../../img/Posts.svg'
 import Saved from '../../img/UnBookmark.svg'
 import ProfileModel from '../ProfileModal/ProfileModel'
 import { followUser, unFollowUser } from '../../actions/userAction'
+import axios from 'axios'
 
 const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
   const dispatch = useDispatch();
@@ -15,10 +16,19 @@ const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(location);
+  const navigate = useNavigate();
 
   const handleFollow = () => {
     setIsFollowing((prev)=>!prev)
     isfollowing ? dispatch(unFollowUser(currentUser._id, user)) : dispatch(followUser(currentUser._id, user));
+  }
+
+  const handleMessage = async () => {
+    const {data} = await axios.post(`/conversations/`,{
+        senderId: user._id,
+        receiverId: currentUser?._id,
+    })
+    navigate(`/messages/${data?._id}`);
   }
 
 
@@ -47,6 +57,9 @@ const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
             {user._id !== profileUserId && <div className="tempStuff">
                 <button className={isfollowing ? "button fc-buttonVertical UnfollowButton" : "button fc-buttonVertical"} onClick={handleFollow}>
                     {isfollowing ? "Unfollow" : "Follow"}
+                </button>
+                <button className={"button fc-buttonVertical UnfollowButton"} onClick={handleMessage}>
+                    Message
                 </button>
             </div>}
 

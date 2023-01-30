@@ -196,8 +196,8 @@ const Post = ({data,index}) => {
         <div className="CommentSection">
           <div className="CommentPlusEmoji">
             <img src={Emoji} className="CommentEmojiIcon" style={{cursor: "pointer",width: "20px"}} alt="" />
-            {data?._id ? <input type="text" id={data._id} className="CommentInput" ref={desc} placeholder='Add a comment...' onKeyDown={searchKeyPressed} onChange={handleInput} />
-            : <input type="text" className="CommentInput" ref={desc} placeholder='Add a comment...' onChange={handleInput} />}
+            {data?._id ? <input type="text" id={data._id} className="CommentInput" ref={desc} placeholder='Add a comment...' onKeyDown={searchKeyPressed} onChange={handleInput} autoComplete="off" />
+            : <input type="text" className="CommentInput" ref={desc} placeholder='Add a comment...' onChange={handleInput} autoComplete="off" />}
           </div>
           {index ? <div className='CommentSendButton' id={index} onClick={handleSubmit} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>{loading ? "Posting" : "Post"}</span></div>
           : <div className='CommentSendButton' style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>Post</span></div>}

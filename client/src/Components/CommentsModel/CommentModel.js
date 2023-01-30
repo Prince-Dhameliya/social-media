@@ -172,7 +172,7 @@ export default function CommentModel2({open, setOpen, index, data}) {
                 <div className="CommentSection">
                     <div className="CommentPlusEmoji">
                         <img src={Emoji} className="CommentEmojiIcon" style={{cursor: "pointer",width: "20px"}} alt="" />
-                        <input type="text" id={`${-data._id}`} className="CommentInput" ref={desc} placeholder='Add a comment...' onKeyDown={searchKeyPressed} onChange={handleInput} />
+                        <input type="text" id={`${-data._id}`} className="CommentInput" ref={desc} placeholder='Add a comment...' onKeyDown={searchKeyPressed} onChange={handleInput} autoComplete="off" />
                     </div>
                     <div className='CommentSendButton' id={`${-index}`} onClick={handleSubmit} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>{loading ? "Posting" : "Post"}</span></div>
                 </div>
