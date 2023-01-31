@@ -36,7 +36,7 @@ const Conversations = ({screenSize}) => {
   // }, [messages.length]);
  
   useEffect(()=>{
-    socket.current = io("ws://social-point-23.vercel.app/");
+    socket.current = io("ws://");
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
@@ -64,6 +64,7 @@ const Conversations = ({screenSize}) => {
   useEffect(()=>{
     arrivalMessages && currentFriendChat?.members?.includes(arrivalMessages.senderId) && 
     setMessages((prev)=>[...prev, arrivalMessages])
+    // console.log("ArrivalMessages");
   },[arrivalMessages,currentFriendChat.members])
 
 
