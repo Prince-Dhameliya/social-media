@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 7000;
 
 const io = new Server(PORT,{
     cors:{
-        origin:"http://social-point-24.vercel.app",
+        origin:"https://social-point-24.vercel.app",
         credentials: true
     }
 });
