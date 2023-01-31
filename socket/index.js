@@ -1,6 +1,9 @@
 import {Server} from "socket.io";
 
-const io = new Server(7000,{
+dotenv.config()
+const PORT = process.env.PORT || 7000;
+
+const io = new Server(PORT,{
     cors:{
         origin:"http://social-point-23.vercel.app/",
     }
