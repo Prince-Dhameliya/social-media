@@ -5,7 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "socket-install": "cd socket && npm start",
+    "server-install": "node server.js",
+    "start": "start npm run server-install && npm run socket-install"
   },
   "author": "Prince Dhameliya",
   "license": "ISC",

@@ -10,6 +10,7 @@ import { getUser } from '../../api/UserRequest';
 import {io} from "socket.io-client";
 import Vertical from "../../img/Vertical3Dot.svg"
 import ConversationOptionModel from '../DropdownButton/ConversationOptionModel';
+import $ from 'jquery';
 
 const Conversations = ({screenSize}) => {
   const [openMore, setOpenMore] = useState(false);
@@ -23,9 +24,19 @@ const Conversations = ({screenSize}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   let navigate = useNavigate();
   let params = useParams();
+  let desc = useRef();
+  // let messagesEndRef = useRef(null)
+
+  // const scrollToBottom = () => {
+  //   messagesEndRef?.current?.scrollIntoView({ behavior: "smooth" })
+  // }
+
+  // useEffect(() => {
+  //   scrollToBottom()
+  // }, [messages.length]);
  
   useEffect(()=>{
-    socket.current = io("ws://localhost:7000");
+    socket.current = io("ws://social-point-23.vercel.app/");
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
@@ -36,9 +47,12 @@ const Conversations = ({screenSize}) => {
   },[])
 
   useEffect(()=>{
-    arrivalMessages && currentFriendChat?.members?.includes(arrivalMessages.senderId) && 
-    setMessages((prev)=>[...prev, arrivalMessages])
-  },[arrivalMessages,currentFriendChat])
+    socket.current.on("getDeleteMessage", data=>{
+      let newMessages = messages;
+      newMessages = newMessages.filter(m=>m._id !== data.messageId);
+      setMessages(newMessages);
+    })
+  },[messages.length])
 
   useEffect(()=>{
     socket.current.emit("addUser",user._id);
@@ -46,6 +60,13 @@ const Conversations = ({screenSize}) => {
       setOnlineFriend(users);
     })
   },[user._id])
+
+  useEffect(()=>{
+    arrivalMessages && currentFriendChat?.members?.includes(arrivalMessages.senderId) && 
+    setMessages((prev)=>[...prev, arrivalMessages])
+    // console.log("ArrivalMessages");
+  },[arrivalMessages,currentFriendChat.members])
+
 
   useEffect(()=>{
     const getConversations = async () => {
@@ -62,38 +83,57 @@ const Conversations = ({screenSize}) => {
     }
     getConversations();
   },[user._id,params?.id])
-  
-  let desc = useRef();
-
-  const messagesEndRef = useRef(null)
-
-  const scrollToBottom = () => {
-    messagesEndRef?.current?.scrollIntoView({ behavior: "smooth" })
-  }
-
-  useEffect(() => {
-    scrollToBottom()
-  }, [messages]);
 
   useEffect(()=>{
-    const getMessages = async () => {
-      try {
-        const {data} = await axios.get(`/messages/${currentFriendChat?._id}/get`)
-        setMessages(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     const friendId = currentFriendChat?.members?.find(member => member !== user._id)
     const getCurrentFriend = async () => {
         const {data} = await getUser(friendId);
         setCurrentFriendData(data);
     }
     if(currentFriendChat?._id){
-      getMessages();
       getCurrentFriend();
     }
-  },[currentFriendChat,user._id,messages])
+    $(".MessagesList").scrollTop(5*$(".Profile").height());
+  },[currentFriendChat?._id,user?._id])
+
+  useEffect(()=>{
+    const getMessages = async () => {
+      try {
+        const {data} = await axios.get(`/messages/${currentFriendChat?._id}/get`)
+        setMessages(data);
+        $(".MessagesList").scrollTop(5*$(".Profile").height());
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if(currentFriendChat?._id){
+      getMessages();
+      // console.log("totalmessages");
+    }
+    // var page = 0;
+    // var isLoading = false;
+
+    // function loadNewPage() {
+    //   var temp = $(".Profile").height();
+    //   var temp1 = $(".MessagesList").height();
+    //     console.log(`${temp} + ${temp1}`);
+    //     page++;
+        // $(".MessagesList").prepend('<div class="big-box"><h1>Page ' + page + '</h1></div>');
+    //     $(".MessagesList").scrollTop(temp-temp1);
+    //     isLoading = false;
+    // }
+
+    // $(".MessagesList").scroll(function() {
+    //   console.log($(".MessagesList").scrollTop());
+    //   if($(".MessagesList").scrollTop() < 1 && !isLoading) {
+    //     isLoading = true;
+    //     setTimeout(loadNewPage, 1200);
+    //   }
+      
+    // });
+
+    // $(".MessagesList").scrollTop(5*$(".Profile").height());
+  },[currentFriendChat?._id,messages.length])
 
 
   const resetComment = () => {
@@ -125,9 +165,9 @@ const Conversations = ({screenSize}) => {
 
     if(desc.current.value){
       const message = {
+        conversationId: currentFriendChat?._id,
         senderId: user._id,
         text: desc.current.value,
-        conversationId: currentFriendChat?._id,
       }
 
       try {
@@ -192,10 +232,24 @@ const Conversations = ({screenSize}) => {
           <ConversationOptionModel open={openMore} setOpen={setOpenMore} conversation={currentFriendChat} />
         </div>
         <div className="MessagesList">
+        {/* <div className="sk-circle">
+          <div className="sk-circle1 sk-child"></div>
+          <div className="sk-circle2 sk-child"></div>
+          <div className="sk-circle3 sk-child"></div>
+          <div className="sk-circle4 sk-child"></div>
+          <div className="sk-circle5 sk-child"></div>
+          <div className="sk-circle6 sk-child"></div>
+          <div className="sk-circle7 sk-child"></div>
+          <div className="sk-circle8 sk-child"></div>
+          <div className="sk-circle9 sk-child"></div>
+          <div className="sk-circle10 sk-child"></div>
+          <div className="sk-circle11 sk-child"></div>
+          <div className="sk-circle12 sk-child"></div>
+        </div> */}
           {messages?.map((message,id) => {
-            return <Message key={id} currentFriendData={currentFriendData} message={message} own={message.senderId === user._id} user={user}/>
+            return <Message key={id} currentFriendData={currentFriendData} socket={socket} message={message} messages={messages} setMessages={setMessages} own={message.senderId === user._id} user={user}/>
           })}
-          <div ref={messagesEndRef} />
+          <div className='LastMessage' />
         </div>
         <div className="SendMessageSection">
           <input type="text" id="SendMessageInput" className="SendMessageInput" ref={desc} onKeyDown={searchKeyPressed} onChange={handleInput} placeholder='Message...' autoComplete="off" />

@@ -3,15 +3,22 @@ import { useSelector } from 'react-redux';
 import { Dialog } from '@mui/material';
 import axios from 'axios';
 
-export default function MessageOptionModel({open,setOpen,message}) {
+export default function MessageOptionModel({currentFriendData,open,setOpen,message,messages,setMessages,socket}) {
   const {user}  = useSelector((state)=>state.authReducer.authData)
 //   const dispatch = useDispatch();
   const handleClose = () => {
     setOpen(false);
   };
   const handleDelete = async () => {
+    let newMessages = messages.filter(m=>m._id !== message._id);
     try {
         await axios.delete(`/messages/${message?._id}/delete`)
+        socket.current.emit("deleteMessage",{
+          senderId: user._id,
+          receiverId: currentFriendData._id,
+          messageId: message._id,
+        })
+        setMessages(newMessages);
     } catch (error) {
         console.log(error);
     }

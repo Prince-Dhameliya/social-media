@@ -1,11 +1,9 @@
-// import React, { useEffect, useState } from 'react'
-// import { getUser } from '../../api/UserRequest';
 import './Messages.css'
 import Horizontal from '../../img/Horizontal3Dot.svg'
 import MessageOptionModel from '../DropdownButton/MessageOptionModel'
 import { useState } from 'react';
 
-const Message = ({currentFriendData,message,own}) => {
+const Message = ({currentFriendData,message,own,messages,setMessages,socket}) => {
   const [openMore, setOpenMore] = useState(false);
 
 //for hold touch action
@@ -51,7 +49,7 @@ function touchmove() {
         {!own ? <img src={currentFriendData?.profilePicture ? currentFriendData?.profilePicture : ""} className="MessageProfile" alt=''/> : null}
         <span  onTouchStart={touchstart}>{message?.text}</span>
         {!own ? <img src={Horizontal} className="MessageMoreIcon" onClick={() => setOpenMore(true)} alt=''/> : null}
-        <MessageOptionModel open={openMore} setOpen={setOpenMore} message={message} />
+        <MessageOptionModel currentFriendData={currentFriendData} open={openMore} setOpen={setOpenMore} message={message} messages={messages} setMessages={setMessages} socket={socket} />
     </div>
   )
 }

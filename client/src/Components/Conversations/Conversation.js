@@ -55,7 +55,7 @@ const Conversation = ({conversation,user,onlineFriend}) => {
         if(isOnline.length === 1){
             setOnline(true);
         }
-    },[user._id,conversation,onlineFriend])
+    },[user._id,conversation?.members,onlineFriend])
   return (
     <div className="Conversation" onTouchStart={touchstart} onTouchEnd={touchend} onTouchMove={touchmove}>
         <span className="pic-div">
