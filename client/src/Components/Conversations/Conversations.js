@@ -64,7 +64,6 @@ const Conversations = ({screenSize}) => {
   useEffect(()=>{
     arrivalMessages && currentFriendChat?.members?.includes(arrivalMessages.senderId) && 
     setMessages((prev)=>[...prev, arrivalMessages])
-    // console.log("ArrivalMessages");
   },[arrivalMessages,currentFriendChat.members])
 
 
