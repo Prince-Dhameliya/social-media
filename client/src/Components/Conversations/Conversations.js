@@ -36,7 +36,7 @@ const Conversations = ({screenSize}) => {
   // }, [messages.length]);
  
   useEffect(()=>{
-    socket.current = io("ws://");
+    socket.current = io("ws://social-point-23.vercel.app/");
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
