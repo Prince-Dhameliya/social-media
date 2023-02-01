@@ -27,7 +27,9 @@ const Conversations = ({screenSize}) => {
   let desc = useRef();
  
   useEffect(()=>{
-    socket.current = io("/");
+    socket.current = io("/", {
+      transports: ['websocket'],
+    });
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
