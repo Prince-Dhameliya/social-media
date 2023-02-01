@@ -21,13 +21,21 @@ const io = new Server(server,{
 app.use(express.static('public'))
 app.use(cors());
 
-server.listen(PORT);
+server.listen(PORT, console.log(`listening at port ${PORT}`));
 
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, './client/build')));
 
 
 app.get('/', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
+app.get('/messages', function (req, res){
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
+
+app.get('/messages/:id', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 
