@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
     SocketServer(socket)
 });
 
-// ExpressPeerServer(http, { path: '/' })
+ExpressPeerServer(http, { path: '/' })
 
 
 // to server images for public
