@@ -12,7 +12,7 @@ import Vertical from "../../img/Vertical3Dot.svg"
 import ConversationOptionModel from '../DropdownButton/ConversationOptionModel';
 import $ from 'jquery';
 
-const App_URL = "social-point-33.vercel.app";
+const App_URL = "social-point-34.vercel.app";
 
 const Conversations = ({screenSize}) => {
   const [openMore, setOpenMore] = useState(false);
