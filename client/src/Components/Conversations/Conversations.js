@@ -27,7 +27,7 @@ const Conversations = ({screenSize}) => {
   let desc = useRef();
  
   useEffect(()=>{
-    socket.current = io("social-point-26.vercel.app");
+    socket.current = io("/");
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
