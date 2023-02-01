@@ -12,7 +12,7 @@ import Vertical from "../../img/Vertical3Dot.svg"
 import ConversationOptionModel from '../DropdownButton/ConversationOptionModel';
 import $ from 'jquery';
 
-const App_URL = "social-point-32.vercel.app";
+const App_URL = "social-point-33.vercel.app";
 
 const Conversations = ({screenSize}) => {
   const [openMore, setOpenMore] = useState(false);
@@ -32,7 +32,7 @@ const Conversations = ({screenSize}) => {
   useEffect(()=>{
     socket.current = io(`https://${App_URL}`, {
       transports: ['websocket'],
-      path: "/api/new/socket.io/"
+      withCredentials: true
     });
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
