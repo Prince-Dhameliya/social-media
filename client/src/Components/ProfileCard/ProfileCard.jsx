@@ -24,7 +24,7 @@ const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
   }
 
   const handleMessage = async () => {
-    const {data} = await axios.post(`/conversations/`,{
+    const {data} = await axios.post(`/api/conversations/`,{
         senderId: user._id,
         receiverId: currentUser?._id,
     })

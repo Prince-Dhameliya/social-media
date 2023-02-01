@@ -12,7 +12,7 @@ export default function MessageOptionModel({currentFriendData,open,setOpen,messa
   const handleDelete = async () => {
     let newMessages = messages.filter(m=>m._id !== message._id);
     try {
-        await axios.delete(`/messages/${message?._id}/delete`)
+        await axios.delete(`/api/messages/${message?._id}/delete`)
         socket.current.emit("deleteMessage",{
           senderId: user._id,
           receiverId: currentFriendData._id,

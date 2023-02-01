@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-router.post('/', upload.single("file", (req, res) => {
+router.post('/upload', upload.single("file", (req, res) => {
     try {
         return res.status(200).json("File Uploaded Successfully")
     } catch (error) {

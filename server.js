@@ -11,10 +11,33 @@ import ConversationRoute from './Routes/ConversationRoute.js'
 import MessageRoute from './Routes/MessageRoute.js'
 import path from 'path';
 
+import {Server} from "socket.io";
+import http from "http";
+import {ExpressPeerServer} from "peer";
+import { SocketServer } from './socketServer.js';
+
+
 // Routes
 const app = express();
 dotenv.config()
 const PORT = process.env.PORT || 5000;
+
+// Socker Server
+const server = http.createServer(app);
+const io = new Server(server,{
+    cors:{
+        origin:"*",
+        credentials: true
+    }
+});
+
+
+io.on('connection', (socket) => {
+    SocketServer(socket)
+});
+
+// ExpressPeerServer(http, { path: '/' })
+
 
 // to server images for public
 app.use(express.static('public'))
@@ -28,54 +51,58 @@ app.use(cors());
 
 mongoose.connect(process.env.MONGO_DB,
 {useNewUrlParser: true, useUnifiedTopology: true})
-.then(()=>app.listen(PORT, ()=>console.log(`listening at ${PORT}`)))
+.then(()=>server.listen(PORT, ()=>console.log(`listening at ${PORT}`)))
 .catch((error)=>console.log("Error while connecting with the database", error));
+
+// usage of routes
+app.use('/api', AuthRoute)
+app.use('/api', UserRoute)
+app.use('/api', PostRoute)
+app.use('/api', ConversationRoute)
+app.use('/api', MessageRoute)
+// app.use('/api', UploadRoute)
 
 // const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, './client/build')));
 
 
-app.get('/', function (req, res){
+app.get('*', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
+
+// app.get('/', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
 
 // app.get('/:id', function (req, res){
 //     res.sendFile(path.join(__dirname, './client/build/index.html'));
 // })
 
-app.get('/auth', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
+// app.get('/auth', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
 
-app.get('/explore', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
+// app.get('/explore', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
 
-app.get('/explore/search', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
+// app.get('/explore/search', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
 
-app.get('/activity', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
+// app.get('/activity', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
 
-app.get('/messages', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
+// app.get('/messages', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
 
-app.get('/messages/:id', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
+// app.get('/messages/:id', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
 
-app.get('/:id/saved', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
-
-// usage of routes
-app.use('/auth', AuthRoute)
-app.use('/user', UserRoute)
-app.use('/posts', PostRoute)
-app.use('/conversations', ConversationRoute)
-app.use('/messages', MessageRoute)
-// app.use('/upload', UploadRoute)
+// app.get('/:id/saved', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })

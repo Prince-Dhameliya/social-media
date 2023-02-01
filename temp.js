@@ -2,42 +2,20 @@ import {Server} from "socket.io";
 import dotenv from "dotenv";
 import express from "express";
 import http from "http";
-import cors from "cors";
-import path from 'path';
 
 const app = express();
 dotenv.config()
 const PORT = process.env.PORT || 7000;
 
 const server = http.createServer(app);
-
-
 const io = new Server(server,{
     cors:{
         origin:"*",
         credentials: true
     }
 });
-app.use(express.static('public'))
-app.use(cors());
 
 server.listen(PORT, console.log(`listening at port ${PORT}`));
-
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, './client/build')));
-
-
-app.get('/', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
-
-app.get('/messages', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
-
-app.get('/messages/:id', function (req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-})
 
 let users = [];
 

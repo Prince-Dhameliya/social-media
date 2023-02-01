@@ -25,20 +25,9 @@ const Conversations = ({screenSize}) => {
   let navigate = useNavigate();
   let params = useParams();
   let desc = useRef();
-  // let messagesEndRef = useRef(null)
-
-  // const scrollToBottom = () => {
-  //   messagesEndRef?.current?.scrollIntoView({ behavior: "smooth" })
-  // }
-
-  // useEffect(() => {
-  //   scrollToBottom()
-  // }, [messages.length]);
  
   useEffect(()=>{
-    socket.current = io("https://social-point-25.vercel.app/", {
-      withCredentials: true,
-    });
+    socket.current = io("social-point-25.vercel.app");
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
@@ -72,7 +61,7 @@ const Conversations = ({screenSize}) => {
 
   useEffect(()=>{
     const getConversations = async () => {
-      const {data} = await axios.get(`/conversations/${user._id}`)
+      const {data} = await axios.get(`/api/conversations/${user._id}`)
       setConversations(data);
       if(params?.id){
         setCurrentFriendChat(data.filter(t=>t._id === params?.id)[0]);
@@ -101,7 +90,7 @@ const Conversations = ({screenSize}) => {
   useEffect(()=>{
     const getMessages = async () => {
       try {
-        const {data} = await axios.get(`/messages/${currentFriendChat?._id}/get`)
+        const {data} = await axios.get(`/api/messages/${currentFriendChat?._id}/get`)
         setMessages(data);
         $(".MessagesList").scrollTop(5*$(".Profile").height());
       } catch (error) {
@@ -173,7 +162,7 @@ const Conversations = ({screenSize}) => {
       }
 
       try {
-        const {data} = await axios.post("/messages",message);
+        const {data} = await axios.post("/api/messages",message);
         setMessages([...messages, data]);
       } catch (error) {
         console.log(error);
@@ -234,20 +223,6 @@ const Conversations = ({screenSize}) => {
           <ConversationOptionModel open={openMore} setOpen={setOpenMore} conversation={currentFriendChat} />
         </div>
         <div className="MessagesList">
-        {/* <div className="sk-circle">
-          <div className="sk-circle1 sk-child"></div>
-          <div className="sk-circle2 sk-child"></div>
-          <div className="sk-circle3 sk-child"></div>
-          <div className="sk-circle4 sk-child"></div>
-          <div className="sk-circle5 sk-child"></div>
-          <div className="sk-circle6 sk-child"></div>
-          <div className="sk-circle7 sk-child"></div>
-          <div className="sk-circle8 sk-child"></div>
-          <div className="sk-circle9 sk-child"></div>
-          <div className="sk-circle10 sk-child"></div>
-          <div className="sk-circle11 sk-child"></div>
-          <div className="sk-circle12 sk-child"></div>
-        </div> */}
           {messages?.map((message,id) => {
             return <Message key={id} currentFriendData={currentFriendData} socket={socket} message={message} messages={messages} setMessages={setMessages} own={message.senderId === user._id} user={user}/>
           })}

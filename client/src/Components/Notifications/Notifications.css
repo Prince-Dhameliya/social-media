@@ -56,3 +56,10 @@
     object-fit:cover;
     border: 1px solid var(--borderColor);
 }
+
+.nfc-button{
+    height: 2rem;
+    padding-left: 25px;
+    padding-right: 25px;
+    min-width:min-content;
+}

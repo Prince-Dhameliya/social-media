@@ -33,7 +33,7 @@ const Notification = ({notification,currentUser,profileUserId,user}) => {
 
         <div className="NotificationRight">
             {(notification?.type === "follow") 
-            ? <button className={isfollowing ? "button fc-buttonVertical UnfollowButton" : "button fc-buttonVertical"} onClick={handleFollow}>
+            ? <button className={isfollowing ? "button nfc-button UnfollowButton" : "button nfc-button"} onClick={handleFollow}>
                   {isfollowing ? "Unfollow" : "Follow"}
               </button>
             : <img src={notification.postImage} alt="" />}

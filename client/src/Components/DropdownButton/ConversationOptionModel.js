@@ -11,7 +11,7 @@ export default function ConversationOptionModel({open,setOpen,conversation}) {
   };
   const handleDelete = async () => {
     try {
-        await axios.delete(`/conversations/${conversation?._id}/delete`)
+        await axios.delete(`/api/conversations/${conversation?._id}/delete`)
         navigate(-1);
     } catch (error) {
         console.log(error);
