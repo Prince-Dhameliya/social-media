@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({baseURL: "/"})
+const API = axios.create({baseURL: "http://localhost:5000/"})
 
 export const getAllPosts = () => API.get(`/api/posts`)
 export const likePost = (id, userId) => API.put(`/api/posts/${id}/like`, {userId: userId})

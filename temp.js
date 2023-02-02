@@ -69,3 +69,41 @@ io.on('connection', (socket) => {
     })
 
   });
+
+
+  
+// app.get('/', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
+
+// app.get('/:id', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
+
+// app.get('/auth', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
+
+// app.get('/explore', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
+
+// app.get('/explore/search', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
+
+// app.get('/activity', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
+
+// app.get('/messages', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
+
+// app.get('/messages/:id', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })
+
+// app.get('/:id/saved', function (req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+// })

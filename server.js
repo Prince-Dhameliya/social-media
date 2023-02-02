@@ -36,23 +36,6 @@ mongoose.connect(process.env.MONGO_DB,
 .then(()=>console.log("MongoDB Connected"))
 .catch((error)=>console.log("Error while connecting with the database", error));
 
-// ExpressPeerServer(http, { path: '/' })
-
-// Socker Server
-// const server = http.createServer(app);
-
-const server = app.listen(PORT, ()=>console.log(`Server started on ${PORT}`))
-const io = new Server(server,{
-    cors:{
-        origin:"/"
-    }
-});
-
-
-io.on('connection', (socket) => {
-    SocketServer(socket)
-});
-
 // usage of routes
 app.use('/api', AuthRoute)
 app.use('/api', UserRoute)
@@ -70,38 +53,22 @@ app.get('*', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 
-// app.get('/', function (req, res){
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
+// ExpressPeerServer(http, { path: '/' })
 
-// app.get('/:id', function (req, res){
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
+// Socker Server
+// const server = http.createServer(app);
 
-// app.get('/auth', function (req, res){
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
+const server = app.listen(PORT, ()=>console.log(`Server started on ${PORT}`))
+const io = new Server(server,{
+    cors:{
+        origin: "*",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
+    }
+});
 
-// app.get('/explore', function (req, res){
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
 
-// app.get('/explore/search', function (req, res){
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
-
-// app.get('/activity', function (req, res){
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
-
-// app.get('/messages', function (req, res){
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
-
-// app.get('/messages/:id', function (req, res){
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
-
-// app.get('/:id/saved', function (req, res){
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
+io.on('connection', (socket) => {
+    SocketServer(socket)
+});
