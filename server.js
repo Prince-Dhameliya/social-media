@@ -44,7 +44,7 @@ mongoose.connect(process.env.MONGO_DB,
 const server = app.listen(PORT, ()=>console.log(`Server started on ${PORT}`))
 const io = new Server(server,{
     cors:{
-        origin:"*",
+        origin:"/",
         methods: ["GET","POST"],
         transports: ['polling']
     }
