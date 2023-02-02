@@ -30,7 +30,11 @@ const Conversations = ({screenSize}) => {
   let desc = useRef();
  
   useEffect(()=>{
-    socket.current = io(window.location.origin);
+    socket.current = io(window.location.origin,{
+      path: '/socket.io',
+      transports: ['polling'],
+      secure: true,
+    });
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
