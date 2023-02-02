@@ -36,6 +36,8 @@ mongoose.connect(process.env.MONGO_DB,
 .then(()=>console.log("MongoDB Connected"))
 .catch((error)=>console.log("Error while connecting with the database", error));
 
+const server = app.listen(PORT, ()=>console.log(`Server started on ${PORT}`))
+
 // usage of routes
 app.use('/api', AuthRoute)
 app.use('/api', UserRoute)
@@ -58,12 +60,9 @@ app.get('*', function (req, res){
 // Socker Server
 // const server = http.createServer(app);
 
-const server = app.listen(PORT, ()=>console.log(`Server started on ${PORT}`))
 const io = new Server(server,{
     cors:{
         origin: "*",
-        methods: ["GET", "POST"],
-        allowedHeaders: ["my-custom-header"],
         credentials: true
     }
 });

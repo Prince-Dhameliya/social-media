@@ -30,12 +30,7 @@ const Conversations = ({screenSize}) => {
   let desc = useRef();
  
   useEffect(()=>{
-    socket.current = io("/",{
-      withCredentials: true,
-      extraHeaders: {
-        "my-custom-header": "abcd"
-      }
-    });
+    socket.current = io(window.location.origin);
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
