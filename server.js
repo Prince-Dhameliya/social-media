@@ -11,11 +11,6 @@ import ConversationRoute from './Routes/ConversationRoute.js'
 import MessageRoute from './Routes/MessageRoute.js'
 import path from 'path';
 
-import {Server} from "socket.io";
-// import http from "http";
-// import {ExpressPeerServer} from "peer";
-import { SocketServer } from './socketServer.js';
-
 
 // Routes
 const app = express();
@@ -31,12 +26,11 @@ app.use(cors());
 app.use(bodyParser.json({limit: "50mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
 
+mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGO_DB,
 {useNewUrlParser: true, useUnifiedTopology: true})
-.then(()=>console.log("MongoDB Connected"))
+.then(app.listen(PORT, ()=>console.log(`Server started on ${PORT}`)))
 .catch((error)=>console.log("Error while connecting with the database", error));
-
-const server = app.listen(PORT, ()=>console.log(`Server started on ${PORT}`))
 
 // usage of routes
 app.use('/api', AuthRoute)
@@ -54,20 +48,3 @@ app.use(express.static(path.join(__dirname, './client/build')));
 app.get('*', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
-
-// ExpressPeerServer(http, { path: '/' })
-
-// Socker Server
-// const server = http.createServer(app);
-
-const io = new Server(server,{
-    cors:{
-        origin: "*",
-        credentials: true
-    }
-});
-
-
-io.on('connection', (socket) => {
-    SocketServer(socket)
-});

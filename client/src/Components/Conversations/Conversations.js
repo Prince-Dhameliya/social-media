@@ -30,7 +30,7 @@ const Conversations = ({screenSize}) => {
   let desc = useRef();
  
   useEffect(()=>{
-    socket.current = io(window.location.origin);
+    socket.current = io("https://socket-two.vercel.app/");
     socket.current.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
