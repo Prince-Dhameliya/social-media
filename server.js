@@ -12,8 +12,8 @@ import MessageRoute from './Routes/MessageRoute.js'
 import path from 'path';
 
 import {Server} from "socket.io";
-import http from "http";
-import {ExpressPeerServer} from "peer";
+// import http from "http";
+// import {ExpressPeerServer} from "peer";
 import { SocketServer } from './socketServer.js';
 
 
@@ -22,12 +22,31 @@ const app = express();
 dotenv.config()
 const PORT = process.env.PORT || 5000;
 
+// to server images for public
+app.use(express.static('public'))
+app.use('/images', express.static("images"))
+
+// Middelware
+app.use(cors());
+app.use(bodyParser.json({limit: "50mb", extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
+
+mongoose.connect(process.env.MONGO_DB,
+{useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=>console.log("MongoDB Connected"))
+.catch((error)=>console.log("Error while connecting with the database", error));
+
+// ExpressPeerServer(http, { path: '/' })
+
 // Socker Server
-const server = http.createServer(app);
+// const server = http.createServer(app);
+
+const server = app.listen(PORT, ()=>console.log(`Server started on ${PORT}`))
 const io = new Server(server,{
     cors:{
-        origin:"https://social-point-35.vercel.app",
-        credentials: true,
+        origin:"*",
+        methods: ["GET","POST"],
+        transports: ['polling']
     }
 });
 
@@ -35,24 +54,6 @@ const io = new Server(server,{
 io.on('connection', (socket) => {
     SocketServer(socket)
 });
-
-ExpressPeerServer(http, { path: '/' })
-
-
-// to server images for public
-app.use(express.static('public'))
-app.use('/images', express.static("images"))
-
-// Middelware
-app.use(bodyParser.json({limit: "50mb", extended: true}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
-app.use(cors());
-
-
-mongoose.connect(process.env.MONGO_DB,
-{useNewUrlParser: true, useUnifiedTopology: true})
-.then(()=>server.listen(PORT, ()=>console.log(`listening at ${PORT}`)))
-.catch((error)=>console.log("Error while connecting with the database", error));
 
 // usage of routes
 app.use('/api', AuthRoute)
