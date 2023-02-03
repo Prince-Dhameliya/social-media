@@ -28,7 +28,7 @@ const Conversations = ({screenSize}) => {
   let navigate = useNavigate();
   let params = useParams();
   let desc = useRef();
-  const ENDPOINT = 'https://socket-two.vercel.app/';
+  const ENDPOINT = 'https://socket-server-r0w0.onrender.com';
  
   useEffect(()=>{
     socket = io(ENDPOINT);

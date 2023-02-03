@@ -55,3 +55,16 @@ app.get('*', function (req, res){
 })
 
 // Listen PORT
+// const express = require("express");
+// const cors = require("cors");
+// const dotenv = require("dotenv");
+// const mongoose = require("mongoose");
+// const bodyParser = require("body-parser");
+
+// const AuthRoute = require('./Routes/AuthRoute.js');
+// const UserRoute = require('./Routes/UserRoute.js');
+// const PostRoute = require('./Routes/PostRoute.js');
+// const UploadRoute = require('./Routes/UploadRoute.js');
+// const ConversationRoute = require('./Routes/ConversationRoute.js');
+// const MessageRoute = require('./Routes/MessageRoute.js');
+// const path = require("path");
