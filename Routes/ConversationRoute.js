@@ -3,8 +3,8 @@ import { createConversation, deleteConversation, getConversation } from '../Cont
 
 const router = express.Router();
 
-router.post('/conversations', createConversation)
-router.get('/conversations/:userId', getConversation)
-router.delete('/conversations/:conversationId/delete', deleteConversation)
+router.post('/', createConversation)
+router.get('/:userId', getConversation)
+router.delete('/:conversationId/delete', deleteConversation)
 
 export default router

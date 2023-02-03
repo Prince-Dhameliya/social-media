@@ -11,40 +11,47 @@ import ConversationRoute from './Routes/ConversationRoute.js'
 import MessageRoute from './Routes/MessageRoute.js'
 import path from 'path';
 
-
-// Routes
-const app = express();
 dotenv.config()
-const PORT = process.env.PORT || 5000;
+const app = express();
+
+// Middelware
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.json({limit: "50mb", extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
 
 // to server images for public
 app.use(express.static('public'))
 app.use('/images', express.static("images"))
 
-// Middelware
-app.use(cors());
-app.use(bodyParser.json({limit: "50mb", extended: true}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true}));
+// Socket Section
 
-mongoose.set('strictQuery', true);
-mongoose.connect(process.env.MONGO_DB,
-{useNewUrlParser: true, useUnifiedTopology: true})
-.then(app.listen(PORT, ()=>console.log(`Server started on ${PORT}`)))
-.catch((error)=>console.log("Error while connecting with the database", error));
 
-// usage of routes
-app.use('/api', AuthRoute)
-app.use('/api', UserRoute)
-app.use('/api', PostRoute)
-app.use('/api', ConversationRoute)
-app.use('/api', MessageRoute)
+// Routes
+app.use('/api/auth', AuthRoute)
+app.use('/api/user', UserRoute)
+app.use('/api/posts', PostRoute)
+app.use('/api/conversations', ConversationRoute)
+app.use('/api/messages', MessageRoute)
 // app.use('/api', UploadRoute)
 
-// const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// MongoDB Connection
+const PORT = process.env.PORT || 5000;
+mongoose.set('strictQuery', true);
+mongoose.connect(process.env.MONGO_DB,{
+    // useCreateIndex: true,
+    // useFindAndModify: false,
+    useNewUrlParser: true, 
+    useUnifiedTopology: true
+})
+.then(app.listen(PORT, () => console.log(`Server started on ${PORT}`)))
+.catch((error) => console.log("Error while connecting with the database", error));
+
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, './client/build')));
-
 
 app.get('*', function (req, res){
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
+
+// Listen PORT

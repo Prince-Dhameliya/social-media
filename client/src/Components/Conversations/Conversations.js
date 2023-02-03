@@ -14,6 +14,7 @@ import $ from 'jquery';
 
 // const App_URL = "social-point-36.vercel.app";
 // const App_URL = "localhost:5000/";
+let socket;
 
 const Conversations = ({screenSize}) => {
   const [openMore, setOpenMore] = useState(false);
@@ -23,34 +24,38 @@ const Conversations = ({screenSize}) => {
   let [arrivalMessages, setArrivalMessages] = useState("");
   let [currentFriendChat, setCurrentFriendChat] = useState({});
   let [currentFriendData, setCurrentFriendData] = useState({});
-  let socket = useRef();
   const {user} = useSelector((state)=>state.authReducer.authData);
   let navigate = useNavigate();
   let params = useParams();
   let desc = useRef();
+  const ENDPOINT = 'https://socket-two.vercel.app/';
  
   useEffect(()=>{
-    socket.current = io("https://socket-two.vercel.app/");
-    socket.current.on("getMessage", data=>{
+    socket = io(ENDPOINT);
+    socket.on("getMessage", data=>{
       setArrivalMessages({
         senderId: data.senderId,
         text: data.text,
         createdAt: Date.now(),
       })
-    })
-  },[])
-
+    });  
+    return () => {
+      socket.emit('disconnect');
+      socket.off();
+    }
+  },[ENDPOINT])
+  
   useEffect(()=>{
-    socket.current.on("getDeleteMessage", data=>{
+    socket.on("getDeleteMessage", data=>{
       let newMessages = messages;
       newMessages = newMessages.filter(m=>m._id !== data.messageId);
       setMessages(newMessages);
     })
   },[messages.length])
-
+  
   useEffect(()=>{
-    socket.current.emit("addUser",user._id);
-    socket.current.on("getUsers",users=>{
+    socket.emit("addUser",user._id);
+    socket.on("getUsers",users=>{
       setOnlineFriend(users);
     })
   },[user._id])
@@ -172,7 +177,7 @@ const Conversations = ({screenSize}) => {
       }
 
       const receiverId = currentFriendChat?.members?.find(member => member !== user._id);
-      socket.current.emit("sendMessage",{
+      socket.emit("sendMessage",{
         senderId: user._id,
         receiverId,
         text: desc.current.value,

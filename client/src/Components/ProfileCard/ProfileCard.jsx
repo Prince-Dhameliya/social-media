@@ -55,10 +55,10 @@ const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
             </div>}
 
             {user._id !== profileUserId && <div className="tempStuff">
-                <button className={isfollowing ? "button fc-buttonVertical UnfollowButton" : "button fc-buttonVertical"} onClick={handleFollow}>
+                <button className={isfollowing ? "button nfc-button UnfollowButton" : "button nfc-button"} onClick={handleFollow}>
                     {isfollowing ? "Unfollow" : "Follow"}
                 </button>
-                <button className={"button fc-buttonVertical UnfollowButton"} onClick={handleMessage}>
+                <button className={"button nfc-button UnfollowButton"} onClick={handleMessage}>
                     Message
                 </button>
             </div>}

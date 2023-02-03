@@ -61,5 +61,6 @@
     height: 2rem;
     padding-left: 25px;
     padding-right: 25px;
-    min-width:min-content;
+    /* min-width:min-content; */
+    width: calc(90px);
 }
