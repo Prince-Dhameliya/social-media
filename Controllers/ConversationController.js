@@ -1,8 +1,10 @@
-import ConversationModel from "../Models/conversationModel.js";
-import MessageModel from "../Models/messageModel.js";
+const ConversationModel = require("../Models/conversationModel.js");
+const MessageModel = require("../Models/messageModel.js");
+// import ConversationModel from "../Models/conversationModel.js";
+// import MessageModel from "../Models/messageModel.js";
 
 // Create new conversation
-export const createConversation = async (req, res) => {
+const createConversation = async (req, res) => {
 
     try {
         const isExist = await ConversationModel.find({
@@ -25,7 +27,7 @@ export const createConversation = async (req, res) => {
     }
 }
 
-export const getConversation = async (req, res) => {
+const getConversation = async (req, res) => {
     try {
         const conversation = await ConversationModel.find({
             members: { $in: [req.params.userId] },
@@ -48,7 +50,7 @@ export const getConversation = async (req, res) => {
     }
 }
 
-export const deleteConversation = async (req, res) => {
+const deleteConversation = async (req, res) => {
     try {
         await ConversationModel.deleteOne({
             _id: req.params.conversationId,
@@ -61,3 +63,5 @@ export const deleteConversation = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+module.exports = { createConversation, deleteConversation, getConversation }

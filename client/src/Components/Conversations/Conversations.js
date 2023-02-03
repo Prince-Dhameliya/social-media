@@ -12,8 +12,6 @@ import Vertical from "../../img/Vertical3Dot.svg"
 import ConversationOptionModel from '../DropdownButton/ConversationOptionModel';
 import $ from 'jquery';
 
-// const App_URL = "social-point-36.vercel.app";
-// const App_URL = "localhost:5000/";
 let socket;
 
 const Conversations = ({screenSize}) => {
@@ -40,7 +38,6 @@ const Conversations = ({screenSize}) => {
       })
     });  
     return () => {
-      socket.emit('disconnect');
       socket.off();
     }
   },[ENDPOINT])

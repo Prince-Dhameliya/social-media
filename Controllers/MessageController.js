@@ -1,7 +1,8 @@
-import MessageModel from "../Models/messageModel.js";
+const MessageModel = require("../Models/messageModel.js");
+// import MessageModel from "../Models/messageModel.js";
 
 // Create new conversation
-export const createMessage = async (req, res) => {
+const createMessage = async (req, res) => {
     const newMessage = new MessageModel(req.body);
 
     try {
@@ -12,7 +13,7 @@ export const createMessage = async (req, res) => {
     }
 }
 
-export const getMessage = async (req, res) => {
+const getMessage = async (req, res) => {
     try {
         const messages = await MessageModel.find({
             conversationId: req.params.conversationId
@@ -23,7 +24,7 @@ export const getMessage = async (req, res) => {
     }
 }
 
-export const deleteMessage = async (req, res) => {
+const deleteMessage = async (req, res) => {
     try {
         await MessageModel.deleteOne({
             _id: req.params.messageId
@@ -33,3 +34,5 @@ export const deleteMessage = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+module.exports = { createMessage, deleteMessage, getMessage }

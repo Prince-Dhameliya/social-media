@@ -1,5 +1,8 @@
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+// import jwt from 'jsonwebtoken'
+// import dotenv from 'dotenv'
 
 dotenv.config();
 
@@ -17,4 +20,4 @@ const authMiddleWare = async (req, res, next) => {
     }
 }
 
-export default authMiddleWare
+module.exports = authMiddleWare

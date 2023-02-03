@@ -1,10 +1,15 @@
-import UserModel from "../Models/userModel.js";
-import bcrypt from 'bcrypt';
-import jwt from "jsonwebtoken";
-import PostModel from "../Models/postModel.js";
+const UserModel = require("../Models/userModel.js");
+const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+const PostModel = require("../Models/postModel.js");
+
+// import UserModel from "../Models/userModel.js";
+// import bcrypt from 'bcrypt';
+// import jwt from "jsonwebtoken";
+// import PostModel from "../Models/postModel.js";
 
 // Get all users
-export const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
     try {
         let users = await UserModel.find();
         users = users.map((user)=>{
@@ -18,7 +23,7 @@ export const getAllUsers = async (req, res) => {
 }
 
 // Get User data from database
-export const getUser = async (req, res) => {
+const getUser = async (req, res) => {
     const id = req.params.id;
     
     try {
@@ -37,7 +42,7 @@ export const getUser = async (req, res) => {
 }
 
 //Get Notifications
-export const getNotifications = async (req, res) => {
+const getNotifications = async (req, res) => {
     const userId = req.params.id;
     try {
         let User = await UserModel.findById(userId);
@@ -52,7 +57,7 @@ export const getNotifications = async (req, res) => {
 }
 
 //Get TimelineNotifications
-export const getTimelineNotifications = async (req, res) => {
+const getTimelineNotifications = async (req, res) => {
     const userId = req.params.id;
     try {
         let User = await UserModel.findById(userId);
@@ -71,7 +76,7 @@ export const getTimelineNotifications = async (req, res) => {
 }
 
 // Update a user
-export const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
     const id = req.params.id;
     const {_id, currentUserAdminStatus, password} = req.body.UserData;
 
@@ -104,7 +109,7 @@ export const updateUser = async (req, res) => {
 }
 
 // Delete User
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
     const id = req.params.id;
 
     //delete for other saved posts✔
@@ -145,7 +150,7 @@ export const deleteUser = async (req, res) => {
 }
 
 // Follow a User
-export const followUser = async (req, res) => {
+const followUser = async (req, res) => {
     const id = req.params.id;
 
     const {_id,username,profilePicture} = req.body;
@@ -182,7 +187,7 @@ export const followUser = async (req, res) => {
 }
 
 // Unfollow a User
-export const unfollowUser = async (req, res) => {
+const unfollowUser = async (req, res) => {
     const id = req.params.id;
 
     const {_id, username} = req.body;
@@ -210,3 +215,5 @@ export const unfollowUser = async (req, res) => {
         }
     }
 }
+
+module.exports = { deleteUser, followUser, getAllUsers, getNotifications, getTimelineNotifications, getUser, unfollowUser, updateUser }

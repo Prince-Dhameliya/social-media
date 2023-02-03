@@ -1,10 +1,16 @@
-import PostModel from "../Models/postModel.js";
-import mongoose from "mongoose";
-import UserModel from "../Models/userModel.js";
-import mongo, { ObjectId } from 'mongodb';
+const PostModel = require("../Models/postModel.js");
+const mongoose = require("mongoose");
+const UserModel = require("../Models/userModel.js");
+const mongo = require('mongodb');
+const {ObjectId} = require("mongodb");
+
+// import PostModel from "../Models/postModel.js";
+// import mongoose from "mongoose";
+// import UserModel from "../Models/userModel.js";
+// import mongo, { ObjectId } from 'mongodb';
 
 // Create new post
-export const createPost = async (req, res) => {
+const createPost = async (req, res) => {
     const newPost = new PostModel(req.body);
 
     try {
@@ -16,7 +22,7 @@ export const createPost = async (req, res) => {
 }
 
 // Get a Post
-export const getPost = async (req, res) => {
+const getPost = async (req, res) => {
     const id = req.params.id;
     
     try {
@@ -28,7 +34,7 @@ export const getPost = async (req, res) => {
 }
 
 // Get all Post
-export const getAllPosts = async (req, res) => {
+const getAllPosts = async (req, res) => {
     try {
         const posts = await PostModel.find({});
         res.status(200).json(posts.sort((a,b)=>{
@@ -40,7 +46,7 @@ export const getAllPosts = async (req, res) => {
 }
 
 // Update a Post
-export const updatePost = async (req, res) => {
+const updatePost = async (req, res) => {
     const postId = req.params.id;
     const {userId} = req.body;
     
@@ -60,7 +66,7 @@ export const updatePost = async (req, res) => {
 }
 
 // Delete a Post
-export const deletePost = async (req, res) => {
+const deletePost = async (req, res) => {
     const postId = req.params.id;
     const {userId} = req.body;
     
@@ -87,7 +93,7 @@ export const deletePost = async (req, res) => {
 }
 
 // like/dislike Post
-export const likePost = async (req, res) => {
+const likePost = async (req, res) => {
     const postId = req.params.id;
     const {userId} = req.body;
     try {
@@ -124,7 +130,7 @@ export const likePost = async (req, res) => {
     }
 }
 
-export const bookmarkPost = async (req, res) => {
+const bookmarkPost = async (req, res) => {
     const postId = req.params.id;
     const {userId} = req.body;
 
@@ -146,7 +152,7 @@ export const bookmarkPost = async (req, res) => {
 
 
 // Comment post
-export const commentPost = async (req, res) => {
+const commentPost = async (req, res) => {
     const postId = req.params.id;
     const {userId, username, profilePicture, comment} = req.body;
     let commentId = new mongo.ObjectId();
@@ -184,7 +190,7 @@ export const commentPost = async (req, res) => {
     }
 }
 
-export const deleteComment = async(req, res) => {
+const deleteComment = async(req, res) => {
     const {postId, userId} = req.body;
     let commentId = req.params.id;
     try {
@@ -201,7 +207,7 @@ export const deleteComment = async(req, res) => {
 }
 
 // Get Timeline Posts
-// export const getTimelinePosts = async (req, res) => {
+// const getTimelinePosts = async (req, res) => {
 //     const userId = req.params.id;  
     
 //     try {
@@ -240,7 +246,7 @@ export const deleteComment = async(req, res) => {
 //     }
 // }
 
-export const getTimelinePosts = async (req, res) => {
+const getTimelinePosts = async (req, res) => {
     const userId = req.params.id;  
     
     try {
@@ -256,7 +262,7 @@ export const getTimelinePosts = async (req, res) => {
 }
 
 // Get Saved Posts
-export const getTimelineSavedPosts = async (req, res) => {
+const getTimelineSavedPosts = async (req, res) => {
     const userId = req.params.id;  
     
     try {
@@ -269,3 +275,4 @@ export const getTimelineSavedPosts = async (req, res) => {
     }
 }
 
+module.exports = { bookmarkPost, commentPost, createPost, deleteComment, deletePost, getPost, getAllPosts, getTimelinePosts, getTimelineSavedPosts, likePost, updatePost }

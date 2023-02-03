@@ -1,15 +1,29 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import AuthRoute from './Routes/AuthRoute.js'
-import UserRoute from './Routes/UserRoute.js'
-import PostRoute from './Routes/PostRoute.js'
-import UploadRoute from './Routes/UploadRoute.js'
-import ConversationRoute from './Routes/ConversationRoute.js'
-import MessageRoute from './Routes/MessageRoute.js'
-import path from 'path';
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+
+const AuthRoute = require('./Routes/AuthRoute.js');
+const UserRoute = require('./Routes/UserRoute.js');
+const PostRoute = require('./Routes/PostRoute.js');
+const UploadRoute = require('./Routes/UploadRoute.js');
+const ConversationRoute = require('./Routes/ConversationRoute.js');
+const MessageRoute = require('./Routes/MessageRoute.js');
+const path = require("path");
+
+// import express from 'express';
+// import bodyParser from 'body-parser';
+// import mongoose from 'mongoose';
+// import dotenv from 'dotenv';
+// import cors from 'cors';
+// import AuthRoute from './Routes/AuthRoute.js'
+// import UserRoute from './Routes/UserRoute.js'
+// import PostRoute from './Routes/PostRoute.js'
+// import UploadRoute from './Routes/UploadRoute.js'
+// import ConversationRoute from './Routes/ConversationRoute.js'
+// import MessageRoute from './Routes/MessageRoute.js'
+// import path from 'path';
 
 dotenv.config()
 const app = express();
@@ -33,7 +47,7 @@ app.use('/api/user', UserRoute)
 app.use('/api/posts', PostRoute)
 app.use('/api/conversations', ConversationRoute)
 app.use('/api/messages', MessageRoute)
-// app.use('/api', UploadRoute)
+app.use('/api', UploadRoute)
 
 // MongoDB Connection
 const PORT = process.env.PORT || 5000;
@@ -47,7 +61,7 @@ mongoose.connect(process.env.MONGO_DB,{
 .then(app.listen(PORT, () => console.log(`Server started on ${PORT}`)))
 .catch((error) => console.log("Error while connecting with the database", error));
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, './client/build')));
 
 app.get('*', function (req, res){
@@ -55,16 +69,3 @@ app.get('*', function (req, res){
 })
 
 // Listen PORT
-// const express = require("express");
-// const cors = require("cors");
-// const dotenv = require("dotenv");
-// const mongoose = require("mongoose");
-// const bodyParser = require("body-parser");
-
-// const AuthRoute = require('./Routes/AuthRoute.js');
-// const UserRoute = require('./Routes/UserRoute.js');
-// const PostRoute = require('./Routes/PostRoute.js');
-// const UploadRoute = require('./Routes/UploadRoute.js');
-// const ConversationRoute = require('./Routes/ConversationRoute.js');
-// const MessageRoute = require('./Routes/MessageRoute.js');
-// const path = require("path");

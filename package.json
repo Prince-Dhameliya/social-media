@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "type": "module",
   "scripts": {
+    "dev": "start npm start && cd client && npm start",
     "start": "node server.js"
   },
   "author": "Prince Dhameliya",

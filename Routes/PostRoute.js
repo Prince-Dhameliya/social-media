@@ -1,5 +1,8 @@
-import express from 'express';
-import { bookmarkPost, commentPost, createPost, deleteComment, deletePost, getPost, getAllPosts, getTimelinePosts, getTimelineSavedPosts, likePost, updatePost } from '../Controllers/PostController.js';
+const express = require("express");
+const { bookmarkPost, commentPost, createPost, deleteComment, deletePost, getPost, getAllPosts, getTimelinePosts, getTimelineSavedPosts, likePost, updatePost } = require('../Controllers/PostController.js');
+
+// import express from 'express';
+// import { bookmarkPost, commentPost, createPost, deleteComment, deletePost, getPost, getAllPosts, getTimelinePosts, getTimelineSavedPosts, likePost, updatePost } from '../Controllers/PostController.js';
 
 const router = express.Router();
 
@@ -15,4 +18,4 @@ router.put('/:id/comment', commentPost)
 router.put('/:id/commentdelete', deleteComment)
 router.delete('/:id/delete', deletePost)
 
-export default router
+module.exports = router

@@ -1,6 +1,10 @@
-import express from "express";
-import { deleteUser, followUser, getAllUsers, getNotifications, getTimelineNotifications, getUser, unfollowUser, updateUser } from "../Controllers/UserController.js";
-import authMiddleWare from "../MiddleWare/authMiddleWare.js";
+const express = require("express");
+const { deleteUser, followUser, getAllUsers, getNotifications, getTimelineNotifications, getUser, unfollowUser, updateUser } = require("../Controllers/UserController.js");
+const authMiddleWare = require("../MiddleWare/authMiddleWare.js");
+
+// import express from "express";
+// import { deleteUser, followUser, getAllUsers, getNotifications, getTimelineNotifications, getUser, unfollowUser, updateUser } from "../Controllers/UserController.js";
+// import authMiddleWare from "../MiddleWare/authMiddleWare.js";
 
 const router = express.Router();
 
@@ -13,4 +17,4 @@ router.put('/:id/follow', authMiddleWare, followUser)
 router.put('/:id/unfollow', authMiddleWare, unfollowUser)
 router.delete('/:id', authMiddleWare, deleteUser)
 
-export default router;
+module.exports = router
