@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { followUser, getNotifications, unFollowUser } from '../../actions/userAction';
 import './Notifications.css'
 import time from 'time-ago';
 
 
-const Notification = ({notification,currentUser,profileUserId,user}) => {
+const Notification = ({notification,currentUser,profileUserId}) => {
+    const {user} = useSelector((state)=>state.authReducer.authData);
     const dispatch = useDispatch();
     const [isfollowing, setIsFollowing] = useState(user.following.includes(profileUserId))
 
@@ -42,7 +43,8 @@ const Notification = ({notification,currentUser,profileUserId,user}) => {
   )
 }
 
-const Notifications = ({location,currentUser,profileUserId,user}) => {
+const Notifications = ({location,currentUser,profileUserId}) => {
+  const {user} = useSelector((state)=>state.authReducer.authData);
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -57,7 +59,7 @@ const Notifications = ({location,currentUser,profileUserId,user}) => {
         <h3>New</h3>
         <div className="NotificationList">
           {user.notifications.map((notification,id)=>{
-            return <Notification key={id} notification={notification} currentUser={currentUser} profileUserId={profileUserId} user={user} />
+            return <Notification key={id} notification={notification} currentUser={currentUser} profileUserId={profileUserId} />
           })}
         </div>
     </div>

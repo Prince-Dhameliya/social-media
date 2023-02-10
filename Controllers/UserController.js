@@ -1,7 +1,9 @@
 const UserModel = require("../Models/userModel.js");
+const PostModel = require("../Models/postModel.js");
+const ConversationModel = require("../Models/conversationModel.js");
+const MessageModel = require("../Models/messageModel.js");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
-const PostModel = require("../Models/postModel.js");
 
 // Get all users
 const getAllUsers = async (req, res) => {
@@ -99,7 +101,7 @@ const updateUser = async (req, res) => {
         }
     }
     else{
-        res.status(403).json("Access Denied! you can only update your own profile")
+        res.status(403).json({message: "Access Denied! you can only update your own profile"})
     }
 }
 
@@ -115,6 +117,8 @@ const deleteUser = async (req, res) => {
     //self all posts✔
 
     var {currentUserId, currentUserAdminStatus} = req.body;
+
+    // console.log(`${id} + ${currentUserId}`);
 
     if(id === currentUserId || currentUserAdminStatus){
         // currentUserId = "63b8d2dcc2f7bead52d5aafb";
@@ -134,13 +138,19 @@ const deleteUser = async (req, res) => {
             await UserModel.updateMany({}, {$pull : {notifications : {userId : currentUserId, type : "liked"}}})
             await UserModel.updateMany({}, {$pull : {notification : {userId : currentUserId, type : "comment"}}})
             await UserModel.updateMany({}, {$pull : {notifications : {userId : currentUserId, type : "comment"}}})
+            const ans = await ConversationModel.find({members: { $in: [currentUserId] }})
+            for (let index = 0; index < ans.length; index++) {
+                const conversationId = ans[index]?._id;
+                await MessageModel.deleteMany({conversationId: conversationId})
+            }
+            await ConversationModel.deleteMany({members: { $in: [currentUserId] }})
             res.status(200).json("User deleted successfully")
         } catch (error) {
             res.status(500).json(error)
         }
     }
     else{
-        res.status(403).json("Access Denied! you can only delete your own profile");
+        res.status(403).json({message: "Access Denied! you can only delete your own profile"});
     }
 }
 

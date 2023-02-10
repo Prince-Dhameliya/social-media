@@ -115,12 +115,12 @@ const Profile = ({location,socket}) => {
 
   return (
     <div className="Profile">
-        <NavigationMain location={location} user={user} profileUserId={profileUserId} currentUser={currentUser} persons={persons} searchedName={searchedName} setSearchedName={setSearchedName} screenSize={screenSize}  />
+        <NavigationMain location={location} profileUserId={profileUserId} currentUser={currentUser} persons={persons} searchedName={searchedName} setSearchedName={setSearchedName} screenSize={screenSize}  />
 
         {location === "home" && <HeaderBar/>}
         {location === "activity" && <HeaderBarNotificitions/>}
         {(location === "search" || location === "allposts") && screenSize.dynamicWidth <= 700 && <HeaderBarSearch setSearchedName={setSearchedName} screenSize={screenSize} />}
-        {(location === "saved" || location === "profile") && <HeaderBarProfile user={user} currentUser={currentUser}/>}
+        {(location === "saved" || location === "profile") && <HeaderBarProfile currentUser={currentUser}/>}
 
 
         {location === "home" && <HomeSide posts={posts} location={location} persons={persons} screenSize={screenSize}/>}
@@ -131,7 +131,7 @@ const Profile = ({location,socket}) => {
             {(location === "saved" || location === "profile") && <ProfileCard location={location} posts={posts} currentUser={currentUser} profileUserId={profileUserId} />}
             {(location === "saved" || location === "profile" || location === "allposts" || location === "home") && <Posts location={location} posts={posts} persons={persons}/>}
             {location === "search" && <SearchedUser persons={persons} searchedName={searchedName} />}
-            {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId} user={user}/>}
+            {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId}/>}
             {location === "activity" && <FollowersCardVertical persons={persons}/>}
 
         </div>}

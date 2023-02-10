@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './NavigationMain.css'
 import { Link } from 'react-router-dom'
 import { logOut } from '../../actions/AuthAction'
@@ -34,7 +34,8 @@ function togglemenu(){
   submenu.classList.toggle("open-menu");
 }
 
-const NavigationMain = ({location,user,currentUser,profileUserId,persons,searchedName,setSearchedName,screenSize}) => {
+const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName,setSearchedName,screenSize}) => {
+  const {user} = useSelector((state)=>state.authReducer.authData);
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(logOut())
@@ -167,7 +168,7 @@ const NavigationMain = ({location,user,currentUser,profileUserId,persons,searche
                 <p style={{color: "red"}}>Delete Account</p>
                 <span><img alt="" src={Delete}/></span>
             </div>
-            <DeleteModel open={openDelete} setOpen={setOpenDelete} user={user} currentUser={currentUser} />
+            <DeleteModel open={openDelete} setOpen={setOpenDelete} currentUser={currentUser} />
             <hr/>
             <div className="sub-menu-link" onClick={handleLogOut}>
                 <p style={{color: "red"}}>Log out</p>
@@ -222,7 +223,7 @@ const NavigationMain = ({location,user,currentUser,profileUserId,persons,searche
             {active === "search" && <h2>Search</h2> }
             {active === "activity" && <h2>Notifications</h2> }
             <div className="MiniNavigationRightStuff">
-                {active === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId} user={user}/>}
+                {active === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId}/>}
                 {active === "search" && <HeaderBarSearch setSearchedName={setSearchedName} screenSize={screenSize} />}
                 {active === "search" && <SearchedUser persons={persons} searchedName={searchedName} />}
             </div>

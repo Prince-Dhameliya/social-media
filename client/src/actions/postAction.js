@@ -33,11 +33,11 @@ export const commentPost = (id, curdata) => async (dispatch) => {
     }
 }
 
-export const deleteComment = (userId, postId, commentId) => async (dispatch) => {
+export const deleteComment = (commentId, data) => async (dispatch) => {
     dispatch({type: "COMMENTDELETING_START"})
     try {
-        await PostApi.deleteComment(userId, postId, commentId);
-        dispatch({type: "COMMENTDELETING_SUCCESS", commentId: commentId, postId:postId})
+        await PostApi.deleteComment(commentId, data);
+        dispatch({type: "COMMENTDELETING_SUCCESS", commentId: commentId, postId:data.postId})
     } catch (error) {
         dispatch({type: "COMMENTDELETING_FAIL"})
         console.log(error);
@@ -80,10 +80,10 @@ export const unbookmarkPost = (postId, userId) => async (dispatch) => {
     }
 }
 
-export const deletePost = (id,userId) => async (dispatch) => {
+export const deletePost = (id,data) => async (dispatch) => {
     dispatch({type: "POST_DELETING_START"})
     try {
-        await PostApi.deletePost(id, userId);
+        await PostApi.deletePost(id, data);
         dispatch({type: "POST_DELETING_SUCCESS", data: id})
     } catch (error) {
         dispatch({type: "POST_DELETING_FAIL"})

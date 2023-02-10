@@ -63,25 +63,22 @@ const updatePost = async (req, res) => {
 // Delete a Post
 const deletePost = async (req, res) => {
     const postId = req.params.id;
-    const {userId} = req.body;
+    const {currentUserId,currentUserAdminStatus} = req.body;
     
     try {
         const post = await PostModel.findById(postId);
-        await UserModel.updateMany({_id : post.userId},{$pull : {notification : {postId : post._id, type : "liked"}}});
-        await UserModel.updateMany({_id : post.userId},{$pull : {notifications : {postId : post._id, type : "liked"}}});
-        await UserModel.updateMany({_id : post.userId},{$pull : {notification : {postId : post._id, type : "comment"}}});
-        await UserModel.updateMany({_id : post.userId},{$pull : {notifications : {postId : post._id, type : "comment"}}});
+        if(post?.userId === currentUserId || currentUserAdminStatus){
+            await UserModel.updateMany({_id : post.userId},{$pull : {notification : {postId : post._id, type : "liked"}}});
+            await UserModel.updateMany({_id : post.userId},{$pull : {notifications : {postId : post._id, type : "liked"}}});
+            await UserModel.updateMany({_id : post.userId},{$pull : {notification : {postId : post._id, type : "comment"}}});
+            await UserModel.updateMany({_id : post.userId},{$pull : {notifications : {postId : post._id, type : "comment"}}});
 
-        await post.deleteOne();
-        res.status(200).json("Post Delete Successfully")
-
-        // if(post.userId === userId){
-        //     // await post.deleteOne();
-        //     // res.status(200).json("Post Delete Successfully")
-        // }
-        // else{
-        //     res.status(403).json("Action Forbidden")
-        // }
+            await post.deleteOne();
+            res.status(200).json("Post Delete Successfully")
+        }
+        else{
+            res.status(403).json("Action Forbidden")
+        }
     } catch (error) {
         res.status(500).json(error)
     }
@@ -186,16 +183,21 @@ const commentPost = async (req, res) => {
 }
 
 const deleteComment = async(req, res) => {
-    const {postId, userId} = req.body;
+    const {commentUserId, postId, currentUserId, currentUserAdminStatus} = req.body;
     let commentId = req.params.id;
     try {
-        await PostModel.updateOne({_id : postId}, {$pull : {comments : {commentId: ObjectId(commentId)}}});
-        const post = await PostModel.findById(postId);
-        if(userId !== post.userId){
-            await UserModel.updateOne({_id : post.userId},{$pull : {notification : {commentId: ObjectId(commentId), type : "comment"}}});
-            await UserModel.updateOne({_id : post.userId},{$pull : {notifications : {commentId: ObjectId(commentId),  type : "comment"}}});
+        if(commentUserId === currentUserId || currentUserAdminStatus){
+            await PostModel.updateOne({_id : postId}, {$pull : {comments : {commentId: ObjectId(commentId)}}});
+            const post = await PostModel.findById(postId);
+            if(currentUserId !== post.userId){
+                await UserModel.updateOne({_id : post.userId},{$pull : {notification : {commentId: ObjectId(commentId), type : "comment"}}});
+                await UserModel.updateOne({_id : post.userId},{$pull : {notifications : {commentId: ObjectId(commentId),  type : "comment"}}});
+            }
+            res.status(200).json("comment deleted successfully")
         }
-        res.status(200).json("comment deleted successfully")
+        else{
+            res.status(403).json("Action Forbidden")
+        }
     } catch (error) {
         res.status(500).json(error)
     }

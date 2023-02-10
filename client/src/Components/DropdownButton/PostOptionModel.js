@@ -10,7 +10,7 @@ export default function PostOptionModel({open,setOpen,data}) {
     setOpen(false);
   };
   const handleDelete = () => {
-    dispatch(deletePost(data._id,user._id));
+    dispatch(deletePost(data._id,{currentUserId: user._id, currentUserAdminStatus: user?.isAdmin}));
     handleClose();
   }
 
@@ -18,12 +18,12 @@ export default function PostOptionModel({open,setOpen,data}) {
       <Dialog open={open} onClose={handleClose}>
 
         <div style={{width: "20rem"}} className="sub-menu">
-            {data?.userId === user._id &&
+            {(data?.userId === user._id || user?.isAdmin === true) &&
             <><div className="sub-menu-link" onClick={handleClose && handleDelete}>
                 <p style={{color: "red",fontWeight: "600",alignItems: 'center'}}>Delete</p>
             </div>
             <hr/></>}
-            {data?.userId === user._id &&
+            {(data?.userId === user._id || user?.isAdmin === true) &&
             <><div className="sub-menu-link" onClick={handleClose}>
                 <p>Edit</p>
             </div>

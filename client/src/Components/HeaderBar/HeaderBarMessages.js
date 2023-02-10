@@ -7,7 +7,7 @@ const HeaderBarMessages = ({user}) => {
     let navigate = useNavigate();
   return (
     <div className="HeaderBarMessages">
-        <img className='HeaderBackIcon' src={Back} alt="" onClick={() => navigate(-1)} />
+        <img className='BackIcon' src={Back} alt="" onClick={() => navigate(-1)} />
         <span className="HeaderTitle">{user.username}</span>
     </div>
   )

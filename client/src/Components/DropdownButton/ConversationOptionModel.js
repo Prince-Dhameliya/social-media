@@ -16,7 +16,6 @@ export default function ConversationOptionModel({open,setOpen,conversation}) {
     } catch (error) {
         console.log(error);
     }
-    // dispatch(deletePost(data._id,user._id));
     handleClose();
   }
 

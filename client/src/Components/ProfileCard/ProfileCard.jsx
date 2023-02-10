@@ -5,9 +5,11 @@ import { useState } from 'react'
 
 import PostIcon from '../../img/Posts.svg'
 import Saved from '../../img/UnBookmark.svg'
+import HorizontalIcon from '../../img/Horizontal3Dot.svg'
 import ProfileModel from '../ProfileModal/ProfileModel'
 import { followUser, unFollowUser } from '../../actions/userAction'
 import axios from 'axios'
+import ProfileOptionModel from '../DropdownButton/ProfileOptionModel'
 
 const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
   const dispatch = useDispatch();
@@ -15,6 +17,7 @@ const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
   const [isfollowing, setIsFollowing] = useState(user.following.includes(profileUserId))
 
   const [open, setOpen] = useState(false);
+  const [openProfileMore, setOpenProfileMore] = useState(false);
   const [active, setActive] = useState(location);
   const navigate = useNavigate();
 
@@ -44,7 +47,7 @@ const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
             </div>
 
             <div className="ProfileName">
-                <span>{currentUser.firstname} {currentUser.lastname}</span>
+                <span>{currentUser.firstname} {currentUser.lastname} <img className="ProfileMoreIcon" src={HorizontalIcon} onClick={()=>setOpenProfileMore(true)} alt=''/><ProfileOptionModel open={openProfileMore} setOpen={setOpenProfileMore} currentUser={currentUser}/> </span>
                 <span>{currentUser.bio ? currentUser.bio : null}</span>
             </div>
 

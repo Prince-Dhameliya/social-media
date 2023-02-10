@@ -28,7 +28,7 @@ const NavigationBar = ({location}) => {
   let comments=0;
   let like=0;
   let follow=0;
-  notification.map((notification,id)=>{
+  notification?.map((notification,id)=>{
       if(notification?.type === "comment"){
         comments=comments+1;
       }
@@ -77,7 +77,6 @@ const NavigationBar = ({location}) => {
               <Link to="../"><img id="100001" src={active === "home" ? Home : WHome} alt="" className='homeNavigation' onClick={handleClick} /></Link>
               <Link to="../explore"><img id="100002" src={active === "allposts" ? Search : WSearch} alt="" className='searchNavigation' onClick={handleClick} /></Link>
               <Link to=""><img id="100003" src={active === "createpost" ? AddObj : WAddObj} alt="" className='addPostNavigation' onClick={handleClick} />
-              <CreatePost open={open} setOpen={setOpen}/>
               </Link>
               <Link to="../activity"><img id="100004" src={active === "activity" ? Like : WLike} alt="" className='likeNavigation' onClick={handleClick} /></Link>
               <Link to={`../${user._id}`}><img id="100005" src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} className={active === "profile" ? "active profileNavigation" : "profileNavigation"} alt="" onClick={handleClick} /></Link>
@@ -99,6 +98,7 @@ const NavigationBar = ({location}) => {
                   <img src={Triangle} className="NotificationBottom" alt="" />
               </div>}
       </div>
+      <CreatePost open={open} setOpen={setOpen}/>
     </>
   )
 }
