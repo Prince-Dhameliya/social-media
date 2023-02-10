@@ -1,7 +1,7 @@
 import React from 'react'
 import FollowersCard from '../FollowersCard/FollowersCard'
 import Posts from '../Posts/Posts'
-import PostShare from '../PostShare/PostShare'
+import StoryScroller from '../StoryScroller/StoryScroller'
 import './HomeSide.css'
 
 const HomeSide = ({posts,persons,location,screenSize}) => {
@@ -9,7 +9,7 @@ const HomeSide = ({posts,persons,location,screenSize}) => {
     <>
       <div className="HomeSide">
           <div className="PostSide">
-              <PostShare />
+              <StoryScroller/>
               <Posts posts={posts} persons={persons} location={location} screenSize={screenSize} />
           </div>
           <div className="FollowerSide">

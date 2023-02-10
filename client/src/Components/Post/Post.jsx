@@ -6,7 +6,7 @@ import Like from '../../img/like.svg'
 import DisLike from '../../img/dislike.svg'
 import Bookmark from '../../img/Bookmark.svg'
 import UnBookmark from '../../img/UnBookmark.svg'
-import Emoji from '../../img/Emoji.svg'
+import EmojiIcon from '../../img/Emoji.svg'
 import Horizontal from '../../img/Horizontal3Dot.svg'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,14 +23,14 @@ const Post = ({data,index}) => {
   const {user}  = useSelector((state)=>state.authReducer.authData)
   const dispatch = useDispatch();
   
-  const [liked, setLiked] = useState(data.likes.includes(user._id))
-  const [bookmarked, setBookmarked] = useState(data.saved.includes(user._id))
-  const [likes, setLikes] = useState(data.likes.length)
+  const [liked, setLiked] = useState(data?.likes?.includes(user?._id))
+  const [bookmarked, setBookmarked] = useState(data?.saved?.includes(user?._id))
+  const [likes, setLikes] = useState(data?.likes?.length)
 
   const handleLike = async () => {
     liked ? setLikes((prev)=>prev-1) : setLikes((prev)=>prev+1)
     setLiked((prev)=>!prev)
-    liked ? dispatch(dislikePost(data._id, user._id)) : dispatch(likePost(data._id, user._id))
+    liked ? dispatch(dislikePost(data?._id, user?._id)) : dispatch(likePost(data?._id, user?._id))
   }
 
   const handleDoubleClickLike = async () => {
@@ -43,12 +43,17 @@ const Post = ({data,index}) => {
 
   const handleBookmark = async () => {
     setBookmarked((prev)=>!prev)
-    bookmarked ? dispatch(unbookmarkPost(data._id, user._id)) : dispatch(bookmarkPost(data._id, user._id))
+    bookmarked ? dispatch(unbookmarkPost(data?._id, user?._id)) : dispatch(bookmarkPost(data?._id, user?._id))
   }
 
   // For Comment
   const loading = useSelector((state)=>state.postReducer.uploading)
   const desc = useRef();
+  // let [input,setInput] = useState();
+
+  // const handleChange = (e) => {
+
+  // }
 
   const resetComment = () => {
     desc.current.value = "";
@@ -75,7 +80,7 @@ const Post = ({data,index}) => {
           comment: desc.current.value,
           likes:[]
       }
-      dispatch(commentPost(data._id, newComment))
+      dispatch(commentPost(data?._id, newComment))
       const myButton = document.getElementById(index);
       myButton.style.color = "rgb(176, 226, 243)"
       resetComment();
@@ -96,10 +101,10 @@ const Post = ({data,index}) => {
   const [openMore, setOpenMore] = useState(false);
 
   function handleRedirect(){
-    if(data.comments.length){
+    if(data?.comments?.length){
       setOpen(true);
     }else{
-      document.getElementById(data._id).select();
+      document.getElementById(data?._id).select();
     }
   }
 
@@ -142,16 +147,14 @@ const Post = ({data,index}) => {
 
         <div className='PostContent'>
           {data?.image ?
-            (data.image.includes("image") 
-              ? <img src={data.image ? data.image: ""} onDoubleClick={handleDoubleClickLike} alt="" />
-              : <><video ref={videoRef} autoPlay muted loop onClick={videoClick}><source src={data.image ? data.image : ""} type="video/mp4"/></video>
+            (data?.image?.includes("image") 
+              ? <img src={data?.image} onDoubleClick={handleDoubleClickLike} alt="" />
+              : <><video ref={videoRef} autoPlay muted loop onClick={videoClick}><source src={data?.image} type="video/mp4"/></video>
                   {pause ? <PlayArrow className='videoPlay' onClick={videoClick}/> : null}
                   {muted ? <VolumeOff className='muted' onClick={videoMuteClick} /> : <VolumeUp className='muted' onClick={videoMuteClick}/>}
                 </>
-            ) :  <Skeleton sx={{ height: 400, borderRadius: 2 }} animation="wave" variant="rectangular" />}
+            ) :  <Skeleton sx={{ height: 400 }} animation="wave" variant="rectangular" />}
         </div>
-
-      
 
         <div className="PostReact">
             <div>
@@ -195,7 +198,7 @@ const Post = ({data,index}) => {
 
         <div className="CommentSection">
           <div className="CommentPlusEmoji">
-            <img src={Emoji} className="CommentEmojiIcon" style={{cursor: "pointer",width: "20px"}} alt="" />
+            <img src={EmojiIcon} className="CommentEmojiIcon" style={{cursor: "pointer",width: "20px"}} alt="" />
             {data?._id ? <input type="text" id={data._id} className="CommentInput" ref={desc} placeholder='Add a comment...' onKeyDown={searchKeyPressed} onChange={handleInput} autoComplete="off" />
             : <input type="text" className="CommentInput" ref={desc} placeholder='Add a comment...' onChange={handleInput} autoComplete="off" />}
           </div>

@@ -2,10 +2,6 @@ const UserModel = require("../Models/userModel.js");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 
-// import UserModel from "../Models/userModel.js";
-// import bcrypt from 'bcrypt';
-// import jwt from "jsonwebtoken";
-
 // Registering a new User
 const registerUser = async (req, res) => {
 

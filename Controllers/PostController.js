@@ -4,11 +4,6 @@ const UserModel = require("../Models/userModel.js");
 const mongo = require('mongodb');
 const {ObjectId} = require("mongodb");
 
-// import PostModel from "../Models/postModel.js";
-// import mongoose from "mongoose";
-// import UserModel from "../Models/userModel.js";
-// import mongo, { ObjectId } from 'mongodb';
-
 // Create new post
 const createPost = async (req, res) => {
     const newPost = new PostModel(req.body);
@@ -251,7 +246,7 @@ const getTimelinePosts = async (req, res) => {
     
     try {
         const posts = await PostModel.find({});
-        
+
         res.status(200).json(posts.sort((a,b)=>{
             return b.createdAt - a.createdAt;
         }));

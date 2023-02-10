@@ -3,11 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const PostModel = require("../Models/postModel.js");
 
-// import UserModel from "../Models/userModel.js";
-// import bcrypt from 'bcrypt';
-// import jwt from "jsonwebtoken";
-// import PostModel from "../Models/postModel.js";
-
 // Get all users
 const getAllUsers = async (req, res) => {
     try {

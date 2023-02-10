@@ -1,0 +1,146 @@
+.CreatePost{
+    display: flex;
+    flex-direction: column;
+    /* height: 80vh; old */
+    height: 90vh;
+    width: 37rem;
+}
+
+.CreatePost > hr{
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: rgb(218, 218, 218);
+    margin: 0px;
+}
+
+.CreatePostTitleSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 40px;
+}
+
+.CreatePostTitle{
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+}
+
+.CreatePostClose{
+    display: flex;
+    position: absolute;
+    right: 10px;
+}
+
+.CreatePostFileUploadSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: 740px; old */
+    height: 830px;
+    position: relative;
+    overflow: hidden;
+    gap: 1rem;
+}
+
+.CreatePostFileUpload{
+    position: absolute;
+    /* height: 734px; old */
+    top: 0;
+    height: inherit;
+    width: 100%;
+    opacity: 0;
+}
+
+.CreatePostButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0095f6;
+    border: none;
+    background: transparent;
+    padding: 12px 10px;
+    cursor: pointer;
+    transition: all 100ms ease-out;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none;
+}
+
+.PreviewImageAndTitle{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.PreviewTitleSection{
+    display: flex;
+    flex-direction: column;
+}
+
+.PreviewTitle{
+    padding: 5px 15px;
+}
+
+.PreviewTextArea{
+    font-family: inherit;
+    font-size: 15px;
+    resize: none;
+    width: 100%;
+    height: 80px;
+    outline: none;
+    border: none;
+}
+
+.CreatePostUserTitleIcon{
+    display: flex;
+    gap: 0.3rem;
+    padding: 10px 15px;
+    align-items: center;
+}
+
+.CreatePostUserIcon{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
+.CreatePostUserTitle{
+    color: black;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.PreviewImage{
+    position: relative;
+}
+
+.PreviewImage > svg{
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.PreviewImage > img{
+    width: 100%;
+    /* height: 592px; */
+    object-fit: cover;
+}
+
+.PreviewImage > video{
+    width: 100%;
+    /* height: 592px; */
+    object-fit: cover;
+}
+
+@media screen and (max-width: 899px){
+    .CreatePost{
+        width: 100%;
+    }
+}

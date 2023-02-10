@@ -18,6 +18,7 @@ import Notifications from '../../Components/Notifications/Notifications'
 import { getTimelineNotifications } from '../../actions/userAction'
 import SearchedUser from '../../Components/SearchedUser/SearchedUser'
 import Conversations from '../../Components/Conversations/Conversations'
+// import $ from "jquery"
 
 function togglemenu(){
   let submenu = document.getElementById("submenu");
@@ -35,16 +36,25 @@ function togglemenu(){
   }
 }
 
-const Profile = ({location}) => {
+const Profile = ({location,socket}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   let {posts} = useSelector((state)=>state.postReducer);
   const [allPosts, setAllPosts] = useState([]);
   const [persons, setPersons] = useState([]);
   const [currentUser, setCurrentUser] = useState(user);
   const [searchedName, setSearchedName] = useState("");
+  let [onlineFriend, setOnlineFriend] = useState([]);
   const params = useParams();
   const dispatch = useDispatch();
   const profileUserId = params.id;
+
+
+  useEffect(()=>{
+    socket?.emit("addUser",user._id);
+    socket?.on("getUsers",users=>{
+      setOnlineFriend(users);
+    })
+  },[user._id])
 
   const [screenSize, getDimension] = useState({
     dynamicWidth: window.innerWidth,
@@ -63,36 +73,37 @@ const Profile = ({location}) => {
   
   useEffect(() => {
     window.addEventListener('resize', setDimension);
+    // $("#ProfileCenter").scrollTop(function(){
+    //   console.log($("#ProfileCenter").height())
+    // });
+    // $(".MessagesList").scroll(function() {
+    //   console.log($(".MessagesList").height());
+    // });
     return(() => {
         window.removeEventListener('resize', setDimension);
     })
   }, [screenSize])
-  // console.log(screenSize.dynamicWidth);
+
 
   useEffect(()=>{
     const fetchAllPosts = async () => {
       const {data} = await getAllPosts();
       setAllPosts(data)
     }
-
     const fetchProfileUserData = async () => {
         const {data} = await getUser(params.id);
         setCurrentUser(data);
     }
-
     const fetchPersons = async () => {
         const {data} = await getAllUser();
         setPersons(data)
     }
-
     const fetchNotifications = async () => {
       dispatch(getTimelineNotifications(user._id))
     }
-
     if(location === "activity" || location === "search" || location === "home"){
       fetchPersons()
     }
-
     if(location !== "search" && location !== "activity" && location !== "home"){
       // fetchAllPosts()
     }
@@ -112,12 +123,11 @@ const Profile = ({location}) => {
         {(location === "saved" || location === "profile") && <HeaderBarProfile user={user} currentUser={currentUser}/>}
 
 
-        {location === "home" && 
-        <HomeSide posts={posts} location={location} persons={persons} screenSize={screenSize}/>}
-        {location === "messages" && <Conversations screenSize={screenSize}/>}
+        {location === "home" && <HomeSide posts={posts} location={location} persons={persons} screenSize={screenSize}/>}
+        {location === "messages" && <Conversations screenSize={screenSize} socket={socket} onlineFriend={onlineFriend}/>}
 
         {location !== "home" && location !== "messages" &&
-        <div className="ProfileCenter" onClick={togglemenu}>
+        <div id='ProfileCenter' className="ProfileCenter" onClick={togglemenu}>
             {(location === "saved" || location === "profile") && <ProfileCard location={location} posts={posts} currentUser={currentUser} profileUserId={profileUserId} />}
             {(location === "saved" || location === "profile" || location === "allposts" || location === "home") && <Posts location={location} posts={posts} persons={persons}/>}
             {location === "search" && <SearchedUser persons={persons} searchedName={searchedName} />}

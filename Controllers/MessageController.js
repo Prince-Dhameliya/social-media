@@ -1,5 +1,4 @@
 const MessageModel = require("../Models/messageModel.js");
-// import MessageModel from "../Models/messageModel.js";
 
 // Create new conversation
 const createMessage = async (req, res) => {

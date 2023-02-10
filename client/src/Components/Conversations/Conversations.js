@@ -7,61 +7,43 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Message from '../Messages/Message';
 import Back from "../../img/Back.svg"
 import { getUser } from '../../api/UserRequest';
-import {io} from "socket.io-client";
 import Vertical from "../../img/Vertical3Dot.svg"
 import ConversationOptionModel from '../DropdownButton/ConversationOptionModel';
 import $ from 'jquery';
 
-let socket;
+// let socket;
 
-const Conversations = ({screenSize}) => {
+const Conversations = ({screenSize,socket,onlineFriend}) => {
   const [openMore, setOpenMore] = useState(false);
   let [conversations, setConversations] = useState([]);
   let [messages, setMessages] = useState([]);
-  let [onlineFriend, setOnlineFriend] = useState([]);
-  let [arrivalMessages, setArrivalMessages] = useState("");
   let [currentFriendChat, setCurrentFriendChat] = useState({});
   let [currentFriendData, setCurrentFriendData] = useState({});
   const {user} = useSelector((state)=>state.authReducer.authData);
   let navigate = useNavigate();
   let params = useParams();
   let desc = useRef();
-  const ENDPOINT = 'https://socket-server-r0w0.onrender.com';
+  // const ENDPOINT = 'https://socket-server-r0w0.onrender.com';
  
   useEffect(()=>{
-    socket = io(ENDPOINT);
-    socket.on("getMessage", data=>{
-      setArrivalMessages({
+    socket?.on("getMessage", data=>{
+      const getMessage = {
         senderId: data.senderId,
         text: data.text,
         createdAt: Date.now(),
-      })
-    });  
-    return () => {
-      socket.off();
-    }
-  },[ENDPOINT])
+      }
+      getMessage && currentFriendChat?.members?.includes(data?.senderId) && 
+      setMessages((prev)=>[...prev, getMessage])
+    });
+  },[socket,currentFriendChat?.members])
   
   useEffect(()=>{
-    socket.on("getDeleteMessage", data=>{
+    socket?.on("getDeleteMessage", data=>{
       let newMessages = messages;
       newMessages = newMessages.filter(m=>m._id !== data.messageId);
       setMessages(newMessages);
     })
   },[messages.length])
-  
-  useEffect(()=>{
-    socket.emit("addUser",user._id);
-    socket.on("getUsers",users=>{
-      setOnlineFriend(users);
-    })
-  },[user._id])
-
-  useEffect(()=>{
-    arrivalMessages && currentFriendChat?.members?.includes(arrivalMessages.senderId) && 
-    setMessages((prev)=>[...prev, arrivalMessages])
-    // console.log("ArrivalMessages");
-  },[arrivalMessages,currentFriendChat.members])
 
 
   useEffect(()=>{
@@ -104,7 +86,6 @@ const Conversations = ({screenSize}) => {
     };
     if(currentFriendChat?._id){
       getMessages();
-      // console.log("totalmessages");
     }
     // var page = 0;
     // var isLoading = false;
@@ -165,20 +146,18 @@ const Conversations = ({screenSize}) => {
         senderId: user._id,
         text: desc.current.value,
       }
-
       try {
-        const {data} = await axios.post("/api/messages",message);
-        setMessages([...messages, data]);
+        await axios.post("/api/messages",message);
+        const receiverId = currentFriendChat?.members?.find(member => member !== user._id);
+        socket?.emit("sendMessage",{
+          senderId: user._id,
+          receiverId,
+          text: desc.current.value,
+        })
+        setMessages([...messages,message])
       } catch (error) {
         console.log(error);
       }
-
-      const receiverId = currentFriendChat?.members?.find(member => member !== user._id);
-      socket.emit("sendMessage",{
-        senderId: user._id,
-        receiverId,
-        text: desc.current.value,
-      })
       // dispatch(commentPost(data._id, newComment))
       const myButton = document.getElementById("SendMesssageButton");
       myButton.style.color = "rgb(176, 226, 243)"

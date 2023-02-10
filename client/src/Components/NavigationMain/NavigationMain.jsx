@@ -27,6 +27,7 @@ import DeleteModel from '../DeleteModel/DeleteModel'
 import Notifications from '../Notifications/Notifications'
 import HeaderBarSearch from '../HeaderBar/HeaderBarSearch'
 import SearchedUser from '../SearchedUser/SearchedUser'
+import CreatePost from '../CreatePost/CreatePost'
 
 function togglemenu(){
   let submenu = document.getElementById("submenu");
@@ -40,6 +41,7 @@ const NavigationMain = ({location,user,currentUser,profileUserId,persons,searche
   }
 
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [active, setActive] = useState(location);
 
   const handleClick = (event) => {
@@ -74,6 +76,7 @@ const NavigationMain = ({location,user,currentUser,profileUserId,persons,searche
       if(MiniNavigation.classList.contains("active")){
         MiniNavigation.classList.remove("active");
       }
+      setOpen(true);
     }
     else if(event.target.id === "100010"){
       setActive("activity");
@@ -136,6 +139,7 @@ const NavigationMain = ({location,user,currentUser,profileUserId,persons,searche
         </div>
       </div>
 
+      <CreatePost open={open} setOpen={setOpen}/>
       <div className="moreItems" id="moreItems" onClick={togglemenu}>
         <img src={More} alt="" className='navigation_icon' />
         <span className="navigation_title">More</span>
@@ -159,11 +163,11 @@ const NavigationMain = ({location,user,currentUser,profileUserId,persons,searche
                 <span><img alt="" src={Mode}/></span>
             </div>
             <hr/>
-            <div className="sub-menu-link" onClick={()=>setOpen(true)}>
+            <div className="sub-menu-link" onClick={()=>setOpenDelete(true)}>
                 <p style={{color: "red"}}>Delete Account</p>
                 <span><img alt="" src={Delete}/></span>
             </div>
-            <DeleteModel open={open} setOpen={setOpen} user={user} currentUser={currentUser} />
+            <DeleteModel open={openDelete} setOpen={setOpenDelete} user={user} currentUser={currentUser} />
             <hr/>
             <div className="sub-menu-link" onClick={handleLogOut}>
                 <p style={{color: "red"}}>Log out</p>

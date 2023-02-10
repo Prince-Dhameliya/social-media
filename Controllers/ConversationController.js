@@ -1,7 +1,5 @@
 const ConversationModel = require("../Models/conversationModel.js");
 const MessageModel = require("../Models/messageModel.js");
-// import ConversationModel from "../Models/conversationModel.js";
-// import MessageModel from "../Models/messageModel.js";
 
 // Create new conversation
 const createConversation = async (req, res) => {

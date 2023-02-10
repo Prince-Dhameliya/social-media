@@ -2,10 +2,6 @@ const express = require("express");
 const { deleteUser, followUser, getAllUsers, getNotifications, getTimelineNotifications, getUser, unfollowUser, updateUser } = require("../Controllers/UserController.js");
 const authMiddleWare = require("../MiddleWare/authMiddleWare.js");
 
-// import express from "express";
-// import { deleteUser, followUser, getAllUsers, getNotifications, getTimelineNotifications, getUser, unfollowUser, updateUser } from "../Controllers/UserController.js";
-// import authMiddleWare from "../MiddleWare/authMiddleWare.js";
-
 const router = express.Router();
 
 router.get('/', getAllUsers)

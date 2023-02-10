@@ -1,10 +1,11 @@
+import { Skeleton } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { getUser } from '../../api/UserRequest';
 import ConversationOptionModel from '../DropdownButton/ConversationOptionModel';
 import './Conversations.css'
 
 const Conversation = ({conversation,user,onlineFriend}) => {
-    const [currentFriend, setCurrentFriend] = useState(null);
+    let [currentFriend, setCurrentFriend] = useState(null);
     const [openMore, setOpenMore] = useState(false);
     const [online, setOnline] = useState(false);
 
@@ -56,14 +57,19 @@ const Conversation = ({conversation,user,onlineFriend}) => {
             setOnline(true);
         }
     },[user._id,conversation?.members,onlineFriend])
+
+    // currentFriend = null;
+
   return (
     <div className="Conversation" onTouchStart={touchstart} onTouchEnd={touchend} onTouchMove={touchmove}>
         <span className="pic-div">
-            <img className="pic" src={currentFriend?.profilePicture ? currentFriend?.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt=''/>
+            {currentFriend?.profilePicture ? <img className="pic" src={currentFriend?.profilePicture ? currentFriend?.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt=''/>
+            : <Skeleton style={{marginTop: -1}} animation="wave" variant="circular" width={50} height={50} />}
             {online ? <div className="onlineIcon"></div> : null}
         </span>
         <div className="chat-username">
-            <span className="chat-name">{currentFriend?.username}</span>
+            {currentFriend?.username ? <span className="chat-name">{currentFriend?.username}</span>
+            : <Skeleton animation="wave" height={20} width={120} />}
             <span className="chat-last-msg"></span>
         </div>
         <ConversationOptionModel open={openMore} setOpen={setOpenMore} conversation={conversation} />

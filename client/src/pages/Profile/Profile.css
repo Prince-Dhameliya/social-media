@@ -4,6 +4,7 @@
     grid-template-columns: 21rem auto;
     grid-template-rows: 100%;
     height: 100vh;
+    overflow-x: scroll;
 }
 
 .ProfileCenter{
@@ -13,7 +14,7 @@
     width: 30rem;
     margin: 0rem auto 0rem auto;
     overflow-x: hidden;
-    overflow-y: auto;
+    /* overflow-y: scroll; */
 }
 
 @media screen and (max-width:1600px){

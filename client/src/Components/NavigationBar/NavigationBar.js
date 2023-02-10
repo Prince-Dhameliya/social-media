@@ -15,6 +15,7 @@ import FullWhiteLike from '../../img/FullWhiteLike.svg'
 import FullWhiteComment from '../../img/FullWhiteComment.svg'
 import Triangle from '../../img/Triangle.svg'
 import UserIcon from '../../img/UserIcon.svg'
+import CreatePost from '../CreatePost/CreatePost';
 
 
 
@@ -22,6 +23,7 @@ const NavigationBar = ({location}) => {
 
   const {user} = useSelector((state)=>state.authReducer.authData);
   const [animation, setAnimation] = useState(true);
+  const [open, setOpen] = useState(false);
   let notification = user.notification;
   let comments=0;
   let like=0;
@@ -59,6 +61,7 @@ const NavigationBar = ({location}) => {
     }
     else if(event.target.id === "100003"){
       setActive("createpost");
+      setOpen(true);
     }
     else if(event.target.id === "100004"){
       setActive("activity");
@@ -73,7 +76,9 @@ const NavigationBar = ({location}) => {
       <div className='NavigationBar'>
               <Link to="../"><img id="100001" src={active === "home" ? Home : WHome} alt="" className='homeNavigation' onClick={handleClick} /></Link>
               <Link to="../explore"><img id="100002" src={active === "allposts" ? Search : WSearch} alt="" className='searchNavigation' onClick={handleClick} /></Link>
-              <Link to=""><img id="100003" src={active === "createpost" ? AddObj : WAddObj} alt="" className='addPostNavigation' onClick={handleClick} /></Link>
+              <Link to=""><img id="100003" src={active === "createpost" ? AddObj : WAddObj} alt="" className='addPostNavigation' onClick={handleClick} />
+              <CreatePost open={open} setOpen={setOpen}/>
+              </Link>
               <Link to="../activity"><img id="100004" src={active === "activity" ? Like : WLike} alt="" className='likeNavigation' onClick={handleClick} /></Link>
               <Link to={`../${user._id}`}><img id="100005" src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} className={active === "profile" ? "active profileNavigation" : "profileNavigation"} alt="" onClick={handleClick} /></Link>
               {animation && ((like !== 0) || (comments !== 0) || (follow !== 0)) && <div className="NotificationAnimation" id="NotificationAnimation">
