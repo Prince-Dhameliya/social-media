@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.eb9373bc.css",
-    "main.js": "/static/js/main.4ac74621.js",
+    "main.css": "/static/css/main.f0feb7a5.css",
+    "main.js": "/static/js/main.f172eb8d.js",
     "static/media/Emoji.svg": "/static/media/Emoji.2c18e49bc52b3776733320cdf5e89745.svg",
     "static/media/Settings.svg": "/static/media/Settings.318d8e4008cbbf6440ad8a931bd4c014.svg",
+    "static/media/Camera.svg": "/static/media/Camera.c6b2c9ca614a635dcd901a8307d25f80.svg",
     "static/media/dislike.svg": "/static/media/dislike.4e0846b50d43c51cfeb407e113542275.svg",
     "static/media/Message1.svg": "/static/media/Message1.ba7aa5bb1eb5e49b9877c3fc3a5674ca.svg",
     "static/media/Message.svg": "/static/media/Message.5511f10277ed22077f5e2965552fd2c3.svg",
@@ -36,11 +37,11 @@
     "static/media/UnBookmark.svg": "/static/media/UnBookmark.67ac179c063193f82ad8f122ed33580d.svg",
     "static/media/Bookmark.svg": "/static/media/Bookmark.19fe01c64d0cbf8233614dc88439d147.svg",
     "static/media/AddObject.svg": "/static/media/AddObject.64afa19b1854c82688e6a650409335ab.svg",
-    "main.eb9373bc.css.map": "/static/css/main.eb9373bc.css.map",
-    "main.4ac74621.js.map": "/static/js/main.4ac74621.js.map"
+    "main.f0feb7a5.css.map": "/static/css/main.f0feb7a5.css.map",
+    "main.f172eb8d.js.map": "/static/js/main.f172eb8d.js.map"
   },
   "entrypoints": [
-    "static/css/main.eb9373bc.css",
-    "static/js/main.4ac74621.js"
+    "static/css/main.f0feb7a5.css",
+    "static/js/main.f172eb8d.js"
   ]
 }

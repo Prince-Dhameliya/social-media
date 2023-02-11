@@ -1,16 +1,16 @@
 import React from 'react'
 import FollowersCard from '../FollowersCard/FollowersCard'
 import Posts from '../Posts/Posts'
-import StoryScroller from '../StoryScroller/StoryScroller'
+import StoryScrollers from '../StoryScroller/StoryScrollers'
 import './HomeSide.css'
 
-const HomeSide = ({posts,persons,location,screenSize}) => {
+const HomeSide = ({persons,location,screenSize}) => {
   return (
     <>
       <div className="HomeSide">
           <div className="PostSide">
-              <StoryScroller/>
-              <Posts posts={posts} persons={persons} location={location} screenSize={screenSize} />
+              <StoryScrollers persons={persons}/>
+              <Posts persons={persons} location={location} screenSize={screenSize} />
           </div>
           <div className="FollowerSide">
               <FollowersCard persons={persons}/>

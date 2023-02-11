@@ -13,7 +13,9 @@ const getAllUsers = async (req, res) => {
             const {password, ...otherDetails} = user._doc
             return otherDetails
         })
-        res.status(200).json(users)
+        res.status(200).json(users.sort((a,b)=>{
+            return a.createdAt - b.createdAt;
+        }))
     } catch (error) {
         res.status(500). json(error)
     }

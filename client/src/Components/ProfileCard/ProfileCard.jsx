@@ -11,7 +11,8 @@ import { followUser, unFollowUser } from '../../actions/userAction'
 import axios from 'axios'
 import ProfileOptionModel from '../DropdownButton/ProfileOptionModel'
 
-const ProfileCard = ({location,posts,currentUser,profileUserId}) => {
+const ProfileCard = ({location,currentUser,profileUserId}) => {
+  let {posts} = useSelector((state)=>state.postReducer);
   const dispatch = useDispatch();
   const {user} = useSelector((state)=>state.authReducer.authData)
   const [isfollowing, setIsFollowing] = useState(user.following.includes(profileUserId))

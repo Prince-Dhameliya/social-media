@@ -6,34 +6,44 @@ import { useParams } from 'react-router-dom'
 import { getTimelinePosts, getTimelineSavedPosts } from '../../actions/postAction'
 import Media from '../SkeletonPost/SkeletonPost'
 import FollowersCard from '../FollowersCard/FollowersCard'
+import Camera from "../../img/Camera.svg";
 
 
-const Posts = ({location,posts,persons,screenSize}) => {
+const Posts = ({location,persons,screenSize}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
-  let {savedPosts, loading} = useSelector((state)=>state.postReducer);
+  let {posts, loading} = useSelector((state)=>state.postReducer);
   const params = useParams();
   const dispatch = useDispatch();
 
   useEffect(()=>{
       dispatch(getTimelinePosts(user._id))
-      dispatch(getTimelineSavedPosts(user._id))
+      // dispatch(getTimelineSavedPosts(user._id))
   },[user._id,dispatch,location])
 
-    if(!posts) return "no Posts";
+  
+  if(location === "home"){
+    posts = posts.filter((post) => {
+      const postUser = post.userId;
+      if(user.following.includes(postUser) || postUser === user._id) return true;
+      else return false;
+    });
+  }
+  else if(location === "profile"){
+    if(params.id) posts = posts.filter((post)=>post.userId === params.id)
+  }
+  else if(location === "saved"){
+    posts = posts.filter((post) => {
+      if(post.saved.includes(user._id)) return true;
+      else return false;
+    });
+  }
 
-    if(location === "home"){
-      posts = posts.filter((post) => {
-        const postUser = post.userId;
-        if(user.following.includes(postUser) || postUser === user._id) return true;
-        else return false;
-      });
-    }
-    if(location === "profile"){
-      if(params.id) posts = posts.filter((post)=>post.userId === params.id)
-    }
-    else if(location === "saved"){
-      posts = savedPosts;
-    }
+  if(posts.length === 0) return (
+    <div className='NoPosts'>
+      <img className="CameraIcon" src={Camera} alt=""/>
+      <span>No posts</span>
+    </div>
+  );
 
   return (
     <>

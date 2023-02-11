@@ -132,15 +132,15 @@ const Post = ({data,index}) => {
         <div className="PostDetails">
           <div className='PostUserName'>
             {data?.profilePicture ? 
-              <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} style={{cursor: "pointer"}} alt="" />
+              <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt="" />
               : <Skeleton style={{marginTop: -1}} animation="wave" variant="circular" width={35} height={35} />
             }
-            {data?.username ? <span style={{cursor: "pointer"}}><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
+            {data?.username ? <span><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
             : <Skeleton animation="wave" height={20} width={120}/>
             }
           </div>
 
-          {data ? <img src={Horizontal} className="ReactLike" alt="" style={{cursor: "pointer",width: "24px"}} onClick={() => setOpenMore(true)} />
+          {data ? <img src={Horizontal} className="ReactLike" alt="" onClick={() => setOpenMore(true)} />
           : <Skeleton animation="wave" height={20} width={30}/>}
           <PostOptionModel open={openMore} setOpen={setOpenMore} data={data} />
         </div>
@@ -158,15 +158,15 @@ const Post = ({data,index}) => {
 
         <div className="PostReact">
             <div>
-              <img src={liked ? Like : DisLike} className="ReactLike" alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
+              <img src={liked ? Like : DisLike} className="ReactLike" alt="" onClick={handleLike} />
               <div>
-                <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} style={{cursor: "pointer",width: "33px",marginTop:"-4px"}} alt="" />
+                <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} alt="" />
                 {data ? <CommentModel open={open} setOpen={setOpen} index={index} data = {data} /> : null}
               </div>
-              <img src={Send} className="ReactShare" style={{cursor: "pointer",width: "29px"}} alt="" />
+              <img src={Send} className="ReactShare" alt="" />
             </div>
 
-            <img src={bookmarked ? Bookmark : UnBookmark} className="ReactBookmark" onClick={handleBookmark} style={{cursor: "pointer",width: "26px"}} alt="" />
+            <img src={bookmarked ? Bookmark : UnBookmark} className="ReactBookmark" onClick={handleBookmark} alt="" />
         </div>
 
         {data?.likes ? <span style={{fontSize: "14px"}}><b>{likes} likes</b></span>
@@ -198,12 +198,12 @@ const Post = ({data,index}) => {
 
         <div className="CommentSection">
           <div className="CommentPlusEmoji">
-            <img src={EmojiIcon} className="CommentEmojiIcon" style={{cursor: "pointer",width: "20px"}} alt="" />
+            <img src={EmojiIcon} className="CommentEmojiIcon" alt="" />
             {data?._id ? <input type="text" id={data._id} className="CommentInput" ref={desc} placeholder='Add a comment...' onKeyDown={searchKeyPressed} onChange={handleInput} autoComplete="off" />
             : <input type="text" className="CommentInput" ref={desc} placeholder='Add a comment...' onChange={handleInput} autoComplete="off" />}
           </div>
-          {index ? <div className='CommentSendButton' id={index} onClick={handleSubmit} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>{loading ? "Posting" : "Post"}</span></div>
-          : <div className='CommentSendButton' style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>Post</span></div>}
+          {index ? <div className='CommentSendButton' id={index} onClick={handleSubmit}><span>{loading ? "Posting" : "Post"}</span></div>
+          : <div className='CommentSendButton'><span>Post</span></div>}
         </div>
     </div>
   )

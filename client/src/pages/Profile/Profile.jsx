@@ -38,7 +38,7 @@ function togglemenu(){
 
 const Profile = ({location,socket}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
-  let {posts} = useSelector((state)=>state.postReducer);
+  // let {posts} = useSelector((state)=>state.postReducer);
   const [allPosts, setAllPosts] = useState([]);
   const [persons, setPersons] = useState([]);
   const [currentUser, setCurrentUser] = useState(user);
@@ -123,13 +123,13 @@ const Profile = ({location,socket}) => {
         {(location === "saved" || location === "profile") && <HeaderBarProfile currentUser={currentUser}/>}
 
 
-        {location === "home" && <HomeSide posts={posts} location={location} persons={persons} screenSize={screenSize}/>}
+        {location === "home" && <HomeSide location={location} persons={persons} screenSize={screenSize}/>}
         {location === "messages" && <Conversations screenSize={screenSize} socket={socket} onlineFriend={onlineFriend}/>}
 
         {location !== "home" && location !== "messages" &&
         <div id='ProfileCenter' className="ProfileCenter" onClick={togglemenu}>
-            {(location === "saved" || location === "profile") && <ProfileCard location={location} posts={posts} currentUser={currentUser} profileUserId={profileUserId} />}
-            {(location === "saved" || location === "profile" || location === "allposts" || location === "home") && <Posts location={location} posts={posts} persons={persons}/>}
+            {(location === "saved" || location === "profile") && <ProfileCard location={location} currentUser={currentUser} profileUserId={profileUserId} />}
+            {(location === "saved" || location === "profile" || location === "allposts" || location === "home") && <Posts location={location} persons={persons}/>}
             {location === "search" && <SearchedUser persons={persons} searchedName={searchedName} />}
             {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId}/>}
             {location === "activity" && <FollowersCardVertical persons={persons}/>}

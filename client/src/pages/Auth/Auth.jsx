@@ -75,7 +75,7 @@ const Auth = () => {
         <div className="AuthLeft">
             <img src={Logo} alt="" />
             <div className="WebName">
-                <h1>My App</h1>
+                <h1>Social Point</h1>
                 <h6>Explore the ideas throughout the world</h6>
             </div>
         </div>
