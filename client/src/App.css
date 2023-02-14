@@ -58,9 +58,9 @@
   pointer-events: none;
 }
 
-/* ::-webkit-scrollbar{
+::-webkit-scrollbar{
   display: none;
-} */
+}
 
 .tap-Highlight {
   -webkit-touch-callout: none!important;
