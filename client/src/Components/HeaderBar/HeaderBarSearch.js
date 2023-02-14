@@ -2,9 +2,11 @@ import React from 'react'
 import './HeaderBar.css'
 import Search from '../../img/SearchGrey.svg'
 import Close from '../../img/CloseGrey.svg'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const HeaderBarSearch = ({setSearchedName,screenSize}) => {
+
+  const navigate = useNavigate();
 
   const handleTextCancle = () => { 
     document.getElementById("SearchInput").value = "";
@@ -34,7 +36,9 @@ const HeaderBarSearch = ({setSearchedName,screenSize}) => {
     setSearchedName("");
   }
   
-  const handleCancel = () => {
+  const handleCancel = (event) => {
+    event.stopPropagation();
+    navigate("../explore");
     if(screenSize.dynamicWidth <= 700){
       document.getElementById("SearchInput").value = "";
       setSearchedName("");
@@ -46,20 +50,19 @@ const HeaderBarSearch = ({setSearchedName,screenSize}) => {
 
   return (
     <div>
-      {(screenSize.dynamicWidth <= 700) && <Link style={{textDecoration: "none"}} to="../explore/search">
+      {(screenSize.dynamicWidth <= 700) &&
         <div className="HeaderBarSearch">
-          <div id="search" onClick={handleSearch}>
+          <div id="search" onClick={()=>{navigate("../explore/search");handleSearch()}}>
             <img src={Search} className="SearchButtonIcon" alt="" />
             <input type="text" placeholder="Search" id="SearchInput" onChange={handleChange} autoComplete="off"/>
             <div id="SearchTextCancel" onClick={handleTextCancle} >
               <img src={Close} className="SearchButtonIcon" alt="" />
             </div>
           </div>
-          <Link style={{textDecoration: "none", color: "Black"}} to="../explore"><div id="SearchCancel" onClick={handleCancel}>
+          <div id="SearchCancel" onClick={handleCancel}>
             <span>Cancel</span>
-          </div></Link>
+          </div>
         </div>
-      </Link>
       }
       {(screenSize.dynamicWidth > 700) && 
         <div className="HeaderBarSearch">

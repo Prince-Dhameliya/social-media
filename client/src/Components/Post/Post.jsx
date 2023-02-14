@@ -14,7 +14,7 @@ import { useState } from 'react'
 import { bookmarkPost, commentPost, dislikePost, likePost, unbookmarkPost } from '../../actions/postAction'
 import time from 'time-ago';
 import {VolumeUp, VolumeOff, PlayArrow} from '@mui/icons-material'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Skeleton from '@mui/material/Skeleton';
 import CommentModel from '../CommentsModel/CommentModel'
 import PostOptionModel from '../DropdownButton/PostOptionModel'
@@ -22,6 +22,7 @@ import PostOptionModel from '../DropdownButton/PostOptionModel'
 const Post = ({data,index}) => {
   const {user}  = useSelector((state)=>state.authReducer.authData)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   const [liked, setLiked] = useState(data?.likes?.includes(user?._id))
   const [bookmarked, setBookmarked] = useState(data?.saved?.includes(user?._id))
@@ -130,12 +131,12 @@ const Post = ({data,index}) => {
   return (
     <div className="Post">
         <div className="PostDetails">
-          <div className='PostUserName'>
+          <div className='PostUserName' onClick={()=>navigate(`/${data.userId}`)}>
             {data?.profilePicture ? 
               <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt="" />
               : <Skeleton style={{marginTop: -1}} animation="wave" variant="circular" width={35} height={35} />
             }
-            {data?.username ? <span><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
+            {data?.username ? <span><b>{data.username}</b></span>
             : <Skeleton animation="wave" height={20} width={120}/>
             }
           </div>
@@ -173,7 +174,7 @@ const Post = ({data,index}) => {
         : <Skeleton animation="wave" height={20} width={80}/>}
 
         { data?.username ? <div className="Details">
-            <span><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
+            <span onClick={()=>navigate(`/${data.userId}`)}><b>{data.username}</b></span>
             <span> {data.desc}</span>
         </div> 
         : <Skeleton animation="wave" height={20} width={130}/>}
@@ -184,7 +185,7 @@ const Post = ({data,index}) => {
           if(comment.userId === data.userId && id<2){
             return (
               <div key={id} className="Details">
-                  <span><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{comment.username}</b></Link></span>
+                  <span onClick={()=>navigate(`/${data.userId}`)}><b>{comment.username}</b></span>
                   <span> {comment.comment}</span>
               </div>
             )

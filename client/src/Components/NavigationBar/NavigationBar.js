@@ -46,7 +46,7 @@ const NavigationBar = ({location}) => {
         setAnimation(true);
         setInterval(()=>{
           setAnimation(false);
-        },2000)
+        },3000)
       }
   },[notification.length])
 
@@ -80,7 +80,8 @@ const NavigationBar = ({location}) => {
               </Link>
               <Link to="../activity"><img id="100004" src={active === "activity" ? Like : WLike} alt="" className='likeNavigation' onClick={handleClick} /></Link>
               <Link to={`../${user._id}`}><img id="100005" src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} className={active === "profile" ? "active profileNavigation" : "profileNavigation"} alt="" onClick={handleClick} /></Link>
-              {animation && ((like !== 0) || (comments !== 0) || (follow !== 0)) && <div className="NotificationAnimation" id="NotificationAnimation">
+              {animation && ((like !== 0) || (comments !== 0) || (follow !== 0)) && 
+              <div className="NotificationAnimation" id="NotificationAnimation">
                   <div className="NotificationTop">
                       {(like!== 0) && <div>
                           <img src={FullWhiteLike} className="AnimationIcon" alt="" />
@@ -95,7 +96,7 @@ const NavigationBar = ({location}) => {
                           <span className="AnimationCount">{follow}</span>
                       </div>}
                   </div>
-                  <img src={Triangle} className="NotificationBottom" alt="" />
+                  <div className="NotificationBottom"/>
               </div>}
       </div>
       <CreatePost open={open} setOpen={setOpen}/>

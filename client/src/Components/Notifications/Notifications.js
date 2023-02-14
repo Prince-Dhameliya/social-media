@@ -3,32 +3,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { followUser, getNotifications, unFollowUser } from '../../actions/userAction';
 import './Notifications.css'
 import time from 'time-ago';
+import { useNavigate } from 'react-router-dom';
 
 
-const Notification = ({notification,currentUser,profileUserId}) => {
+const Notification = ({notification}) => {
     const {user} = useSelector((state)=>state.authReducer.authData);
     const dispatch = useDispatch();
-    const [isfollowing, setIsFollowing] = useState(user.following.includes(profileUserId))
+    const [isfollowing, setIsFollowing] = useState(user.following.includes(notification.userId))
 
-    const handleFollow = () => {
+    const handleFollow = (event) => {
+      event.stopPropagation();
       setIsFollowing((prev)=>!prev)
-      isfollowing ? dispatch(unFollowUser(currentUser._id, user)) : dispatch(followUser(currentUser._id, user));
+      isfollowing ? dispatch(unFollowUser(notification.userId, user)) : dispatch(followUser(notification.userId, user));
     }
+
+    const navigate = useNavigate();
   return (
     <div className="Notification">
         <div className="NotificationLeft">
-            <img src={notification.userImage} alt=""/>
+            <img src={notification.userImage} alt="" onClick={()=>navigate(`/${notification.userId}`)} />
 
             {(notification?.type === "comment") && <div className="NotificationInfo">
-                <span><span>{notification.username}</span> commented: {notification.comment} <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(notification.createdAt,true)}</span></span>
+                <span><span onClick={()=>navigate(`/${notification.userId}`)}>{notification.username}</span> commented: {notification.comment} <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(notification.createdAt,true)}</span></span>
             </div>}
             
             {(notification?.type === "liked") && <div className="NotificationInfo">
-                <span><span>{notification.username}</span> liked your post. <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(notification.createdAt,true)}</span></span>
+                <span><span onClick={()=>navigate(`/${notification.userId}`)}>{notification.username}</span> liked your post. <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(notification.createdAt,true)}</span></span>
             </div>}
 
             {(notification?.type === "follow") && <div className="NotificationInfo">
-                <span><span>{notification.username}</span> started following you. <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(notification.createdAt,true)}</span></span>
+                <span><span onClick={()=>navigate(`/${notification.userId}`)}>{notification.username}</span> started following you. <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(notification.createdAt,true)}</span></span>
             </div>}
         </div>
 
@@ -43,7 +47,7 @@ const Notification = ({notification,currentUser,profileUserId}) => {
   )
 }
 
-const Notifications = ({location,currentUser,profileUserId}) => {
+const Notifications = ({location}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -59,7 +63,7 @@ const Notifications = ({location,currentUser,profileUserId}) => {
         <h3>New</h3>
         <div className="NotificationList">
           {user.notifications.map((notification,id)=>{
-            return <Notification key={id} notification={notification} currentUser={currentUser} profileUserId={profileUserId} />
+            return <Notification key={id} notification={notification} />
           })}
         </div>
     </div>

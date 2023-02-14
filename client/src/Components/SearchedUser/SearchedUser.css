@@ -92,6 +92,7 @@
     height: 3.2rem;
     border-radius: 50%;
     border: 1px solid var(--borderColor);
+    cursor: pointer;
 }
 
 .SearchedUserName{
@@ -104,6 +105,7 @@
 
 .SearchedUserName > span:nth-of-type(1){
     font-weight: bold;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 700px){

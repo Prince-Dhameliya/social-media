@@ -8,7 +8,6 @@ import { uploadPost } from '../../actions/uploadAction';
 import { getTimelinePosts } from '../../actions/postAction';
 import { useState } from "react";
 import Close from '../../img/Close.svg'
-import { UilTimes } from "@iconscout/react-unicons";
 import axios from 'axios';
 
 export default function CreatePost({open, setOpen}) {
@@ -134,7 +133,7 @@ export default function CreatePost({open, setOpen}) {
                 </div>
               </div>
               <div className="PreviewImage">
-                  <UilTimes onClick={()=>setImage(null)} />
+                  <img src={Close} className='ReactLike PreviewClose' alt="" style={{cursor: "pointer",width: "26px"}} onClick={()=>setImage(null)} />
                   {(image.type==="image/png" || image.type==="image/jpg" || image.type==="image/jpeg" || image.type==="image/webp") && <img src={URL.createObjectURL(image)} alt="" />}
                   {image.type==="video/mp4" && <video src={URL.createObjectURL(image)} autoPlay>
                     Your browser does not support the video tag.

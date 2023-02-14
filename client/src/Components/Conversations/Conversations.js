@@ -11,8 +11,6 @@ import Vertical from "../../img/Vertical3Dot.svg"
 import ConversationOptionModel from '../DropdownButton/ConversationOptionModel';
 import $ from 'jquery';
 
-// let socket;
-
 const Conversations = ({screenSize,socket,onlineFriend}) => {
   const [openMore, setOpenMore] = useState(false);
   let [conversations, setConversations] = useState([]);
@@ -23,7 +21,6 @@ const Conversations = ({screenSize,socket,onlineFriend}) => {
   let navigate = useNavigate();
   let params = useParams();
   let desc = useRef();
-  // const ENDPOINT = 'https://socket-server-r0w0.onrender.com';
  
   useEffect(()=>{
     socket?.on("getMessage", data=>{
@@ -194,28 +191,33 @@ const Conversations = ({screenSize,socket,onlineFriend}) => {
       </div>}
       {(screenSize.dynamicWidth > 700 || params?.id) &&
       <div id="CurrentChatBox" className="CurrentChatBox">
-        {currentFriendChat?._id ? <><div className="TopBarMessages">
-          <div className="MessageIconAndTitle">
-            <img className='BackIcon' src={Back} alt="" onClick={() => {
-              navigate(-1);
-              setMessages([]);
-            }} />
-            <img className='MessageProfile' src={currentFriendData.profilePicture} alt="" />
-            <span className="MessageTitle">{currentFriendData?.username}</span>
+        {currentFriendChat?._id ? 
+        <><div className="TopBarMessages">
+            <div className="MessageIconAndTitle">
+              <img className='BackIcon' src={Back} alt="" onClick={() => {
+                navigate(-1);
+                setMessages([]);
+              }} />
+              <img className='MessageProfile' src={currentFriendData.profilePicture} alt="" onClick={()=>navigate(`/${currentFriendData._id}`)} />
+              <span className="MessageTitle" onClick={()=>navigate(`/${currentFriendData._id}`)} >{currentFriendData?.username}</span>
+            </div>
+            <img className='BackIcon' src={Vertical} alt="" onClick={() => setOpenMore(true)}/>
+            <ConversationOptionModel open={openMore} setOpen={setOpenMore} conversation={currentFriendChat} />
           </div>
-          <img className='BackIcon' src={Vertical} alt="" onClick={() => setOpenMore(true)}/>
-          <ConversationOptionModel open={openMore} setOpen={setOpenMore} conversation={currentFriendChat} />
-        </div>
-        <div className="MessagesList">
-          {messages?.map((message,id) => {
-            return <Message key={id} currentFriendData={currentFriendData} socket={socket} message={message} messages={messages} setMessages={setMessages} own={message.senderId === user._id} user={user}/>
-          })}
-          <div className='LastMessage' />
-        </div>
-        <div className="SendMessageSection">
-          <input type="text" id="SendMessageInput" className="SendMessageInput" ref={desc} onKeyDown={searchKeyPressed} onChange={handleInput} placeholder='Message...' autoComplete="off" />
-          <div id="SendMesssageButton" className="SendMesssageButton" onClick={handleSubmit} style={{fontSize: "16px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>Send</span></div>
-        </div></> : <span style={{display:"flex", alignSelf:"center",fontSize:"25px", fontWeight: "700"}}>{!params?.id ? "No Current Chat" : ""}</span>}
+          <div className="MessagesList">
+            {messages?.map((message,id) => {
+              return <Message key={id} currentFriendData={currentFriendData} socket={socket} message={message} messages={messages} setMessages={setMessages} own={message.senderId === user._id} user={user}/>
+            })}
+            <div className='LastMessage' />
+          </div>
+          <div className="SendMessageSection">
+            <div className="SendMessageInputAndButton">
+              <input type="text" id="SendMessageInput" className="SendMessageInput" ref={desc} onKeyDown={searchKeyPressed} onChange={handleInput} placeholder='Message...' autoComplete="off" />
+              <div id="SendMesssageButton" className="SendMesssageButton" onClick={handleSubmit} style={{fontSize: "16px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>Send</span></div>
+            </div>
+          </div>
+        </>
+        : <span style={{display:"flex", alignSelf:"center",fontSize:"25px", fontWeight: "700"}}>{!params?.id ? "No Current Chat" : ""}</span>}
       </div>}
     </div>
   )

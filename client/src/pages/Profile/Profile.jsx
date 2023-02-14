@@ -101,7 +101,7 @@ const Profile = ({location,socket}) => {
     const fetchNotifications = async () => {
       dispatch(getTimelineNotifications(user._id))
     }
-    if(location === "activity" || location === "search" || location === "home"){
+    if(location === "activity" || location === "search" || location === "home" || location === "saved" || location === "profile"){
       fetchPersons()
     }
     if(location !== "search" && location !== "activity" && location !== "home"){
@@ -128,10 +128,10 @@ const Profile = ({location,socket}) => {
 
         {location !== "home" && location !== "messages" &&
         <div id='ProfileCenter' className="ProfileCenter" onClick={togglemenu}>
-            {(location === "saved" || location === "profile") && <ProfileCard location={location} currentUser={currentUser} profileUserId={profileUserId} />}
+            {(location === "saved" || location === "profile") && <ProfileCard location={location} currentUser={currentUser} persons={persons} />}
             {(location === "saved" || location === "profile" || location === "allposts" || location === "home") && <Posts location={location} persons={persons}/>}
             {location === "search" && <SearchedUser persons={persons} searchedName={searchedName} />}
-            {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId}/>}
+            {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location}/>}
             {location === "activity" && <FollowersCardVertical persons={persons}/>}
 
         </div>}

@@ -1,6 +1,7 @@
 .Notifications{
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
     font-size: 13px;
     width: 100%;
 }
@@ -35,6 +36,7 @@
     height: 3.2rem;
     border-radius: 50%;
     border: 1px solid var(--borderColor);
+    cursor: pointer;
 }
 
 .NotificationInfo{
@@ -44,6 +46,7 @@
 
 .NotificationInfo > span > span:nth-of-type(1){
     font-weight: bold;
+    cursor: pointer;
 }
 
 .NotificationRight{
@@ -58,9 +61,9 @@
 }
 
 .nfc-button{
+    /* padding: 7px 20px; */
     height: 2rem;
     padding-left: 25px;
     padding-right: 25px;
-    /* min-width:min-content; */
-    width: calc(90px);
+    /* width: calc(90px); */
 }

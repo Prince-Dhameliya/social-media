@@ -7,6 +7,7 @@
     background-color: var(--cardColor);
     border-radius: 0.5rem;
     border: 1px solid var(--lineColor);
+    /* height: 113px; */
 }
 
 .StoryContainer{

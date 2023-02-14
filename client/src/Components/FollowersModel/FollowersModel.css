@@ -1,0 +1,50 @@
+.FollowingModel{
+    display: flex;
+    flex-direction: column;
+    width:25rem;
+}
+
+.FollowingModel > hr{
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: rgb(218, 218, 218);
+    margin: 0px;
+}
+
+.FollowingModelTitleSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 40px;
+}
+
+.FollowingModelTitle{
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+}
+
+.FollowingModelClose{
+    display: flex;
+    position: absolute;
+    right: 10px;
+}
+
+.FollowingModelList{
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    font-size: 13px;
+    width: 100%;
+    height: 350px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+@media screen and (max-width: 899px){
+    .FollowingModel{
+        width: 100%;
+    }
+}

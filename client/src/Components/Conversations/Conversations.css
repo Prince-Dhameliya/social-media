@@ -19,8 +19,30 @@
     background-color: white;
     border: 1px solid var(--lineColor);
     position: relative;
-    padding-top: 54px;
+    padding-top: 3rem;
 }
+
+.TopBarMessages{
+    display: flex;
+    align-items: center;
+    background: var(--cardColor);
+    justify-content: space-between;
+    left: 0;
+    right: 0;
+    position:absolute;
+    top: 0;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgb(183, 183, 183);
+    /* z-index: 1; */
+    height: 2rem;
+}
+
+.BackIcon{
+    width: 28px;
+    cursor: pointer;
+    display: none;
+}
+
 
 /* conversationlist */
 .ConversationsList{
@@ -95,8 +117,8 @@
     background-color: white;
     border: 1px solid var(--lineColor);
     position: relative;
-    padding-top: 54px;
-    padding-bottom: 82px;
+    padding-top: 3rem;
+    padding-bottom: 4.5rem;
 }
 
 .MessagesList{
@@ -104,27 +126,6 @@
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: scroll;
-}
-
-.TopBarMessages{
-    display: flex;
-    align-items: center;
-    background: var(--cardColor);
-    justify-content: space-between;
-    left: 0;
-    right: 0;
-    position:absolute;
-    top: 0;
-    padding: 0.7rem 1rem;
-    border-bottom: 1px solid rgb(183, 183, 183);
-    /* z-index: 1; */
-    height: 2rem;
-}
-
-.BackIcon{
-    width: 28px;
-    cursor: pointer;
-    display: none;
 }
 
 .MessageIconAndTitle{
@@ -138,6 +139,7 @@
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
+    cursor: pointer;
 }
 
 .MessageTitle{
@@ -145,6 +147,7 @@
     font-weight: 600;
     font-size: 22px;
     font-family: cursive;
+    cursor: pointer;
 }
 
 .SendMessageSection{
@@ -155,12 +158,20 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgb(246, 246, 246);
-    height: 2rem;
+    background: white;
+    padding: 1rem;
+}
+
+.SendMessageInputAndButton{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    height: 1.5rem;
     border-radius: 25px;
     border: 1px solid var(--lineColor);
+    background-color: rgb(246, 246, 246);
     padding: 0.5rem 1rem;
-    margin: 1rem 0.5rem;
+    flex-grow: 1;
 }
 
 .SendMessageInput{

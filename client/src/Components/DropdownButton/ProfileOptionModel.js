@@ -45,14 +45,14 @@ export default function ProfileOptionModel({open,setOpen,currentUser}) {
                 <p>Switch appearance</p>
             </div>
             <hr/></>}
+            {user._id === currentUser._id && <><div className="sub-menu-link" onClick={handleLogOut}>
+                <p>Log out</p>
+            </div>
+            <hr/></>}
             {(user._id === currentUser._id || user?.isAdmin === true) && <><div className="sub-menu-link" onClick={()=>setOpenDeleteModel(true)}>
                 <p style={{color: "red",fontWeight: "600",alignItems: 'center'}}>Delete Account</p>
             </div>
             <DeleteModel open={openDeleteModel} setOpen={setOpenDeleteModel} currentUser={currentUser} />
-            <hr/></>}
-            {user._id === currentUser._id && <><div className="sub-menu-link" onClick={handleLogOut}>
-                <p>Log out</p>
-            </div>
             <hr/></>}
             <div className="sub-menu-link" onClick={handleClose}>
                 <p>Cancel</p>

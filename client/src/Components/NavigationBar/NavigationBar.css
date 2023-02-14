@@ -54,12 +54,24 @@
     left: 70%;
     right: 30%;
     bottom: 3rem;
+    animation: fadeInAnimation ease 400ms;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .NotificationTop{
     display: flex;
+    width: fit-content;
     border-radius: 0.3rem;
     padding: 0.5rem;
+    height: 25px;
     gap: 1rem;
     background: rgba(235,71,85,255);
     align-items: center;
@@ -84,8 +96,12 @@
 }
 
 .NotificationBottom{
-    width: 25px;
-    transform: rotate(180deg);
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    
+    border-top: 20px solid rgba(235,71,85,255);
     margin-top: -12px;
 }
 

@@ -99,6 +99,7 @@
     align-items: center;
     justify-content: center;
     margin: 1rem 0rem;
+    cursor: pointer;
 }
 
 .Follow > span:nth-of-type(1){

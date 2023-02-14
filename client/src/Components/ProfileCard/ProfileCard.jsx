@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './ProfileCard.css'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate, useParams} from 'react-router-dom'
 import { useState } from 'react'
 
 import PostIcon from '../../img/Posts.svg'
@@ -10,14 +10,20 @@ import ProfileModel from '../ProfileModal/ProfileModel'
 import { followUser, unFollowUser } from '../../actions/userAction'
 import axios from 'axios'
 import ProfileOptionModel from '../DropdownButton/ProfileOptionModel'
+import FollowingModel from '../FollowingModel/FollowingModel'
+import FollowersModel from '../FollowersModel/FollowersModel'
 
-const ProfileCard = ({location,currentUser,profileUserId}) => {
+const ProfileCard = ({location,currentUser,persons}) => {
   let {posts} = useSelector((state)=>state.postReducer);
   const dispatch = useDispatch();
+  const param = useParams();
+  const currentUserId = param.id;
   const {user} = useSelector((state)=>state.authReducer.authData)
-  const [isfollowing, setIsFollowing] = useState(user.following.includes(profileUserId))
+  const [isfollowing, setIsFollowing] = useState(user.following.includes(currentUserId))
 
-  const [open, setOpen] = useState(false);
+  const [openProfileModel, setOpenProfileModel] = useState(false);
+  const [openFollowingModel, setOpenFollowingModel] = useState(false);
+  const [openFollowersModel, setOpenFollowersModel] = useState(false);
   const [openProfileMore, setOpenProfileMore] = useState(false);
   const [active, setActive] = useState(location);
   const navigate = useNavigate();
@@ -52,13 +58,13 @@ const ProfileCard = ({location,currentUser,profileUserId}) => {
                 <span>{currentUser.bio ? currentUser.bio : null}</span>
             </div>
 
-            {user._id === profileUserId && <div className="tempStuff">
-                <div><span onClick={()=>setOpen(true)}>Edit Profile</span>
-                    <ProfileModel open={open} setOpen={setOpen} data = {user} />
+            {user._id === currentUserId && <div className="tempStuff">
+                <div><span onClick={()=>setOpenProfileModel(true)}>Edit Profile</span>
+                    <ProfileModel open={openProfileModel} setOpen={setOpenProfileModel} data = {user} />
                 </div>
             </div>}
 
-            {user._id !== profileUserId && <div className="tempStuff">
+            {user._id !== currentUserId && <div className="tempStuff">
                 <button className={isfollowing ? "button nfc-button UnfollowButton" : "button nfc-button"} onClick={handleFollow}>
                     {isfollowing ? "Unfollow" : "Follow"}
                 </button>
@@ -70,12 +76,12 @@ const ProfileCard = ({location,currentUser,profileUserId}) => {
             <div className="FollowStatus">
                 <hr />
                 <div>
-                    <div className="Follow">
+                    <div className="Follow" onClick={()=>setOpenFollowingModel(true)}>
                         <span>{currentUser.following.length}</span>
                         <span>Following</span>
                     </div>
                     <div className="vl"></div>
-                    <div className="Follow">
+                    <div className="Follow" onClick={()=>setOpenFollowersModel(true)}>
                         <span>{currentUser.followers.length}</span>
                         <span>Followers</span>
                     </div>
@@ -89,20 +95,23 @@ const ProfileCard = ({location,currentUser,profileUserId}) => {
                         <span>Posts</span>
                     </div>
                 </div>
+                <FollowingModel open={openFollowingModel} setOpen={setOpenFollowingModel} persons={persons} currentUser={currentUser}/>
+                <FollowersModel open={openFollowersModel} setOpen={setOpenFollowersModel} persons={persons} currentUser={currentUser}/>
             </div>
 
             <div className="ProfilePosts">
-                <Link style={{textDecoration: "none", color: "inherit"}} to={`../${profileUserId}`}><div id="profile" className={active === "profile" ? "active ProfilePostsButton" : "ProfilePostsButton"} onClick={handleClick}>
+                <Link style={{textDecoration: "none", color: "inherit"}} to={`../${currentUserId}`}><div id="profile" className={active === "profile" ? "active ProfilePostsButton" : "ProfilePostsButton"} onClick={handleClick}>
                     <img className="ProfilePostsButton_Icon" src={PostIcon} alt="" />
                     <span className="ProfilePostsButton_Title">POSTS</span>
                 </div></Link>
 
-                {user._id === profileUserId && <Link style={{textDecoration: "none", color: "inherit"}} to={`../${profileUserId}/saved`}><div id="saved" className={active === "saved" ? "active ProfilePostsButton" : "ProfilePostsButton"} onClick={handleClick}>
+                {user._id === currentUserId && <Link style={{textDecoration: "none", color: "inherit"}} to={`../${currentUserId}/saved`}><div id="saved" className={active === "saved" ? "active ProfilePostsButton" : "ProfilePostsButton"} onClick={handleClick}>
                     <img className="ProfilePostsButton_Icon" src={Saved} alt="" />
                     <span className="ProfilePostsButton_Title">SAVED</span>
                 </div></Link>
                 }
             </div>
+            
         </div>
     )
 }

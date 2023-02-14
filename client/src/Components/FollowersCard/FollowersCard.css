@@ -29,6 +29,7 @@
     height: 3.2rem;
     border-radius: 50%;
     border: 1px solid var(--borderColor);
+    cursor: pointer;
 }
 
 .FollowerName{
@@ -40,15 +41,23 @@
 
 .FollowerName > span:nth-of-type(1){
     font-weight: bold;
+    cursor: pointer;
 }
 
 .fc-button{
     height: 2rem;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .UnfollowButton{
+    color: var(--orange);
+    border: 2px solid var(--orange);
+    cursor: pointer;
+    background: transparent;
+}
+
+.UnfollowButton:hover{
     color: var(--orange);
     border: 2px solid var(--orange);
     cursor: pointer;
@@ -122,6 +131,13 @@
     }
     
     .UnfollowButton{
+        color: var(--orange);
+        border: 2px solid var(--orange);
+        cursor: pointer;
+        background: transparent;
+    }
+
+    .UnfollowButton:hover{
         color: var(--orange);
         border: 2px solid var(--orange);
         cursor: pointer;

@@ -8,6 +8,7 @@
   --lineColor: rgb(218, 218, 218);
   --borderColor: rgb(218, 218, 218);
   --buttonBg: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);
+  --buttonBgHover: linear-gradient(98.63deg, #fe990c 0%, #ff410d 100%);
   --inputColor: rgba(40, 52, 62, 0.07);
   --cardColor: rgba(255, 255, 255, 0.64);
   --cardColor: white;
@@ -49,9 +50,7 @@
 
 .button:hover{
   cursor: pointer;
-  color: var(--orange);
-  background: transparent;
-  border: 2px solid var(--orange);
+  background: var(--buttonBgHover);
 }
 
 .button:disabled{
