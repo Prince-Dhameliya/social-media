@@ -1,10 +1,7 @@
 .Profile{
     position: relative;
-    display: grid;
-    grid-template-columns: 21rem auto;
-    grid-template-rows: 100%;
-    height: 100vh;
-    overflow-x: scroll;
+    display: flex;
+    margin-left: 21rem;
 }
 
 .ProfileCenter{
@@ -13,27 +10,26 @@
     gap: 1rem;
     width: 30rem;
     margin: 0rem auto 0rem auto;
+    height: calc(100vh - 7rem);
+    overflow-y: scroll;
     overflow-x: hidden;
-    /* overflow-y: scroll; */
 }
 
 @media screen and (max-width:1600px){
     .Profile{
-        grid-template-columns: 16rem auto;
+        margin-left: 16rem;
     }
 }
 
 @media screen and (max-width:1400px){
     .Profile{
-        grid-template-columns: 4.8rem auto;
+        margin-left: 4.8rem;
     }
 }
 
 @media screen and (max-width:700px){
     .Profile{
-        /* grid-template-columns: auto; */
-        display: flex;
-        /* flex-direction: column; */
+        margin-left: 0rem;
     }
     .ProfileCenter{
         margin: 3rem auto 3rem auto;

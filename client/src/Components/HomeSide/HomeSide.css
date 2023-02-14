@@ -3,8 +3,9 @@
     flex-direction: row;
     margin: 0rem auto;
     gap: 2rem;
-    overflow-x: hidden;
+    height: calc(100vh - 7rem);
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .PostSide{

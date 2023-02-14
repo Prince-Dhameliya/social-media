@@ -5,7 +5,11 @@
     background-color: white;
     border-right: 1px solid rgb(218, 218, 218);
     justify-content: space-between;
-    transition: 0.5s ease;
+    height: 100vh;
+    width: 21rem;
+    position: fixed;
+    left: 0;
+    z-index: 1;
 }
 
 /* .NavigationMain.active{
@@ -194,8 +198,17 @@
     width: 20px;
 }
 
+@media screen and (max-width:1600px){
+    .NavigationMain{
+        width: 16rem;
+    }
+}
+
 
 @media screen and (max-width:1400px){
+    .NavigationMain{
+        width: 4.8rem;
+    }
     .navigation_title{
         display: none;
     }

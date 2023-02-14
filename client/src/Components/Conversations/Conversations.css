@@ -43,6 +43,10 @@
     display: none;
 }
 
+.MessageVerticalIcon{
+    width: 21px;
+    cursor: pointer;
+}
 
 /* conversationlist */
 .ConversationsList{

@@ -141,7 +141,7 @@ const Post = ({data,index}) => {
             }
           </div>
 
-          {data ? <img src={Horizontal} className="ReactLike" alt="" onClick={() => setOpenMore(true)} />
+          {data ? <img src={Horizontal} className="PostHorizontalIcon" alt="" onClick={() => setOpenMore(true)} />
           : <Skeleton animation="wave" height={20} width={30}/>}
           <PostOptionModel open={openMore} setOpen={setOpenMore} data={data} />
         </div>

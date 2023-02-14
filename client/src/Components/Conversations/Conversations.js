@@ -201,7 +201,7 @@ const Conversations = ({screenSize,socket,onlineFriend}) => {
               <img className='MessageProfile' src={currentFriendData.profilePicture} alt="" onClick={()=>navigate(`/${currentFriendData._id}`)} />
               <span className="MessageTitle" onClick={()=>navigate(`/${currentFriendData._id}`)} >{currentFriendData?.username}</span>
             </div>
-            <img className='BackIcon' src={Vertical} alt="" onClick={() => setOpenMore(true)}/>
+            <img className='MessageVerticalIcon' src={Vertical} alt="" onClick={() => setOpenMore(true)}/>
             <ConversationOptionModel open={openMore} setOpen={setOpenMore} conversation={currentFriendChat} />
           </div>
           <div className="MessagesList">

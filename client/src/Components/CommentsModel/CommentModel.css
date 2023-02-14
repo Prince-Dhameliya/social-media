@@ -13,7 +13,7 @@
     padding-top: -5rem;
     height: 43rem;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
     text-align:justify;
 }
 
