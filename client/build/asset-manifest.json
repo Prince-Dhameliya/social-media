@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/static/css/main.48c18ad7.css",
-    "main.js": "/static/js/main.bc200f91.js",
+    "main.css": "/static/css/main.7d117765.css",
+    "main.js": "/static/js/main.01f14429.js",
+    "static/media/logo.png": "/static/media/logo.44c07a3d2cf670fb3ed3.png",
     "static/media/Emoji.svg": "/static/media/Emoji.2c18e49bc52b3776733320cdf5e89745.svg",
     "static/media/Settings.svg": "/static/media/Settings.318d8e4008cbbf6440ad8a931bd4c014.svg",
     "static/media/Logo.svg": "/static/media/Logo.150a7656f6a03e76e98e10177531ec0d.svg",
-    "static/media/Logo1.svg": "/static/media/Logo1.97cbdfe55c026cb037b9793f9c24c834.svg",
     "static/media/Camera.svg": "/static/media/Camera.c6b2c9ca614a635dcd901a8307d25f80.svg",
     "static/media/dislike.svg": "/static/media/dislike.4e0846b50d43c51cfeb407e113542275.svg",
     "static/media/Message1.svg": "/static/media/Message1.ba7aa5bb1eb5e49b9877c3fc3a5674ca.svg",
@@ -39,11 +39,11 @@
     "static/media/UnBookmark.svg": "/static/media/UnBookmark.67ac179c063193f82ad8f122ed33580d.svg",
     "static/media/Bookmark.svg": "/static/media/Bookmark.19fe01c64d0cbf8233614dc88439d147.svg",
     "static/media/AddObject.svg": "/static/media/AddObject.64afa19b1854c82688e6a650409335ab.svg",
-    "main.48c18ad7.css.map": "/static/css/main.48c18ad7.css.map",
-    "main.bc200f91.js.map": "/static/js/main.bc200f91.js.map"
+    "main.7d117765.css.map": "/static/css/main.7d117765.css.map",
+    "main.01f14429.js.map": "/static/js/main.01f14429.js.map"
   },
   "entrypoints": [
-    "static/css/main.48c18ad7.css",
-    "static/js/main.bc200f91.js"
+    "static/css/main.7d117765.css",
+    "static/js/main.01f14429.js"
   ]
 }
