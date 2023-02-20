@@ -1,6 +1,6 @@
 import React from 'react'
 import './AppleBootupScreen.css'
-import Logo from '../../img/Logo1.svg'
+import Logo from '../../img/Logo.svg'
 
 const AppleBootupScreen = () => {
   return (

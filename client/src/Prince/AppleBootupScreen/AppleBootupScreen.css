@@ -35,9 +35,7 @@
     display: block;
     width: 300px;
     height: 6px;
-    /* background: #fff; */
-    background: #111;
-    /* background: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%); */
+    background: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);
     animation: load 0.5s linear;
 }
 
