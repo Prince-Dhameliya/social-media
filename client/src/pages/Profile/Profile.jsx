@@ -18,7 +18,7 @@ import Notifications from '../../Components/Notifications/Notifications'
 import { getTimelineNotifications } from '../../actions/userAction'
 import SearchedUser from '../../Components/SearchedUser/SearchedUser'
 import Conversations from '../../Components/Conversations/Conversations'
-// import $ from "jquery"
+import $ from "jquery"
 
 function togglemenu(){
   let submenu = document.getElementById("submenu");
@@ -41,6 +41,7 @@ const Profile = ({location,socket}) => {
   // let {posts} = useSelector((state)=>state.postReducer);
   const [allPosts, setAllPosts] = useState([]);
   const [persons, setPersons] = useState([]);
+  const [personsLoading, setPersonsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState(user);
   const [searchedName, setSearchedName] = useState("");
   let [onlineFriend, setOnlineFriend] = useState([]);
@@ -48,6 +49,9 @@ const Profile = ({location,socket}) => {
   const dispatch = useDispatch();
   const profileUserId = params.id;
 
+  useEffect(()=>{
+    $(".App").scrollTop("0");
+  },[location])
 
   useEffect(()=>{
     socket?.emit("addUser",user._id);
@@ -55,6 +59,7 @@ const Profile = ({location,socket}) => {
       setOnlineFriend(users);
     })
   },[user._id])
+
 
   const [screenSize, getDimension] = useState({
     dynamicWidth: window.innerWidth,
@@ -66,19 +71,13 @@ const Profile = ({location,socket}) => {
       dynamicHeight: window.innerHeight
     })
   }
-  window.addEventListener("scroll", (event) => {
-    let scroll = this.scrollY;
-    console.log(scroll)
-});
+  
+  // $(".App").scroll(function() {
+  //   console.log($(".App").scrollTop());
+  // });
   
   useEffect(() => {
     window.addEventListener('resize', setDimension);
-    // $("#ProfileCenter").scrollTop(function(){
-    //   console.log($("#ProfileCenter").height())
-    // });
-    // $(".MessagesList").scroll(function() {
-    //   console.log($(".MessagesList").height());
-    // });
     return(() => {
         window.removeEventListener('resize', setDimension);
     })
@@ -95,8 +94,10 @@ const Profile = ({location,socket}) => {
         setCurrentUser(data);
     }
     const fetchPersons = async () => {
+        setPersonsLoading(true);
         const {data} = await getAllUser();
         setPersons(data)
+        setPersonsLoading(false);
     }
     const fetchNotifications = async () => {
       dispatch(getTimelineNotifications(user._id))
@@ -115,15 +116,16 @@ const Profile = ({location,socket}) => {
 
   return (
     <div className="Profile">
+        <span className="headLoader loader"></span>
         <NavigationMain location={location} profileUserId={profileUserId} currentUser={currentUser} persons={persons} searchedName={searchedName} setSearchedName={setSearchedName} screenSize={screenSize}  />
 
         {location === "home" && <HeaderBar/>}
         {location === "activity" && <HeaderBarNotificitions/>}
         {(location === "search" || location === "allposts") && screenSize.dynamicWidth <= 700 && <HeaderBarSearch setSearchedName={setSearchedName} screenSize={screenSize} />}
-        {(location === "saved" || location === "profile") && <HeaderBarProfile currentUser={currentUser}/>}
+        {(location === "saved" || location === "profile") && <HeaderBarProfile location={location} currentUser={currentUser}/>}
 
 
-        {location === "home" && <HomeSide location={location} persons={persons} screenSize={screenSize}/>}
+        {location === "home" && <HomeSide location={location} persons={persons} personsLoading={personsLoading} screenSize={screenSize}/>}
         {location === "messages" && <Conversations screenSize={screenSize} socket={socket} onlineFriend={onlineFriend}/>}
 
         {location !== "home" && location !== "messages" &&
@@ -133,7 +135,6 @@ const Profile = ({location,socket}) => {
             {location === "search" && <SearchedUser persons={persons} searchedName={searchedName} />}
             {location === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location}/>}
             {location === "activity" && <FollowersCardVertical persons={persons}/>}
-
         </div>}
         
         {location !== "chatbox" && location !== "messages" && <NavigationBar location={location}/>}

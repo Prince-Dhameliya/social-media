@@ -1,10 +1,12 @@
 import React from 'react'
 import './AppleBootupScreen.css'
+import Logo from '../../img/Logo1.svg'
 
 const AppleBootupScreen = () => {
   return (
     <div className='AppleBootupScreen' id='AppleBootupScreen'>
-        <i className='fa fa-apple logo'></i>
+        <img src={Logo} alt="" className='logo' />
+        {/* <i className='fa fa-apple logo'></i> */}
         <div className="progress"></div>
     </div>
   )

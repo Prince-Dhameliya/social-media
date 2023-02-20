@@ -7,7 +7,7 @@
     background-color: var(--cardColor);
     border-radius: 0.5rem;
     border: 1px solid var(--lineColor);
-    /* height: 113px; */
+    height: 113px;
 }
 
 .StoryContainer{
@@ -49,6 +49,7 @@
 
 .StoryUserName{
     font-size: 12px;
+    height: 15px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

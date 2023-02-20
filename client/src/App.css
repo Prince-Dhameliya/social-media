@@ -23,6 +23,9 @@
   overflow: hidden;
   color: var(--black);
   background: #fafafa;
+  height: calc(100vh);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .blur{

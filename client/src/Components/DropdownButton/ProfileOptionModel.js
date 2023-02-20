@@ -6,7 +6,7 @@ import DeleteModel from '../DeleteModel/DeleteModel';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function ProfileOptionModel({open,setOpen,currentUser}) {
+export default function ProfileOptionModel({open,setOpen,navigate,currentUser}) {
   const {user}  = useSelector((state)=>state.authReducer.authData)
   const [openDeleteModel, setOpenDeleteModel] = useState(false);
   const dispatch = useDispatch();
@@ -15,6 +15,9 @@ export default function ProfileOptionModel({open,setOpen,currentUser}) {
   };
   const handleLogOut = () => {
     dispatch(logOut())
+  }
+  if(navigate === true){
+    currentUser = user;
   }
 
   return (

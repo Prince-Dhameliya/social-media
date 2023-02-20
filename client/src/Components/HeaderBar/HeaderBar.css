@@ -29,8 +29,10 @@
 
 .HeaderBarProfile{
     align-items: center;
+    justify-content: space-between;
     background: var(--cardColor);
-    width: 100%;
+    left: 0;
+    right: 0;
     position:fixed;
     top: 0;
     padding: 0.5rem 1rem;
@@ -60,6 +62,22 @@
     font-weight: 600;
     font-size: 22px;
     font-family: cursive;
+}
+
+.HeaderProfileTitle{
+    display: flex;
+    align-items: center;
+    /* gap: 1rem; */
+}
+
+.HeaderProfileVerticalIcon{
+    width: 21px;
+    cursor: pointer;
+}
+
+.HeaderProfileMoreIcon{
+    width: 27px;
+    cursor: pointer;
 }
 
 .HeaderChatIcon{

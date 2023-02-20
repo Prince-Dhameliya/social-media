@@ -96,7 +96,7 @@
     align-items: center;
     margin: 40px 0px 40px 25px;
     cursor: pointer;
-    position: relative;
+    /* position: relative; */
 }
 
 .MiniNavigation{
@@ -145,57 +145,6 @@
     width: 23.5rem;
     flex-direction: column;
     padding :0rem 0.5rem 0rem 0.5rem;
-}
-
-/* dropdown menu css */
-
-.sub-menu-pc{
-    position: absolute;
-    left: 20px;
-    bottom: 80px;
-    z-index: 2;
-}
-
-.sub-menu-wrap{
-    width: 250px;
-    max-height: 0px;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.sub-menu-wrap.open-menu{
-    max-height: 400px;
-}
-
-.sub-menu{
-    background: white;
-}
-
-.sub-menu hr{
-    border: 0;
-    height: 1px;
-    width: 100%;
-    background: rgb(218, 218, 218);
-    margin: 0px;
-}
-
-.sub-menu-link{
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #525252;
-    padding: 0px 20px;
-    cursor: pointer;
-}
-
-.sub-menu-link p{
-    font-size: 15px;
-    width: 100%;
-}
-
-.sub-menu-link img{
-    width: 20px;
 }
 
 @media screen and (max-width:1600px){

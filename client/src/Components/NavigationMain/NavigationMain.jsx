@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './NavigationMain.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { logOut } from '../../actions/AuthAction'
 
 import Home from '../../img/home.svg'
@@ -21,22 +21,19 @@ import Settings from '../../img/Settings.svg'
 import Saved from '../../img/UnBookmark.svg'
 import Delete from '../../img/Delete.svg'
 import Mode from '../../img/Mode.svg'
-import Logo from '../../img/logo.png'
+import Logo from '../../img/Logo.svg'
 import { useState } from 'react'
 import DeleteModel from '../DeleteModel/DeleteModel'
 import Notifications from '../Notifications/Notifications'
 import HeaderBarSearch from '../HeaderBar/HeaderBarSearch'
 import SearchedUser from '../SearchedUser/SearchedUser'
 import CreatePost from '../CreatePost/CreatePost'
-
-function togglemenu(){
-  let submenu = document.getElementById("submenu");
-  submenu.classList.toggle("open-menu");
-}
+import ProfileOptionModel from '../DropdownButton/ProfileOptionModel'
 
 const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName,setSearchedName,screenSize}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogOut = () => {
     dispatch(logOut())
   }
@@ -44,10 +41,22 @@ const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [active, setActive] = useState(location);
+  const [openProfileMore, setOpenProfileMore] = useState(false);
+
+  const handleLoader = () => {
+    const Loader = document.querySelector(".headLoader");
+    Loader.classList.add("active");
+      setInterval(() => {
+        Loader.classList.remove("active");
+      }, 1000);
+  }
 
   const handleClick = (event) => {
     const MiniNavigation = document.querySelector(".MiniNavigation");
+    
     if(event.target.id === "100006"){
+      handleLoader();
+      navigate("../");
       setActive("home");
       if(MiniNavigation.classList.contains("active")){
         MiniNavigation.classList.remove("active");
@@ -61,12 +70,16 @@ const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName
       }
     }
     else if(event.target.id === "100008"){
+      handleLoader();
+      navigate("../explore");
       setActive("allposts");
       if(MiniNavigation.classList.contains("active")){
         MiniNavigation.classList.remove("active");
       }
     }
     else if(event.target.id === "100012"){
+      handleLoader();
+      navigate("../messages");
       setActive("messages");
       if(MiniNavigation.classList.contains("active")){
         MiniNavigation.classList.remove("active");
@@ -86,6 +99,8 @@ const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName
       }
     }
     else if(event.target.id === "100011"){
+      handleLoader();
+      navigate(`../${user._id}`);
       setActive("profile");
       if(MiniNavigation.classList.contains("active")){
         MiniNavigation.classList.remove("active");
@@ -102,79 +117,45 @@ const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName
             <span className="logo_Title">Social Point</span>
         </div>
         <div className="navigationItems">
-          <Link style={{textDecoration: "none", color: "inherit"}} to="../"><div id="100006" className="navigation_row" onClick={handleClick}>
+          <div id="100006" className="navigation_row" onClick={handleClick}>
             <img src={active === "home" ? Home : WHome} alt="" className='navigation_icon' />
             <span className="navigation_title">Home</span>
           </div>
-          </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100007" className="navigation_row" onClick={handleClick}>
+          <div id="100007" className="navigation_row" onClick={handleClick}>
             <img src={active === "search" ? Search : WSearch} alt="" className='navigation_icon' />
             <span className="navigation_title">Search</span>
           </div>
-          </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to="../explore"><div id="100008" className="navigation_row" onClick={handleClick}>
+          <div id="100008" className="navigation_row" onClick={handleClick}>
             <img src={active === "allposts" ? Explore : WExplore} alt="" className='navigation_icon' />
             <span className="navigation_title">Explore</span>
           </div>
-          </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to="../messages"><div id="100012" className="navigation_row" onClick={handleClick}>
+          <div id="100012" className="navigation_row" onClick={handleClick}>
             <img src={active === "messages" ? Message : WMessage} alt="" className='navigation_icon' />
             <span className="navigation_title">Messages</span>
           </div>
-          </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100009" className="navigation_row" onClick={handleClick}>
+          <div id="100009" className="navigation_row" onClick={handleClick}>
             <img src={active === "createpost" ? AddObj : WAddObj} alt="" className='navigation_icon' />
             <span className="navigation_title">Create</span>
           </div>
-          </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100010" className="navigation_row" onClick={handleClick}>
+          <div id="100010" className="navigation_row" onClick={handleClick}>
             <img src={active === "activity" ? Like : WLike} style={{width:"23px",marginLeft:"1px"}} alt="" className='navigation_icon' />
             <span className="navigation_title">Notifications</span>
           </div>
-          </Link>
-          <Link style={{textDecoration: "none", color: "inherit"}} to={`../${user._id}`}><div id="100011" className="navigation_row" onClick={handleClick}>
+          <div id="100011" className="navigation_row" onClick={handleClick}>
             <img src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt="" className={active === "profile" ? "active navigation_icon navigation_profileIcon" : "navigation_icon navigation_profileIcon"} />
             <span className={active === "profile" ? "active navigation_title navigation_profileTitle" : "navigation_title navigation_profileTitle"}>Profile</span>
           </div>
-          </Link>
         </div>
       </div>
 
       <CreatePost open={open} setOpen={setOpen}/>
-      <div className="moreItems" id="moreItems" onClick={togglemenu}>
+      <ProfileOptionModel open={openProfileMore} setOpen={setOpenProfileMore} navigate={true} currentUser={currentUser}/>
+      <div className="moreItems" id="moreItems" onClick={()=>setOpenProfileMore(true)}>
         <img src={More} alt="" className='navigation_icon' />
         <span className="navigation_title">More</span>
       </div>
     </div>
-
-    <div className="sub-menu-wrap sub-menu-pc" id="submenu">
-        <div className="sub-menu">
-            <div className="sub-menu-link">
-                <p>Settings</p>
-                <span><img alt="" src={Settings}/></span>
-            </div>
-            <hr/>
-            <Link style={{textDecoration: "none", color: "inherit"}} to={`/${user._id}/saved`}><div className="sub-menu-link">
-                <p>Saved</p>
-                <span><img alt="" src={Saved}/></span>
-            </div></Link>
-            <hr/>
-            <div className="sub-menu-link">
-                <p>Switch appearance</p>
-                <span><img alt="" src={Mode}/></span>
-            </div>
-            <hr/>
-            <div className="sub-menu-link" onClick={()=>setOpenDelete(true)}>
-                <p style={{color: "red"}}>Delete Account</p>
-                <span><img alt="" src={Delete}/></span>
-            </div>
-            <DeleteModel open={openDelete} setOpen={setOpenDelete} currentUser={currentUser} />
-            <hr/>
-            <div className="sub-menu-link" onClick={handleLogOut}>
-                <p style={{color: "red"}}>Log out</p>
-            </div>
-        </div>
-    </div>
+    
 
     {screenSize.dynamicWidth > 700 && <div id="MiniNavigation" className="MiniNavigation">
         <div className="MiniNavigationLeft">
@@ -183,38 +164,31 @@ const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName
                   <img src={Logo} alt="" className='logo_icon mini_logo_icon' />
               </div>
               <div className="navigationItems">
-                <Link style={{textDecoration: "none", color: "inherit"}} to="../"><div id="100006" className="navigation_row" onClick={handleClick}>
+                <div id="100006" className="navigation_row" onClick={handleClick}>
                   <img src={active === "home" ? Home : WHome} alt="" className='navigation_icon' />
                 </div>
-                </Link>
-                <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100007" className={active === "search" ? "mininavigation_row" : "navigation_row"} onClick={handleClick}>
+                <div id="100007" className={active === "search" ? "mininavigation_row" : "navigation_row"} onClick={handleClick}>
                   <img src={active === "search" ? Search : WSearch} alt="" className='navigation_icon' />
                 </div>
-                </Link>
-                <Link style={{textDecoration: "none", color: "inherit"}} to="../explore"><div id="100008" className="navigation_row" onClick={handleClick}>
+                <div id="100008" className="navigation_row" onClick={handleClick}>
                   <img src={active === "allposts" ? Explore : WExplore} alt="" className='navigation_icon' />
                 </div>
-                </Link>
-                <Link style={{textDecoration: "none", color: "inherit"}} to="../messages"><div id="100012" className="navigation_row" onClick={handleClick}>
+                <div id="100012" className="navigation_row" onClick={handleClick}>
                   <img src={active === "messages" ? Message : WMessage} alt="" className='navigation_icon' />
                 </div>
-                </Link>
-                <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100009" className="navigation_row" onClick={handleClick}>
+                <div id="100009" className="navigation_row" onClick={handleClick}>
                   <img src={active === "createpost" ? AddObj : WAddObj} alt="" className='navigation_icon' />
                 </div>
-                </Link>
-                <Link style={{textDecoration: "none", color: "inherit"}} to=""><div id="100010" className={active === "activity" ? "mininavigation_row" : "navigation_row"} onClick={handleClick}>
+                <div id="100010" className={active === "activity" ? "mininavigation_row" : "navigation_row"} onClick={handleClick}>
                   <img src={active === "activity" ? Like : WLike} style={{width:"23px",marginLeft:"1px"}} alt="" className='navigation_icon' />
                 </div>
-                </Link>
-                <Link style={{textDecoration: "none", color: "inherit"}} to={`../${user._id}`}><div id="100011" className="navigation_row" onClick={handleClick}>
+                <div id="100011" className="navigation_row" onClick={handleClick}>
                   <img src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt="" className={active === "profile" ? "active navigation_icon navigation_profileIcon" : "navigation_icon navigation_profileIcon"} />
                 </div>
-                </Link>
               </div>
             </div>
 
-            <div className="moreItems" id="moreItems" onClick={togglemenu}>
+            <div className="moreItems" id="moreItems" onClick={()=>setOpenProfileMore(true)}>
               <img src={More} alt="" className='navigation_icon' />
             </div>
         </div>

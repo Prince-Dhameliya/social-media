@@ -3,9 +3,6 @@
     flex-direction: row;
     margin: 0rem auto;
     gap: 2rem;
-    height: 100vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 .PostSide{
@@ -30,7 +27,6 @@
         flex-direction: column;
         margin: 3rem auto 3rem auto;
         padding: 0.5rem 0rem;
-        height: calc(100vh - 7rem);
     }
 }
 

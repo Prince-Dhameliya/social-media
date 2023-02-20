@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import './NavigationBar.css';
 
 import Home from '../../img/home.svg'
@@ -23,6 +23,7 @@ const NavigationBar = ({location}) => {
 
   const {user} = useSelector((state)=>state.authReducer.authData);
   const [animation, setAnimation] = useState(true);
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   let notification = user.notification;
   let comments=0;
@@ -52,11 +53,23 @@ const NavigationBar = ({location}) => {
 
   const [active, setActive] = useState(location);
 
+  const handleLoader = () => {
+    const Loader = document.querySelector(".headLoader");
+    Loader.classList.add("active");
+      setInterval(() => {
+        Loader.classList.remove("active");
+      }, 1000);
+  }
+
   const handleClick = (event) => {
     if(event.target.id === "100001"){
+      handleLoader();
+      navigate("../");
       setActive("home");
     }
     else if(event.target.id === "100002"){
+      handleLoader();
+      navigate("../explore");
       setActive("allposts");
     }
     else if(event.target.id === "100003"){
@@ -64,9 +77,13 @@ const NavigationBar = ({location}) => {
       setOpen(true);
     }
     else if(event.target.id === "100004"){
+      handleLoader();
+      navigate("../activity");
       setActive("activity");
     }
     else if(event.target.id === "100005"){
+      handleLoader();
+      navigate(`../${user._id}`);
       setActive("profile");
     }
   }
@@ -74,12 +91,11 @@ const NavigationBar = ({location}) => {
   return (
     <>
       <div className='NavigationBar'>
-              <Link to="../"><img id="100001" src={active === "home" ? Home : WHome} alt="" className='homeNavigation' onClick={handleClick} /></Link>
-              <Link to="../explore"><img id="100002" src={active === "allposts" ? Search : WSearch} alt="" className='searchNavigation' onClick={handleClick} /></Link>
-              <Link to=""><img id="100003" src={active === "createpost" ? AddObj : WAddObj} alt="" className='addPostNavigation' onClick={handleClick} />
-              </Link>
-              <Link to="../activity"><img id="100004" src={active === "activity" ? Like : WLike} alt="" className='likeNavigation' onClick={handleClick} /></Link>
-              <Link to={`../${user._id}`}><img id="100005" src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} className={active === "profile" ? "active profileNavigation" : "profileNavigation"} alt="" onClick={handleClick} /></Link>
+              <img id="100001" src={active === "home" ? Home : WHome} alt="" className='homeNavigation' onClick={handleClick} />
+              <img id="100002" src={active === "allposts" ? Search : WSearch} alt="" className='searchNavigation' onClick={handleClick} />
+              <img id="100003" src={active === "createpost" ? AddObj : WAddObj} alt="" className='addPostNavigation' onClick={handleClick} />
+              <img id="100004" src={active === "activity" ? Like : WLike} alt="" className='likeNavigation' onClick={handleClick} />
+              <img id="100005" src={user.profilePicture ? user.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} className={active === "profile" ? "active profileNavigation" : "profileNavigation"} alt="" onClick={handleClick} />
               {animation && ((like !== 0) || (comments !== 0) || (follow !== 0)) && 
               <div className="NotificationAnimation" id="NotificationAnimation">
                   <div className="NotificationTop">

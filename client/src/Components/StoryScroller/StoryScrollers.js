@@ -1,3 +1,4 @@
+import { Skeleton } from '@mui/material';
 import React from 'react'
 import { useSelector } from 'react-redux';
 import "./StoryScrollers.css"
@@ -25,7 +26,7 @@ const StoryScroller = ({person}) => {
     )
 }
 
-const StoryScrollers = ({persons}) => {
+const StoryScrollers = ({persons,personsLoading}) => {
     const {user} = useSelector((state)=>state.authReducer.authData);
 
     const storyPersons = persons.filter((person) => {
@@ -45,12 +46,26 @@ const StoryScrollers = ({persons}) => {
             },3000)
         })
     })
+
+    let userFollowing = user.following.length + 1;
+
   return (
     <div>
         <div className="StoryScroller">
-            {storyPersons?.map((person, id)=>{
+            {!personsLoading? (storyPersons?.map((person, id)=>{
                 return <StoryScroller key={id} person={person}/>
-            })}
+            }))
+            : 
+            <>
+            {Array(userFollowing).fill(true).map((_, i) => 
+            <div className="StoryContainer" key={i}>
+                <div className="StoryProfile">
+                    <Skeleton animation="wave" variant="circular" width={60} height={60} style={{ marginTop: 3,border: "1px solid var(--lineColor)"}} />
+                </div>
+                <Skeleton animation="wave" height={20} width="80%" />
+            </div>)}
+            </>
+            }
         </div>
     </div>
   )
