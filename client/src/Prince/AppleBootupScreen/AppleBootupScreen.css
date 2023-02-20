@@ -33,17 +33,17 @@
     width: 300px;
     height: 6px;
     background: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);
-    animation: load 0.5s linear;
+    animation: load 0.8s linear;
 }
 
 #AppleBootupScreen {
-    -moz-animation: cssAnimation 0s ease-in 0.5s forwards;
+    -moz-animation: cssAnimation 0s ease-in 0.8s forwards;
     /* Firefox */
-    -webkit-animation: cssAnimation 0s ease-in 0.5s forwards;
+    -webkit-animation: cssAnimation 0s ease-in 0.8s forwards;
     /* Safari and Chrome */
-    -o-animation: cssAnimation 0s ease-in 0.5s forwards;
+    -o-animation: cssAnimation 0s ease-in 0.8s forwards;
     /* Opera */
-    animation: cssAnimation 0s ease-in 0.5s forwards;
+    animation: cssAnimation 0s ease-in 0.8s forwards;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
