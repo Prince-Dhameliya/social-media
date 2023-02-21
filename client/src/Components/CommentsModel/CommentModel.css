@@ -103,7 +103,7 @@
 @media (max-width: 899px) {
     .CommentBox{
         width:auto;
-        height: 100vh;
+        height: 100dvh;
     }
 }
 

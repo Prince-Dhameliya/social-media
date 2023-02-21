@@ -141,9 +141,9 @@
         width: 100%;
     }
     .CreatePostFileUploadSection{
-        height: calc(100vh - 41px);
+        height: calc(100dvh - 41px);
     }
     .PreviewImageAndTitle{
-        height: calc(100vh - 41px);
+        height: calc(100dvh - 41px);
     }
 }

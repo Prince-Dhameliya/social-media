@@ -49,6 +49,6 @@
     }
 
     .FollowingModelList{
-        height: calc(100vh - 41px);
+        height: calc(100dvh - 41px);
     }
 }

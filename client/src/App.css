@@ -23,7 +23,7 @@
   overflow: hidden;
   color: var(--black);
   background: #fafafa;
-  height: calc(100vh);
+  height: calc(100dvh);
   overflow-y: scroll;
   overflow-x: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
