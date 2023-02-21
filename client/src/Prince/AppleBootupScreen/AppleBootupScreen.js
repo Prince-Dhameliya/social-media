@@ -7,7 +7,7 @@ const AppleBootupScreen = () => {
   return (
     <div className='AppleBootupScreen' id='AppleBootupScreen'>
         <img src={Logo} alt="" className='logo' />
-        {/* <div className="progress"></div> */}
+        <div className="progress"></div>
     </div>
   )
 }

@@ -5,7 +5,7 @@
     overflow-x: scroll;
     overflow-y: hidden;
     background-color: var(--cardColor);
-    border-radius: 0.5rem;
+    border-radius: 0.2rem;
     border: 1px solid var(--lineColor);
     height: 113px;
 }

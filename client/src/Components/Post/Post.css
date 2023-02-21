@@ -197,7 +197,7 @@
 
     .PostUserName{
         gap: 0.7rem;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
     }
     
@@ -243,12 +243,12 @@
     }
 
     .LikeDetails{
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
     }
     
     .CommentsDetails{
-        font-size: 14px;
+        font-size: 13px;
     }
     
     .PostTimeDetails{
@@ -256,7 +256,7 @@
     }
     
     .Details{
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .CommentSection{
@@ -269,5 +269,13 @@
     
     .CommentEmojiIcon{
         width: 22px;
+    }
+    
+    .CommentInput{
+        font-size: 13px;
+    }
+    
+    .CommentSendButton{
+        font-size: 13px;
     }
 }
