@@ -42,8 +42,13 @@
 }
 
 .FollowerName > span:nth-of-type(1){
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
+}
+
+.FollowerName > span:nth-of-type(2){
+    font-weight: 500;
+    color: rgb(147, 147, 147);
 }
 
 .fc-button{
@@ -123,7 +128,7 @@
     }
     
     .FollowerName > span:nth-of-type(1){
-        font-weight: bold;
+        font-weight: 600;
     }
     
     .fc-button{

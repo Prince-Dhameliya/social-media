@@ -19,7 +19,7 @@ import time from 'time-ago';
 import CommentFromModel from "./CommentFromModel/CommentFromModel";
 import PostOptionModel from '../DropdownButton/PostOptionModel';
 import { Skeleton } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function CommentModel2({open, setOpen, index, data}) {
 //   const [open, setOpen] = React.useState(false);
@@ -35,6 +35,7 @@ export default function CommentModel2({open, setOpen, index, data}) {
   const {user}  = useSelector((state)=>state.authReducer.authData)
   const loading = useSelector((state)=>state.postReducer.uploading)
   const desc = useRef();
+  const navigate = useNavigate();
 
   const [liked, setLiked] = useState(data.likes.includes(user._id))
   const [bookmarked, setBookmarked] = useState(data.saved.includes(user._id))
@@ -108,16 +109,16 @@ export default function CommentModel2({open, setOpen, index, data}) {
       >
         <div className="CommentBox">
             <div className="TopPostDetails">
-              <div className="PostDetails">
-                <div className='PostUserName commentUsername'>
-                    <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } style={{cursor: "pointer"}} alt="" />
-                    <span style={{cursor: "pointer"}}><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
+              <div className="PostHeaderSection">
+                <div className='PostUserName' onClick={()=>navigate(`/${data.userId}`)}>
+                    <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } alt="" />
+                    <span>{data.username}</span>
                 </div>
                 <div className='PostMoreIcon'>
-                    {data ? <img src={Horizontal} className="ReactLike" alt="" style={{cursor: "pointer",width: "24px"}} onClick={() => setOpenMore(true)} />
+                    {data ? <img src={Horizontal} className="ReactLike" alt="" onClick={() => setOpenMore(true)} />
                     : <Skeleton animation="wave" height={20} width={30}/>}
                     <PostOptionModel open={openMore} setOpen={setOpenMore} data={data} />
-                    <img src={Close} className='ReactLike' alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleClose} />
+                    <img src={Close} className='ReactLike' alt="" onClick={handleClose} />
                 </div>
               </div>
             </div>
@@ -125,18 +126,19 @@ export default function CommentModel2({open, setOpen, index, data}) {
 
 
             <div className="MainComment">
-                {data.desc ? (<div className="CommentWindow">
+                {data.desc ? 
+                (<div className="CommentWindow">
                     <div className="CommentLeft">
                         <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } style={{cursor: "pointer"}} alt="" />
 
                         <div className="CommentInfo">
                             <div className="CommentUserInfo">
-                                <span><Link style={{textDecoration: "none", color: "inherit"}} to={`/${data.userId}`}><b>{data.username}</b></Link></span>
+                                <span onClick={()=>navigate(`/${data.userId}`)}>{data.username}</span>
                                 <span> {data.desc}</span>
                             </div>
 
-                            <div className="CommentUserInfo">
-                                <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(data.createdAt,true)}</span>
+                            <div className="CommentAction">
+                              <span>{time.ago(data.createdAt,true)}</span>
                             </div>
                         </div>
                     </div>
@@ -148,33 +150,27 @@ export default function CommentModel2({open, setOpen, index, data}) {
                 })}
             </div>
 
-            
-            
-
             <div className="bottomcomment">
                 <hr />
-                <div className="PostReact">
-                    <div>
-                        <img src={liked ? Like : DisLike} className="ReactLike" alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleLike} />
-                        <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} style={{cursor: "pointer",width: "33px",marginTop:"-4px"}} alt="" />
-                        <img src={Send} className="ReactShare" style={{cursor: "pointer",width: "29px"}} alt="" />
-                    </div>
-
-                    <img src={bookmarked ? Bookmark : UnBookmark} className="ReactBookmark" onClick={handleBookmark} style={{cursor: "pointer",width: "26px"}} alt="" />
+                <div className="PostDetailsSection">
+                  <div className="PostReact">
+                      <div>
+                          <img src={liked ? Like : DisLike} className="ReactLike" alt="" onClick={handleLike} />
+                          <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} alt="" />
+                          <img src={Send} className="ReactShare" alt="" />
+                      </div>
+                      <img src={bookmarked ? Bookmark : UnBookmark} className="ReactBookmark" onClick={handleBookmark} alt="" />
+                  </div>
+                  <span className='LikeDetails'>{likes} likes</span>
+                  <span className='PostTimeDetails'>{time.ago(data.createdAt)}</span>
                 </div>
-
-                <span><b>{likes} likes</b></span>
-
-                <span style={{color: "rgb(147, 147, 147)"}}>{time.ago(data.createdAt)}</span>
-
                 <hr />
-
                 <div className="CommentSection">
                     <div className="CommentPlusEmoji">
-                        <img src={Emoji} className="CommentEmojiIcon" style={{cursor: "pointer",width: "20px"}} alt="" />
+                        <img src={Emoji} className="CommentEmojiIcon" alt="" />
                         <input type="text" id={`${-data._id}`} className="CommentInput" ref={desc} placeholder='Add a comment...' onKeyDown={searchKeyPressed} onChange={handleInput} autoComplete="off" />
                     </div>
-                    <div className='CommentSendButton' id={`${-index}`} onClick={handleSubmit} style={{fontSize: "13px", color: "rgb(176, 226, 243)",fontWeight:"600", cursor: "pointer"}}><span>{loading ? "Posting" : "Post"}</span></div>
+                    <div className='CommentSendButton' id={`${-index}`} onClick={handleSubmit}><span>{loading ? "Posting" : "Post"}</span></div>
                 </div>
             </div>
         </div>

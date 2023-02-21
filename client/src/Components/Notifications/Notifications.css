@@ -43,7 +43,7 @@
 }
 
 .NotificationInfo > span > span:nth-of-type(1){
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
 }
 
@@ -59,9 +59,7 @@
 }
 
 .nfc-button{
-    /* padding: 7px 20px; */
     height: 2rem;
     padding-left: 25px;
     padding-right: 25px;
-    /* width: calc(90px); */
 }

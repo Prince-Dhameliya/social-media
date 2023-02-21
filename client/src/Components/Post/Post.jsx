@@ -130,13 +130,13 @@ const Post = ({data,index}) => {
 
   return (
     <div className="Post">
-        <div className="PostDetails">
+        <div className="PostHeaderSection">
           <div className='PostUserName' onClick={()=>navigate(`/${data.userId}`)}>
             {data?.profilePicture ? 
               <img src={data.profilePicture ? data.profilePicture: "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png"} alt="" />
               : <Skeleton style={{marginTop: -1}} animation="wave" variant="circular" width={35} height={35} />
             }
-            {data?.username ? <span><b>{data.username}</b></span>
+            {data?.username ? <span>{data.username}</span>
             : <Skeleton animation="wave" height={20} width={120}/>
             }
           </div>
@@ -157,43 +157,47 @@ const Post = ({data,index}) => {
             ) :  <Skeleton sx={{ height: 400 }} animation="wave" variant="rectangular" />}
         </div>
 
-        <div className="PostReact">
-            <div>
-              <img src={liked ? Like : DisLike} className="ReactLike" alt="" onClick={handleLike} />
+        <div className="PostDetailsSection">
+
+          <div className="PostReact">
               <div>
-                <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} alt="" />
-                {data ? <CommentModel open={open} setOpen={setOpen} index={index} data = {data} /> : null}
+                <img src={liked ? Like : DisLike} className="ReactLike" alt="" onClick={handleLike} />
+                <div>
+                  <img src={Comment} className="ReactComment" id="RedirectCommentInput" onClick={handleRedirect} alt="" />
+                  {data ? <CommentModel open={open} setOpen={setOpen} index={index} data = {data} /> : null}
+                </div>
+                <img src={Send} className="ReactShare" alt="" />
               </div>
-              <img src={Send} className="ReactShare" alt="" />
-            </div>
+              <img src={bookmarked ? Bookmark : UnBookmark} className="ReactBookmark" onClick={handleBookmark} alt="" />
+          </div>
 
-            <img src={bookmarked ? Bookmark : UnBookmark} className="ReactBookmark" onClick={handleBookmark} alt="" />
+          {data?.likes ? <span className='LikeDetails'>{likes} likes</span>
+          : <Skeleton animation="wave" height={20} width={80}/>}
+
+          {data?.desc?.length > 0 && (data?.username ? <div className="Details">
+              <span onClick={()=>navigate(`/${data.userId}`)}>{data.username}</span>
+              <span> {data.desc}</span>
+          </div> 
+          : <Skeleton animation="wave" height={20} width={130}/>)}
+
+          {data?.comments?.length>0 && (data?.comments?.length ? <span className='CommentsDetails' onClick={handleRedirect}><span>{`View all ${data.comments.length} comments`}</span></span> : <Skeleton animation="wave" height={20} width={130}/>)}
+
+          {data?.comments ? (data.comments.map((comment,id)=>{
+            if(comment.userId === data.userId && id<2){
+              return (
+                <div key={id} className="Details">
+                    <span onClick={()=>navigate(`/${data.userId}`)}>{comment.username}</span>
+                    <span> {comment.comment}</span>
+                </div>
+              )
+            }
+            return null;
+          })) : null}
+
+          {data?.createdAt ? <span className='PostTimeDetails'>{time.ago(data.createdAt)}</span>
+          : <Skeleton animation="wave" height={20} width={100}/>}
+
         </div>
-
-        {data?.likes ? <span style={{fontSize: "14px"}}><b>{likes} likes</b></span>
-        : <Skeleton animation="wave" height={20} width={80}/>}
-
-        { data?.username ? <div className="Details">
-            <span onClick={()=>navigate(`/${data.userId}`)}><b>{data.username}</b></span>
-            <span> {data.desc}</span>
-        </div> 
-        : <Skeleton animation="wave" height={20} width={130}/>}
-
-        {data?.comments?.length>0 && (data?.comments?.length ? <span style={{fontSize: "14px", color: "rgb(147, 147, 147)",cursor: "pointer"}} onClick={handleRedirect}><span>{`View all ${data.comments.length} comments`}</span></span> : <Skeleton animation="wave" height={20} width={130}/>)}
-
-        {data?.comments ? (data.comments.map((comment,id)=>{
-          if(comment.userId === data.userId && id<2){
-            return (
-              <div key={id} className="Details">
-                  <span onClick={()=>navigate(`/${data.userId}`)}><b>{comment.username}</b></span>
-                  <span> {comment.comment}</span>
-              </div>
-            )
-          }
-          return null;
-        })) : null}
-        {data?.createdAt ? <span style={{fontSize: "13px",color: "rgb(147, 147, 147)"}}><span>{time.ago(data.createdAt)}</span></span>
-        : <Skeleton animation="wave" height={20} width={100}/>}
 
         <hr />
 
@@ -203,8 +207,8 @@ const Post = ({data,index}) => {
             {data?._id ? <input type="text" id={data._id} className="CommentInput" ref={desc} placeholder='Add a comment...' onKeyDown={searchKeyPressed} onChange={handleInput} autoComplete="off" />
             : <input type="text" className="CommentInput" ref={desc} placeholder='Add a comment...' onChange={handleInput} autoComplete="off" />}
           </div>
-          {index ? <div className='CommentSendButton' id={index} onClick={handleSubmit}><span>{loading ? "Posting" : "Post"}</span></div>
-          : <div className='CommentSendButton'><span>Post</span></div>}
+          {index ? <span className='CommentSendButton' id={index} onClick={handleSubmit}>{loading ? "Posting" : "Post"}</span>
+          : <span className='CommentSendButton'>Post</span>}
         </div>
     </div>
   )

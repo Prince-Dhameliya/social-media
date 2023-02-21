@@ -1,57 +1,3 @@
-/* .SearchedUsers{
-    width: 100%;
-    border-radius: 0.7rem;
-    gap: 0rem;
-    display: flex;
-    flex-direction: column;
-    font-size: 13px;
-}
-
-.SearchedUsersList{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    overflow-x: auto;
-}
-
-.SearchedUser{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--cardColor);
-    border-radius: 0.3rem;
-    border: 1px solid rgb(218, 218, 218);
-    gap: 10px;
-    padding: 1rem;
-}
-
-.SearchedUser > div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.SearchedUserImage{
-    width: 9rem;
-    height: 9rem;
-    border-radius: 50%;
-    border: 1px solid var(--borderColor);
-}
-
-.SearchedUserName{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.SearchedUserName > span:nth-of-type(1){
-    font-weight: bold;
-} */
-
 .SearchedUsers{
     width: 100%;
     border-radius: 0.7rem;
@@ -102,8 +48,13 @@
 }
 
 .SearchedUserName > span:nth-of-type(1){
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
+}
+
+.SearchedUserName > span:nth-of-type(2){
+    font-weight: 500;
+    color: rgb(147, 147, 147);
 }
 
 @media screen and (max-width: 700px){
@@ -153,9 +104,5 @@
         align-items: flex-start;
         justify-content: center;
         gap: 0px;
-    }
-    
-    .SearchedUserName > span:nth-of-type(1){
-        font-weight: bold;
     }
 }
