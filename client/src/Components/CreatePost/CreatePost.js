@@ -8,7 +8,10 @@ import { uploadPost } from '../../actions/uploadAction';
 import { getTimelinePosts } from '../../actions/postAction';
 import { useState } from "react";
 import Close from '../../img/Close.svg'
+import NextButton from '../../img/NextButton.png'
 import axios from 'axios';
+import { useRef } from 'react';
+import { VolumeOff, VolumeUp } from '@mui/icons-material';
 
 export default function CreatePost({open, setOpen}) {
 //   const [open, setOpen] = React.useState(false);
@@ -22,20 +25,21 @@ export default function CreatePost({open, setOpen}) {
   const imageRef = React.useRef();
   const dispatch = useDispatch();
   const {user} = useSelector((state)=>state.authReducer.authData);
-  const [image, setImage] = useState("");
+  let [image, setImage] = useState([]);
   const [loading, setLoading] = useState(false);
   const [createPostDesc, setCreatePostDesc] = useState("");
   // const loading = useSelector((state)=>state.postReducer.uploading)
 
   const onImageChange = (event) => {
     if(event.target.files && event.target.files[0]){
-        let img = event.target.files[0];
+        // let img = event.target.files[0];
+        let img = Object.values(event.target.files);
         setImage(img);
     }
   }
 
   const resetPost = () => {
-    setImage(null);
+    setImage([]);
     setCreatePostDesc("");
   }
 
@@ -53,24 +57,30 @@ export default function CreatePost({open, setOpen}) {
         profilePicture: user.profilePicture,
         desc: createPostDesc
     }
-    let res;
-    if(image){
+
+    let AllImage = [];
+    for (let index = 0; index < image.length; index++) {
+      
+      let res;
+      if(image[index]){
         const formData = new FormData();
-        formData.append("file", image);
+        formData.append("file", image[index]);
         formData.append('upload_preset', 'socialmedia');
         formData.append('cloud_name', "princedhameliya");
 
-        if(image.type==="video/mp4"){
-            await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/video/upload', formData)
-            .then(async response => {
-                res = await response.data;
-            })
+        if(image[index].type==="video/mp4"){
+          await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/video/upload', formData)
+          .then(async response => {
+              res = await response.data;
+          })
+          AllImage.push(res?.url);
         }
-        else if(image.type==="image/png" || image.type==="image/jpg" || image.type==="image/jpeg" || image.type==="image/webp"){
-            await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/image/upload', formData)
-            .then(async response => {
-                res = await response.data;
-            })
+        else if(image[index].type==="image/png" || image[index].type==="image/jpg" || image[index].type==="image/jpeg" || image[index].type==="image/webp"){
+          await axios.post('https://api.cloudinary.com/v1_1/princedhameliya/image/upload', formData)
+          .then(async response => {
+            res = await response.data;
+          })
+          AllImage.push(res?.url);
         }
         else{
             return;
@@ -81,13 +91,16 @@ export default function CreatePost({open, setOpen}) {
         // } catch (error) {
         //     console.log(error);
         // }
-    }
-    else{
-        return;
+      }
+      else{
+          return;
+      }
+        
     }
 
-    if(res){
-        newPost.image = res.url;
+    if(AllImage.length > 0){
+        newPost.image = AllImage;
+        console.log(newPost);
         dispatch(uploadPost(newPost))
         dispatch(getTimelinePosts(user._id))
     }
@@ -96,6 +109,58 @@ export default function CreatePost({open, setOpen}) {
     setLoading(false);
     resetPost();
   }
+
+  const videoRef = useRef(null);
+  const [muted, setMuted] = useState(true);
+
+  const videoMuteClick = () => {
+      setMuted((prev)=>!prev);
+      videoRef.current.muted ? videoRef.current.muted=false :  videoRef.current.muted=true;
+  }
+
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("createPreviewPost");
+    let dots;
+    if(image?.length > 1){
+      dots = document.getElementsByClassName("createPreviewDot");
+    }
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+    }
+    if(image?.length > 1){
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i]?.className?.replace(" active", "");
+      }
+    }
+    slides[slideIndex-1].style.display = "block"; 
+    if(image?.length > 1){ 
+      dots[slideIndex-1].className += " active";
+    }
+  }
+
+  let [slideIndex, setSlideIndex] = useState(1);
+  React.useEffect(()=>{
+    if(image?.length!==0){
+      showSlides(slideIndex);
+    }
+  },[image?.length])
+
+  function plusSlides(n) {
+    setSlideIndex(prev=>prev+=n);
+    showSlides(slideIndex += n);
+
+  }
+
+  function currentSlide(n) {
+    setSlideIndex(prev=>prev=n);
+    showSlides(slideIndex = n);
+  }
+
+
+
 
   return (
     <div>
@@ -109,19 +174,19 @@ export default function CreatePost({open, setOpen}) {
           <div className="CreatePostTitleSection">
             <span className='CreatePostTitle'>Create new post</span>
             <div className="CreatePostClose">
-              {!image && <img src={Close} className='ReactLike' alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleClose} />}
-              {image && <button className="CreatePostButton" onClick={handleSubmit} disabled={loading} >{loading ? "Uploading..." : "Share"}</button>}
+              {image.length===0 && <img src={Close} className='ReactLike' alt="" style={{cursor: "pointer",width: "26px"}} onClick={handleClose} />}
+              {image.length!==0 && <button className="CreatePostButton" onClick={handleSubmit} disabled={loading} >{loading ? "Uploading..." : "Share"}</button>}
             </div>
           </div> 
           <hr />
 
-          {!image && <div className="CreatePostFileUploadSection">
+          {image.length===0 && <div className="CreatePostFileUploadSection">
               <div style={{fontSize: "18px", color: "black"}}>Drag photos and videos here</div>
               <div style={{background: "#0095f6", color: "white", padding: "5px 10px", borderRadius: "5px", cursor: "pointer", zIndex:"1"}} onClick={()=>imageRef.current.click()}>Select from computer</div>
-              <input className="CreatePostFileUpload" type="file" name="myImage" accept='video/' ref={imageRef} onChange={onImageChange} />
+              <input className="CreatePostFileUpload" type="file" name="myImage" accept='video/' ref={imageRef} onChange={onImageChange} multiple />
           </div>}
 
-          {image && (
+          {image.length!==0 && (
             <div className="PreviewImageAndTitle">
               <div className="PreviewTitleSection">
                 <div className="CreatePostUserTitleIcon">
@@ -133,11 +198,29 @@ export default function CreatePost({open, setOpen}) {
                 </div>
               </div>
               <div className="PreviewImage">
-                  <img src={Close} className='ReactLike PreviewClose' alt="" style={{cursor: "pointer",width: "26px"}} onClick={()=>setImage(null)} />
-                  {(image.type==="image/png" || image.type==="image/jpg" || image.type==="image/jpeg" || image.type==="image/webp") && <img src={URL.createObjectURL(image)} alt="" />}
-                  {image.type==="video/mp4" && <video src={URL.createObjectURL(image)} autoPlay>
-                    Your browser does not support the video tag.
-                  </video>}
+                  <div className="slideshow-container">
+
+                    {image?.map((img,index)=>{
+                      return <div key={index} className="mySlides fade createPreviewPost">
+                                {(img.type==="image/png" || img.type==="image/jpg" || img.type==="image/jpeg" || img.type==="image/webp") && <img src={URL.createObjectURL(img)} style={{width: "100%"}} alt="" />}
+                                {img.type==="video/mp4" && <><video src={URL.createObjectURL(img)} style={{width: "100%"}} ref={videoRef} autoPlay muted loop>
+                                  Your browser does not support the video tag.
+                                </video>
+                                {muted ? <VolumeOff className='muted' onClick={videoMuteClick} /> : <VolumeUp className='muted' onClick={videoMuteClick}/>}
+                                </>}
+                             </div>
+                    })}
+
+                    {slideIndex!==1 && <span className="prev" onClick={()=>plusSlides(-1)}><img src={NextButton} style={{width: "30px",rotate: "180deg"}} alt=""/></span>}
+                    {slideIndex!==image?.length && <span className="next" onClick={()=>plusSlides(1)}><img src={NextButton} style={{width: "30px"}} alt=""/></span>}
+
+                    {image?.length > 1 && <div className='dotNavigation' style={{textAlign: "center"}}>
+                      {image?.map((img,id)=>{
+                        return <span key={id} className="dot createPreviewDot" onClick={()=>currentSlide(id+1)}></span>
+                      })}
+                    </div>}
+                  </div>
+                  <img src={Close} className='ReactLike PreviewClose' alt="" style={{cursor: "pointer",width: "26px"}} onClick={()=>setImage([])} />
               </div>
             </div>
           )}

@@ -58,8 +58,8 @@ const StoryScrollers = ({persons,personsLoading}) => {
             : 
             <>
             {Array(userFollowing).fill(true).map((_, i) => 
-            <div className="StoryContainer" key={i}>
-                <div className="StoryProfile">
+            <div className="SkeletonStoryContainer" key={i}>
+                <div className="SkeletonStoryProfile">
                     <Skeleton animation="wave" variant="circular" width={60} height={60} style={{ marginTop: 3,border: "1px solid var(--lineColor)"}} />
                 </div>
                 <Skeleton animation="wave" height={20} width="80%" />

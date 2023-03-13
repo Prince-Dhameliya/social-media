@@ -14,7 +14,7 @@ const PostSchema = mongoose.Schema(
         desc: String,
         likes: [],
         saved: [],
-        image: String,
+        image: [],
         comments: []
     },
     {timestamps: true}

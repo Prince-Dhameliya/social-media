@@ -1,7 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import './NavigationMain.css'
-import { Link, useNavigate } from 'react-router-dom'
-import { logOut } from '../../actions/AuthAction'
+import { useNavigate } from 'react-router-dom'
 
 import Home from '../../img/home.svg'
 import WHome from '../../img/Whitehome.svg'
@@ -17,29 +16,19 @@ import WMessage from '../../img/Message1.svg'
 import Message from '../../img/Message.svg'
 
 import More from '../../img/More.svg'
-import Settings from '../../img/Settings.svg'
-import Saved from '../../img/UnBookmark.svg'
-import Delete from '../../img/Delete.svg'
-import Mode from '../../img/Mode.svg'
 import Logo from '../../img/Logo.svg'
 import { useState } from 'react'
-import DeleteModel from '../DeleteModel/DeleteModel'
 import Notifications from '../Notifications/Notifications'
 import HeaderBarSearch from '../HeaderBar/HeaderBarSearch'
 import SearchedUser from '../SearchedUser/SearchedUser'
 import CreatePost from '../CreatePost/CreatePost'
 import ProfileOptionModel from '../DropdownButton/ProfileOptionModel'
 
-const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName,setSearchedName,screenSize}) => {
+const NavigationMain = ({location,persons,searchedName,setSearchedName,screenSize}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleLogOut = () => {
-    dispatch(logOut())
-  }
 
-  const [open, setOpen] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
+  const [open, setOpen] = useState(false)
   const [active, setActive] = useState(location);
   const [openProfileMore, setOpenProfileMore] = useState(false);
 
@@ -149,7 +138,7 @@ const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName
       </div>
 
       <CreatePost open={open} setOpen={setOpen}/>
-      <ProfileOptionModel open={openProfileMore} setOpen={setOpenProfileMore} navigate={true} currentUser={currentUser}/>
+      <ProfileOptionModel open={openProfileMore} setOpen={setOpenProfileMore} navigate={true} currentUser={user}/>
       <div className="moreItems" id="moreItems" onClick={()=>setOpenProfileMore(true)}>
         <img src={More} alt="" className='navigation_icon' />
         <span className="navigation_title">More</span>
@@ -197,7 +186,7 @@ const NavigationMain = ({location,currentUser,profileUserId,persons,searchedName
             {active === "search" && <h2>Search</h2> }
             {active === "activity" && <h2>Notifications</h2> }
             <div className="MiniNavigationRightStuff">
-                {active === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location} currentUser={currentUser} profileUserId={profileUserId}/>}
+                {active === "activity" && (user?.notifications?.length !== 0) && <Notifications location={location}/>}
                 {active === "search" && <HeaderBarSearch setSearchedName={setSearchedName} screenSize={screenSize} />}
                 {active === "search" && <SearchedUser persons={persons} searchedName={searchedName} />}
             </div>

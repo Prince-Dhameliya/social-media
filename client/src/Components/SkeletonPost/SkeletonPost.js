@@ -46,7 +46,7 @@ function SkeletonPost() {
         <CardContent sx={{height: 170}}>
             {
             <React.Fragment>
-                <Skeleton animation="wave" height={40} style={{ marginBottom: 10, marginTop: -10, borderRadius: 14 }} />
+                <Skeleton animation="wave" height={30} style={{ marginBottom: 10, marginTop: -10, borderRadius: 10 }} />
                 <Skeleton animation="wave" height={20} width="20%" style={{ marginBottom: 10 }} />
                 <Skeleton animation="wave" height={20} width="50%" style={{ marginBottom: 10 }} />
                 <Skeleton animation="wave" height={20} width="40%" style={{ marginBottom: 10 }} />
@@ -56,15 +56,15 @@ function SkeletonPost() {
         </CardContent>
         <CardHeader
             avatar={
-                <Skeleton animation="wave" variant="circular" width={40} height={40} />
+                <Skeleton animation="wave" variant="circular" width={35} height={35} />
             }
 
             title={
                 <Skeleton
                 animation="wave"
-                height={40}
+                height={30}
                 width="70%"
-                style={{ marginBottom: 0, borderRadius:14 }}
+                style={{ marginBottom: 0, borderRadius:10 }}
                 />
             }
 

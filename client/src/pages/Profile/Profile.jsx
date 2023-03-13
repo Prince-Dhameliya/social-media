@@ -4,7 +4,7 @@ import NavigationMain from '../../Components/NavigationMain/NavigationMain'
 import './Profile.css'
 import NavigationBar from '../../Components/NavigationBar/NavigationBar'
 import { useEffect, useState } from 'react'
-import { getAllPosts } from '../../api/PostRequest'
+// import { getAllPosts } from '../../api/PostRequest'
 import { getAllUser, getUser } from '../../api/UserRequest'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -39,7 +39,7 @@ function togglemenu(){
 const Profile = ({location,socket}) => {
   const {user} = useSelector((state)=>state.authReducer.authData);
   // let {posts} = useSelector((state)=>state.postReducer);
-  const [allPosts, setAllPosts] = useState([]);
+  // const [allPosts, setAllPosts] = useState([]);
   const [persons, setPersons] = useState([]);
   const [personsLoading, setPersonsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState(user);
@@ -85,10 +85,10 @@ const Profile = ({location,socket}) => {
 
 
   useEffect(()=>{
-    const fetchAllPosts = async () => {
-      const {data} = await getAllPosts();
-      setAllPosts(data)
-    }
+    // const fetchAllPosts = async () => {
+    //   const {data} = await getAllPosts();
+    //   setAllPosts(data)
+    // }
     const fetchProfileUserData = async () => {
         const {data} = await getUser(params.id);
         setCurrentUser(data);
@@ -117,7 +117,7 @@ const Profile = ({location,socket}) => {
   return (
     <div className="Profile">
         <span className="headLoader loader"></span>
-        <NavigationMain location={location} profileUserId={profileUserId} currentUser={currentUser} persons={persons} searchedName={searchedName} setSearchedName={setSearchedName} screenSize={screenSize}  />
+        <NavigationMain location={location} profileUserId={profileUserId} persons={persons} searchedName={searchedName} setSearchedName={setSearchedName} screenSize={screenSize}  />
 
         {location === "home" && <HeaderBar/>}
         {location === "activity" && <HeaderBarNotificitions/>}

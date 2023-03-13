@@ -18,10 +18,26 @@
     align-items: center;
 }
 
+.SkeletonStoryContainer{
+    margin: 4px 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .StoryProfile{
     width: 90px;
     height: 90px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SkeletonStoryProfile{
+    width: 90px;
+    height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -45,10 +45,12 @@ const Posts = ({location,persons,screenSize}) => {
     </div>
   );
 
+
+
   return (
     <>
       <div className="Posts">
-        {loading ? <><Media/><Media/></>
+        {loading ? <Media/>
           : (
             <>
             {posts[0]!==undefined && (<Post key={0} index={0+1} data={posts[0]} location={location} />)}

@@ -30,7 +30,7 @@ const ProfileCard = ({location,currentUser,persons}) => {
 
   const handleFollow = () => {
     setIsFollowing((prev)=>!prev)
-    isfollowing ? dispatch(unFollowUser(currentUser._id, user)) : dispatch(followUser(currentUser._id, user));
+    isfollowing ? dispatch(unFollowUser(currentUser?._id, user)) : dispatch(followUser(currentUser?._id, user));
   }
 
   const handleMessage = async () => {
@@ -49,13 +49,13 @@ const ProfileCard = ({location,currentUser,persons}) => {
   return (
         <div className="ProfileCard">
             <div className="ProfileImages">
-                <img src={currentUser.coverPicture ? currentUser.coverPicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662226/Default/defaultCover_kadawa.jpg" } alt="" />
-                <img src={currentUser.profilePicture ? currentUser.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } alt="" />
+                <img src={currentUser?.coverPicture ? currentUser?.coverPicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662226/Default/defaultCover_kadawa.jpg" } alt="" />
+                <img src={currentUser?.profilePicture ? currentUser?.profilePicture : "https://res.cloudinary.com/princedhameliya/image/upload/v1669662212/Default/defaultProfile_tvonuv.png" } alt="" />
             </div>
 
             <div className="ProfileName">
-                <span>{currentUser.firstname} {currentUser.lastname} <img className="ProfileMoreIcon" src={HorizontalIcon} onClick={()=>setOpenProfileMore(true)} alt=''/><ProfileOptionModel open={openProfileMore} setOpen={setOpenProfileMore} currentUser={currentUser}/> </span>
-                <span>{currentUser.bio ? currentUser.bio : null}</span>
+                <span>{currentUser?.firstname} {currentUser?.lastname} <img className="ProfileMoreIcon" src={HorizontalIcon} onClick={()=>setOpenProfileMore(true)} alt=''/><ProfileOptionModel open={openProfileMore} setOpen={setOpenProfileMore} currentUser={currentUser}/> </span>
+                <span>{currentUser?.bio ? currentUser?.bio : null}</span>
             </div>
 
             {user._id === currentUserId && <div className="tempStuff">
@@ -77,12 +77,12 @@ const ProfileCard = ({location,currentUser,persons}) => {
                 <hr />
                 <div>
                     <div className="Follow" onClick={()=>setOpenFollowingModel(true)}>
-                        <span>{currentUser.following.length}</span>
+                        <span>{currentUser?.following?.length}</span>
                         <span>Following</span>
                     </div>
                     <div className="vl"></div>
                     <div className="Follow" onClick={()=>setOpenFollowersModel(true)}>
-                        <span>{currentUser.followers.length}</span>
+                        <span>{currentUser?.followers?.length}</span>
                         <span>Followers</span>
                     </div>
 
@@ -91,7 +91,7 @@ const ProfileCard = ({location,currentUser,persons}) => {
 
                     </div>
                     <div className="Follow">
-                        <span>{posts.filter((post)=>post.userId === currentUser._id).length}</span>
+                        <span>{posts.filter((post)=>post.userId === currentUser?._id).length}</span>
                         <span>Posts</span>
                     </div>
                 </div>

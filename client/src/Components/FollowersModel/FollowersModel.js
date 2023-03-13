@@ -35,7 +35,7 @@ export default function FollowersModel({open, setOpen, persons, currentUser}) {
 
             <div className="FollowingModelList">
             {persons.map((person, id)=>{
-                if(currentUser.followers.includes(person._id)){
+                if(currentUser?.followers?.includes(person._id)){
                     return <FollowerVertical person={person} key={id} />
                 }
                 return null;

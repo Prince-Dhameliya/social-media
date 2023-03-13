@@ -16,10 +16,10 @@ const HeaderBarProfile = ({currentUser}) => {
     <div className="HeaderBarProfile">
         <div className="HeaderProfileTitle">
           <img className='BackIcon' src={Back} alt="" onClick={() => navigate(-1)} />
-          <span className="HeaderTitle">{currentUser.username}</span>
+          <span className="HeaderTitle">{currentUser?.username}</span>
         </div>
-        {currentUser._id !== user._id && <img className='HeaderProfileVerticalIcon' src={Vertical} alt="" onClick={()=>setOpenProfileMore(true)} />}
-        {currentUser._id === user._id && <img className='HeaderProfileMoreIcon' src={More} alt="" onClick={()=>setOpenProfileMore(true)} />}
+        {currentUser?._id !== user._id && <img className='HeaderProfileVerticalIcon' src={Vertical} alt="" onClick={()=>setOpenProfileMore(true)} />}
+        {currentUser?._id === user._id && <img className='HeaderProfileMoreIcon' src={More} alt="" onClick={()=>setOpenProfileMore(true)} />}
         <ProfileOptionModel open={openProfileMore} setOpen={setOpenProfileMore} currentUser={currentUser}/>
     </div>
   )
