@@ -100,7 +100,7 @@ const likePost = async (req, res) => {
                     username : User.username,
                     userImage : User.profilePicture,
                     postId : post._id,
-                    postImage : post.image,
+                    postImage : post.image[0],
                     createdAt: new Date()
                 }
                 await UserModel.updateOne({_id : post.userId},{$push : {notification : data}});
@@ -168,7 +168,7 @@ const commentPost = async (req, res) => {
                 username : username,
                 userImage : profilePicture,
                 postId : post._id,
-                postImage : post.image,
+                postImage : post.image[0],
                 commentId: commentId,
                 comment : comment,
                 createdAt: new Date()

@@ -8,10 +8,14 @@ import { uploadPost } from '../../actions/uploadAction';
 import { getTimelinePosts } from '../../actions/postAction';
 import { useState } from "react";
 import Close from '../../img/Close.svg'
-import NextButton from '../../img/NextButton.png'
 import axios from 'axios';
-import { useRef } from 'react';
-import { VolumeOff, VolumeUp } from '@mui/icons-material';
+// import { useRef } from 'react';
+// import { VolumeOff, VolumeUp } from '@mui/icons-material';
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import CarouselSliderPreview from './CarouselSliderPreview';
 
 export default function CreatePost({open, setOpen}) {
 //   const [open, setOpen] = React.useState(false);
@@ -110,57 +114,6 @@ export default function CreatePost({open, setOpen}) {
     resetPost();
   }
 
-  const videoRef = useRef(null);
-  const [muted, setMuted] = useState(true);
-
-  const videoMuteClick = () => {
-      setMuted((prev)=>!prev);
-      videoRef.current.muted ? videoRef.current.muted=false :  videoRef.current.muted=true;
-  }
-
-  function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("createPreviewPost");
-    let dots;
-    if(image?.length > 1){
-      dots = document.getElementsByClassName("createPreviewDot");
-    }
-    if (n > slides.length) {slideIndex = 1}    
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-    }
-    if(image?.length > 1){
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i]?.className?.replace(" active", "");
-      }
-    }
-    slides[slideIndex-1].style.display = "block"; 
-    if(image?.length > 1){ 
-      dots[slideIndex-1].className += " active";
-    }
-  }
-
-  let [slideIndex, setSlideIndex] = useState(1);
-  React.useEffect(()=>{
-    if(image?.length!==0){
-      showSlides(slideIndex);
-    }
-  },[image?.length])
-
-  function plusSlides(n) {
-    setSlideIndex(prev=>prev+=n);
-    showSlides(slideIndex += n);
-
-  }
-
-  function currentSlide(n) {
-    setSlideIndex(prev=>prev=n);
-    showSlides(slideIndex = n);
-  }
-
-
-
 
   return (
     <div>
@@ -198,28 +151,13 @@ export default function CreatePost({open, setOpen}) {
                 </div>
               </div>
               <div className="PreviewImage">
-                  <div className="slideshow-container">
-
-                    {image?.map((img,index)=>{
-                      return <div key={index} className="mySlides fade createPreviewPost">
-                                {(img.type==="image/png" || img.type==="image/jpg" || img.type==="image/jpeg" || img.type==="image/webp") && <img src={URL.createObjectURL(img)} style={{width: "100%"}} alt="" />}
-                                {img.type==="video/mp4" && <><video src={URL.createObjectURL(img)} style={{width: "100%"}} ref={videoRef} autoPlay muted loop>
-                                  Your browser does not support the video tag.
-                                </video>
-                                {muted ? <VolumeOff className='muted' onClick={videoMuteClick} /> : <VolumeUp className='muted' onClick={videoMuteClick}/>}
-                                </>}
-                             </div>
-                    })}
-
-                    {slideIndex!==1 && <span className="prev" onClick={()=>plusSlides(-1)}><img src={NextButton} style={{width: "30px",rotate: "180deg"}} alt=""/></span>}
-                    {slideIndex!==image?.length && <span className="next" onClick={()=>plusSlides(1)}><img src={NextButton} style={{width: "30px"}} alt=""/></span>}
-
-                    {image?.length > 1 && <div className='dotNavigation' style={{textAlign: "center"}}>
-                      {image?.map((img,id)=>{
-                        return <span key={id} className="dot createPreviewDot" onClick={()=>currentSlide(id+1)}></span>
+                  {<div className="slideshow-container">
+                    <Slider dots={true}>
+                      {image?.map((img,index)=>{
+                        return <CarouselSliderPreview key={index} img={img} />
                       })}
-                    </div>}
-                  </div>
+                    </Slider>
+                  </div>}
                   <img src={Close} className='ReactLike PreviewClose' alt="" style={{cursor: "pointer",width: "26px"}} onClick={()=>setImage([])} />
               </div>
             </div>

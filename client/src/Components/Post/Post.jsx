@@ -8,7 +8,6 @@ import Bookmark from '../../img/Bookmark.svg'
 import UnBookmark from '../../img/UnBookmark.svg'
 import EmojiIcon from '../../img/Emoji.svg'
 import Horizontal from '../../img/Horizontal3Dot.svg'
-import NextButton from '../../img/NextButton.png'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
@@ -20,6 +19,10 @@ import Skeleton from '@mui/material/Skeleton';
 import CommentModel from '../CommentsModel/CommentModel'
 import PostOptionModel from '../DropdownButton/PostOptionModel'
 import CarouselSlider from './CarouselSlider'
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 const Post = ({data,index}) => {
   const {user}  = useSelector((state)=>state.authReducer.authData)
@@ -36,13 +39,13 @@ const Post = ({data,index}) => {
     liked ? dispatch(dislikePost(data?._id, user?._id)) : dispatch(likePost(data?._id, user?._id))
   }
 
-  // const handleDoubleClickLike = async () => {
-  //   if(!liked){
-  //     setLikes((prev)=>prev+1)
-  //     dispatch(likePost(data._id, user._id))
-  //   }
-  //   setLiked(true);
-  // }
+  const handleDoubleClickLike = async () => {
+    if(!liked){
+      setLikes((prev)=>prev+1)
+      dispatch(likePost(data._id, user._id))
+    }
+    setLiked(true);
+  }
 
   const handleBookmark = async () => {
     setBookmarked((prev)=>!prev)
@@ -135,47 +138,6 @@ const Post = ({data,index}) => {
   //   Video = true;
   // }
 
-  function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName(`${data?._id}`);
-    let dots;
-    if(data?.image?.length > 1){
-      dots = document.getElementsByClassName(`${index}`);
-    }
-    if (n > slides.length) {slideIndex = 1}    
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-    }
-    if(data?.image?.length > 1){
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i]?.className?.replace(" active", "");
-      }
-    }
-    slides[slideIndex-1].style.display = "block"; 
-    if(data?.image?.length > 1){ 
-      dots[slideIndex-1].className += " active";
-    }
-  }
-
-  let [slideIndex, setSlideIndex] = useState(1);
-  React.useEffect(()=>{
-    if(data?.image?.length!==0){
-      showSlides(slideIndex);
-    }
-  },[data?.image?.length])
-
-  function plusSlides(n) {
-    setSlideIndex(prev=>prev+=n);
-    showSlides(slideIndex += n);
-
-  }
-
-  function currentSlide(n) {
-    setSlideIndex(prev=>prev=n);
-    showSlides(slideIndex = n);
-  }
-
   return (
     <div className="Post">
         <div className="PostHeaderSection">
@@ -213,19 +175,11 @@ const Post = ({data,index}) => {
 
         <div className='PostContent'>
           <div className="slideshow-container">
-
-            {data?.image?.map((img,index)=>{
-              return <CarouselSlider data={data} key={index} img={img} setLikes={setLikes} />
-            })}
-
-            {slideIndex!==1 && <span className="prev" onClick={()=>plusSlides(-1)}><img src={NextButton} style={{width: "30px",rotate: "180deg"}} alt=""/></span>}
-            {slideIndex!==data?.image?.length && <span className="next" onClick={()=>plusSlides(1)}><img src={NextButton} style={{width: "30px"}} alt=""/></span>}
-
-            {data?.image?.length > 1 && <div className='dotNavigation' style={{textAlign: "center"}}>
-              {data?.image?.map((img,id)=>{
-                return <span key={id} className={`dot ${index}`} onClick={()=>currentSlide(id+1)}></span>
+            <Slider dots={true}>
+              {data?.image?.map((img,index)=>{
+                return <CarouselSlider data={data} key={index} img={img} handleDoubleClickLike={handleDoubleClickLike} />
               })}
-            </div>}
+            </Slider>
           </div>
         </div>
 

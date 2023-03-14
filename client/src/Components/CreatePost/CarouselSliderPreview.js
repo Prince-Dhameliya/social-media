@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import {VolumeUp, VolumeOff, PlayArrow} from '@mui/icons-material'
-import "./Post.css"
+import "./CreatePost.css"
 import { Skeleton } from '@mui/material'
 
-const CarouselSlider = ({data,img,handleDoubleClickLike}) => {
+const CarouselSliderPreview = ({img}) => {
 
   const videoRef = useRef(null);
   const [muted, setMuted] = useState(true);
@@ -22,16 +22,16 @@ const CarouselSlider = ({data,img,handleDoubleClickLike}) => {
   }
   return (
     <>
-        {img ?
-            (img?.includes("image") 
-            ? <img src={img}  onDoubleClick={handleDoubleClickLike} alt="" />
-            : <div className='videoSection'><video ref={videoRef} autoPlay muted loop onClick={videoClick} style={{width: "100%"}}><source src={img} type="video/mp4"/></video>
+        {img ? (<>
+                {(img.type==="image/png" || img.type==="image/jpg" || img.type==="image/jpeg" || img.type==="image/webp") && <img src={URL.createObjectURL(img)} style={{width: "100%"}} alt="" />}
+                {img.type==="video/mp4" && <div className='videoSection'><video ref={videoRef} autoPlay muted loop onClick={videoClick} style={{width: "100%"}}><source src={URL.createObjectURL(img)} type="video/mp4"/></video>
                 {pause ? <PlayArrow className='videoPlay' onClick={videoClick}/> : null}
                 {muted ? <VolumeOff className='muted' onClick={videoMuteClick} /> : <VolumeUp className='muted' onClick={videoMuteClick}/>}
-                </div>
-            ) :  <Skeleton sx={{ height: 400 }} animation="wave" variant="rectangular" />}
+                </div>}
+            </>) 
+            :  <Skeleton sx={{ height: 400 }} animation="wave" variant="rectangular" />}
     </>
   )
 }
 
-export default CarouselSlider
+export default CarouselSliderPreview
